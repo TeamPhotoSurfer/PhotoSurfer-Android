@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoSurferAndroid"
         tools:targetApi="31">
+        <!-- leakcanary 안드로이드 12 부터 버전충돌 문제 해결 -->
+        <activity-alias
+            android:name="leakcanary.internal.activity.LeakLauncherActivity"
+            android:exported="false"
+            android:targetActivity="leakcanary.internal.activity.LeakActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
