@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.readme.android.navigator"
+    namespace = "com.photosurfer.android.navigator"
 }
 
 dependencies {

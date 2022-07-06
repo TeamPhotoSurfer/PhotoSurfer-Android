@@ -6,7 +6,7 @@ plugins {
 
 android {
 
-    namespace = "com.readme.android.shared"
+    namespace = "com.photosurfer.android.shared"
 }
 
 dependencies {

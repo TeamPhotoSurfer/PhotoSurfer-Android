@@ -11,7 +11,7 @@ android {
     buildFeatures {
         dataBinding = true
     }
-    namespace = "com.readme.android.core_ui"
+    namespace = "com.photosurfer.android.core"
 }
 
 dependencies {

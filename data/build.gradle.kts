@@ -41,5 +41,5 @@ dependencies {
     implementation(ThirdPartyDependencies.gsonConverter)
 }
 android {
-    namespace = "com.readme.android.data"
+    namespace = "com.photosurfer.android.data"
 }
