@@ -14,3 +14,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PhotoSurfer-Android"
 include ':app'
+include ':core'
+include ':data'
+include ':navigator'
+include ':shared'
+include ':domain'
+
