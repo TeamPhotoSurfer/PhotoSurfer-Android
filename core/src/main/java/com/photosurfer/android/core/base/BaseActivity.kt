@@ -38,12 +38,14 @@ abstract class BaseActivity<T : ViewDataBinding>(
     }
 
     protected fun terminationTokenHandling(viewModel: BaseViewModel) {
-        viewModel.moveToLogin.observe(this, EventObserver {
+        viewModel.moveToLogin.observe(
+            this,
+            EventObserver {
 //            mainNavigator.openLogin(this) 이부분 추후에 작성해야함 로그인화면으로 이동부분
-            sharedPreferences.edit { remove("PHOTO_SURFER_ACCESS_TOKEN") }
-            sharedPreferences.edit { remove("USER_NICKNAME") }
-            finishAffinity()
-        })
+                sharedPreferences.edit { remove("PHOTO_SURFER_ACCESS_TOKEN") }
+                sharedPreferences.edit { remove("USER_NICKNAME") }
+                finishAffinity()
+            }
+        )
     }
 }
-
