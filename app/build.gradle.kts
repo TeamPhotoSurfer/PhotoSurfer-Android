@@ -78,6 +78,4 @@ dependencies {
     // Firebase
     implementation(platform(FirebaseDependency.firebaseBom))
     implementation(FirebaseDependency.analyticsKtx)
-
-    debugImplementation(ThirdPartyDependencies.leakCanary)
 }
