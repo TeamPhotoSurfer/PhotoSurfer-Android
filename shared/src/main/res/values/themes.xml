@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.PhotoSurferAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -10,9 +10,9 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/gray_white</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -26,63 +26,63 @@
 
     <!-- text theme. -->
 
-    <style name="android_title_1B">
+    <style name="title_1B">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingExtra">7.2sp</item>
     </style>
 
-    <style name="android_title_1M">
+    <style name="title_1M">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingExtra">7.2sp</item>
     </style>
 
-    <style name="android_title_2B">
+    <style name="title_2B">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
 
-    <style name="android_title_2M">
+    <style name="title_2M">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
 
-    <style name="android_title_3B">
+    <style name="title_3B">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">5.4sp</item>
     </style>
 
-    <style name="android_title_3M">
+    <style name="title_3M">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">5.4sp</item>
     </style>
 
-    <style name="android_subtitle_1">
+    <style name="subtitle_1">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">4.8sp</item>
     </style>
 
-    <style name="android_body_1">
+    <style name="body_1">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">15sp</item>
         <item name="android:lineSpacingExtra">7.5sp</item>
     </style>
 
-    <style name="android_subtitle_2">
+    <style name="subtitle_2">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
@@ -90,14 +90,14 @@
         <item name="android:lineSpacingExtra">4.2sp</item>
     </style>
 
-    <style name="android_body2">
+    <style name="body2">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4.2sp</item>
     </style>
 
-    <style name="android_caption_1">
+    <style name="caption_1">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">12sp</item>
