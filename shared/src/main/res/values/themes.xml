@@ -24,6 +24,13 @@
         <item name="android:textCursorDrawable">@drawable/shape_rect_main_blue_cursor</item>
     </style>
 
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_blue</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@style/Theme.PhotoSurferAndroid</item>
+    </style>
+
     <!-- text theme. -->
 
     <style name="title_1B">
