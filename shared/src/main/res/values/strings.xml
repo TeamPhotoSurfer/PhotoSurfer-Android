@@ -4,4 +4,7 @@
     <!--PushSettingActivity-->
     <string name="btn_cancel">취소</string>
     <string name="btn_save">저장</string>
+    <string name="complete_set_notification">알림 설정 완료</string>
+    <string name="memo_hint">50자 이내로 알림메모를 작성해보세요</string>
+    <string name="memo_title">메모</string>
 </resources>
