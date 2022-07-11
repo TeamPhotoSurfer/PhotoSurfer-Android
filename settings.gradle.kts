@@ -5,4 +5,4 @@ include(":data")
 include(":domain")
 include(":navigator")
 include(":shared")
-
+include(":feature:push-setting")
