@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PhotoSurfer-Android</string>
+
+    <!--PushSettingActivity-->
+    <string name="btn_cancel">취소</string>
+    <string name="btn_save">저장</string>
 </resources>
