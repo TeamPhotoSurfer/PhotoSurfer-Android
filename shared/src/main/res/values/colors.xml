@@ -7,4 +7,35 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="main">#357AF9</color>
+    <color name="sub">#E7EEFF</color>
+
+    <color name="point_main">#357af9</color>
+    <color name="point_sub">#e7eeff</color>
+    <color name="point_red">#ff5252</color>
+    <color name="point_yellow">#ffa431</color>
+    <color name="point_green">#59b65d</color>
+    <color name="point_blue">#2196f3</color>
+
+    <color name="alpha_white_a_10">#19ffffff</color>
+    <color name="alpha_white_a_30">#4cffffff</color>
+    <color name="alpha_white_a_70">#b3ffffff</color>
+    <color name="alpha_gray_95_a_10">#19191f28</color>
+    <color name="alpha_gray_95_a_30">#4c191f28</color>
+    <color name="alpha_gray_95_a_70">#b3191f28</color>
+
+    <color name="gray_white">#ffffff</color>
+    <color name="gray_gray_5">#f9fafb</color>
+    <color name="gray_gray_10">#f2f4f6</color>
+    <color name="gray_gray_20">#e5e8eb</color>
+    <color name="gray_gray_30">#d1d6db</color>
+    <color name="gray_gray_40">#b0b8c1</color>
+    <color name="gray_gray_50">#8b95a1</color>
+    <color name="gray_gray_60">#6b7684</color>
+    <color name="gray_gray_70">#4e5968</color>
+    <color name="gray_gray_80">#333d4b</color>
+    <color name="gray_gray_90">#262f3d</color>
+    <color name="gray_gray_950">#191f28</color>
+    <color name="gray_black">#000000</color>
+
 </resources>
