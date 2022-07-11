@@ -8,4 +8,5 @@
     <string name="memo_hint">50자 이내로 알림메모를 작성해보세요</string>
     <string name="memo_title">메모</string>
     <string name="push_image_explain">푸시알림도 설정 하시겠어요?</string>
+    <string name="date_picker_button">알림 날짜</string>
 </resources>

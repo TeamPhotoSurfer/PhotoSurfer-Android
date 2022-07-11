@@ -28,7 +28,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/iv_main"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="55dp"
@@ -38,6 +38,7 @@
                         app:srcCompat="@drawable/img_push_setting_main" />
 
                     <TextView
+                        android:id="@+id/tv_main"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -47,8 +48,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView"
-                        app:layout_constraintVertical_bias="0.455"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_main"
                         app:layout_constraintVertical_chainStyle="packed" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -59,6 +59,41 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_push_image"
                     tools:layout_editor_absoluteX="0dp">
 
+                    <TextView
+                        android:id="@+id/tv_date_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/date_picker_button"
+                        android:textAppearance="@style/subtitle_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_date_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_date_picker"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_info_circle" />
+
+                    <TextView
+                        android:id="@+id/tv_date_picker_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shape_rect_grey10_fill_8"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="5dp"
+                        android:textAppearance="@style/body_1"
+                        android:textColor="@color/main"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="2022.7.9 (토)" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
