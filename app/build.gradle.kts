@@ -21,6 +21,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":navigator"))
     implementation(project(":shared"))
+    implementation(project(":feature:push-setting"))
 
     // Kotlin
     implementation(KotlinDependencies.kotlin)

@@ -7,7 +7,7 @@ import com.photosurfer.android.core.util.Event
 import kotlinx.coroutines.CoroutineExceptionHandler
 import java.security.cert.CertificateException
 
-class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     private val _moveToLogin = MutableLiveData<Event<Boolean>>()
     val moveToLogin: LiveData<Event<Boolean>> = _moveToLogin
