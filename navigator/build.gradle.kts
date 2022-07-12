@@ -8,6 +8,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared"))
 
     // Android Core
     implementation(AndroidXDependencies.coreKtx)
