@@ -2,20 +2,16 @@ package com.example.register_tag
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.photosurfer.android.shared.R.color
-import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.ext.getColor
 import com.photosurfer.android.register_tag.R
-import com.photosurfer.android.register_tag.databinding.FragmentSelectTagBinding
+import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 import com.photosurfer.android.shared.R.style.body2
 
-class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragment_select_tag) {
-
+class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setChips()
@@ -33,7 +29,7 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
         val textStateList = ColorStateList(states, textColors)
 
         for (i in 0 until Category.values().size) {
-            binding.cgRecent.addView(
+            binding.chipGroupRecent.addView(
                 Chip(requireContext()).apply {
                     this.text = "# " + Category.values()[i].categoryName
                     this.chipBackgroundColor = backgroundStateList
@@ -45,7 +41,7 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
         }
 
         for (i in 0 until Category.values().size) {
-            binding.cgOften.addView(
+            binding.chipGroupOften.addView(
                 Chip(requireContext()).apply {
                     this.text = "# " + Category.values()[i].categoryName
                     this.chipBackgroundColor = backgroundStateList
@@ -57,7 +53,7 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
         }
 
         for (i in 0 until Category.values().size) {
-            binding.cgPlatform.addView(
+            binding.chipGroupPlatform.addView(
                 Chip(requireContext()).apply {
                     this.text = "# " + Category.values()[i].categoryName
                     this.chipBackgroundColor = backgroundStateList

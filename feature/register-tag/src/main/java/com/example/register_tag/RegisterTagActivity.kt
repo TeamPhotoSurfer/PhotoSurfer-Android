@@ -8,12 +8,12 @@ import com.photosurfer.android.register_tag.databinding.ActivityRegisterTagBindi
 class RegisterTagActivity :
     BaseActivity<ActivityRegisterTagBinding>(R.layout.activity_register_tag) {
 
-    private lateinit var selectTagFragment: SelectTagFragment
+    private lateinit var selectTagFragment: ChooseTagFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        selectTagFragment = SelectTagFragment()
+        selectTagFragment = ChooseTagFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, selectTagFragment)
             .commit()

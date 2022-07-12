@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,7 +110,7 @@
                     android:id="@+id/cl_add_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/cl_add_tag">
+                    app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <!--
                     추가한 태그 칩 들어갈 부분
@@ -124,7 +124,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_input"
+                            android:id="@+id/chip_group_input"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -139,7 +139,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="74dp"
-                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -160,7 +159,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_recent"
+                            android:id="@+id/chip_group_recent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:chipSpacingHorizontal="12dp"
@@ -188,7 +187,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_often"
+                            android:id="@+id/chip_group_often"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:chipSpacingHorizontal="12dp"
@@ -223,7 +222,7 @@
                             app:layout_constraintTop_toBottomOf="@id/tv_platform" />
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_platform"
+                            android:id="@+id/chip_group_platform"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -236,6 +235,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:visibility="gone"
                     android:id="@+id/cl_typing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
