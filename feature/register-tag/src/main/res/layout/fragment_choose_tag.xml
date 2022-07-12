@@ -124,7 +124,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chip_group_input"
+                            android:id="@+id/cg_input"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -159,7 +159,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chip_group_recent"
+                            android:id="@+id/cg_recent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:chipSpacingHorizontal="12dp"
@@ -187,7 +187,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chip_group_often"
+                            android:id="@+id/cg_often"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:chipSpacingHorizontal="12dp"
@@ -222,7 +222,7 @@
                             app:layout_constraintTop_toBottomOf="@id/tv_platform" />
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chip_group_platform"
+                            android:id="@+id/cg_platform"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
