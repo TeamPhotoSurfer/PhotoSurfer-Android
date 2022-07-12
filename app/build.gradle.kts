@@ -21,9 +21,9 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":navigator"))
     implementation(project(":shared"))
+    implementation(project(":feature:register-tag"))
     implementation(project(":feature:push-setting"))
     implementation(project(":feature:auth"))
-
 
     // Kotlin
     implementation(KotlinDependencies.kotlin)
