@@ -33,7 +33,7 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
         val textStateList = ColorStateList(states, textColors)
 
         for (i in 0 until Category.values().size) {
-            binding.chipGroupRecent.addView(
+            binding.cgRecent.addView(
                 Chip(requireContext()).apply {
                     this.text = "# " + Category.values()[i].categoryName
                     this.chipBackgroundColor = backgroundStateList
@@ -45,7 +45,7 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
         }
 
         for (i in 0 until Category.values().size) {
-            binding.chipGroupOften.addView(
+            binding.cgOften.addView(
                 Chip(requireContext()).apply {
                     this.text = "# " + Category.values()[i].categoryName
                     this.chipBackgroundColor = backgroundStateList
@@ -57,7 +57,7 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
         }
 
         for (i in 0 until Category.values().size) {
-            binding.chipGroupPlatform.addView(
+            binding.cgPlatform.addView(
                 Chip(requireContext()).apply {
                     this.text = "# " + Category.values()[i].categoryName
                     this.chipBackgroundColor = backgroundStateList
