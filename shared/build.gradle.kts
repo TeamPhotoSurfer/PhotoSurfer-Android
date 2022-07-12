@@ -10,6 +10,9 @@ android {
 }
 
 dependencies {
+    // Android Core
+    implementation(AndroidXDependencies.splashScreen)
+
     // Material Design
     implementation(MaterialDesignDependencies.materialDesign)
 }
