@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">PhotoSurfer-Android</string>
+
+    <!--PushSettingActivity-->
+    <string name="btn_cancel">취소</string>
+    <string name="btn_save">저장</string>
+    <string name="complete_set_notification">알림 설정 완료</string>
+    <string name="memo_hint">50자 이내로 알림메모를 작성해보세요</string>
+    <string name="memo_title">메모</string>
+    <string name="push_image_explain">푸시알림도 설정 하시겠어요?</string>
+    <string name="date_picker_button">알림 날짜</string>
+    <string name="represent_tag_title">대표 태그</string>
+    <string name="represent_tag_content">푸시 알림에서 보일 대표 태그를 최대 3개 선택해보세요!</string>
 </resources>

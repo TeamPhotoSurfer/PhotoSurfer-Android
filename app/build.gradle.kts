@@ -22,6 +22,8 @@ dependencies {
     implementation(project(":navigator"))
     implementation(project(":shared"))
     implementation(project(":feature:register-tag"))
+    implementation(project(":feature:push-setting"))
+    implementation(project(":feature:auth"))
 
     // Kotlin
     implementation(KotlinDependencies.kotlin)
@@ -79,4 +81,8 @@ dependencies {
     // Firebase
     implementation(platform(FirebaseDependency.firebaseBom))
     implementation(FirebaseDependency.analyticsKtx)
+
+    // test
+    implementation(AndroidXDependencies.junit)
+    androidTestImplementation(TestDependencies.androidTest)
 }
