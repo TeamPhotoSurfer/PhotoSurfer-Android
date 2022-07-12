@@ -9,4 +9,5 @@
     <string name="memo_title">메모</string>
     <string name="push_image_explain">푸시알림도 설정 하시겠어요?</string>
     <string name="date_picker_button">알림 날짜</string>
+    <string name="represent_tag_title">대표 태그</string>
 </resources>
