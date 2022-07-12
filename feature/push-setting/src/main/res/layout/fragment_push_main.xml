@@ -96,11 +96,23 @@
                         tools:text="2022.7.9 (토)" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <DatePicker
+                    android:padding="30dp"
+                    android:id="@+id/picker_push"
+                    android:layout_width="wrap_content"
+                    android:layout_height="171dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    android:theme="@style/MyDatePickerStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_button_date_picker" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_button_represent_tag"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_button_date_picker">
+                    app:layout_constraintTop_toBottomOf="@+id/picker_push">
 
                     <TextView
                         android:id="@+id/tv_represent_tag"
