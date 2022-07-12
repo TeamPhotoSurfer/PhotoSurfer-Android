@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
+import android.view.animation.LinearInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -29,39 +30,38 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun setAnimationOnSplash() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (isOverAndroid12) {
             splashScreen.setOnExitAnimationListener { splashScreenView ->
-                val fadeOut = ObjectAnimator.ofFloat(splashScreenView, View.ALPHA, 1f, 0f)
-                fadeOut.interpolator = AccelerateInterpolator()
-                fadeOut.duration = SPLASH_TIME
-                fadeOut.doOnEnd {
-                    splashScreenView.remove()
+                ObjectAnimator.ofFloat(splashScreenView, View.ALPHA, 1f, 0f).apply {
+                    interpolator = AccelerateInterpolator()
+                    duration = SPLASH_TIME
+                    doOnEnd { splashScreenView.remove() }
+                    start()
                 }
-                fadeOut.start()
             }
         }
     }
 
     private fun setStatusBarColorOnSplash() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.window.statusBarColor =
-                ContextCompat.getColor(this, color.login_blue_top)
-        }
+        this.window.statusBarColor =
+            ContextCompat.getColor(this, color.login_blue_top)
     }
 
     private fun setLogoTransitionY() {
-        val transitionY = ObjectAnimator.ofFloat(binding.ivLogo, "translationY", -420f).apply {
-            interpolator = AccelerateInterpolator()
+        ObjectAnimator.ofFloat(binding.ivLogo, "translationY", -420f).apply {
+            interpolator = LinearInterpolator()
             setDelayIfDeviceOverAndroid12(this)
             duration = 1500L
+            start()
         }
-        transitionY.start()
     }
 
     private fun setDelayIfDeviceOverAndroid12(objectAnimator: ObjectAnimator) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) objectAnimator.startDelay =
-            SPLASH_TIME + 300L
+        if (isOverAndroid12)
+            objectAnimator.startDelay = SPLASH_TIME + 300L
     }
+
+    private val isOverAndroid12 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
     companion object {
         const val SPLASH_TIME = 300L
