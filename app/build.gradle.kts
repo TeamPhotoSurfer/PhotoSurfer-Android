@@ -79,4 +79,8 @@ dependencies {
     // Firebase
     implementation(platform(FirebaseDependency.firebaseBom))
     implementation(FirebaseDependency.analyticsKtx)
+
+    // test
+    implementation(AndroidXDependencies.junit)
+    androidTestImplementation(TestDependencies.androidTest)
 }
