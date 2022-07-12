@@ -33,8 +33,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         setStatusBarColorOnSplash()
         setLogoTransitionY()
         checkAutoLogin()
-        onClickKakaoLoginBtn()
-        onClickNaverLoginBtn()
+        onClickLoginBtn()
     }
 
     private fun checkAutoLogin() {
@@ -48,17 +47,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         finish()
     }
 
-    private fun onClickKakaoLoginBtn() {
-        binding.clKakao.setOnClickListener {
-            // TODO 카카오 로그인 로직 추가 & HomeView이동 로직 수정
-            navigateMainActivity()
-        }
-    }
+    private fun onClickLoginBtn() {
+        // TODO 로그인 로직 추가 & MainView이동 로직 수정
+        with(binding) {
+            clKakao.setOnClickListener {
+                navigateMainActivity()
+            }
 
-    private fun onClickNaverLoginBtn() {
-        binding.clNaver.setOnClickListener {
-            // TODO 네이버 로그인 로직 추가 & HomeView이동 로직 수정
-            navigateMainActivity()
+            clNaver.setOnClickListener {
+                navigateMainActivity()
+
+            }
         }
     }
 
