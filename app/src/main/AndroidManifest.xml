@@ -25,9 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.example.register_tag.RegisterTagActivity"
-            android:exported="false" />
+            android:exported="true" />
+
         <activity
             android:name=".push_setting.PushSettingActivity"
             android:exported="false" />
