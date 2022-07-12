@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.photosurfer.android.auth.LoginViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +32,7 @@
             android:id="@+id/cl_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:goneUnless="@{viewModel.isAutoLogin}"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <View

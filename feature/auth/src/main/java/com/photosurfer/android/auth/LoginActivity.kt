@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
+import androidx.activity.viewModels
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -18,16 +19,46 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+    private val viewModel: LoginViewModel by viewModels()
+
     @Inject
     lateinit var mainNavigator: MainNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        binding.viewModel = viewModel
+
         setAnimationOnSplash()
         setStatusBarColorOnSplash()
         setLogoTransitionY()
-        setLoginViewGroupFadeIn()
+        checkAutoLogin()
+        onClickKakaoLoginBtn()
+        onClickNaverLoginBtn()
+    }
+
+    private fun checkAutoLogin() {
+        val isAutoLogin = viewModel.isAutoLogin
+        if (!isAutoLogin) setLoginViewGroupFadeIn()
+        else navigateHomeActivity()
+    }
+
+    private fun navigateHomeActivity() {
+        // home 뷰로 이동
+    }
+
+    private fun onClickKakaoLoginBtn() {
+        binding.clKakao.setOnClickListener {
+            // TODO 카카오 로그인 로직 추가 & HomeView이동 로직 수정
+            navigateHomeActivity()
+        }
+    }
+
+    private fun onClickNaverLoginBtn() {
+        binding.clNaver.setOnClickListener {
+            // TODO 네이버 로그인 로직 추가 & HomeView이동 로직 수정
+            navigateHomeActivity()
+        }
     }
 
     private fun setAnimationOnSplash() {
