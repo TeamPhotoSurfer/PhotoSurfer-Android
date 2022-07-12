@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,7 +110,7 @@
                     android:id="@+id/cl_add_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/cl_add_tag">
+                    app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <!--
                     추가한 태그 칩 들어갈 부분
@@ -235,13 +235,13 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_typing"
 
+                    android:visibility="gone"
+                    android:id="@+id/cl_typing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="74dp"
-                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <TextView
