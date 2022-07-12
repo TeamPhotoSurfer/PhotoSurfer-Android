@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SelectTagFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/cl_top"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:text="취소"
+                android:textAppearance="@style/subtitle_1"
+                android:textColor="@color/gray_60"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:text="저장"
+                android:textAppearance="@style/subtitle_1"
+                android:textColor="@color/gray_50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/et_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_rect_register_gray_radius_8dp"
+            android:hint="태그를 입력하세요"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="14dp"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray_50"
+            android:theme="@style/BlueEditTextStyle"
+            app:layout_constraintTop_toBottomOf="@id/cl_top" />
+
+        <!-- 여기 부터 -->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/et_tag">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/et_tag">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:paddingVertical="8dp"
+                        android:text="입력한 태그"
+                        android:textAppearance="@style/subtitle_1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="최대 6개"
+                        android:textAppearance="@style/caption_1"
+                        android:textColor="@color/gray_50"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_add"
+                        app:layout_constraintStart_toEndOf="@id/tv_add"
+                        app:layout_constraintTop_toTopOf="@+id/tv_add" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_add_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/cl_add_tag">
+
+                    <!--
+                    추가한 태그 칩 들어갈 부분
+                    -->
+
+                    <HorizontalScrollView
+                        android:id="@+id/horizontal_sv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/cg_input"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </HorizontalScrollView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:id="@+id/cl_not_typing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="74dp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_add">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_recent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tv_recent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="9dp"
+                            android:text="최근 추가한 태그"
+                            android:textAppearance="@style/subtitle_2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/cg_recent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:chipSpacingHorizontal="12dp"
+                            app:chipSpacingVertical="9dp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_recent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_often"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        app:layout_constraintTop_toBottomOf="@id/cl_recent">
+
+                        <TextView
+                            android:id="@+id/tv_often"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="9dp"
+                            android:text="자주 추가한 태그"
+                            android:textAppearance="@style/subtitle_2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/cg_often"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:chipSpacingHorizontal="12dp"
+                            app:chipSpacingVertical="9dp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_often" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_platform"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        app:layout_constraintTop_toBottomOf="@id/cl_often">
+
+                        <TextView
+                            android:id="@+id/tv_platform"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:text="플랫폼 유형"
+                            android:textAppearance="@style/subtitle_2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_platform_msg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="출처를 추가하면 사진을 더 쉽게 찾을 수 있어요."
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_platform" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/cg_platform"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            app:chipSpacingHorizontal="12dp"
+                            app:chipSpacingVertical="9dp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_platform_msg" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_typing"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="74dp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/cl_add">
+
+                    <TextView
+                        android:id="@+id/tv_relative"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="9dp"
+                        android:text="연관 태그"
+                        android:textAppearance="@style/subtitle_2"
+                        android:textColor="@color/gray_90"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_relative_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="21dp"
+                        android:text="추가하기"
+                        android:textAppearance="@style/caption_1"
+                        android:textColor="@color/gray_60"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_relative" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_relative_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:background="@color/gray_10"
+                        android:maxWidth="200dp"
+                        android:text='@{"# " + etTag.text}'
+                        android:textAppearance="@style/body2"
+                        android:textColor="@color/gray_70"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_relative_add"
+                        app:layout_constraintEnd_toStartOf="@id/cl_check_platform"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@id/tv_relative_add"
+                        app:layout_constraintTop_toTopOf="@id/tv_relative_add" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_check_platform"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/chip_relative_add"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/chip_relative_add">
+
+                        <TextView
+                            android:id="@+id/tv_check_platform"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="8dp"
+                            android:paddingEnd="8dp"
+                            android:text="플랫폼"
+                            android:textAppearance="@style/caption_1"
+                            android:textColor="@color/gray_40"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_check_platform"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_check_circle_fill"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_check_platform"
+                            app:layout_constraintEnd_toStartOf="@id/tv_check_platform"
+                            app:layout_constraintTop_toTopOf="@id/tv_check_platform" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
