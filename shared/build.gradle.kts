@@ -15,4 +15,8 @@ dependencies {
 
     // Material Design
     implementation(MaterialDesignDependencies.materialDesign)
+
+    // test
+    implementation(AndroidXDependencies.junit)
+    androidTestImplementation(TestDependencies.androidTest)
 }

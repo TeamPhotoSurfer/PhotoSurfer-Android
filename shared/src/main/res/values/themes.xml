@@ -98,15 +98,23 @@
     </style>
 
     <style name="body2">
-        <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4.2sp</item>
     </style>
 
     <style name="caption_1">
-        <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MyDatePickerStyle" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/transparent</item> <!-- 구분선 -->
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">-0.022</item>
     </style>
 </resources>
