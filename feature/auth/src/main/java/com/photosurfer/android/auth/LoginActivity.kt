@@ -40,24 +40,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun checkAutoLogin() {
         val isAutoLogin = viewModel.isAutoLogin
         if (!isAutoLogin) setLoginViewGroupFadeIn()
-        else navigateHomeActivity()
+        else navigateMainActivity()
     }
 
-    private fun navigateHomeActivity() {
-        // home 뷰로 이동
+    private fun navigateMainActivity() {
+        mainNavigator.navigateMain(this)
+        finish()
     }
 
     private fun onClickKakaoLoginBtn() {
         binding.clKakao.setOnClickListener {
             // TODO 카카오 로그인 로직 추가 & HomeView이동 로직 수정
-            navigateHomeActivity()
+            navigateMainActivity()
         }
     }
 
     private fun onClickNaverLoginBtn() {
         binding.clNaver.setOnClickListener {
             // TODO 네이버 로그인 로직 추가 & HomeView이동 로직 수정
-            navigateHomeActivity()
+            navigateMainActivity()
         }
     }
 
