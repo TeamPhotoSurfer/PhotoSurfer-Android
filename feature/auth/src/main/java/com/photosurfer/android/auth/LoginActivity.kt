@@ -27,6 +27,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         setAnimationOnSplash()
         setStatusBarColorOnSplash()
         setLogoTransitionY()
+        setLoginViewGroupFadeIn()
     }
 
     private fun setAnimationOnSplash() {
@@ -49,6 +50,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private fun setLogoTransitionY() {
         ObjectAnimator.ofFloat(binding.ivLogo, "translationY", -420f).apply {
+            interpolator = LinearInterpolator()
+            setDelayIfDeviceOverAndroid12(this)
+            duration = 1500L
+            start()
+        }
+    }
+
+    private fun setLoginViewGroupFadeIn() {
+        ObjectAnimator.ofFloat(binding.clLogin, View.ALPHA, 0f, 1f).apply {
             interpolator = LinearInterpolator()
             setDelayIfDeviceOverAndroid12(this)
             duration = 1500L
