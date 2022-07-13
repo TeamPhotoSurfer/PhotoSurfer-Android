@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:checked="true"
+        android:icon="@drawable/ic_search_fill"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/menu_tag"
+        android:enabled="true"
+        android:icon="@drawable/ic_bell_line"
+        android:title="Tag" />
+
+    <item
+        android:id="@+id/menu_alarm"
+        android:enabled="true"
+        android:icon="@drawable/ic_gear_line"
+        android:title="Alarm" />
+
+    <item
+        android:id="@+id/menu_setting"
+        android:enabled="true"
+        android:icon="@drawable/ic_tag_line"
+        android:title="Setting" />
+
+</menu>
