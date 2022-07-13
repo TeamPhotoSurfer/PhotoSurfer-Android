@@ -13,17 +13,17 @@ import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 import com.photosurfer.android.shared.R.style.body2
 
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
-    private var isTyping: Boolean = false
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.isEmpty = true
         setChips()
+        checkInputNum()
     }
 
     private fun checkInputNum() {
         binding.etTag.addTextChangedListener {
-            if (binding.etTag.length() > 0) {
-                isTyping = true
-            }
+            binding.isEmpty = binding.etTag.text.isEmpty()
         }
     }
 
