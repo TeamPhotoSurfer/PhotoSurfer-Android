@@ -28,5 +28,6 @@
     <string name="often_search_tag">자주 검색한 태그</string>
     <string name="shall_surf">서핑할까요?</string>
     <string name="where_to">어떤 사진을 향해</string>
+    <string name="try_first_surf">첫 번째 서핑을 시작해보세요!</string>
 
 </resources>
