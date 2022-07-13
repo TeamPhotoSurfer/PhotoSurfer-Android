@@ -99,7 +99,7 @@
 
     <style name="body2">
         <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4.2sp</item>
     </style>
