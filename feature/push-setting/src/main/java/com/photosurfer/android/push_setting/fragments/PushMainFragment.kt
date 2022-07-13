@@ -17,9 +17,18 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.pushSettingViewModel = pushSettingViewModel
         initDefaultAlarmDate()
+        setDatePickerMinDate()
     }
 
-    private fun initDefaultAlarmDate(){
+    private fun initDefaultAlarmDate() {
         pushSettingViewModel.initDefaultAlarmDate()
+    }
+
+    private fun setDatePickerMinDate() {
+        binding.pickerPush.minDate = System.currentTimeMillis() + ONE_DAY_TO_MILLIS
+    }
+
+    companion object {
+        const val ONE_DAY_TO_MILLIS = 24 * 60 * 60 * 1000L
     }
 }
