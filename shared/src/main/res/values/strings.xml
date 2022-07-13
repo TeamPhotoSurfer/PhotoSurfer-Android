@@ -22,4 +22,11 @@
     <string name="tag">Tag</string>
     <string name="alarm">Alarm</string>
     <string name="setting">Setting</string>
+
+    <!-- HomeFragment -->
+    <string name="enter_tag">태그를 입력하세요</string>
+    <string name="often_search_tag">자주 검색한 태그</string>
+    <string name="shall_surf">서핑할까요?</string>
+    <string name="where_to">어떤 사진을 향해</string>
+
 </resources>
