@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:layout_marginBottom="16dp"
-                android:text="계정 연결"
+                android:text="@string/connect_account"
                 android:textAppearance="@style/caption_1"
                 android:textColor="@color/gray_20"
                 app:layout_constraintBottom_toTopOf="@id/cl_kakao"
@@ -109,6 +109,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Naver Button -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_naver"
                 android:layout_width="0dp"
