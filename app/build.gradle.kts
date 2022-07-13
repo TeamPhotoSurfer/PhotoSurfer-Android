@@ -25,6 +25,7 @@ dependencies {
     implementation(project(":feature:register-tag"))
     implementation(project(":feature:push-setting"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:main"))
 
     // Kotlin
     implementation(KotlinDependencies.kotlin)
@@ -58,7 +59,6 @@ dependencies {
     implementation(AndroidXDependencies.fragment)
 
     // Jetpack Lifecycle
-    implementation(AndroidXDependencies.coroutines)
     implementation(AndroidXDependencies.lifeCycleKtx)
     implementation(AndroidXDependencies.lifecycleJava8)
 
