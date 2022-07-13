@@ -1,5 +1,0 @@
-<resources>
-    <string name="kakao_login">카카오톡 로그인</string>
-    <string name="naver_login">네이버로 로그인</string>
-    <string name="connect_account">계정 연결</string>
-</resources>
