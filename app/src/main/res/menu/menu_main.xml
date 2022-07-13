@@ -9,19 +9,16 @@
 
     <item
         android:id="@+id/menu_tag"
-        android:enabled="true"
         android:icon="@drawable/selector_bottom_navi_tag"
         android:title="@string/tag" />
 
     <item
         android:id="@+id/menu_alarm"
-        android:enabled="true"
         android:icon="@drawable/selector_bottom_navi_alarm"
         android:title="@string/alarm" />
 
     <item
         android:id="@+id/menu_setting"
-        android:enabled="true"
         android:icon="@drawable/selector_bottom_navi_setting"
         android:title="@string/setting" />
 
