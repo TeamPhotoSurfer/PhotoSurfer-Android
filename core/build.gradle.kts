@@ -37,4 +37,11 @@ dependencies {
 
     // ImageLoading Library
     implementation(ThirdPartyDependencies.glide)
+
+    // test
+    implementation(AndroidXDependencies.junit)
+    androidTestImplementation(TestDependencies.androidTest)
+
+    // stfalconImageViewer
+    implementation(ThirdPartyDependencies.stFalconImageViewer)
 }

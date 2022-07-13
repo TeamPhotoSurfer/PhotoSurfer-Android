@@ -30,6 +30,13 @@
         </activity>
 
         <activity
+            android:name="com.example.register_tag.RegisterTagActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".push_setting.PushSettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
 
