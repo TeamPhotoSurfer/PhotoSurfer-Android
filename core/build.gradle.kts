@@ -41,4 +41,7 @@ dependencies {
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    // stfalconImageViewer
+    implementation(ThirdPartyDependencies.stFalconImageViewer)
 }

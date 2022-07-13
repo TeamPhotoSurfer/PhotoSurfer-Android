@@ -80,6 +80,7 @@ object ThirdPartyDependencies {
     const val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"
     const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.gsonConverterVersion}"
     const val naverAuth = "com.navercorp.nid:oauth:${Versions.naverAuth}"
+    const val stFalconImageViewer = "com.github.stfalcon-studio:StfalconImageViewer:${Versions.stFalconImageViewer}"
 }
 
 object FirebaseDependency {
