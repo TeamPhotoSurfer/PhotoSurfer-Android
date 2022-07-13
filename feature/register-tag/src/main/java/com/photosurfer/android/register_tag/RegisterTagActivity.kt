@@ -1,4 +1,4 @@
-package com.example.register_tag
+package com.photosurfer.android.register_tag
 
 import android.os.Bundle
 import com.photosurfer.android.core.base.BaseActivity

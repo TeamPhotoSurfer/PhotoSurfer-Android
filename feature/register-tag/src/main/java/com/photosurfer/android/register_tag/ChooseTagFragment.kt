@@ -1,8 +1,9 @@
-package com.example.register_tag
+package com.photosurfer.android.register_tag
 
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import com.photosurfer.android.shared.R.color
 import com.google.android.material.chip.Chip
 import com.photosurfer.android.core.base.BaseFragment
@@ -12,9 +13,18 @@ import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 import com.photosurfer.android.shared.R.style.body2
 
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
+    private var isTyping: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setChips()
+    }
+
+    private fun checkInputNum() {
+        binding.etTag.addTextChangedListener {
+            if (binding.etTag.length() > 0) {
+                isTyping = true
+            }
+        }
     }
 
     private fun setChips() {

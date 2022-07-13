@@ -1,4 +1,4 @@
-package com.example.register_tag
+package com.photosurfer.android.register_tag
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
