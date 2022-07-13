@@ -4,13 +4,13 @@ import android.os.Bundle
 import com.photosurfer.android.adapter.MainViewPagerAdapter
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.databinding.ActivityMainBinding
+import com.photosurfer.android.main.HomeFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         initAdapter()
         syncBottomNavWithVp()
     }
@@ -18,7 +18,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun initAdapter() {
         binding.vpMain.adapter = MainViewPagerAdapter(this).also { mainViewPagerAdapter = it }
         mainViewPagerAdapter.fragmentList = listOf(
-            // HomeFragment
+            // TODO : HomeFragment(), TagFragment(), AlarmFragment(), SettingFragment()로 교체할것
+            HomeFragment(), HomeFragment(), HomeFragment(), HomeFragment()
         )
     }
 
