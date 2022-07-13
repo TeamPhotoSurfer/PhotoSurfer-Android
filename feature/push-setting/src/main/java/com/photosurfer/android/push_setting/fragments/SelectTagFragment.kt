@@ -3,10 +3,11 @@ package com.photosurfer.android.push_setting.fragments
 import android.os.Bundle
 import android.view.View
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.push_setting.R
 import com.photosurfer.android.push_setting.databinding.FragmentSelectTagBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragment_select_tag) {
 
     private lateinit var selectTagListAdapter: SelectTagListAdapter

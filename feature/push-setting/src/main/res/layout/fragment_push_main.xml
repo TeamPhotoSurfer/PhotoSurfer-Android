@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="pushSettingViewModel"
+            type="com.photosurfer.android.push_setting.PushSettingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,6 +91,7 @@
                         android:background="@drawable/shape_rect_grey10_fill_8"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="5dp"
+                        android:text="@{pushSettingViewModel.alarmDate}"
                         android:textAppearance="@style/body_1"
                         android:textColor="@color/main"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,12 +101,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <DatePicker
-                    android:padding="30dp"
                     android:id="@+id/picker_push"
                     android:layout_width="wrap_content"
                     android:layout_height="171dp"
                     android:calendarViewShown="false"
                     android:datePickerMode="spinner"
+                    android:padding="30dp"
                     android:theme="@style/MyDatePickerStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
