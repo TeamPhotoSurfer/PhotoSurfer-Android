@@ -16,4 +16,10 @@
     <string name="date_picker_button">알림 날짜</string>
     <string name="represent_tag_title">대표 태그</string>
     <string name="represent_tag_content">푸시 알림에서 보일 대표 태그를 최대 3개 선택해보세요!</string>
+
+    <!-- Bottom Navigation -->
+    <string name="home">Home</string>
+    <string name="tag">Tag</string>
+    <string name="alarm">Alarm</string>
+    <string name="setting">Setting</string>
 </resources>
