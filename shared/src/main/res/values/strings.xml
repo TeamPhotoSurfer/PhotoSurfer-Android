@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">PhotoSurfer-Android</string>
 
+    <!-- login -->
+    <string name="kakao_login">카카오톡 로그인</string>
+    <string name="naver_login">네이버로 로그인</string>
+    <string name="connect_account">계정 연결</string>
+
     <!--PushSettingActivity-->
     <string name="btn_cancel">취소</string>
     <string name="btn_save">저장</string>

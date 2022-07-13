@@ -8,7 +8,6 @@ android {
 }
 
 dependencies {
-
     // Android Core
     implementation(AndroidXDependencies.coreKtx)
 

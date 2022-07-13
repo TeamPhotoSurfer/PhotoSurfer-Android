@@ -11,6 +11,9 @@
     <color name="splash_blue">#3d90fb</color>
     <color name="login_blue_top">#367ef9</color>
     <color name="login_blue_bottom">#51c6ff</color>
+    <color name="yellow_kakao">#fae100</color>
+    <color name="kakao_text_brown">#381e1f</color>
+    <color name="green_naver">#06be34</color>
 
     <color name="point_main">#357af9</color>
     <color name="point_sub">#e7eeff</color>

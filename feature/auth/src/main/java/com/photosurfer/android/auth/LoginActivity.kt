@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
+import androidx.activity.viewModels
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -18,15 +19,46 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+    private val viewModel: LoginViewModel by viewModels()
+
     @Inject
     lateinit var mainNavigator: MainNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        binding.viewModel = viewModel
+
         setAnimationOnSplash()
         setStatusBarColorOnSplash()
         setLogoTransitionY()
+        checkAutoLogin()
+        onClickLoginBtn()
+    }
+
+    private fun checkAutoLogin() {
+        val isAutoLogin = viewModel.isAutoLogin
+        if (!isAutoLogin) setLoginViewGroupFadeIn()
+        else navigateMainActivity()
+    }
+
+    private fun navigateMainActivity() {
+        mainNavigator.navigateMain(this)
+        finish()
+    }
+
+    private fun onClickLoginBtn() {
+        // TODO 로그인 로직 추가 & MainView이동 로직 수정
+        with(binding) {
+            clKakao.setOnClickListener {
+                navigateMainActivity()
+            }
+
+            clNaver.setOnClickListener {
+                navigateMainActivity()
+
+            }
+        }
     }
 
     private fun setAnimationOnSplash() {
@@ -49,6 +81,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private fun setLogoTransitionY() {
         ObjectAnimator.ofFloat(binding.ivLogo, "translationY", -420f).apply {
+            interpolator = LinearInterpolator()
+            setDelayIfDeviceOverAndroid12(this)
+            duration = 1500L
+            start()
+        }
+    }
+
+    private fun setLoginViewGroupFadeIn() {
+        ObjectAnimator.ofFloat(binding.clLogin, View.ALPHA, 0f, 1f).apply {
             interpolator = LinearInterpolator()
             setDelayIfDeviceOverAndroid12(this)
             duration = 1500L
