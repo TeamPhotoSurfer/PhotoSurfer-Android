@@ -8,8 +8,9 @@ import com.photosurfer.android.databinding.ActivityMainBinding
 import com.photosurfer.android.main.HomeFragment
 import com.photosurfer.android.shared.R.color.login_blue_top
 import com.photosurfer.android.shared.R.color.white
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
 
