@@ -14,30 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoSurferAndroid"
         tools:targetApi="31">
-
         <activity
             android:name=".auth.LoginActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Starting"
-            android:exported="true">
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".register_tag.RegisterTagActivity"
+            android:name="com.example.register_tag.RegisterTagActivity"
             android:exported="false" />
-
         <activity
             android:name=".push_setting.PushSettingActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
     </application>
-
-
 </manifest>

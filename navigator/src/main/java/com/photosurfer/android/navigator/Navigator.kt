@@ -1,3 +1,9 @@
-package com.photosurfer.android.navigator // ktlint-disable filename
+package com.photosurfer.android.navigator
 
-interface MainNavigator
+import android.content.Context
+
+interface MainNavigator {
+
+    fun navigateMain(context: Context)
+
+}

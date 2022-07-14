@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.photosurfer.android.auth.LoginViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +27,136 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:goneUnless="@{viewModel.isAutoLogin}"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <View
+                android:id="@+id/divider_left"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="50dp"
+                android:layout_weight="1"
+                android:background="@color/gray_20"
+                app:layout_constraintBottom_toBottomOf="@id/tv_connect_account"
+                app:layout_constraintEnd_toStartOf="@id/tv_connect_account"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_connect_account" />
+
+            <TextView
+                android:id="@+id/tv_connect_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/connect_account"
+                android:textAppearance="@style/caption_1"
+                android:textColor="@color/gray_20"
+                app:layout_constraintBottom_toTopOf="@id/cl_kakao"
+                app:layout_constraintEnd_toStartOf="@id/divider_right"
+                app:layout_constraintStart_toEndOf="@id/divider_left" />
+
+            <View
+                android:id="@+id/divider_right"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="50dp"
+                android:layout_weight="1"
+                android:background="@color/gray_20"
+                app:layout_constraintBottom_toBottomOf="@id/tv_connect_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_connect_account"
+                app:layout_constraintTop_toTopOf="@id/tv_connect_account" />
+
+            <!-- Kaakao Button -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_kakao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="36dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rectangle_yellow_radius_999"
+                app:layout_constraintBottom_toTopOf="@id/cl_naver">
+
+                <ImageView
+                    android:id="@+id/iv_kakao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_kakao_talk_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_kakao_login"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_kakao_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="13dp"
+                    android:text="@string/kakao_login"
+                    android:textAppearance="@style/body2"
+                    android:textColor="@color/kakao_text_brown"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_kakao"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Naver Button -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_naver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="158dp"
+                android:background="@drawable/rectangle_green_radius_999"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/cl_kakao"
+                app:layout_constraintStart_toStartOf="@id/cl_kakao">
+
+                <ImageView
+                    android:id="@+id/iv_naver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_naver_logo"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_naver"
+                    app:layout_constraintEnd_toStartOf="@id/tv_naver"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_naver"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_naver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="13dp"
+                    android:text="@string/naver_login"
+                    android:textAppearance="@style/body2"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_naver"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_wave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="3dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_sea_bottom"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
