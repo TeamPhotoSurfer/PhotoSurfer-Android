@@ -93,12 +93,14 @@
             app:layout_constraintStart_toStartOf="@id/et_enter_tag"
             app:layout_constraintTop_toBottomOf="@id/et_enter_tag" />
 
+        <!-- TODO (수정) chipSpacingVertical이 dp만큼 작동하지 않음 -->
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_often_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="13dp"
+            app:chipSpacingVertical="1dp"
             app:goneUnless="@{!viewModel.isOftenTagMoreThanZero}"
             app:layout_constraintStart_toStartOf="@id/tv_often_search_tag"
             app:layout_constraintTop_toBottomOf="@id/tv_often_search_tag" />
