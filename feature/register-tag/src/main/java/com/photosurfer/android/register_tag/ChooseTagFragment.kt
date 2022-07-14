@@ -46,6 +46,20 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         val textStateList = ColorStateList(states, textColors)
 
         for (i in 0 until Category.values().size) {
+            binding.cgInput.addView(
+                Chip(requireContext()).apply {
+                    this.text = "# " + Category.values()[i].categoryName
+                    this.chipBackgroundColor = backgroundStateList
+                    this.setTextColor(textStateList)
+                    this.setTextAppearance(body2)
+                    this.setRippleColorResource(android.R.color.transparent)
+                }
+            )
+        }
+
+
+
+        for (i in 0 until Category.values().size) {
             binding.cgRecent.addView(
                 Chip(requireContext()).apply {
                     this.text = "# " + Category.values()[i].categoryName
