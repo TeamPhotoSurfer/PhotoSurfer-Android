@@ -5,18 +5,21 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="pushSettingViewModel"
             type="com.photosurfer.android.push_setting.PushSettingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_push_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.PushMainFragment">
 
         <ScrollView
-            android:id="@+id/scrollView2"
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -108,9 +111,26 @@
                     android:datePickerMode="spinner"
                     android:padding="30dp"
                     android:theme="@style/MyDatePickerStyle"
+                    android:visibility="@{pushSettingViewModel.datePickerVisibility ? View.VISIBLE : View.GONE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_button_date_picker" />
+
+                <TextView
+                    android:id="@+id/tv_date_picker_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="-10dp"
+                    android:background="@drawable/shape_rect_gray_95_a_70_fill_4"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/date_picker_info"
+                    android:textAppearance="@style/caption_1"
+                    android:textColor="@color/white"
+                    android:visibility="@{pushSettingViewModel.datePickerInfoVisibility?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_push_image"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_button_represent_tag"
@@ -182,6 +202,7 @@
                         android:hint="@string/memo_hint"
                         android:inputType="textPersonName"
                         android:padding="12dp"
+                        android:maxLength="50"
                         android:textAppearance="@style/body_1"
                         android:textColor="@color/gray_90"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -196,6 +217,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="28dp"
                         android:background="@drawable/shape_rect_main_fill_8"
+                        android:visibility="@{pushSettingViewModel.pushAlarmDoneButtonVisibility? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/et_memo">
 
