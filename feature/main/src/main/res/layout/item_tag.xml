@@ -24,14 +24,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/iv_star"
             android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/selector_tag_star"
+            android:src="@drawable/selector_tag_star"
             app:layout_constraintStart_toStartOf="@id/iv_tag_img"
             app:layout_constraintTop_toTopOf="@id/iv_tag_img" />
 
         <ImageView
+            android:id="@+id/iv_threedots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"

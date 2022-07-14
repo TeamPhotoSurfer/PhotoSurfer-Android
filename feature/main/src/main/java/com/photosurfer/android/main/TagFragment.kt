@@ -16,6 +16,8 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTagAdapter()
+
+
     }
 
     private fun initTagAdapter() {

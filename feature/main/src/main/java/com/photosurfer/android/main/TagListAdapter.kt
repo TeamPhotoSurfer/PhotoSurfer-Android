@@ -1,5 +1,6 @@
 package com.photosurfer.android.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.main.databinding.ItemTagBinding
 
-class TagListAdapter : RecyclerView.Adapter<TagListAdapter.TagListViewHolder>() {
+class TagListAdapter(
+
+) : RecyclerView.Adapter<TagListAdapter.TagListViewHolder>() {
     private var _tagList = mutableListOf<TagInfo>()
     var tagList: MutableList<TagInfo> = _tagList
 
@@ -21,11 +24,22 @@ class TagListAdapter : RecyclerView.Adapter<TagListAdapter.TagListViewHolder>() 
         return TagListViewHolder(binding)
     }
 
-    inner class TagListViewHolder(
+    inner class TagListViewHolder (
         private val binding: ItemTagBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: TagInfo, position: Int) {
             binding.tagInfo = data
+
+            binding.ivStar.setOnClickListener {
+                binding.ivStar.isSelected = binding.ivStar.isSelected != true
+            }
+
+            binding.ivThreedots.setOnClickListener {
+                // 점 3개 누르면 옵션 창 뜨기
+
+
+            }
+
         }
     }
 
