@@ -3,7 +3,9 @@ package com.photosurfer.android.push_setting.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.replace
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.constant.PushSettingConstant.SELECT_TAG
 import com.photosurfer.android.core.util.DateUtil.dotDateFormatter
 import com.photosurfer.android.core.util.KeyBoardUtil
 import com.photosurfer.android.core.util.KeyBoardVisibilityListener
@@ -30,6 +32,7 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         initDatePickerButtonLongClickListener()
         initBackGroundClickListener()
         initKeyBoardVisibilityListener()
+        initRepresentTagButtonClickListener()
     }
 
     private fun initDefaultAlarmDate() {
@@ -115,6 +118,14 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
             if (elseCase != null) {
                 elseCase()
             }
+        }
+    }
+
+    private fun initRepresentTagButtonClickListener() {
+        binding.layoutButtonRepresentTag.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace<SelectTagFragment>(R.id.container_push_setting).commit()
+            pushSettingViewModel.updateFragmentState(SELECT_TAG)
         }
     }
 
