@@ -129,6 +129,11 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        keyBoardVisibilityListener.detachKeyboardListeners()
+    }
+
     companion object {
         const val ONE_DAY_TO_MILLIS = 24 * 60 * 60 * 1000L
     }
