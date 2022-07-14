@@ -28,11 +28,12 @@
         <item name="android:textCursorDrawable">@drawable/shape_rect_main_blue_cursor</item>
     </style>
 
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/splash_blue</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
-        <item name="windowSplashScreenAnimationDuration">300</item>
-        <item name="postSplashScreenTheme">@style/Theme.PhotoSurferAndroid</item>
+
+    <style name="popupMenuStyle" >
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:itemBackground">#000000</item>
+        <item name="android:divider">#eaeaea</item>
+        <item name="android:dividerHeight">1dp</item>
     </style>
 
     <!-- text theme. -->

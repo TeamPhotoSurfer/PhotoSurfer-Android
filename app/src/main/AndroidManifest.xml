@@ -38,7 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
 
     </application>
 
