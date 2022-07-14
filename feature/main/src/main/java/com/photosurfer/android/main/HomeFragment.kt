@@ -18,10 +18,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun setChip() {
-        for (i in 0 until viewModel.fakeOftenTagList.size) {
+        val tagList = viewModel.fakeOftenTagLongList
+        for (element in tagList) {
             ChipUnSelectableUtil(requireContext()).make(
                 binding.cgOftenSearch,
-                viewModel.fakeOftenTagList[i].name
+                element.name
             )
         }
     }
