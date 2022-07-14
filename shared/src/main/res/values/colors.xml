@@ -9,6 +9,7 @@
     <color name="sub">#E7EEFF</color>
 
     <color name="splash_blue">#3d90fb</color>
+    <color name="home_status_bar_color">#3B8AFB</color>
     <color name="login_blue_top">#367ef9</color>
     <color name="login_blue_bottom">#51c6ff</color>
     <color name="yellow_kakao">#fae100</color>
