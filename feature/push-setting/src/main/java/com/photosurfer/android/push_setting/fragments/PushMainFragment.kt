@@ -87,7 +87,8 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
     private fun initKeyBoardVisibilityListener() {
         keyBoardVisibilityListener = KeyBoardVisibilityListener(
             requireActivity().window,
-            onHideKeyboard = { requireActivity().currentFocus?.clearFocus() }
+            onHideKeyboard = { requireActivity().currentFocus?.clearFocus() },
+            onShowKeyboard = { binding.scrollView.fullScroll(View.FOCUS_DOWN) }
         )
     }
 
