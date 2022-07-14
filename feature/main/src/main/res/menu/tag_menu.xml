@@ -4,7 +4,6 @@
     <group android:id="@+id/g">
         <item
             android:id="@+id/tag_edit"
-
             android:title="태그 수정" />
         <item
             android:id="@+id/tag_delete"

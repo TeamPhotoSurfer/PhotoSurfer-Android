@@ -47,19 +47,21 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_scroll"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_tag_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:listitem="@layout/item_tag"
+                    android:layout_marginHorizontal="13dp"
+                    android:layout_marginTop="16dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:spanCount="2"
+                    tools:listitem="@layout/item_tag" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

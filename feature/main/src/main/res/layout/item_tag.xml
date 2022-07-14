@@ -49,26 +49,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_tag_img">
 
-            <ImageView
-                android:id="@+id/iv_hashtag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_hashtag_line_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
+                android:paddingStart="8dp"
+                android:paddingEnd="18dp"
                 android:id="@+id/tv_tag_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:text="@{tagInfo.name}"
                 android:textAppearance="@style/title_3B"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/iv_hashtag"
-                app:layout_constraintStart_toEndOf="@id/iv_hashtag"
-                app:layout_constraintTop_toTopOf="@id/iv_hashtag" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableLeftCompat="@drawable/ic_hashtag_line_white" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
