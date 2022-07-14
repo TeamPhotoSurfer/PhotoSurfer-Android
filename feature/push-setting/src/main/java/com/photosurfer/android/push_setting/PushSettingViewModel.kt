@@ -27,4 +27,8 @@ class PushSettingViewModel @Inject constructor() : BaseViewModel() {
     fun updateAlarmDate(currentDate: String) {
         _alarmDate.postValue(currentDate)
     }
+
+    fun updateFragmentState(fragmentState: PushSettingConstant) {
+        _fragmentState.postValue(fragmentState)
+    }
 }
