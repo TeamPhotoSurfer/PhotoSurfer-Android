@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="tagInfo"
+            type="com.photosurfer.android.domain.entity.TagInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="162dp"
+        android:layout_height="110dp">
+
+        <ImageView
+            android:id="@+id/iv_tag_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/bg_splash_gradient_blue"
+            app:layout_constraintDimensionRatio="162:110"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_tag_star"
+            app:layout_constraintStart_toStartOf="@id/iv_tag_img"
+            app:layout_constraintTop_toTopOf="@id/iv_tag_img" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_threedots_vertical"
+            app:layout_constraintEnd_toEndOf="@id/iv_tag_img"
+            app:layout_constraintTop_toTopOf="@id/iv_tag_img" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_tag_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_tag_img">
+
+            <ImageView
+                android:id="@+id/iv_hashtag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_hashtag_line_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tv_tag_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{tagInfo.name}"
+                android:textAppearance="@style/title_3B"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/iv_hashtag"
+                app:layout_constraintStart_toEndOf="@id/iv_hashtag"
+                app:layout_constraintTop_toTopOf="@id/iv_hashtag" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
