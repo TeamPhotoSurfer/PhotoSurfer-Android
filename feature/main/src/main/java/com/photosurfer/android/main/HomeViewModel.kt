@@ -13,4 +13,12 @@ class HomeViewModel : ViewModel() {
         TagInfo(4, "휴학계획"),
         TagInfo(5, "여행")
     )
+    val fakeOftenTagLongList = listOf(
+        TagInfo(0, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
+        TagInfo(1, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
+        TagInfo(2, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
+        TagInfo(3, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
+        TagInfo(4, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
+        TagInfo(5, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼")
+    )
 }
