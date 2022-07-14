@@ -122,7 +122,7 @@
                     android:layout_height="171dp"
                     android:calendarViewShown="false"
                     android:datePickerMode="spinner"
-                    android:padding="30dp"
+                    android:padding="8dp"
                     android:theme="@style/MyDatePickerStyle"
                     android:visibility="@{datePickerVisibility ? View.VISIBLE : View.GONE}"
                     app:layout_constraintEnd_toEndOf="parent"
