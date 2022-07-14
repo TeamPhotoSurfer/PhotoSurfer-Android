@@ -22,6 +22,7 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.pushSettingViewModel = pushSettingViewModel
         initDefaultAlarmDate()
+        initVisibilityVariable()
         setDatePickerMinDate()
         getDateFromDatePicker()
         initDatePickerButtonClickListener()
@@ -33,6 +34,12 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
 
     private fun initDefaultAlarmDate() {
         pushSettingViewModel.initDefaultAlarmDate()
+    }
+
+    private fun initVisibilityVariable() {
+        binding.datePickerVisibility = false
+        binding.datePickerInfoVisibility = false
+        binding.pushAlarmDoneButtonVisibility = true
     }
 
     private fun setDatePickerMinDate() {
@@ -49,43 +56,46 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
 
     private fun initDatePickerButtonClickListener() {
         binding.layoutButtonDatePicker.setOnClickListener {
-            keyBoardHideWhenEtMemoFocused {
-                pushSettingViewModel.updateDatePickerVisibility(!requireNotNull(pushSettingViewModel.datePickerVisibility.value))
-                pushSettingViewModel.updateDatePickerInfoVisibility(false)
+            hideKeyBoardWhenMemoETFocused {
+                binding.datePickerVisibility =
+                    !requireNotNull(binding.datePickerVisibility)
+                binding.datePickerInfoVisibility = false
             }
         }
     }
 
     private fun initDatePickerButtonLongClickListener() {
         binding.layoutButtonDatePicker.setOnLongClickListener {
-            pushSettingViewModel.updateDatePickerInfoVisibility(true)
+            binding.datePickerInfoVisibility = true
             return@setOnLongClickListener true
         }
     }
 
     private fun initBackGroundClickListener() {
-        binding.layoutPushImage.setOnClickListener {
-            pushSettingViewModel.updateDatePickerInfoVisibility(false)
-            keyBoardHideWhenEtMemoFocused()
-        }
-        binding.pickerPush.setOnClickListener {
-            pushSettingViewModel.updateDatePickerInfoVisibility(false)
-            keyBoardHideWhenEtMemoFocused()
-        }
-        binding.layoutMemo.setOnClickListener {
-            pushSettingViewModel.updateDatePickerInfoVisibility(false)
-            keyBoardHideWhenEtMemoFocused()
+        with(binding) {
+            layoutPushImage.setOnClickListener {
+                binding.datePickerInfoVisibility = false
+                hideKeyBoardWhenMemoETFocused()
+            }
+            pickerPush.setOnClickListener {
+                binding.datePickerInfoVisibility = false
+                hideKeyBoardWhenMemoETFocused()
+            }
+            layoutMemo.setOnClickListener {
+                binding.datePickerInfoVisibility = false
+                hideKeyBoardWhenMemoETFocused()
+            }
         }
     }
 
     private fun initEditTextMemoFocusListener() {
         binding.etMemo.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                pushSettingViewModel.updateDatePickerVisibility(false)
-                pushSettingViewModel.updateDatePickerInfoVisibility(false)
-                pushSettingViewModel.updatePushAlarmDoneButtonVisibility(false)
+                binding.datePickerVisibility = false
+                binding.datePickerInfoVisibility = false
+                binding.pushAlarmDoneButtonVisibility = false
             } else {
-                pushSettingViewModel.updatePushAlarmDoneButtonVisibility(true)
+                binding.pushAlarmDoneButtonVisibility = true
             }
         }
     }
@@ -98,7 +108,7 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         )
     }
 
-    private fun keyBoardHideWhenEtMemoFocused(elseCase: (() -> Unit)? = null) {
+    private fun hideKeyBoardWhenMemoETFocused(elseCase: (() -> Unit)? = null) {
         if (binding.etMemo.hasFocus()) {
             KeyBoardUtil.hide(requireActivity())
         } else {
