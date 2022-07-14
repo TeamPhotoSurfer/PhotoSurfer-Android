@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.PhotoSurferAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.PhotoSurferAndroid" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/point_main</item>
         <item name="colorPrimaryVariant">@color/point_sub</item>
@@ -15,6 +15,9 @@
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
         <item name="android:overScrollMode">never</item>
+        <!-- Bottom Navigation icon Background -->
+        <item name="colorSecondaryContainer">@color/point_main</item>
+        <item name="colorOnSecondaryContainer">@color/point_main</item>
     </style>
 
     <style name="BlueEditTextStyle" parent="Theme.AppCompat.Light.NoActionBar">
