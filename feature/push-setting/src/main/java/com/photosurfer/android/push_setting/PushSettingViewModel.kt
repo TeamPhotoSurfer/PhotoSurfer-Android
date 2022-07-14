@@ -23,4 +23,8 @@ class PushSettingViewModel @Inject constructor() : BaseViewModel() {
         val defaultDate = LocalDate.now().plusDays(1)
         _alarmDate.postValue(defaultDate.format(dotDateFormatter))
     }
+
+    fun updateAlarmDate(currentDate: String) {
+        _alarmDate.postValue(currentDate)
+    }
 }
