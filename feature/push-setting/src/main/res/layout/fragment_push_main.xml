@@ -175,7 +175,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_memo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="238dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_button_represent_tag">
 
@@ -201,8 +201,8 @@
                         android:gravity="start"
                         android:hint="@string/memo_hint"
                         android:inputType="textPersonName"
-                        android:padding="12dp"
                         android:maxLength="50"
+                        android:padding="12dp"
                         android:textAppearance="@style/body_1"
                         android:textColor="@color/gray_90"
                         app:layout_constraintEnd_toEndOf="parent"
