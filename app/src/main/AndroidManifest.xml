@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoSurferAndroid"
         tools:targetApi="31">
-
         <activity
             android:name=".auth.LoginActivity"
             android:configChanges="orientation"
@@ -22,16 +21,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Starting"
             tools:ignore="LockedOrientationActivity">
-
-        </activity>
-
-        <activity
-            android:name="com.example.register_tag.RegisterTagActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".push_setting.PushSettingActivity"
-            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,10 +28,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.example.register_tag.RegisterTagActivity"
+            android:exported="true" />
+        <activity
+            android:name=".push_setting.PushSettingActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
-
     </application>
-
-
 </manifest>
