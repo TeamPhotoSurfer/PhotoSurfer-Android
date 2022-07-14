@@ -1,19 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.photosurfer.android.main.HomeViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_40"
+        android:background="@color/white"
         tools:context=".HomeFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="HomeFragment" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:src="@drawable/ic_bubble_static"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_sea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_sea_top"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="115dp"
+            android:src="@drawable/ic_logo_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_where_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/where_to"
+            android:textAppearance="@style/title_1M"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+        <TextView
+            android:id="@+id/tv_surf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shall_surf"
+            android:textAppearance="@style/title_1B"
+            app:layout_constraintStart_toStartOf="@id/tv_where_to"
+            app:layout_constraintTop_toBottomOf="@id/tv_where_to" />
+
+        <EditText
+            android:id="@+id/et_enter_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/rectangle_blue_radius_999"
+            android:clickable="false"
+            android:drawableStart="@drawable/ic_search_line"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/point_main"
+            android:focusable="false"
+            android:hint="@string/enter_tag"
+            android:paddingVertical="14dp"
+            android:paddingStart="16dp"
+            android:textAppearance="@style/body2"
+            android:theme="@style/BlueEditTextStyle"
+            app:layout_constraintTop_toBottomOf="@id/tv_surf"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/tv_often_search_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:text="@string/often_search_tag"
+            android:textAppearance="@style/caption_1"
+            app:layout_constraintStart_toStartOf="@id/et_enter_tag"
+            app:layout_constraintTop_toBottomOf="@id/et_enter_tag" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_often_search_tag"
+            app:layout_constraintTop_toBottomOf="@id/tv_often_search_tag">
+
+            <!-- TODO (수정) chipSpacingVertical이 dp만큼 작동하지 않음 -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_often_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chipSpacingVertical="1dp"
+                app:goneUnless="@{!viewModel.isOftenTagMoreThanZero}" />
+        </ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:text="@string/try_first_surf"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray_60"
+            app:goneUnless="@{viewModel.isOftenTagMoreThanZero}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_often_search_tag" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

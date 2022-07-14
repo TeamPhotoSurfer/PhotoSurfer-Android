@@ -1,11 +1,16 @@
 package com.photosurfer.android
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.photosurfer.android.adapter.MainViewPagerAdapter
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.databinding.ActivityMainBinding
 import com.photosurfer.android.main.HomeFragment
+import com.photosurfer.android.shared.R.color.login_blue_top
+import com.photosurfer.android.shared.R.color.white
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
 
@@ -13,6 +18,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         initAdapter()
         syncBottomNavWithVp()
+        initStatusBarColor()
+        changeStatusBarColor()
     }
 
     private fun initAdapter() {
@@ -21,6 +28,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             // TODO : HomeFragment(), TagFragment(), AlarmFragment(), SettingFragment()로 교체할것
             HomeFragment(), HomeFragment(), HomeFragment(), HomeFragment()
         )
+    }
+
+    private fun initStatusBarColor() {
+        this.window.statusBarColor = ContextCompat.getColor(this, login_blue_top)
+    }
+
+    private fun changeStatusBarColor() {
+        binding.bottomNav.setOnItemSelectedListener {
+            val colorRes = if (it.itemId == R.id.menu_home) login_blue_top else white
+            this.window.statusBarColor = ContextCompat.getColor(this, colorRes)
+            return@setOnItemSelectedListener true
+        }
     }
 
     private fun syncBottomNavWithVp() {
