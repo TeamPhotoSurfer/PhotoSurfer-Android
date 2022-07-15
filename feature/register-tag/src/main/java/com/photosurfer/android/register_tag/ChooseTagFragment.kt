@@ -1,24 +1,51 @@
 package com.photosurfer.android.register_tag
 
-import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
-import com.photosurfer.android.shared.R.color
-import com.google.android.material.chip.Chip
+import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.core.ext.getColor
+import com.photosurfer.android.core.util.ChipUnSelectableUtil
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
-import com.photosurfer.android.shared.R.style.body2
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
-
+    private val chooseTagViewModel: ChooseTagViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.isEmpty = true
+        binding.isTyping = true
         setChips()
         checkInputNum()
         checkPlatform()
+        addInputTag()
+        observeInputChipGroup()
+    }
+
+    private fun observeInputChipGroup() {
+        chooseTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
+            if (chooseTagViewModel.isEmptyInput.value!! > 0) {
+                binding.tvSave.isSelected = binding.ivCheckPlatform.isSelected != true
+                binding.tvSave.isEnabled = true
+            }
+        }
+    }
+
+    private fun addInputTag() {
+        binding.etTag.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                ChipUnSelectableUtil(requireContext()).make(
+                    binding.cgInput,
+                    binding.etTag.text.toString()
+                )
+                chooseTagViewModel.setEmptyInput(binding.cgInput.childCount)
+                binding.etTag.setText("")
+                true
+            }
+            false
+        }
     }
 
     private fun checkPlatform() {
@@ -30,68 +57,29 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun checkInputNum() {
         binding.etTag.addTextChangedListener {
-            binding.isEmpty = binding.etTag.text.isEmpty()
+            binding.isTyping = binding.etTag.text.isEmpty()
         }
     }
 
     private fun setChips() {
-
-        val states = arrayOf(
-            intArrayOf(-android.R.attr.state_selected),
-            intArrayOf(android.R.attr.state_selected),
-        )
-        val backgroundColors = intArrayOf(getColor(color.point_sub), getColor(color.point_main))
-        val textColors = intArrayOf(getColor(color.point_main), getColor(color.white))
-        val backgroundStateList = ColorStateList(states, backgroundColors)
-        val textStateList = ColorStateList(states, textColors)
-
-        for (i in 0 until Category.values().size) {
-            binding.cgInput.addView(
-                Chip(requireContext()).apply {
-                    this.text = "# " + Category.values()[i].categoryName
-                    this.chipBackgroundColor = backgroundStateList
-                    this.setTextColor(textStateList)
-                    this.setTextAppearance(body2)
-                    this.setRippleColorResource(android.R.color.transparent)
-                }
+        for (element in Category.values()) {
+            ChipUnSelectableUtil(requireContext()).make(
+                binding.cgRecent,
+                element.name
             )
         }
 
-
-
-        for (i in 0 until Category.values().size) {
-            binding.cgRecent.addView(
-                Chip(requireContext()).apply {
-                    this.text = "# " + Category.values()[i].categoryName
-                    this.chipBackgroundColor = backgroundStateList
-                    this.setTextColor(textStateList)
-                    this.setTextAppearance(body2)
-                    this.setRippleColorResource(android.R.color.transparent)
-                }
+        for (element in Category.values()) {
+            ChipUnSelectableUtil(requireContext()).make(
+                binding.cgOften,
+                element.name
             )
         }
 
-        for (i in 0 until Category.values().size) {
-            binding.cgOften.addView(
-                Chip(requireContext()).apply {
-                    this.text = "# " + Category.values()[i].categoryName
-                    this.chipBackgroundColor = backgroundStateList
-                    this.setTextColor(textStateList)
-                    this.setTextAppearance(body2)
-                    this.setRippleColorResource(android.R.color.transparent)
-                }
-            )
-        }
-
-        for (i in 0 until Category.values().size) {
-            binding.cgPlatform.addView(
-                Chip(requireContext()).apply {
-                    this.text = "# " + Category.values()[i].categoryName
-                    this.chipBackgroundColor = backgroundStateList
-                    this.setTextColor(textStateList)
-                    this.setTextAppearance(body2)
-                    this.setRippleColorResource(android.R.color.transparent)
-                }
+        for (element in Category.values()) {
+            ChipUnSelectableUtil(requireContext()).make(
+                binding.cgPlatform,
+                element.name
             )
         }
     }

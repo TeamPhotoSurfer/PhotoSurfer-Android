@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="isEmpty"
+            name="isTyping"
             type="Boolean" />
 
         <variable
@@ -54,9 +54,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
+                android:enabled="false"
                 android:text="저장"
                 android:textAppearance="@style/subtitle_1"
-                android:textColor="@color/gray_50"
+                android:textColor="@color/selector_choose_tag_check_state_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,6 +72,7 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/shape_rect_register_gray_radius_8dp"
             android:hint="태그를 입력하세요"
+            android:inputType="text"
             android:maxLength="20"
             android:maxLines="1"
             android:paddingHorizontal="16dp"
@@ -144,7 +146,8 @@
                         <com.google.android.material.chip.ChipGroup
                             android:id="@+id/cg_input"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            app:chipSpacingVertical="1dp" />
 
                     </HorizontalScrollView>
 
@@ -156,7 +159,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="74dp"
-                    android:visibility="@{isEmpty ? View.VISIBLE : View.INVISIBLE}"
+                    android:visibility="@{isTyping ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -181,7 +184,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:chipSpacingHorizontal="12dp"
-                            app:chipSpacingVertical="9dp"
+                            app:chipSpacingVertical="1dp"
                             app:layout_constraintTop_toBottomOf="@id/tv_recent" />
 
 
@@ -208,8 +211,7 @@
                             android:id="@+id/cg_often"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:chipSpacingHorizontal="12dp"
-                            app:chipSpacingVertical="9dp"
+                            app:chipSpacingVertical="1dp"
                             app:layout_constraintTop_toBottomOf="@id/tv_often" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -244,8 +246,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            app:chipSpacingHorizontal="12dp"
-                            app:chipSpacingVertical="9dp"
+                            app:chipSpacingVertical="1dp"
                             app:layout_constraintTop_toBottomOf="@id/tv_platform_msg" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -258,7 +259,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="74dp"
-                    android:visibility="@{isEmpty ? View.INVISIBLE : View.VISIBLE}"
+                    android:visibility="@{isTyping ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <TextView

@@ -1,13 +1,16 @@
 package com.photosurfer.android.register_tag
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.register_tag.R
 import com.photosurfer.android.register_tag.databinding.ActivityRegisterTagBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterTagActivity :
     BaseActivity<ActivityRegisterTagBinding>(R.layout.activity_register_tag) {
-
+    private val chooseTagViewModel: ChooseTagViewModel by viewModels()
     private lateinit var chooseTagFragment: ChooseTagFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
