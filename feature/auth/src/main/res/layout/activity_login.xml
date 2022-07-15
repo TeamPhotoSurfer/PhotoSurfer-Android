@@ -17,6 +17,15 @@
         android:background="@drawable/bg_splash_gradient_blue"
         tools:context=".LoginActivity">
 
+        <!--todo 릴리즈 시에는 무한반복 효과 없애기 -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_fileName="android_bubble.json" />
+
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
