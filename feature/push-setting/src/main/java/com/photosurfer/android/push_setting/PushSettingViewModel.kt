@@ -26,6 +26,9 @@ class PushSettingViewModel @Inject constructor() : BaseViewModel() {
     private val _representTagIdList = MutableLiveData<MutableList<Long>>()
     val representTagIdList: LiveData<MutableList<Long>> = _representTagIdList
 
+    private val _tempRepresentTagIdList = MutableLiveData<MutableList<Long>>()
+    val tempRepresentTagIdList: LiveData<MutableList<Long>> = _tempRepresentTagIdList
+
     fun initDefaultAlarmDate() {
         val defaultDate = LocalDate.now().plusDays(1)
         _alarmDate.postValue(defaultDate.format(dotDateFormatter))
@@ -51,5 +54,13 @@ class PushSettingViewModel @Inject constructor() : BaseViewModel() {
                 wholeTagList.value?.subList(0, 3)?.map { it.id }?.toMutableList()
             )
         }
+    }
+
+    fun saveRepresentTagIdList() {
+        _representTagIdList.value = tempRepresentTagIdList.value
+    }
+
+    fun updateTempRepresentTagList(tempList: MutableList<Long>){
+        _tempRepresentTagIdList.postValue(tempList)
     }
 }

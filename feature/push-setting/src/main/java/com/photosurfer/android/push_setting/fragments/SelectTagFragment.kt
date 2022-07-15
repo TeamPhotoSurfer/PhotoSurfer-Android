@@ -1,7 +1,6 @@
 package com.photosurfer.android.push_setting.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.photosurfer.android.core.base.BaseFragment
@@ -21,8 +20,15 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
     }
 
     private fun initSelectTagListAdapter() {
-        selectTagListAdapter = SelectTagListAdapter(requireNotNull(pushSettingViewModel.representTagIdList.value))
+        selectTagListAdapter = SelectTagListAdapter(
+            requireNotNull(pushSettingViewModel.representTagIdList.value),
+            ::updateTempRepresentTagList
+        )
         binding.rvRepresentTag.adapter = selectTagListAdapter
         selectTagListAdapter.submitList(pushSettingViewModel.wholeTagList.value)
+    }
+
+    private fun updateTempRepresentTagList(tempList: MutableList<Long>) {
+        pushSettingViewModel.updateTempRepresentTagList(tempList)
     }
 }
