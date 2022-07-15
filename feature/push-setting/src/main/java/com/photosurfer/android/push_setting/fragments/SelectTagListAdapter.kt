@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.photosurfer.android.core.util.CustomSnackBar
 import com.photosurfer.android.core.util.ItemDiffCallback
+import com.photosurfer.android.core.util.PhotoSurferSnackBar
+import com.photosurfer.android.core.util.PhotoSurferSnackBar.Companion.SELECT_TAG_FRAGMENT
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.push_setting.databinding.ItemSelectTagBinding
 
@@ -55,7 +56,7 @@ class SelectTagListAdapter(
                         tempList.add(data.id)
                         binding.cbCheckImage.isChecked = true
                     } else {
-                        CustomSnackBar.make(it, "대표태그는 3개까지만 추가할 수 있어요.").show()
+                        PhotoSurferSnackBar.make(it, SELECT_TAG_FRAGMENT).show()
                     }
                 } else {
                     binding.cbCheckImage.isChecked = false
