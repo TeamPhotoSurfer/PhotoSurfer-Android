@@ -6,7 +6,7 @@ import com.photosurfer.android.adapter.MainViewPagerAdapter
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.databinding.ActivityMainBinding
 import com.photosurfer.android.main.HomeFragment
-import com.photosurfer.android.shared.R.color.login_blue_top
+import com.photosurfer.android.shared.R.color.home_status_bar_color
 import com.photosurfer.android.shared.R.color.white
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,12 +31,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initStatusBarColor() {
-        this.window.statusBarColor = ContextCompat.getColor(this, login_blue_top)
+        this.window.statusBarColor = ContextCompat.getColor(this, home_status_bar_color)
     }
 
     private fun changeStatusBarColor() {
         binding.bottomNav.setOnItemSelectedListener {
-            val colorRes = if (it.itemId == R.id.menu_home) login_blue_top else white
+            val colorRes = if (it.itemId == R.id.menu_home) home_status_bar_color else white
             this.window.statusBarColor = ContextCompat.getColor(this, colorRes)
             return@setOnItemSelectedListener true
         }
