@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="snackBarText"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +21,7 @@
             android:background="@drawable/shape_rect_gray_80_fill_8"
             android:gravity="center"
             android:paddingVertical="16dp"
+            android:text="@{snackBarText}"
             android:textAppearance="@style/body2"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
