@@ -44,4 +44,7 @@
     <color name="gray_950">#191f28</color>
     <color name="black">#000000</color>
 
+    <color name="alpha_ocean_a_60">#993f96fc</color>
+    <color name="alpha_ocean_a_75">#c03f96fc</color>
+
 </resources>
