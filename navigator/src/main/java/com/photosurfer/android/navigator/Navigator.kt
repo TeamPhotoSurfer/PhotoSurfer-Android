@@ -6,4 +6,9 @@ interface MainNavigator {
 
     fun navigateMain(context: Context)
 
+    fun navigateSearchTag(
+        context: Context,
+        tag: Pair<String, String>
+    )
+
 }
