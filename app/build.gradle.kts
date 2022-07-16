@@ -23,8 +23,8 @@ dependencies {
     implementation(project(":navigator"))
     implementation(project(":shared"))
     implementation(project(":feature:register-tag"))
-    implementation(project(":feature:search-tag"))
     implementation(project(":feature:push-setting"))
+    implementation(project(":feature:search"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
 
