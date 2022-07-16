@@ -9,13 +9,18 @@ import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.util.ChipUnSelectableUtil
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.main.databinding.FragmentHomeBinding
+import com.photosurfer.android.navigator.MainNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var tagList: List<TagInfo>
+
+    @Inject
+    lateinit var mainNavigator: MainNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.viewModel = viewModel
@@ -46,6 +51,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun navigateToSearchTagActivity(tag: TagInfo? = null) {
+        mainNavigator.navigateSearchTag(requireContext(), Pair("hi", "hi"))
         Timber.tag(TAG).d("onClick: ${tag?.name}")
     }
 
