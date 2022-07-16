@@ -123,10 +123,14 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
 
     private fun initRepresentTagButtonClickListener() {
         binding.layoutButtonRepresentTag.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace<SelectTagFragment>(R.id.container_push_setting).commit()
+            transactionToSelectTagFragment()
             pushSettingViewModel.updateFragmentState(SELECT_TAG)
         }
+    }
+
+    private fun transactionToSelectTagFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace<SelectTagFragment>(R.id.container_push_setting).commit()
     }
 
     override fun onDestroyView() {
