@@ -213,7 +213,7 @@
                         android:background="@drawable/shape_rect_grey10_fill_8"
                         android:gravity="start"
                         android:hint="@string/memo_hint"
-                        android:inputType="textPersonName"
+                        android:inputType="textMultiLine"
                         android:maxLength="50"
                         android:padding="12dp"
                         android:textAppearance="@style/body_1"

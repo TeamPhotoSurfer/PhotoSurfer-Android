@@ -46,5 +46,7 @@
 
     <color name="alpha_ocean_a_60">#993f96fc</color>
     <color name="alpha_ocean_a_75">#c03f96fc</color>
+    <color name="alarm_grad_blue_top">#3985fa</color>
+    <color name="alarm_grad_blue_bottom">#51c6ff</color>
 
 </resources>
