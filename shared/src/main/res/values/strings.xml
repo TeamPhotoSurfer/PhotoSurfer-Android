@@ -1,3 +1,4 @@
+
 <resources>
     <string name="app_name">PhotoSurfer-Android</string>
 
@@ -33,4 +34,10 @@
 
     <!--SanckBarMessage 정리-->
     <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>
+
+    <!-- Setting -->
+    <string name="setting_kr">환경설정</string>
+    <string name="manage_account">계정 관리</string>
+    <string name="push_alarm">푸시 알림</string>
+    <string name="etc_policy">기타 정책</string>
 </resources>
