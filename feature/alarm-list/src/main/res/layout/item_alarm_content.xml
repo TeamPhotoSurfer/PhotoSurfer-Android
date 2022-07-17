@@ -13,16 +13,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_alarm_content"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_10"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/iv_gray_20_background"
             android:layout_width="96dp"
-            android:layout_height="0dp"
+            android:layout_height="96dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
-            app:shapeAbleSetImage="@{alarmData.imageURL}"
-            app:layout_constraintDimensionRatio="1"
+            android:background="@drawable/shape_rect_gray_20_fill_8"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_alarm_content"
+            android:layout_width="94dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_gray_20_background"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@+id/iv_gray_20_background"
+            app:layout_constraintStart_toStartOf="@+id/iv_gray_20_background"
+            app:layout_constraintTop_toTopOf="@+id/iv_gray_20_background"
+            app:shapeAbleSetImage="@{alarmData.imageURL}"
             app:shapeAppearanceOverlay="@style/roundImageView"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -36,14 +52,14 @@
             android:textAppearance="@style/subtitle_2"
             android:textColor="@color/gray_90"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_alarm_content"
-            app:layout_constraintTop_toTopOf="@+id/iv_alarm_content"
+            app:layout_constraintStart_toEndOf="@+id/iv_gray_20_background"
+            app:layout_constraintTop_toTopOf="@+id/iv_gray_20_background"
             tools:text="#장학금 #신청 #대학" />
 
         <TextView
             android:id="@+id/tv_memo"
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:layout_height="49dp"
             android:text="@{alarmData.memo}"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="20dp"
