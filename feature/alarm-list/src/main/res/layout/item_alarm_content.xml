@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="alarmData"
+            type="com.photosurfer.android.domain.entity.AlarmElement" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_10"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/iv_gray_20_background"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_rect_gray_20_fill_8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_alarm_content"
+            android:layout_width="94dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_gray_20_background"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@+id/iv_gray_20_background"
+            app:layout_constraintStart_toStartOf="@+id/iv_gray_20_background"
+            app:layout_constraintTop_toTopOf="@+id/iv_gray_20_background"
+            app:shapeAbleSetImage="@{alarmData.imageURL}"
+            app:shapeAppearanceOverlay="@style/roundImageView"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_represent_tag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            app:setRepresentTagText="@{alarmData.tags}"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/subtitle_2"
+            android:textColor="@color/gray_90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_gray_20_background"
+            app:layout_constraintTop_toTopOf="@+id/iv_gray_20_background"
+            tools:text="#장학금 #신청 #대학" />
+
+        <TextView
+            android:id="@+id/tv_memo"
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:text="@{alarmData.memo}"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/caption_1"
+            android:textColor="@color/gray_90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_represent_tag"
+            app:layout_constraintTop_toBottomOf="@+id/tv_represent_tag"
+            tools:text="메모 50자는 띄어쓰기 포함입니다. 길어지면 이렇게 되고 엔터는 불가합다.50자는 여기" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="14dp"
+            app:setDateToAlarmList="@{alarmData.pushDate}"
+            android:textAppearance="@style/caption_1"
+            android:textColor="@color/gray_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_memo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_memo"
+            tools:text="7월 9일" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

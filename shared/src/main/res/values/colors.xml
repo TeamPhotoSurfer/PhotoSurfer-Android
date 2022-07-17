@@ -9,6 +9,7 @@
     <color name="sub">#E7EEFF</color>
 
     <color name="splash_blue">#3d90fb</color>
+    <color name="home_status_bar_color">#3B8AFB</color>
     <color name="login_blue_top">#367ef9</color>
     <color name="login_blue_bottom">#51c6ff</color>
     <color name="yellow_kakao">#fae100</color>
@@ -42,5 +43,10 @@
     <color name="gray_90">#262f3d</color>
     <color name="gray_950">#191f28</color>
     <color name="black">#000000</color>
+
+    <color name="alpha_ocean_a_60">#993f96fc</color>
+    <color name="alpha_ocean_a_75">#c03f96fc</color>
+    <color name="alarm_grad_blue_top">#3985fa</color>
+    <color name="alarm_grad_blue_bottom">#51c6ff</color>
 
 </resources>

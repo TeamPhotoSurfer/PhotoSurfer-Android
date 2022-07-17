@@ -31,4 +31,13 @@
     <string name="where_to">어떤 사진을 향해</string>
     <string name="try_first_surf">첫 번째 서핑을 시작해보세요!</string>
 
+    <!--SanckBarMessage 정리-->
+    <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>림
+
+    <!--AlarmListMainFragment-->
+    <string name="alarm_list_title">알림 목록</string>
+    <string name="alarm_list_passed_title">지난 알림</string>
+    <string name="alarm_list_more">더보기</string>
+    <string name="alarm_list_up_coming">다가오는 알림</string>
+    <string name="alarm_list_urgent">임박한 알림</string>
 </resources>

@@ -23,9 +23,11 @@ dependencies {
     implementation(project(":navigator"))
     implementation(project(":shared"))
     implementation(project(":feature:register-tag"))
+    implementation(project(":feature:search-tag"))
     implementation(project(":feature:push-setting"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
+    implementation(project(":feature:alarm-list"))
 
     // Kotlin
     implementation(KotlinDependencies.kotlin)

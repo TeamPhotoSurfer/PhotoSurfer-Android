@@ -31,7 +31,7 @@ class ChipUnSelectableUtil @Inject constructor(@ApplicationContext private val c
     private val textStateList = ColorStateList(states, textColors)
     private val strokeStateList = ColorStateList(states, strokeColors)
 
-    private fun getChip(tag: String): Chip {
+    private fun getChip(tag: String, onChipClick: (() -> Unit)): Chip {
         val chip = Chip(context).apply {
             this.text = tag
             this.chipStrokeColor = strokeStateList
@@ -52,10 +52,15 @@ class ChipUnSelectableUtil @Inject constructor(@ApplicationContext private val c
             .setBottomRightCorner(CornerFamily.ROUNDED, 70F)
             .build()
 
+        chip.setOnClickListener {
+            it.isSelected = !it.isSelected
+            onChipClick()
+        }
+
         return chip
     }
 
-    fun make(view: ChipGroup, chipName: String) {
-        view.addView(getChip(chipName))
+    fun make(view: ChipGroup, chipName: String, onChipClick: (() -> Unit)) {
+        view.addView(getChip(chipName, onChipClick))
     }
 }
