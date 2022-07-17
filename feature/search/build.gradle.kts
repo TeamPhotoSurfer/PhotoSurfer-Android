@@ -30,6 +30,8 @@ dependencies {
 
     // Dagger-Hilt
     implementation(AndroidXDependencies.hilt)
+    // TODO 채영 & 효림 tag 모듈로 합치기
+    implementation(project(mapOf("path" to ":feature:register-tag")))
     kapt(KaptDependencies.hiltCompiler)
 
     // Jetpack Fragment

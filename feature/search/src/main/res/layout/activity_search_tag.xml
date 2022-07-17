@@ -11,5 +11,10 @@
         android:layout_height="match_parent"
         tools:context=".SearchTagActivity">
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_select_tag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
