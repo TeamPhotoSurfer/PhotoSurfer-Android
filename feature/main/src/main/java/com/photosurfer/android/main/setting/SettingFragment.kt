@@ -8,7 +8,6 @@ import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.main.R
 import com.photosurfer.android.main.databinding.FragmentSettingBinding
 import com.photosurfer.android.main.setting.viewModel.SettingViewModel
-import timber.log.Timber
 
 class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting) {
     private val viewModel: SettingViewModel by viewModels()
@@ -25,7 +24,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
                 startActivity(Intent(activity, ManageAccountActivity::class.java))
             }
             clEtcPolicy.setOnClickListener {
-                Timber.d("setting / 기타정책")
+                startActivity(Intent(activity, EtcPolicyActivity::class.java))
             }
         }
     }
