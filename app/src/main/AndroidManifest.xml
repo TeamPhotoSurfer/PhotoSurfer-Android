@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoSurferAndroid"
         tools:targetApi="31">
-
         <activity
             android:name=".auth.LoginActivity"
             android:configChanges="orientation"
@@ -28,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.example.register_tag.RegisterTagActivity"
             android:exported="false" />
@@ -39,9 +37,14 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
-
+            android:exported="false" />
+            
+        <activity
+            android:name=".main.setting.ManageAccountActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".main.setting.EtcPolicyActivity"
+            android:exported="false" />
     </application>
-
-
 </manifest>

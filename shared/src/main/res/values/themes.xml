@@ -18,6 +18,16 @@
         <!-- Bottom Navigation icon Background -->
         <item name="colorSecondaryContainer">@color/point_main</item>
         <item name="colorOnSecondaryContainer">@color/point_main</item>
+        <item name="switchStyle">@style/Widget.App.Switch</item>
+    </style>
+
+    <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorOnSurface">@color/main</item>
+        <item name="colorSecondary">@color/gray_10</item>
     </style>
 
     <style name="BlueEditTextStyle" parent="Theme.AppCompat.Light.NoActionBar">
@@ -130,5 +140,12 @@
         <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
         <item name="android:textStyle">normal</item>
         <item name="android:letterSpacing">-0.022</item>
+    </style>
+
+    <style name="roundImageView" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:strokeColor">@color/gray_20</item>
     </style>
 </resources>

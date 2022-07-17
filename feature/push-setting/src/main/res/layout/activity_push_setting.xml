@@ -5,6 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="pushSettingViewModel"
+            type="com.photosurfer.android.push_setting.PushSettingViewModel" />
+
+        <variable
+            name="pushSettingConstant"
+            type="com.photosurfer.android.core.constant.PushSettingConstant" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +34,7 @@
                 android:layout_marginVertical="2dp"
                 android:background="@android:color/transparent"
                 android:padding="16dp"
+                android:visibility="@{pushSettingViewModel.fragmentState == pushSettingConstant.PUSH_MAIN ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +48,7 @@
                 android:text="@string/btn_cancel"
                 android:textAppearance="@style/subtitle_1"
                 android:textColor="@color/gray_60"
+                android:visibility="@{pushSettingViewModel.fragmentState == pushSettingConstant.SELECT_TAG ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,10 +57,12 @@
                 android:id="@+id/tv_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="@{pushSettingViewModel.tempRepresentTagIdList.size() == 0 ? false : true}"
                 android:padding="16dp"
                 android:text="@string/btn_save"
                 android:textAppearance="@style/subtitle_1"
-                android:textColor="@color/main"
+                android:textColor="@{pushSettingViewModel.tempRepresentTagIdList.size() == 0 ? @color/gray_50 : @color/main}"
+                android:visibility="@{pushSettingViewModel.fragmentState == pushSettingConstant.SELECT_TAG ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.photosurfer.android.main.setting.viewModel.SettingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".setting.SettingFragment">
+
+        <TextView
+            android:id="@+id/tv_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="13dp"
+            android:switchTextAppearance="@color/gray_90"
+            android:text="@string/setting_kr"
+            android:textAppearance="@style/title_1B"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:switchTextAppearance="@color/gray_90"
+            android:text="@{viewModel.userName}"
+            android:textAppearance="@style/title_3M"
+            app:layout_constraintStart_toStartOf="@id/tv_setting"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting"
+            tools:text="김포토" />
+
+        <TextView
+            android:id="@+id/tv_user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{viewModel.email}"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray_50"
+            app:layout_constraintStart_toStartOf="@id/tv_user_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+            tools:text="photosurfer@gmail.com" />
+
+        <View
+            android:id="@+id/view_gray"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray_10"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_email" />
+
+        <!-- 계정 관리 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_manage_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/view_gray">
+
+            <ImageView
+                android:id="@+id/iv_account"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginVertical="14dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_user_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_manage_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/manage_account"
+                android:textAppearance="@style/body_1"
+                android:textColor="@color/gray_90"
+                app:layout_constraintBottom_toBottomOf="@id/iv_account"
+                app:layout_constraintStart_toEndOf="@id/iv_account"
+                app:layout_constraintTop_toTopOf="@id/iv_account" />
+
+            <ImageView
+                android:id="@+id/iv_account_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_shortarrow_line_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 푸시 알림 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_push_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cl_manage_account">
+
+            <ImageView
+                android:id="@+id/iv_push_alarm"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginVertical="14dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_bell_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_push_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/push_alarm"
+                android:textAppearance="@style/body_1"
+                android:textColor="@color/gray_90"
+                app:layout_constraintBottom_toBottomOf="@id/iv_push_alarm"
+                app:layout_constraintStart_toEndOf="@id/iv_push_alarm"
+                app:layout_constraintTop_toTopOf="@id/iv_push_alarm" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@null"
+                android:scaleY="0.9"
+                android:checked="@={viewModel.isPushOn}"
+                android:thumb="@drawable/shape_oval_white_fill_27"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:track="@drawable/selector_switch_track"
+                app:useMaterialThemeColors="false" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_etc_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cl_push_alarm">
+
+            <ImageView
+                android:id="@+id/iv_policy"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginVertical="14dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_book_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_etc_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/etc_policy"
+                android:textAppearance="@style/body_1"
+                android:textColor="@color/gray_90"
+                app:layout_constraintBottom_toBottomOf="@id/iv_policy"
+                app:layout_constraintStart_toEndOf="@id/iv_policy"
+                app:layout_constraintTop_toTopOf="@id/iv_policy" />
+
+            <ImageView
+                android:id="@+id/iv_policy_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_shortarrow_line_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -5,7 +5,9 @@ plugins {
 }
 
 android {
-
+    buildFeatures {
+        dataBinding = true
+    }
     namespace = "com.photosurfer.android.shared"
 }
 
