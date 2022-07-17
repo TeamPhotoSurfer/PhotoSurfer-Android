@@ -10,5 +10,5 @@ object DateUtil {
 
     // 7월 9일 형식 formatter
     val monthDayDateFormatter =
-        DateTimeFormatter.ofPattern("MM 월 dd 일")
+        DateTimeFormatter.ofPattern("M월 d일")
 }

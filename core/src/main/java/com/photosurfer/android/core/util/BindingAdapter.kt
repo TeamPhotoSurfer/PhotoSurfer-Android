@@ -44,6 +44,7 @@ fun TextView.setRepresentTagText(representTag: List<String>) {
             tempString = "$tempString #$i"
         }
     }
+    text = tempString
 }
 
 @BindingAdapter("app:setDateToAlarmList")
