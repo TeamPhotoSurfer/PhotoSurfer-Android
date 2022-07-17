@@ -1,19 +1,23 @@
 package com.photosurfer.android.register_tag
 
+import android.nfc.Tag
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.util.ChipUnSelectableUtil
+import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
     private val chooseTagViewModel: ChooseTagViewModel by viewModels()
+
+    private lateinit var tagAdapter: TagAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
@@ -22,6 +26,10 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         checkPlatform()
         addInputTag()
         observeInputChipGroup()
+
+        tagAdapter = TagAdapter()
+        binding.rcvMultiview.adapter = tagAdapter
+
     }
 
     private fun observeInputChipGroup() {
@@ -62,28 +70,52 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun setChips() {
-        for (element in Category.values()) {
-            ChipUnSelectableUtil(requireContext()).make(
-                binding.cgRecent,
-                element.name
-            )
+    }
+/*
+    inner class ItemFilter: Filter() {
+        override fun performFiltering(charSequence: CharSequence): FilterResults {
+            val filterString = charSequence.toString()
+            val results = FilterResults()
+            Log.d(TAG, "charSequence : $charSequence")
+
+            //검색이 필요없을 경우를 위해 원본 배열을 복제
+            val filteredList: ArrayList<TagInfo> = ArrayList<TagInfo>()
+            //공백제외 아무런 값이 없을 경우 -> 원본 배열
+            if (filterString.trim { it <= ' ' }.isEmpty()) {
+                results.values = persons
+                results.count = persons.size
+
+                return results
+                //공백제외 2글자 이인 경우 -> 이름으로만 검색
+            } else if (filterString.trim { it <= ' ' }.length <= 2) {
+                for (person in persons) {
+                    if (person.name.contains(filterString)) {
+                        filteredList.add(person)
+                    }
+                }
+                //그 외의 경우(공백제외 2글자 초과) -> 이름/전화번호로 검색
+            } else {
+                for (person in persons) {
+                    if (person.name.contains(filterString) || person.phoneNumber.contains(
+                            filterString
+                        )
+                    ) {
+                        filteredList.add(person)
+                    }
+                }
+            }
+            results.values = filteredList
+            results.count = filteredList.size
+
+            return results
         }
 
-        for (element in Category.values()) {
-            ChipUnSelectableUtil(requireContext()).make(
-                binding.cgOften,
-                element.name
-            )
-        }
-
-        for (element in Category.values()) {
-            ChipUnSelectableUtil(requireContext()).make(
-                binding.cgPlatform,
-                element.name
-            )
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            TODO("Not yet implemented")
         }
     }
 
+ */
     enum class Category(val categoryName: String) {
         PHOTOSURFER("포토서퍼"),
         CAFE("카페"),
@@ -99,4 +131,5 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         TES("tes"),
         TEST("test");
     }
+
 }

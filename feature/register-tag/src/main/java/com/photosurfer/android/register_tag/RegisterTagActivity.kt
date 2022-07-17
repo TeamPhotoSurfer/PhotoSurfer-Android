@@ -20,5 +20,11 @@ class RegisterTagActivity :
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, chooseTagFragment)
             .commit()
+
+//        testFragment = TestFragment()
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container_view_tag, testFragment)
+//            .commit()
+
     }
 }

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ChooseTagViewModel : ViewModel() {
+class ChooseTagViewModel : ViewModel(
+
+) {
 
     private var _isEmptyInput = MutableLiveData<Int>()
     val isEmptyInput: LiveData<Int> get() = _isEmptyInput
