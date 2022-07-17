@@ -12,14 +12,14 @@ import com.photosurfer.android.domain.entity.AlarmElement
 class AlarmListAdapter() : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
     ItemDiffCallback<AlarmElement>(
         onContentsTheSame = { old, new -> old == new },
-        onItemsTheSame = { old, new -> old.pushId == new.pushId }
+        onItemsTheSame = { old, new -> old.id == new.id }
     )
 ) {
 
     private lateinit var inflater: LayoutInflater
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position).pushId == TODAY_ID || getItem(position).pushId == TOMORROW_ID) {
+        return if (getItem(position).id == TODAY_ID || getItem(position).id == TOMORROW_ID) {
             DIVISION_DAY_HEADER
         } else {
             ALARM_CONTENT

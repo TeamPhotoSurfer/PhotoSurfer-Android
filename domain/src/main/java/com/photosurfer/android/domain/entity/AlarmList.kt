@@ -10,7 +10,7 @@ data class AlarmInfo(
 )
 
 data class AlarmElement(
-    val pushId: Long,
+    val id: Long,
     val pushDate: LocalDate,
     val tags: List<String>,
     val imageURL: String,
