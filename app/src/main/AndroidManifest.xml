@@ -37,7 +37,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".alarm_list.AlarmListMoreActivity"
+            android:name=".alarm_list.AlarmListExtraActivity"
             android:exported="false" />
     </application>
 </manifest>

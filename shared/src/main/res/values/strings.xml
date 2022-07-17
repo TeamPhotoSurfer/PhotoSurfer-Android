@@ -40,4 +40,7 @@
     <string name="alarm_list_more">더보기</string>
     <string name="alarm_list_up_coming">다가오는 알림</string>
     <string name="alarm_list_urgent">임박한 알림</string>
+
+    <!--ImageZoomInFragment-->
+    <string name="button_check_alarm">알림 내용 확인하기</string>
 </resources>
