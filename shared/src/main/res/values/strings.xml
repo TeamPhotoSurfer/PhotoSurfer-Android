@@ -45,4 +45,11 @@
     <string name="auto_login">자동 로그인</string>
     <string name="logout">로그아웃</string>
     <string name="delete_account">계정 탈퇴</string>
+
+    <!--AlarmListMainFragment-->
+    <string name="alarm_list_title">알림 목록</string>
+    <string name="alarm_list_passed_title">지난 알림</string>
+    <string name="alarm_list_more">더보기</string>
+    <string name="alarm_list_up_coming">다가오는 알림</string>
+    <string name="alarm_list_urgent">임박한 알림</string>
 </resources>
