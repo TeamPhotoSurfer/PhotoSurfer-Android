@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="alarmData"
+            type="com.photosurfer.android.domain.entity.AlarmElement" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +19,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
+            app:shapeAbleSetImage="@{alarmData.imageURL}"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            app:setRepresentTagText="@{alarmData.tags}"
             android:layout_marginEnd="20dp"
             android:textAppearance="@style/subtitle_2"
             android:textColor="@color/gray_90"
@@ -40,6 +44,7 @@
             android:id="@+id/tv_memo"
             android:layout_width="0dp"
             android:layout_height="52dp"
+            android:text="@{alarmData.memo}"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="20dp"
             android:textAppearance="@style/caption_1"
@@ -55,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="14dp"
+            app:setDateToAlarmList="@{alarmData.pushDate}"
             android:textAppearance="@style/caption_1"
             android:textColor="@color/gray_50"
             app:layout_constraintBottom_toBottomOf="parent"

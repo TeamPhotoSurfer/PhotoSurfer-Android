@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="alarmData"
+            type="com.photosurfer.android.domain.entity.AlarmElement" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +17,7 @@
             android:id="@+id/tv_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:setDivisionHeaderText="@{alarmData.pushId}"
             tools:text="오늘"
             android:textAppearance="@style/caption_1"
             android:textColor="@color/gray_90"
