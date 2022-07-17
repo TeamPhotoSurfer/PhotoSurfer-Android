@@ -1,4 +1,4 @@
-package com.photosurfer.android.main
+package com.photosurfer.android.main.home
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.util.ChipUnSelectableUtil
+import com.photosurfer.android.main.R
 import com.photosurfer.android.main.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

@@ -1,4 +1,4 @@
-package com.photosurfer.android.main
+package com.photosurfer.android.main.home
 
 import androidx.lifecycle.ViewModel
 import com.photosurfer.android.domain.entity.TagInfo

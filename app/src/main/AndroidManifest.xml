@@ -36,5 +36,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".main.setting.ManageAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.setting.EtcPolicyActivity"
+            android:exported="false" />
     </application>
 </manifest>
