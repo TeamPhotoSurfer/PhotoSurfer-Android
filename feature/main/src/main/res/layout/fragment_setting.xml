@@ -69,8 +69,8 @@
 
             <ImageView
                 android:id="@+id/iv_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="14dp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_user_line"
@@ -113,8 +113,8 @@
 
             <ImageView
                 android:id="@+id/iv_push_alarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="14dp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_bell_line"
@@ -135,20 +135,18 @@
                 app:layout_constraintStart_toEndOf="@id/iv_push_alarm"
                 app:layout_constraintTop_toTopOf="@id/iv_push_alarm" />
 
-            <!-- todo background, thumbTint 설정 하기 -->
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switch_alarm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:background="@null"
+                android:scaleY="0.9"
                 android:checked="@={viewModel.isPushOn}"
-                android:scaleX="1.2"
-                android:scaleY="1.2"
+                android:thumb="@drawable/shape_oval_white_fill_27"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:thumb="@drawable/switch_thumb"
                 app:track="@drawable/selector_switch_track"
                 app:useMaterialThemeColors="false" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,8 +159,8 @@
 
             <ImageView
                 android:id="@+id/iv_policy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="14dp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_book_line"
