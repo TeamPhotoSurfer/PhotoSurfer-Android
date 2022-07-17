@@ -1,5 +1,6 @@
 package com.photosurfer.android.alarm_list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.photosurfer.android.alarm_list.databinding.FragmentAlarmListMainBinding
@@ -15,10 +16,12 @@ class AlarmListMainFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAlarmListAdapter()
+        passedMoreButtonClickListener()
+        upComingMoreButtonClickListener()
     }
 
     private fun initAlarmListAdapter() {
-        alarmListAdapter = AlarmListAdapter()
+        alarmListAdapter = AlarmListAdapter(::rvAlarmListItemClickListener)
         binding.rvAlarmList.adapter = alarmListAdapter
         // 리스트 업데이트 하는 코드 필요
         // 현재는 더미
@@ -68,5 +71,37 @@ class AlarmListMainFragment :
                 )
             )
         )
+    }
+
+    private fun passedMoreButtonClickListener() {
+        binding.tvPassedMore.setOnClickListener {
+            val intent = Intent(requireActivity(), AlarmListExtraActivity::class.java).apply {
+                putExtra(START_POINT, PASSED_ALARM)
+            }
+            startActivity(intent)
+        }
+    }
+
+    private fun upComingMoreButtonClickListener() {
+        binding.tvUpComingMore.setOnClickListener {
+            val intent = Intent(requireActivity(), AlarmListExtraActivity::class.java).apply {
+                putExtra(START_POINT, UP_COMING_ALARM)
+            }
+            startActivity(intent)
+        }
+    }
+
+    private fun rvAlarmListItemClickListener() {
+        val intent = Intent(requireActivity(), AlarmListExtraActivity::class.java).apply {
+            putExtra(START_POINT, ZOOM_IN_IMAGE)
+        }
+        startActivity(intent)
+    }
+
+    companion object {
+        const val PASSED_ALARM = 1
+        const val UP_COMING_ALARM = 2
+        const val ZOOM_IN_IMAGE = 3
+        const val START_POINT = "START_POINT"
     }
 }
