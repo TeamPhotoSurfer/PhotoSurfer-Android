@@ -39,33 +39,19 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_tag_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/cl_top">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_scroll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_tag_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="13dp"
-                    android:layout_marginTop="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:spanCount="2"
-                    tools:listitem="@layout/item_tag" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+            android:layout_height="0dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="3dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_top"
+            app:spanCount="2"
+            tools:listitem="@layout/item_tag" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
