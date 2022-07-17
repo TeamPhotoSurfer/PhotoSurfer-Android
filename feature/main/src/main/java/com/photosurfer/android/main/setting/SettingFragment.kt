@@ -1,5 +1,6 @@
 package com.photosurfer.android.main.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -21,7 +22,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
     private fun iniClickEvent() {
         with(binding) {
             clManageAccount.setOnClickListener {
-                Timber.d("setting / 계정관리")
+                startActivity(Intent(activity, ManageAccountActivity::class.java))
             }
             clEtcPolicy.setOnClickListener {
                 Timber.d("setting / 기타정책")
