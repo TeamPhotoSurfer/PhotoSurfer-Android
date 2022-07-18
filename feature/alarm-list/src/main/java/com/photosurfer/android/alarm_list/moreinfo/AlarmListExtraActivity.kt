@@ -1,29 +1,55 @@
-package com.photosurfer.android.alarm_list
+package com.photosurfer.android.alarm_list.moreinfo
 
 import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.replace
-import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.ZOOM_IN_IMAGE
-import com.photosurfer.android.alarm_list.databinding.FragmentAlarmListMoreBinding
-import com.photosurfer.android.core.base.BaseFragment
+import androidx.activity.viewModels
+import com.photosurfer.android.alarm_list.AlarmListAdapter
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.PASSED_ALARM
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.START_POINT
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.UP_COMING_ALARM
+import com.photosurfer.android.alarm_list.R
+import com.photosurfer.android.alarm_list.databinding.ActivityAlarmListMoreBinding
+import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.domain.entity.AlarmElement
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class AlarmListMoreFragment :
-    BaseFragment<FragmentAlarmListMoreBinding>(R.layout.fragment_alarm_list_more) {
+class AlarmListExtraActivity :
+    BaseActivity<ActivityAlarmListMoreBinding>(R.layout.activity_alarm_list_more) {
 
+    private val alarmListExtraViewModel by viewModels<AlarmListExtraViewModel>()
+    private var startPoint by Delegates.notNull<Int>()
     private lateinit var alarmListAdapter: AlarmListAdapter
-    private val alarmListExtraViewModel by activityViewModels<AlarmListExtraViewModel>()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initExtraData()
+        binding.startPoint = startPoint
+        initStartFragmentData()
+        initBackButtonClickListener()
+        initAlarmListAdapter()
+    }
+
+    private fun initExtraData() {
+        startPoint = intent.getIntExtra(START_POINT, 1)
+    }
+
+    private fun initStartFragmentData() {
+        when (startPoint) {
+            PASSED_ALARM -> {}
+            UP_COMING_ALARM -> {}
+        }
+    }
+
+    private fun initBackButtonClickListener() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initAlarmListAdapter() {
-        alarmListAdapter = AlarmListAdapter(::rvAlarmListItemClickListener)
+        alarmListAdapter = AlarmListAdapter()
         binding.rvAlarmListMore.adapter = alarmListAdapter
         // 리스트 업데이트 코드
         // 현재는 더미
@@ -73,12 +99,5 @@ class AlarmListMoreFragment :
                 )
             )
         )
-    }
-
-    private fun rvAlarmListItemClickListener(url: String) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace<ImageZoomInFragment>(R.id.container_alarm_list_more)
-        alarmListExtraViewModel.updateFragmentState(ZOOM_IN_IMAGE)
-        alarmListExtraViewModel.updateZoomInImageUrl(url)
     }
 }

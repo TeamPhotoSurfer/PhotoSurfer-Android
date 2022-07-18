@@ -1,17 +1,20 @@
 package com.photosurfer.android.alarm_list
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.PUSH_ID
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.ZOOM_IN_IMAGE_URL
 import com.photosurfer.android.alarm_list.databinding.ItemAlarmContentBinding
 import com.photosurfer.android.alarm_list.databinding.ItemDivisionDayHeaderBinding
+import com.photosurfer.android.alarm_list.eachinfo.EachInfoActivity
 import com.photosurfer.android.core.util.ItemDiffCallback
 import com.photosurfer.android.domain.entity.AlarmElement
 
-class AlarmListAdapter(
-    private val itemCLickListener: ((String) -> Unit)? = null
-) : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
+class AlarmListAdapter() : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
     ItemDiffCallback<AlarmElement>(
         onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.id == new.id }
@@ -52,16 +55,20 @@ class AlarmListAdapter(
         if (holder is DivisionDayHeaderViewHolder) {
             holder.onBind(getItem(position))
         } else if (holder is AlarmListElementViewHolder) {
-            holder.onBind(getItem(position), itemCLickListener)
+            holder.onBind(getItem(position))
         }
     }
 
     class AlarmListElementViewHolder(private val binding: ItemAlarmContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: AlarmElement, itemCLickListener: ((String) -> Unit)? = null) {
+        fun onBind(data: AlarmElement) {
             binding.alarmData = data
             binding.root.setOnClickListener {
-                itemCLickListener?.invoke(data.imageURL)
+                val intent = Intent(it.context, EachInfoActivity::class.java).apply {
+                    putExtra(ZOOM_IN_IMAGE_URL, data.imageURL)
+                    putExtra(PUSH_ID,data.id)
+                }
+                startActivity(it.context, intent, null)
             }
         }
     }

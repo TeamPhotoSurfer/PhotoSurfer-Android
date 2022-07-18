@@ -47,7 +47,10 @@
             android:name=".main.setting.EtcPolicyActivity"
             android:exported="false" />
         <activity
-            android:name=".alarm_list.AlarmListExtraActivity"
+            android:name=".alarm_list.moreinfo.AlarmListExtraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".alarm_list.eachinfo.EachInfoActivity"
             android:exported="false" />
     </application>
 </manifest>

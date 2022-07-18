@@ -5,18 +5,12 @@
 
     <data>
 
-        <import type="android.view.View" />
-
-        <variable
-            name="startPoint"
-            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".moreinfo.AlarmListExtraActivity">
-
+        tools:context=".eachinfo.EachInfoActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_toolbar"
@@ -36,38 +30,37 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_shortarrow_line_left" />
 
-            <TextView
-                android:id="@+id/tv_alarm_when"
+            <ImageButton
+                android:id="@+id/btn_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/title_3B"
-                android:textColor="@color/gray_90"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:padding="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setAlarmWhenText="@{startPoint}"
-                tools:text="지난알림" />
+                app:srcCompat="@drawable/ic_share_line" />
 
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:padding="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_x_line" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/view_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_30"
-            app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_alarm_list_more"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/container_each_info"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:paddingBottom="32dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_divider" />
-
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.photosurfer.android.alarm_list.databinding.FragmentAlarmListMainBinding
+import com.photosurfer.android.alarm_list.eachinfo.EachInfoActivity
+import com.photosurfer.android.alarm_list.moreinfo.AlarmListExtraActivity
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.domain.entity.AlarmElement
 import java.time.LocalDate
@@ -21,7 +23,7 @@ class AlarmListMainFragment :
     }
 
     private fun initAlarmListAdapter() {
-        alarmListAdapter = AlarmListAdapter(::rvAlarmListItemClickListener)
+        alarmListAdapter = AlarmListAdapter()
         binding.rvAlarmList.adapter = alarmListAdapter
         // 리스트 업데이트 하는 코드 필요
         // 현재는 더미
@@ -91,20 +93,11 @@ class AlarmListMainFragment :
         }
     }
 
-    private fun rvAlarmListItemClickListener(url: String) {
-        val intent = Intent(requireActivity(), AlarmListExtraActivity::class.java).apply {
-            putExtra(START_POINT, ZOOM_IN_IMAGE)
-            putExtra(ZOOM_IN_IMAGE_URL, url)
-        }
-        startActivity(intent)
-    }
-
     companion object {
         const val PASSED_ALARM = 1
         const val UP_COMING_ALARM = 2
-        const val ZOOM_IN_IMAGE = 3
-        const val CHECK_ALARM = 4
         const val START_POINT = "START_POINT"
         const val ZOOM_IN_IMAGE_URL = "ZOOM_IN_IMAGE_URL"
+        const val PUSH_ID = "PUSH_ID"
     }
 }
