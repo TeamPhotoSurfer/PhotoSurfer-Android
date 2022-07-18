@@ -30,15 +30,19 @@
         <activity
             android:name="com.example.register_tag.RegisterTagActivity"
             android:exported="false" />
+
         <activity
             android:name=".push_setting.PushSettingActivity"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+            
         <activity
             android:name=".main.setting.ManageAccountActivity"
             android:exported="false" />
+            
         <activity
             android:name=".main.setting.EtcPolicyActivity"
             android:exported="false" />
