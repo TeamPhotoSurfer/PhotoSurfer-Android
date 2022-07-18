@@ -24,6 +24,7 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
         initExtraData()
         initViewModelData()
         initTransactionStartFragment()
+        initBackButtonClickListener()
     }
 
     private fun initExtraData() {
@@ -39,5 +40,11 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
     private fun initTransactionStartFragment() {
         supportFragmentManager.beginTransaction()
             .replace<ImageZoomInFragment>(R.id.container_each_info).commit()
+    }
+
+    private fun initBackButtonClickListener() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }
