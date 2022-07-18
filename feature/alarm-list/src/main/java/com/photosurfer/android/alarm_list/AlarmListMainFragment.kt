@@ -91,9 +91,10 @@ class AlarmListMainFragment :
         }
     }
 
-    private fun rvAlarmListItemClickListener() {
+    private fun rvAlarmListItemClickListener(url: String) {
         val intent = Intent(requireActivity(), AlarmListExtraActivity::class.java).apply {
             putExtra(START_POINT, ZOOM_IN_IMAGE)
+            putExtra(ZOOM_IN_IMAGE_URL, url)
         }
         startActivity(intent)
     }
@@ -102,6 +103,8 @@ class AlarmListMainFragment :
         const val PASSED_ALARM = 1
         const val UP_COMING_ALARM = 2
         const val ZOOM_IN_IMAGE = 3
+        const val CHECK_ALARM = 4
         const val START_POINT = "START_POINT"
+        const val ZOOM_IN_IMAGE_URL = "ZOOM_IN_IMAGE_URL"
     }
 }

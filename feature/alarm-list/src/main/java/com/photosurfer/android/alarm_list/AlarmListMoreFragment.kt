@@ -2,22 +2,28 @@ package com.photosurfer.android.alarm_list
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.replace
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.ZOOM_IN_IMAGE
 import com.photosurfer.android.alarm_list.databinding.FragmentAlarmListMoreBinding
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.domain.entity.AlarmElement
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
+@AndroidEntryPoint
 class AlarmListMoreFragment :
     BaseFragment<FragmentAlarmListMoreBinding>(R.layout.fragment_alarm_list_more) {
 
     private lateinit var alarmListAdapter: AlarmListAdapter
+    private val alarmListExtraViewModel by activityViewModels<AlarmListExtraViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initAlarmListAdapter() {
-        alarmListAdapter = AlarmListAdapter()
+        alarmListAdapter = AlarmListAdapter(::rvAlarmListItemClickListener)
         binding.rvAlarmListMore.adapter = alarmListAdapter
         // 리스트 업데이트 코드
         // 현재는 더미
@@ -67,5 +73,12 @@ class AlarmListMoreFragment :
                 )
             )
         )
+    }
+
+    private fun rvAlarmListItemClickListener(url: String) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace<ImageZoomInFragment>(R.id.container_alarm_list_more)
+        alarmListExtraViewModel.updateFragmentState(ZOOM_IN_IMAGE)
+        alarmListExtraViewModel.updateZoomInImageUrl(url)
     }
 }

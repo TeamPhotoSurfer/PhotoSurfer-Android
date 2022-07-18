@@ -10,7 +10,7 @@ import com.photosurfer.android.core.util.ItemDiffCallback
 import com.photosurfer.android.domain.entity.AlarmElement
 
 class AlarmListAdapter(
-    private val itemCLickListener: (() -> Unit)? = null
+    private val itemCLickListener: ((String) -> Unit)? = null
 ) : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
     ItemDiffCallback<AlarmElement>(
         onContentsTheSame = { old, new -> old == new },
@@ -52,16 +52,16 @@ class AlarmListAdapter(
         if (holder is DivisionDayHeaderViewHolder) {
             holder.onBind(getItem(position))
         } else if (holder is AlarmListElementViewHolder) {
-            holder.onBind(getItem(position),itemCLickListener)
+            holder.onBind(getItem(position), itemCLickListener)
         }
     }
 
     class AlarmListElementViewHolder(private val binding: ItemAlarmContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: AlarmElement, itemCLickListener: (() -> Unit)? = null) {
+        fun onBind(data: AlarmElement, itemCLickListener: ((String) -> Unit)? = null) {
             binding.alarmData = data
             binding.root.setOnClickListener {
-                itemCLickListener?.invoke()
+                itemCLickListener?.invoke(data.imageURL)
             }
         }
     }

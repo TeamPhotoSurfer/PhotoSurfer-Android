@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="alarmListExtraViewModel"
+            type="com.photosurfer.android.alarm_list.AlarmListExtraViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +31,7 @@
                 android:layout_marginStart="10dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
+                android:visibility="@{alarmListExtraViewModel.fragmentState == 4 ? View.GONE :View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,10 +43,12 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/title_3B"
                 android:textColor="@color/gray_90"
+                android:visibility="@{alarmListExtraViewModel.fragmentState != 3 || alarmListExtraViewModel.fragmentState != 4 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:setAlarmWhenText="@{alarmListExtraViewModel.fragmentState}"
                 tools:text="지난알림" />
 
             <ImageButton
@@ -50,10 +58,24 @@
                 android:layout_marginEnd="10dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
+                android:visibility="@{alarmListExtraViewModel.fragmentState== 3 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_share_line" />
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:padding="6dp"
+                android:visibility="@{alarmListExtraViewModel.fragmentState == 4 ? View.VISIBLE: View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_x_line" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.fragment.app.FragmentContainerView
