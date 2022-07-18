@@ -5,9 +5,8 @@ import androidx.core.content.ContextCompat
 import com.photosurfer.android.adapter.MainViewPagerAdapter
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.databinding.ActivityMainBinding
-import com.photosurfer.android.main.HomeFragment
 import com.photosurfer.android.main.TagFragment
-import com.photosurfer.android.main.setting.SettingFragment
+import com.photosurfer.android.main.home.HomeFragment
 import com.photosurfer.android.shared.R.color.home_status_bar_color
 import com.photosurfer.android.shared.R.color.white
 import dagger.hilt.android.AndroidEntryPoint

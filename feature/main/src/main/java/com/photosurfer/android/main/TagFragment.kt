@@ -2,16 +2,12 @@ package com.photosurfer.android.main
 
 import android.content.Context
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.AlignmentSpan
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.core.view.get
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.main.databinding.FragmentTagBinding
@@ -43,21 +39,6 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
                 TagInfo(1, "tag666666669"),
                 TagInfo(1, "tag10"),
                 TagInfo(1, "tag11"),
-                TagInfo(1, "tag666666667"),
-                TagInfo(1, "tag666666668"),
-                TagInfo(1, "tag666666669"),
-                TagInfo(1, "tag10"),
-                TagInfo(1, "tag11"),
-                TagInfo(1, "tag666666667"),
-                TagInfo(1, "tag666666668"),
-                TagInfo(1, "tag666666669"),
-                TagInfo(1, "tag10"),
-                TagInfo(1, "tag11"),
-                TagInfo(1, "tag666666667"),
-                TagInfo(1, "tag666666668"),
-                TagInfo(1, "tag666666669"),
-                TagInfo(1, "tag10"),
-                TagInfo(1, "tag11")
             )
         )
     }
