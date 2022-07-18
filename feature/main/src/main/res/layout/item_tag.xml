@@ -26,7 +26,7 @@
             app:layout_constraintDimensionRatio="W, 110:162"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize8dp" />
 
         <ImageView
             android:id="@+id/iv_star"

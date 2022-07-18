@@ -46,7 +46,14 @@
         <item name="postSplashScreenTheme">@style/Theme.PhotoSurferAndroid</item>
     </style>
 
+    <!-- shape appearance corner size -->
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize8dp" parent="">
+        <item name="cornerSize">8dp</item>
+    </style>
+
     <!-- popup menu style. -->
+
     <style name="popupMenuStyle" parent="Widget.AppCompat.PopupMenu">
         <item name="android:textColor">@color/gray_95_a_70</item>
         <item name="android:itemBackground">@color/white</item>
