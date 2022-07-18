@@ -22,7 +22,7 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
         super.onCreate(savedInstanceState)
 
         initExtraData()
-        initImgUrl()
+        initViewModelData()
         initTransactionStartFragment()
     }
 
@@ -31,8 +31,9 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
         pushId = intent.getLongExtra(PUSH_ID, -3L)
     }
 
-    private fun initImgUrl() {
+    private fun initViewModelData() {
         eachInfoViewModel.updateImgUrl(imgUrl)
+        eachInfoViewModel.updatePushId(pushId)
     }
 
     private fun initTransactionStartFragment() {
