@@ -21,10 +21,12 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.eachInfoViewModel = eachInfoViewModel
         initExtraData()
         initViewModelData()
         initTransactionStartFragment()
         initBackButtonClickListener()
+        initCloseButtonClickListener()
     }
 
     private fun initExtraData() {
@@ -40,11 +42,35 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
     private fun initTransactionStartFragment() {
         supportFragmentManager.beginTransaction()
             .replace<ImageZoomInFragment>(R.id.container_each_info).commit()
+        eachInfoViewModel.updateFragmentState(IMAGE_ZOOM_IN)
     }
 
     private fun initBackButtonClickListener() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun initCloseButtonClickListener() {
+        binding.btnClose.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace<ImageZoomInFragment>(R.id.container_each_info).commit()
+            eachInfoViewModel.updateFragmentState(IMAGE_ZOOM_IN)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (eachInfoViewModel.fragmentState.value == PUSH_MAIN_STATE) {
+            supportFragmentManager.beginTransaction()
+                .replace<ImageZoomInFragment>(R.id.container_each_info).commit()
+            eachInfoViewModel.updateFragmentState(IMAGE_ZOOM_IN)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    companion object {
+        const val IMAGE_ZOOM_IN = "IMAGE_ZOOM_IN"
+        const val PUSH_MAIN_STATE = "PUSH_MAIN"
     }
 }

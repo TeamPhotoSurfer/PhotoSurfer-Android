@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="eachInfoViewModel"
+            type="com.photosurfer.android.alarm_list.eachinfo.EachInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +30,7 @@
                 android:layout_marginStart="10dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
+                android:visibility="@{eachInfoViewModel.fragmentState == `IMAGE_ZOOM_IN`? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +43,7 @@
                 android:layout_marginEnd="10dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
+                android:visibility="@{eachInfoViewModel.fragmentState == `IMAGE_ZOOM_IN`? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,6 +56,7 @@
                 android:layout_marginEnd="10dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
+                android:visibility="@{eachInfoViewModel.fragmentState == `PUSH_MAIN`? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
