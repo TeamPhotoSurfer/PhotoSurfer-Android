@@ -32,7 +32,19 @@
     <string name="try_first_surf">첫 번째 서핑을 시작해보세요!</string>
 
     <!--SanckBarMessage 정리-->
-    <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>림
+    <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>
+
+    <!-- Setting -->
+    <string name="setting_kr">환경설정</string>
+    <string name="manage_account">계정 관리</string>
+    <string name="push_alarm">푸시 알림</string>
+    <string name="etc_policy">기타 정책</string>
+    <string name="version_info">버전 정보</string>
+    <string name="personal_data">개인정보 처리방침</string>
+    <string name="open_source_license">오픈소스 라이선스</string>
+    <string name="auto_login">자동 로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="delete_account">계정 탈퇴</string>
 
     <!--AlarmListMainFragment-->
     <string name="alarm_list_title">알림 목록</string>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="alarmData"
             type="com.photosurfer.android.domain.entity.AlarmElement" />
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray_10"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageView
             android:id="@+id/iv_gray_20_background"

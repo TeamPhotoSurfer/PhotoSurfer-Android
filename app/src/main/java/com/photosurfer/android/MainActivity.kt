@@ -5,7 +5,8 @@ import androidx.core.content.ContextCompat
 import com.photosurfer.android.adapter.MainViewPagerAdapter
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.databinding.ActivityMainBinding
-import com.photosurfer.android.main.HomeFragment
+import com.photosurfer.android.main.TagFragment
+import com.photosurfer.android.main.home.HomeFragment
 import com.photosurfer.android.shared.R.color.home_status_bar_color
 import com.photosurfer.android.shared.R.color.white
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,33 +18,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initAdapter()
-        syncBottomNavWithVp()
+        onClickBottomNavigation()
         initStatusBarColor()
-        changeStatusBarColor()
+        disableViewPagerSwipe()
     }
 
     private fun initAdapter() {
         binding.vpMain.adapter = MainViewPagerAdapter(this).also { mainViewPagerAdapter = it }
         mainViewPagerAdapter.fragmentList = listOf(
             // TODO : HomeFragment(), TagFragment(), AlarmFragment(), SettingFragment()로 교체할것
-            HomeFragment(), HomeFragment(), HomeFragment(), HomeFragment()
+            HomeFragment(), TagFragment(), HomeFragment(), HomeFragment()
         )
+    }
+
+    private fun disableViewPagerSwipe() {
+        binding.vpMain.isUserInputEnabled = false
     }
 
     private fun initStatusBarColor() {
         this.window.statusBarColor = ContextCompat.getColor(this, home_status_bar_color)
     }
 
-    private fun changeStatusBarColor() {
-        binding.bottomNav.setOnItemSelectedListener {
-            val colorRes = if (it.itemId == R.id.menu_home) home_status_bar_color else white
-            this.window.statusBarColor = ContextCompat.getColor(this, colorRes)
-            return@setOnItemSelectedListener true
-        }
-    }
-
-    private fun syncBottomNavWithVp() {
-        binding.vpMain.isUserInputEnabled = false
+    private fun onClickBottomNavigation() {
         binding.bottomNav.setOnItemSelectedListener {
             val position = when (it.itemId) {
                 R.id.menu_home -> 0
@@ -52,8 +48,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.menu_setting -> 3
                 else -> throw IllegalStateException("Wrong Position")
             }
-            binding.vpMain.setCurrentItem(position, false)
+            setStatusBarColor(position)
+            syncBottomNavWithVp(position)
             return@setOnItemSelectedListener true
         }
     }
+
+    private fun setStatusBarColor(position: Int) {
+        val colorRes = if (position == 0) home_status_bar_color else white
+        this.window.statusBarColor = ContextCompat.getColor(this, colorRes)
+    }
+
+    private fun syncBottomNavWithVp(position: Int) {
+        binding.vpMain.setCurrentItem(position, false)
+    }
+
 }
