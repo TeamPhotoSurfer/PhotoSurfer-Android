@@ -11,4 +11,4 @@ include(":feature:auth")
 include(":feature:main")
 include(":feature:alarm-list")
 include(":feature:search-tag")
-
+include(":feature:search-result")
