@@ -78,6 +78,7 @@
             android:id="@+id/scroll_chip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_divider">
 
@@ -85,12 +86,13 @@
                 android:id="@+id/cg_search_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="16dp" />
+                android:paddingHorizontal="20dp" />
         </HorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="3dp"
             android:visibility="@{viewModel.isNoData ? View.GONE : View.VISIBLE }"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
