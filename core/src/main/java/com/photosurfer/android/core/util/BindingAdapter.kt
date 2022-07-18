@@ -1,6 +1,7 @@
 package com.photosurfer.android.core.util
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -50,4 +51,12 @@ fun TextView.setRepresentTagText(representTag: List<String>) {
 @BindingAdapter("app:setDateToAlarmList")
 fun TextView.setDateToAlarmList(localDate: LocalDate) {
     this.text = localDate.format(monthDayDateFormatter)
+}
+
+@BindingAdapter("app:imageUrl")
+fun ImageView.loadImage(url: String?) {
+    Glide.with(context)
+        .load(url)
+        .placeholder(gray_20)
+        .into(this)
 }
