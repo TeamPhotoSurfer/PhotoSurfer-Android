@@ -52,4 +52,9 @@
     <string name="alarm_list_more">더보기</string>
     <string name="alarm_list_up_coming">다가오는 알림</string>
     <string name="alarm_list_urgent">임박한 알림</string>
+
+    <!-- SearchResult -->
+    <string name="search_result">검색 결과</string>
+    <string name="choose">선택</string>
+
 </resources>
