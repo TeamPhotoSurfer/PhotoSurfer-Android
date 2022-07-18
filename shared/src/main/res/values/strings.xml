@@ -34,6 +34,7 @@
 
     <!--SanckBarMessage 정리-->
     <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>
+    <string name="push_main_fragment">서비스 준비 중이에요.</string>
 
     <!-- Setting -->
     <string name="setting_kr">환경설정</string>
