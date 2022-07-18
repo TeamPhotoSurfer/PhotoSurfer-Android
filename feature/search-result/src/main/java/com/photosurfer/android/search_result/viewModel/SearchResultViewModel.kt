@@ -38,7 +38,7 @@ class SearchResultViewModel : ViewModel() {
             ),
             ThumbnailInfo(
                 2,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+                "https://mb1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
             ),
             ThumbnailInfo(
                 3,
@@ -46,8 +46,24 @@ class SearchResultViewModel : ViewModel() {
             ),
             ThumbnailInfo(
                 4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
                 "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            )
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
         )
     }
 }
