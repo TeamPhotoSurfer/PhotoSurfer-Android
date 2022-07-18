@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.photosurfer.android.alarm_list.databinding.FragmentAlarmListMainBinding
-import com.photosurfer.android.alarm_list.eachinfo.EachInfoActivity
 import com.photosurfer.android.alarm_list.moreinfo.AlarmListExtraActivity
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.domain.entity.AlarmElement
@@ -96,6 +95,7 @@ class AlarmListMainFragment :
     companion object {
         const val PASSED_ALARM = 1
         const val UP_COMING_ALARM = 2
+        const val CLICKABLE_STATE = "CLICKABLE_STATE"
         const val START_POINT = "START_POINT"
         const val ZOOM_IN_IMAGE_URL = "ZOOM_IN_IMAGE_URL"
         const val PUSH_ID = "PUSH_ID"

@@ -66,7 +66,7 @@ class AlarmListAdapter() : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
             binding.root.setOnClickListener {
                 val intent = Intent(it.context, EachInfoActivity::class.java).apply {
                     putExtra(ZOOM_IN_IMAGE_URL, data.imageURL)
-                    putExtra(PUSH_ID,data.id)
+                    putExtra(PUSH_ID, data.id)
                 }
                 startActivity(it.context, intent, null)
             }

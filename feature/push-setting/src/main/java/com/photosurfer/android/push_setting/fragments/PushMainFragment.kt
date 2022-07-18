@@ -1,6 +1,7 @@
 package com.photosurfer.android.push_setting.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.replace
@@ -20,11 +21,14 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
 
     private val pushSettingViewModel by activityViewModels<PushSettingViewModel>()
     private lateinit var keyBoardVisibilityListener: KeyBoardVisibilityListener
+    private var clickableState = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.pushSettingViewModel = pushSettingViewModel
         initDefaultAlarmDate()
         initVisibilityVariable()
+        initArgumentsData()
+        binding.clickableState = clickableState
         setDatePickerMinDate()
         getDateFromDatePicker()
         initDatePickerButtonClickListener()
@@ -33,6 +37,12 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         initBackGroundClickListener()
         initKeyBoardVisibilityListener()
         initRepresentTagButtonClickListener()
+    }
+
+    private fun initArgumentsData() {
+        if (arguments != null) {
+            clickableState = requireNotNull(arguments).getBoolean("CLICKABLE_STATE")
+        }
     }
 
     private fun initDefaultAlarmDate() {

@@ -3,6 +3,7 @@ package com.photosurfer.android.alarm_list.eachinfo
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.CLICKABLE_STATE
 import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.PUSH_ID
 import com.photosurfer.android.alarm_list.R
 import com.photosurfer.android.alarm_list.databinding.FragmentImageZoomInBinding
@@ -32,6 +33,7 @@ class ImageZoomInFragment :
         binding.btnCheckAlarm.setOnClickListener {
             val bundle = Bundle().apply {
                 putLong(PUSH_ID, eachInfoViewModel.pushId.value ?: throw IllegalStateException())
+                putBoolean(CLICKABLE_STATE, false)
             }
             mainNavigator.transactionPushMainFragment(requireActivity(), bundle)
         }
