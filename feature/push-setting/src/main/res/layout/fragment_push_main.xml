@@ -12,6 +12,10 @@
             type="com.photosurfer.android.push_setting.PushSettingViewModel" />
 
         <variable
+            name="clickableState"
+            type="Boolean" />
+
+        <variable
             name="datePickerVisibility"
             type="Boolean" />
 
@@ -62,13 +66,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="55dp"
-                        android:text="@string/push_image_explain"
+                        android:text="@{clickableState?@string/push_image_explain:@string/push_image_check}"
                         android:textAppearance="@style/title_3M"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/iv_main"
-                        app:layout_constraintVertical_chainStyle="packed" />
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="서퍼님을 위한 알림이에요!" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -259,6 +264,16 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view_disable_click"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:visibility="@{clickableState ?View.GONE :View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

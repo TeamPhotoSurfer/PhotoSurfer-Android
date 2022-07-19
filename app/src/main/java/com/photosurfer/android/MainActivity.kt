@@ -3,6 +3,7 @@ package com.photosurfer.android
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.photosurfer.android.adapter.MainViewPagerAdapter
+import com.photosurfer.android.alarm_list.AlarmListMainFragment
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.databinding.ActivityMainBinding
 import com.photosurfer.android.main.TagFragment
@@ -27,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.vpMain.adapter = MainViewPagerAdapter(this).also { mainViewPagerAdapter = it }
         mainViewPagerAdapter.fragmentList = listOf(
             // TODO : HomeFragment(), TagFragment(), AlarmFragment(), SettingFragment()로 교체할것
-            HomeFragment(), TagFragment(), HomeFragment(), HomeFragment()
+            HomeFragment(), TagFragment(), AlarmListMainFragment(), HomeFragment()
         )
     }
 

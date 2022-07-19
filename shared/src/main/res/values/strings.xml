@@ -17,6 +17,7 @@
     <string name="represent_tag_title">대표 태그</string>
     <string name="represent_tag_content">푸시 알림에서 보일 대표 태그를 최대 3개 선택해보세요!</string>
     <string name="date_picker_info">오전 8시에 알려드릴께요!</string>
+    <string name="push_image_check">서퍼님을 위한 알림이에요!</string>
 
     <!-- Bottom Navigation -->
     <string name="home">Home</string>
@@ -33,6 +34,7 @@
 
     <!--SanckBarMessage 정리-->
     <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>
+    <string name="push_main_fragment">서비스 준비 중이에요.</string>
 
     <!-- Setting -->
     <string name="setting_kr">환경설정</string>
@@ -52,4 +54,7 @@
     <string name="alarm_list_more">더보기</string>
     <string name="alarm_list_up_coming">다가오는 알림</string>
     <string name="alarm_list_urgent">임박한 알림</string>
+
+    <!--ImageZoomInFragment-->
+    <string name="button_check_alarm">알림 내용 확인하기</string>
 </resources>

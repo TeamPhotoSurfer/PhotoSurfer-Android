@@ -46,5 +46,11 @@
         <activity
             android:name=".main.setting.EtcPolicyActivity"
             android:exported="false" />
+        <activity
+            android:name=".alarm_list.moreinfo.AlarmListExtraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".alarm_list.eachinfo.AlarmSpecificImageActivity"
+            android:exported="false" />
     </application>
 </manifest>
