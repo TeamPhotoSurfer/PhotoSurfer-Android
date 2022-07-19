@@ -1,3 +1,8 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+
 plugins {
     id("com.android.application")
     id("kotlin-parcelize")
@@ -11,6 +16,9 @@ plugins {
 android {
     buildFeatures {
         dataBinding = true
+    }
+    defaultConfig {
+        buildConfigField("String", "PHOTO_SURFER_SERVER_BASE_URL", properties.getProperty("PHOTO_SURFER_SERVER_BASE_URL"))
     }
     namespace = "com.photosurfer.android"
 }

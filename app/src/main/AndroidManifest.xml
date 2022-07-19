@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoSurferAndroid"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".auth.LoginActivity"
@@ -38,11 +39,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-            
+
         <activity
             android:name=".main.setting.ManageAccountActivity"
             android:exported="false" />
-            
+
         <activity
             android:name=".main.setting.EtcPolicyActivity"
             android:exported="false" />
