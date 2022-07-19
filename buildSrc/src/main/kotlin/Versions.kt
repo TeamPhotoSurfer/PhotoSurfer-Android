@@ -22,11 +22,11 @@ object Versions {
 
     const val gradleVersion = "7.2.1"
     const val ktlintVersion = "10.2.0"
-    const val googleServiceVersion = "4.3.10"
+    const val googleServiceVersion = "4.3.13"
     const val playCoreVersion = "1.10.0"
 
     const val lottieVersion = "3.6.0"
-    const val firebaseBomVersion = "29.3.0"
+    const val firebaseBomVersion = "30.2.0"
     const val firebaseMessagingVersion = "22.0.0"
     const val viewPagerIndicatorVersion = "4.1.2"
     const val glideVersion = "4.13.0"

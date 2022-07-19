@@ -4,7 +4,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     kotlin("plugin.serialization") version Versions.kotlinVersion
-//    id("com.google.gms.google-services") 요거 추후에 구글 연결할때 사용
+    id("com.google.gms.google-services")
     id("dagger.hilt.android.plugin")
 }
 
