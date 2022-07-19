@@ -1,5 +1,6 @@
 package com.photosurfer.android.alarm_list.eachinfo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.replace
@@ -27,6 +28,7 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
         initTransactionStartFragment()
         initBackButtonClickListener()
         initCloseButtonClickListener()
+        initShareButtonClickListener()
     }
 
     private fun initExtraData() {
@@ -56,6 +58,16 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
             supportFragmentManager.beginTransaction()
                 .replace<ImageZoomInFragment>(R.id.container_each_info).commit()
             eachInfoViewModel.updateFragmentState(IMAGE_ZOOM_IN)
+        }
+    }
+
+    private fun initShareButtonClickListener() {
+        binding.btnShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, imgUrl)
+            }
+            startActivity(Intent.createChooser(intent, "공유하기"))
         }
     }
 
