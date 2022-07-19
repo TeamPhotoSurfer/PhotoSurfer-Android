@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
     </data>
 
@@ -63,12 +64,20 @@
             android:theme="@style/BlueEditTextStyle"
             app:layout_constraintTop_toBottomOf="@id/cl_top" />
 
-        <!-- 여기 부터 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/ic_x_circle_fill"
+            app:layout_constraintBottom_toBottomOf="@id/et_tag"
+            app:layout_constraintEnd_toEndOf="@id/et_tag"
+            app:layout_constraintTop_toTopOf="@id/et_tag" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_tag">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,8 +97,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:paddingVertical="8dp"
-                        android:text="입력한 태그"
+                        android:text="추가한 태그"
                         android:textAppearance="@style/subtitle_1"
+                        android:textColor="@color/gray_90"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,23 +122,14 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
-                    <!--
-                    추가한 태그 칩 들어갈 부분
-                    -->
-
-                    <HorizontalScrollView
-                        android:id="@+id/horizontal_sv"
+                    <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_input"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </HorizontalScrollView>
+                        android:layout_marginHorizontal="20dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/item_tag_point" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -155,17 +156,18 @@
                             android:paddingVertical="9dp"
                             android:text="최근 추가한 태그"
                             android:textAppearance="@style/subtitle_2"
+                            android:textColor="@color/gray_90"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_recent"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcv_recent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:chipSpacingHorizontal="12dp"
-                            app:chipSpacingVertical="9dp"
-                            app:layout_constraintTop_toBottomOf="@id/tv_recent" />
-
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@id/tv_recent"
+                            tools:listitem="@layout/item_tag_point_sub" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -183,16 +185,18 @@
                             android:paddingVertical="9dp"
                             android:text="자주 추가한 태그"
                             android:textAppearance="@style/subtitle_2"
+                            android:textColor="@color/gray_90"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_often"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcv_often"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:chipSpacingHorizontal="12dp"
-                            app:chipSpacingVertical="9dp"
-                            app:layout_constraintTop_toBottomOf="@id/tv_often" />
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@id/tv_often"
+                            tools:listitem="@layout/item_tag_point_sub" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -210,6 +214,7 @@
                             android:layout_marginTop="28dp"
                             android:text="플랫폼 유형"
                             android:textAppearance="@style/subtitle_2"
+                            android:textColor="@color/gray_90"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -218,30 +223,31 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="출처를 추가하면 사진을 더 쉽게 찾을 수 있어요."
+                            android:textAppearance="@style/caption_1"
+                            android:textColor="@color/gray_40"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_platform" />
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/cg_platform"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcv_platform"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            app:chipSpacingHorizontal="12dp"
-                            app:chipSpacingVertical="9dp"
-                            app:layout_constraintTop_toBottomOf="@id/tv_platform_msg" />
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@id/tv_platform_msg"
+                            tools:listitem="@layout/item_tag_point_sub" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-
-                    android:visibility="gone"
                     android:id="@+id/cl_typing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="74dp"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <TextView
