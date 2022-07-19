@@ -6,13 +6,19 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.photosurfer.android.core.util.useBitmapImg
+import com.photosurfer.android.shared.R.drawable.ic_push_small
 
 class PhotoSurferMessagingService : FirebaseMessagingService() {
+
+    lateinit var bitmap: Bitmap
 
     override fun onNewToken(token: String) {
         // 서버에게 토큰 새로 보내주는 코드
@@ -25,13 +31,15 @@ class PhotoSurferMessagingService : FirebaseMessagingService() {
         createNotificationChannel()
 
         if (remoteMessage.data.isNotEmpty()) {
-            val title = remoteMessage.data["title"]
-            val body = remoteMessage.data["body"]
-            val imageUrl = remoteMessage.data["imageUrl"]
+            val title: String = remoteMessage.data["title"] ?: throw IllegalStateException()
+            val body: String = remoteMessage.data["body"] ?: throw IllegalStateException()
+            val imageUrl: String = remoteMessage.data["imageUrl"] ?: throw IllegalStateException()
+            NotificationManagerCompat.from(this)
+                .notify(0, createNotification(title, body, imageUrl))
         }
     }
 
-    private fun createNotification(title: String, body: String, imageurl: String): Notification {
+    private fun createNotification(title: String, body: String, imageUrl: String): Notification {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
@@ -44,14 +52,23 @@ class PhotoSurferMessagingService : FirebaseMessagingService() {
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notification)// 아이콘 보여주기
+        useBitmapImg(this, imageUrl) {
+            bitmap = it
+        }
+
+        return NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(ic_push_small) // 아이콘 보여주기
             .setContentTitle(title) // 메세지 에서 받은 타이틀 활용
             .setContentText(body) // 메세지 에서 받은 메세지 활용
             .setPriority(NotificationCompat.PRIORITY_HIGH) // 오레오 이하 버전 에서는 지정 필요
             .setContentIntent(pendingIntent)
             .setAutoCancel(true) // 알림 클릭시 자동 제거
             .setSound(defaultSoundUri)
+            .setLargeIcon(bitmap)
+            .setStyle(
+                NotificationCompat.BigPictureStyle().bigPicture(bitmap).bigLargeIcon(null)
+            )
+            .build()
     }
 
     private fun createNotificationChannel() {
