@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,4 +41,9 @@ dependencies {
 
     // Logger - Timber
     implementation(ThirdPartyDependencies.timber)
+
+    // Firebase
+    implementation(platform(FirebaseDependency.firebaseBom))
+    implementation(FirebaseDependency.analyticsKtx)
+    implementation(FirebaseDependency.firebaeMessaging)
 }
