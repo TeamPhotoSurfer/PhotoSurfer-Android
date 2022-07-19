@@ -18,8 +18,6 @@ import com.photosurfer.android.shared.R.drawable.ic_push_small
 
 class PhotoSurferMessagingService : FirebaseMessagingService() {
 
-    lateinit var bitmap: Bitmap
-
     override fun onNewToken(token: String) {
         // 서버에게 토큰 새로 보내주는 코드
     }
@@ -34,12 +32,14 @@ class PhotoSurferMessagingService : FirebaseMessagingService() {
             val title: String = remoteMessage.data["title"] ?: throw IllegalStateException()
             val body: String = remoteMessage.data["body"] ?: throw IllegalStateException()
             val imageUrl: String = remoteMessage.data["imageUrl"] ?: throw IllegalStateException()
-            NotificationManagerCompat.from(this)
-                .notify(0, createNotification(title, body, imageUrl))
+            useBitmapImg(this, imageUrl) {
+                NotificationManagerCompat.from(this)
+                    .notify(0, createNotification(title, body, it))
+            }
         }
     }
 
-    private fun createNotification(title: String, body: String, imageUrl: String): Notification {
+    private fun createNotification(title: String, body: String, bitmap: Bitmap): Notification {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
@@ -51,10 +51,6 @@ class PhotoSurferMessagingService : FirebaseMessagingService() {
         )
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
-        useBitmapImg(this, imageUrl) {
-            bitmap = it
-        }
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(ic_push_small) // 아이콘 보여주기
