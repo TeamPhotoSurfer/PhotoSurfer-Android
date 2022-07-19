@@ -9,6 +9,8 @@ import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.ZOOM_I
 import com.photosurfer.android.alarm_list.R
 import com.photosurfer.android.alarm_list.databinding.ActivityEachInfoBinding
 import com.photosurfer.android.core.base.BaseActivity
+import com.photosurfer.android.core.util.getImageUriFromBitmap
+import com.photosurfer.android.core.util.useBitmapImg
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
@@ -63,11 +65,13 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
 
     private fun initShareButtonClickListener() {
         binding.btnShare.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, imgUrl)
+            useBitmapImg(this, imgUrl) {
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "image/*"
+                    putExtra(Intent.EXTRA_STREAM, getImageUriFromBitmap(this@EachInfoActivity,it))
+                }
+                startActivity(Intent.createChooser(intent, "공유하기"))
             }
-            startActivity(Intent.createChooser(intent, "공유하기"))
         }
     }
 
