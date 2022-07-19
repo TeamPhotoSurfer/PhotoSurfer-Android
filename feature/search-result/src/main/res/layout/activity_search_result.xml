@@ -3,14 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- &amp;&amp; -->
+
     <data>
 
         <import type="android.view.View" />
 
+        <import type="com.photosurfer.android.core.constant.TagResultViewType" />
+
+        <variable
+            name="currentViewType"
+            type="TagResultViewType" />
+
         <variable
             name="viewModel"
             type="com.photosurfer.android.search_result.viewModel.SearchResultViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +41,7 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/ic_shortarrow_line_left"
+                android:visibility="@{currentViewType == TagResultViewType.DEFAULT ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +68,35 @@
                 android:text="@string/choose"
                 android:textAppearance="@style/body_1"
                 android:textColor="@color/gray_70"
-                android:visibility="@{viewModel.noThumbnailData ? View.GONE : View.VISIBLE}"
+                android:visibility="@{currentViewType == TagResultViewType.SELECT || viewModel.noThumbnailData ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="16dp"
+                android:text="@string/btn_cancel"
+                android:textAppearance="@style/body_1"
+                android:textColor="@color/gray_70"
+                android:visibility="@{currentViewType == TagResultViewType.SELECT &amp;&amp; !viewModel.noThumbnailData ? View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_menu"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/iv_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="16dp"
+                android:src="@drawable/ic_threedots_vertical"
+                android:visibility="@{currentViewType == TagResultViewType.SELECT &amp;&amp; !viewModel.noThumbnailData ? View.VISIBLE : View.GONE }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,20 +110,39 @@
             android:background="@color/gray_30"
             app:layout_constraintTop_toBottomOf="@id/cl_tool_bar" />
 
+
         <HorizontalScrollView
-            android:id="@+id/scroll_chip"
+            android:id="@+id/scroll_chip_defualt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
+            android:visibility="@{currentViewType == TagResultViewType.DEFAULT ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_divider">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cg_search_tag"
+                android:id="@+id/cg_search_tag_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp" />
         </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_chip_default_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:visibility="@{currentViewType == TagResultViewType.SELECT ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scroll_chip_defualt">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_search_tag_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp" />
+        </HorizontalScrollView>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_thumbnail"
@@ -96,7 +151,7 @@
             android:visibility="@{viewModel.noThumbnailData ? View.GONE : View.VISIBLE }"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scroll_chip"
+            app:layout_constraintTop_toBottomOf="@id/scroll_chip_default_select"
             app:spanCount="3"
             tools:listitem="@layout/item_photo_thumbnail" />
 
@@ -107,7 +162,7 @@
             android:layout_height="0dp"
             android:visibility="@{viewModel.noThumbnailData ? View.VISIBLE : View.GONE }"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scroll_chip"
+            app:layout_constraintTop_toBottomOf="@id/scroll_chip_defualt"
             tools:layout="@layout/layout_search_result_empty" />
 
 

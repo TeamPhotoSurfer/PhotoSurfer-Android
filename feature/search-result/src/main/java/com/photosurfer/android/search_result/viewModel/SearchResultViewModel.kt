@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
-import timber.log.Timber
 
 class SearchResultViewModel : ViewModel() {
 
@@ -28,9 +27,18 @@ class SearchResultViewModel : ViewModel() {
 
     fun updateList(list: MutableList<Int>) {
         // for (i in 0 until list.size) {}
-        _thumbnail.value = listOf()     // TODO 서버 response 값으로 교체
+        // TODO 서버 response 값으로 교체
+        _thumbnail.value = listOf(
+            ThumbnailInfo(
+                1,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                2,
+                "https://mb1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            )
+        )
         noThumbnailData.value = thumbnail.value?.size == 0
-        Timber.d("please ${thumbnail.value} ${noThumbnailData.value}")
     }
 
     init {
