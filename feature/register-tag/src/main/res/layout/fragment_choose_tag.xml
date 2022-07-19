@@ -6,7 +6,15 @@
     <data>
 
         <import type="android.view.View" />
-        
+
+        <variable
+            name="isTyping"
+            type="Boolean" />
+
+        <variable
+            name="isChecked"
+            type="Boolean" />
+
         <variable
             name="viewmodel"
             type="com.photosurfer.android.register_tag.ChooseTagViewModel" />
@@ -18,7 +26,6 @@
         tools:context=".SelectTagFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-
             android:id="@+id/cl_top"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -44,7 +51,7 @@
                 android:paddingHorizontal="16dp"
                 android:text="저장"
                 android:textAppearance="@style/subtitle_1"
-                android:textColor="@color/gray_50"
+                android:textColor="@color/selector_choose_tag_check_state_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,6 +66,8 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/shape_rect_register_gray_radius_8dp"
             android:hint="태그를 입력하세요"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:maxLength="20"
             android:maxLines="1"
             android:paddingHorizontal="16dp"
@@ -69,6 +78,7 @@
             app:layout_constraintTop_toBottomOf="@id/cl_top" />
 
         <ImageView
+            android:id="@+id/iv_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
@@ -127,6 +137,7 @@
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
@@ -139,11 +150,11 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-
                     android:id="@+id/cl_not_typing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="74dp"
+                    android:visibility="@{isTyping? View.VISIBLE : View.GONE}"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -251,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="74dp"
-                    android:visibility="gone"
+                    android:visibility="@{isTyping? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <TextView
