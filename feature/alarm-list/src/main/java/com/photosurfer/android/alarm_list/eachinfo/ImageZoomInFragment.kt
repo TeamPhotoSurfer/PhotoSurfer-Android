@@ -7,11 +7,8 @@ import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.CLICKA
 import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.PUSH_ID
 import com.photosurfer.android.alarm_list.R
 import com.photosurfer.android.alarm_list.databinding.FragmentImageZoomInBinding
-import com.photosurfer.android.alarm_list.eachinfo.EachInfoActivity.Companion.PUSH_MAIN_STATE
+import com.photosurfer.android.alarm_list.eachinfo.AlarmSpecificImageActivity.Companion.PUSH_MAIN_STATE
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.core.constant.PushSettingConstant
-import com.photosurfer.android.core.constant.PushSettingConstant.PUSH_MAIN
-import com.photosurfer.android.core.util.PhotoSurferSnackBar.Companion.PUSH_MAIN_FRAGMENT
 import com.photosurfer.android.core.util.StfalconImageViewerUtil
 import com.photosurfer.android.navigator.MainNavigator
 import dagger.hilt.android.AndroidEntryPoint

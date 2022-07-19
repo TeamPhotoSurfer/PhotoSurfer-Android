@@ -10,7 +10,7 @@ import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.PUSH_I
 import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.ZOOM_IN_IMAGE_URL
 import com.photosurfer.android.alarm_list.databinding.ItemAlarmContentBinding
 import com.photosurfer.android.alarm_list.databinding.ItemDivisionDayHeaderBinding
-import com.photosurfer.android.alarm_list.eachinfo.EachInfoActivity
+import com.photosurfer.android.alarm_list.eachinfo.AlarmSpecificImageActivity
 import com.photosurfer.android.core.util.ItemDiffCallback
 import com.photosurfer.android.domain.entity.AlarmElement
 
@@ -64,7 +64,7 @@ class AlarmListAdapter() : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
         fun onBind(data: AlarmElement) {
             binding.alarmData = data
             binding.root.setOnClickListener {
-                val intent = Intent(it.context, EachInfoActivity::class.java).apply {
+                val intent = Intent(it.context, AlarmSpecificImageActivity::class.java).apply {
                     putExtra(ZOOM_IN_IMAGE_URL, data.imageURL)
                     putExtra(PUSH_ID, data.id)
                 }

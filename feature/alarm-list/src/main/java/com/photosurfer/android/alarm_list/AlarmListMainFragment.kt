@@ -17,8 +17,8 @@ class AlarmListMainFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAlarmListAdapter()
-        passedMoreButtonClickListener()
-        upComingMoreButtonClickListener()
+        setPassedAlarmClickListener()
+        setUpComingAlarmClickListener()
     }
 
     private fun initAlarmListAdapter() {
@@ -74,7 +74,7 @@ class AlarmListMainFragment :
         )
     }
 
-    private fun passedMoreButtonClickListener() {
+    private fun setPassedAlarmClickListener() {
         binding.tvPassedMore.setOnClickListener {
             val intent = Intent(requireActivity(), AlarmListExtraActivity::class.java).apply {
                 putExtra(START_POINT, PASSED_ALARM)
@@ -83,7 +83,7 @@ class AlarmListMainFragment :
         }
     }
 
-    private fun upComingMoreButtonClickListener() {
+    private fun setUpComingAlarmClickListener() {
         binding.tvUpComingMore.setOnClickListener {
             val intent = Intent(requireActivity(), AlarmListExtraActivity::class.java).apply {
                 putExtra(START_POINT, UP_COMING_ALARM)

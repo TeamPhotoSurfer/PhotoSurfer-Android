@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity_each_info) {
+class AlarmSpecificImageActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity_each_info) {
 
     private val eachInfoViewModel by viewModels<EachInfoViewModel>()
     private lateinit var imgUrl: String
@@ -68,7 +68,7 @@ class EachInfoActivity : BaseActivity<ActivityEachInfoBinding>(R.layout.activity
             useBitmapImg(this, imgUrl) {
                 val intent = Intent(Intent.ACTION_SEND).apply {
                     type = "image/*"
-                    putExtra(Intent.EXTRA_STREAM, getImageUriFromBitmap(this@EachInfoActivity,it))
+                    putExtra(Intent.EXTRA_STREAM, getImageUriFromBitmap(this@AlarmSpecificImageActivity,it))
                 }
                 startActivity(Intent.createChooser(intent, "공유하기"))
             }
