@@ -44,4 +44,7 @@ dependencies {
 
     // stfalconImageViewer
     implementation(ThirdPartyDependencies.stFalconImageViewer)
+
+    // dotsIndocator
+    implementation(ThirdPartyDependencies.dotsIndicator)
 }

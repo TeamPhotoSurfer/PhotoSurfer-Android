@@ -57,4 +57,7 @@
 
     <!--ImageZoomInFragment-->
     <string name="button_check_alarm">알림 내용 확인하기</string>
+
+    <!--DialogOnBoarding-->
+    <string name="skip_on_boarding">건너뛰기</string>
 </resources>
