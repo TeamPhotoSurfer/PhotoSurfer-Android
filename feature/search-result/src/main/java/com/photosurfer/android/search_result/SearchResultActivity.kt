@@ -4,12 +4,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.core.ext.shortToast
-import com.photosurfer.android.core.util.ChipUnSelectableUtil
+import com.photosurfer.android.core.util.ChipCancelableUtil
 import com.photosurfer.android.core.util.ItemDividerGrid
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
 import com.photosurfer.android.search_result.viewModel.SearchResultViewModel
-import timber.log.Timber
 
 class SearchResultActivity :
     BaseActivity<ActivitySearchResultBinding>(R.layout.activity_search_result) {
@@ -56,9 +55,9 @@ class SearchResultActivity :
 
     // Selectable Chip 만들면 코드 교체
     private fun setChip() {
-        val tagList = viewModel.fakeOftenTagList
+        val tagList = viewModel.originTagList.value ?: return
         for (element in tagList) {
-            ChipUnSelectableUtil(this).make(
+            ChipCancelableUtil(this).make(
                 binding.cgSearchTag,
                 element.name,
                 ::onClickChip
@@ -67,6 +66,6 @@ class SearchResultActivity :
     }
 
     private fun onClickChip() {
-        Timber.d("clciked chip")
+        viewModel.updateList(binding.cgSearchTag.checkedChipIds)
     }
 }

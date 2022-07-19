@@ -5,30 +5,33 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
+import timber.log.Timber
 
 class SearchResultViewModel : ViewModel() {
-    fun isNoData(): Boolean = thumbnail.value?.size == 0
 
-
-    val fakeOftenTagList = listOf(
-        TagInfo(0, "포토서퍼"),
-        TagInfo(1, "카페"),
-        TagInfo(2, "생활꿀팁"),
-        TagInfo(3, "위시리스트"),
-        TagInfo(4, "휴학계획"),
-        TagInfo(5, "여행")
+    private var _originTagList = MutableLiveData(
+        mutableListOf(
+            TagInfo(0, "포토서퍼"),
+            TagInfo(1, "카페"),
+            TagInfo(2, "생활꿀팁"),
+            TagInfo(3, "위시리스트"),
+            TagInfo(4, "휴학계획"),
+            TagInfo(5, "여행")
+        )
     )
-    val fakeOftenTagLongList = listOf(
-        TagInfo(0, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
-        TagInfo(1, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
-        TagInfo(2, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
-        TagInfo(3, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
-        TagInfo(4, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
-        TagInfo(5, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼")
-    )
+    val originTagList: LiveData<MutableList<TagInfo>> = _originTagList
 
     private var _thumbnail = MutableLiveData<List<ThumbnailInfo?>>()
     val thumbnail: LiveData<List<ThumbnailInfo?>> = _thumbnail
+
+    val noThumbnailData = MutableLiveData(thumbnail.value?.size == 0)
+
+    fun updateList(list: MutableList<Int>) {
+        // for (i in 0 until list.size) {}
+        _thumbnail.value = listOf()     // TODO 서버 response 값으로 교체
+        noThumbnailData.value = thumbnail.value?.size == 0
+        Timber.d("please ${thumbnail.value} ${noThumbnailData.value}")
+    }
 
     init {
         _thumbnail.value = listOf(
@@ -43,6 +46,126 @@ class SearchResultViewModel : ViewModel() {
             ThumbnailInfo(
                 3,
                 "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                3,
+                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
+            ),
+            ThumbnailInfo(
+                4,
+                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
             ),
             ThumbnailInfo(
                 4,
