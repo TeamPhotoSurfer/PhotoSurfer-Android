@@ -3,15 +3,21 @@ package com.photosurfer.android.register_tag
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.photosurfer.android.core.util.ItemDiffCallback
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.databinding.ItemTagPointSubBinding
 
 class PointSubTagAdapter(
-    private val tagsList: MutableList<TagInfo>
+    private val selectTag: ((TagInfo) -> Unit)? = null
 ) :
-    RecyclerView.Adapter<PointSubTagAdapter.SubTagViewHolder>() {
-
+    ListAdapter<TagInfo, PointSubTagAdapter.SubTagViewHolder>(
+        ItemDiffCallback<TagInfo>(
+            onContentsTheSame = { old, new -> old == new },
+            onItemsTheSame = { old, new -> old.id == new.id }
+        )
+    ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -26,20 +32,26 @@ class PointSubTagAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: PointSubTagAdapter.SubTagViewHolder,
+        holder: SubTagViewHolder,
         position: Int
     ) {
-        holder.onBind(position)
+        holder.onBind(getItem(position), selectTag)
     }
-
-    override fun getItemCount(): Int = tagsList.size
 
     inner class SubTagViewHolder(
         private val binding: ItemTagPointSubBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(position: Int) {
-            binding.tvTagName.text = tagsList[position].name
+        fun onBind(data: TagInfo, selectTag: ((TagInfo) -> Unit)? = null) {
+            binding.tagInfo = data
+            binding.clWholeTag.setOnClickListener {
+//                binding.ivHead.setColorFilter(Color.parseColor("#f2f4f6"))
+//                binding.ivTail.setColorFilter(Color.parseColor("#f2f4f6"))
+//                binding.ivHashtag.setColorFilter(Color.parseColor("#8b95a1"))
+//                binding.tvTagName.setTextColor(Color.parseColor("#8b95a1"))
+//                binding.clTag.setBackgroundColor(Color.parseColor("#f2f4f6"))
+//                binding.clWholeTag.isClickable = false
+                selectTag?.invoke(data)
+            }
         }
     }
-
 }

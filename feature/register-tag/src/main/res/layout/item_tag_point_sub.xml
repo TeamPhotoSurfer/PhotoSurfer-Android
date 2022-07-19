@@ -5,9 +5,13 @@
 
     <data>
 
+        <variable
+            name="tagInfo"
+            type="com.photosurfer.android.domain.entity.TagInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_whole_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -42,6 +46,7 @@
                 android:id="@+id/tv_tag_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{tagInfo.name}"
                 android:textAppearance="@style/body2"
                 android:textColor="@color/point_main"
                 app:layout_constraintBottom_toBottomOf="parent"
