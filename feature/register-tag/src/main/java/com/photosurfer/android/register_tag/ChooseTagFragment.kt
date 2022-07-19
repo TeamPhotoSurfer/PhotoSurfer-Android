@@ -1,14 +1,16 @@
-package com.example.register_tag
+package com.photosurfer.android.register_tag
 
 import android.os.Bundle
 import android.view.View
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.register_tag.R
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if(binding.etTag.text.isEmpty()) {
+            // 비어있으면 뷰모델 isEmpty = true
+        }
 
     }
 

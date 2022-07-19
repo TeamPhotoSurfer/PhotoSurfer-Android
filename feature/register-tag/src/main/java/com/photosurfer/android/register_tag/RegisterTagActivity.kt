@@ -1,8 +1,7 @@
-package com.example.register_tag
+package com.photosurfer.android.register_tag
 
 import android.os.Bundle
 import com.photosurfer.android.core.base.BaseActivity
-import com.photosurfer.android.register_tag.R
 import com.photosurfer.android.register_tag.databinding.ActivityRegisterTagBinding
 
 class RegisterTagActivity :

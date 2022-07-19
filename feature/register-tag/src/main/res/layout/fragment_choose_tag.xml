@@ -6,6 +6,10 @@
     <data>
 
         <import type="android.view.View" />
+        
+        <variable
+            name="viewmodel"
+            type="com.photosurfer.android.register_tag.ChooseTagViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
