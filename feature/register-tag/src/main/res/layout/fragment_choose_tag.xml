@@ -97,8 +97,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:paddingVertical="8dp"
-                        android:text="입력한 태그"
+                        android:text="추가한 태그"
                         android:textAppearance="@style/subtitle_1"
+                        android:textColor="@color/gray_90"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -155,6 +156,7 @@
                             android:paddingVertical="9dp"
                             android:text="최근 추가한 태그"
                             android:textAppearance="@style/subtitle_2"
+                            android:textColor="@color/gray_90"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -183,6 +185,7 @@
                             android:paddingVertical="9dp"
                             android:text="자주 추가한 태그"
                             android:textAppearance="@style/subtitle_2"
+                            android:textColor="@color/gray_90"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -211,6 +214,7 @@
                             android:layout_marginTop="28dp"
                             android:text="플랫폼 유형"
                             android:textAppearance="@style/subtitle_2"
+                            android:textColor="@color/gray_90"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -219,6 +223,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="출처를 추가하면 사진을 더 쉽게 찾을 수 있어요."
+                            android:textAppearance="@style/caption_1"
+                            android:textColor="@color/gray_40"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_platform" />
 
