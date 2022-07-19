@@ -100,5 +100,16 @@
             app:spanCount="3"
             tools:listitem="@layout/item_photo_thumbnail" />
 
+        <include
+            android:id="@+id/layout_search_result_empty"
+            layout="@layout/layout_search_result_empty"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.isNoData ? View.VISIBLE : View.GONE }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scroll_chip"
+            tools:layout="@layout/layout_search_result_empty" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

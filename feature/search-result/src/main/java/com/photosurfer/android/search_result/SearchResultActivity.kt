@@ -24,6 +24,13 @@ class SearchResultActivity :
         initAdapter()
         initThumbnailList()
         setItemDecoration()
+        initLearnAddTag()
+    }
+
+    private fun initLearnAddTag() {
+        binding.layoutSearchResultEmpty.btnLearnAddTag.setOnClickListener {
+            // TODO : 온보딩 dialog 띄워줌
+        }
     }
 
     private fun initAdapter() {
