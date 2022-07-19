@@ -44,12 +44,6 @@ class PointSubTagAdapter(
         fun onBind(data: TagInfo, selectTag: ((TagInfo) -> Unit)? = null) {
             binding.tagInfo = data
             binding.clWholeTag.setOnClickListener {
-//                binding.ivHead.setColorFilter(Color.parseColor("#f2f4f6"))
-//                binding.ivTail.setColorFilter(Color.parseColor("#f2f4f6"))
-//                binding.ivHashtag.setColorFilter(Color.parseColor("#8b95a1"))
-//                binding.tvTagName.setTextColor(Color.parseColor("#8b95a1"))
-//                binding.clTag.setBackgroundColor(Color.parseColor("#f2f4f6"))
-//                binding.clWholeTag.isClickable = false
                 selectTag?.invoke(data)
             }
         }

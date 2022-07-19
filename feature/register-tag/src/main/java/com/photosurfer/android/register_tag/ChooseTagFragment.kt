@@ -1,6 +1,5 @@
 package com.photosurfer.android.register_tag
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -79,7 +78,6 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         binding.etTag.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 chooseTagViewModel.inputList.add(TagInfo(0L, binding.etTag.text.toString()))
-                Log.d("태그 추가", "${chooseTagViewModel.inputList}")
                 chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
                 binding.etTag.setText("")
                 true
@@ -92,13 +90,11 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         chooseTagViewModel.selectTag(tagInfo)
         inputTagAdapter.submitList(chooseTagViewModel.inputList)
         inputTagAdapter.notifyDataSetChanged()
-        Log.d("태그 추가", "${chooseTagViewModel.inputList}")
     }
 
     private fun deleteTag(tagInfo: TagInfo) {
         chooseTagViewModel.deleteTag(tagInfo)
         inputTagAdapter.submitList(chooseTagViewModel.inputList)
-        Log.d("태그 삭제", "${chooseTagViewModel.inputList}")
     }
 
     enum class Platform(val platformName: String) {

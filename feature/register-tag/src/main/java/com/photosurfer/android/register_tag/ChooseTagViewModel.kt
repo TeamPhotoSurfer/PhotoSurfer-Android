@@ -8,10 +8,7 @@ import com.photosurfer.android.domain.entity.TagInfo
 class ChooseTagViewModel : ViewModel() {
     private var _isEmptyInput = MutableLiveData<Int>()
     val isEmptyInput: LiveData<Int> get() = _isEmptyInput
-
     var inputList: MutableList<TagInfo> = mutableListOf()
-
-
     val recentList: MutableList<TagInfo> = mutableListOf()
     val oftenList: MutableList<TagInfo> = mutableListOf()
     val platformList: MutableList<TagInfo> = mutableListOf()
@@ -61,6 +58,4 @@ class ChooseTagViewModel : ViewModel() {
     fun deleteTag(item: TagInfo) {
         inputList.remove(item)
     }
-
-
 }
