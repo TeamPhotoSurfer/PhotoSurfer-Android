@@ -54,7 +54,7 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun providesNaverRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(PHOTO_SURFER_SERVER_BASE_URL)
             .client(okHttpClient)
