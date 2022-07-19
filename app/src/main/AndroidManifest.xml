@@ -14,6 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoSurferAndroid"
         tools:targetApi="31">
+
+        <service
+            android:name=".PhotoSurferMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--푸시 아이콘 지정-->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+
         <activity
             android:name=".auth.LoginActivity"
             android:configChanges="orientation"
