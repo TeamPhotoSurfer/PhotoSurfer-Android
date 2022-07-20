@@ -42,6 +42,12 @@ dependencies {
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
 
+    // Http Client Library
+    implementation(ThirdPartyDependencies.retrofit)
+    implementation(platform(ThirdPartyDependencies.okHttpBom))
+    implementation(ThirdPartyDependencies.okHttp)
+    implementation(ThirdPartyDependencies.okHttpLoggingInterceptor)
+
     // stfalconImageViewer
     implementation(ThirdPartyDependencies.stFalconImageViewer)
 }
