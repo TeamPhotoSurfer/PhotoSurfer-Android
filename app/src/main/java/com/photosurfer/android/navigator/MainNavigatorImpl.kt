@@ -1,18 +1,23 @@
 package com.photosurfer.android.navigator
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.photosurfer.android.MainActivity
 import com.photosurfer.android.core.ext.startActivity
+import com.photosurfer.android.domain.entity.SerializeTagInfoList
+import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.push_setting.fragments.PushMainFragment
 import com.photosurfer.android.search.SearchTagActivity
+import com.photosurfer.android.search_result.SearchResultActivity
 import javax.inject.Inject
 
 class MainNavigatorImpl @Inject constructor() : MainNavigator {
     override fun navigateMain(context: Context) {
         context.startActivity<MainActivity>()
     }
+
 
     override fun navigateSearchTag(context: Context, tag: Pair<String, String>) {
         context.startActivity<SearchTagActivity>(tag)
@@ -24,5 +29,17 @@ class MainNavigatorImpl @Inject constructor() : MainNavigator {
             PushMainFragment::class.java,
             bundle
         ).commit()
+    }
+
+    override fun navigateSearchResult(context: Context, list: List<TagInfo>) {
+        context.startActivity(
+            Intent(context, SearchResultActivity::class.java).apply {
+                putExtra(TAG_LIST, SerializeTagInfoList(list))
+            }
+        )
+    }
+
+    companion object {
+        const val TAG_LIST = "TAG_LIST"
     }
 }
