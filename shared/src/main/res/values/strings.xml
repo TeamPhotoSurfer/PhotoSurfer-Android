@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PhotoSurfer-Android</string>
+    <string name="app_name">Photo Surfer</string>
 
     <!-- login -->
     <string name="kakao_login">카카오톡 로그인</string>
