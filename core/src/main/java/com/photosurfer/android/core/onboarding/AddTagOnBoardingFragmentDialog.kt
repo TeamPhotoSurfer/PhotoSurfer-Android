@@ -36,7 +36,7 @@ class AddTagOnBoardingFragmentDialog : DialogFragment() {
     }
 
     private fun initAdapter() {
-        val fragmentList = listOf(AddTagOneFragment(), AddTagTwoFragment(), AddTagThreeFragment())
+        val fragmentList = listOf(OnBoardingTagfirstFragment(), OnBoardingTagSecondFragment(), OnBoardingTagThirdFragment())
 
         onBoardingAdapter = OnBoardingAdapter(this)
         onBoardingAdapter.fragments.addAll(fragmentList)

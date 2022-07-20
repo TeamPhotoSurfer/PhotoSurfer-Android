@@ -24,6 +24,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="360:604"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/vp_on_boarding"
+            app:srcCompat="@drawable/bg_onboarding_pado" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_on_boarding"
             android:layout_width="match_parent"
@@ -51,16 +61,6 @@
             app:layout_constraintStart_toStartOf="parent" >
 
         </com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator>
-
-        <ImageView
-            android:id="@+id/iv_background"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="360:604"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/vp_on_boarding"
-            app:srcCompat="@drawable/bg_onboarding_pado" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

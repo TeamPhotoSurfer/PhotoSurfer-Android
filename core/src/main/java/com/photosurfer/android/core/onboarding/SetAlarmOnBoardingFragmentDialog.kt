@@ -37,7 +37,7 @@ class SetAlarmOnBoardingFragmentDialog : DialogFragment() {
 
     private fun initAdapter() {
         val fragmentList =
-            listOf(SetAlarmOneFragment(), SetAlarmTwoFragment(), SetAlarmThreeFragment())
+            listOf(OnBoardingAlarmFirsrtFragment(), OnBoardingAlarmSecondFragment(), OnBoardingAlarmThirdFragment())
 
         onBoardingAdapter = OnBoardingAdapter(this)
         onBoardingAdapter.fragments.addAll(fragmentList)
