@@ -28,7 +28,7 @@ class SelectTagFragment : BaseFragment<FragmentSelectTagBinding>(R.layout.fragme
         selectTagListAdapter.submitList(pushSettingViewModel.wholeTagList.value)
     }
 
-    private fun updateTempRepresentTagList(tempList: MutableList<Long>) {
+    private fun updateTempRepresentTagList(tempList: MutableList<Int>) {
         pushSettingViewModel.updateTempRepresentTagList(tempList)
     }
 }

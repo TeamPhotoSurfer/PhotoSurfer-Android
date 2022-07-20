@@ -2,19 +2,23 @@ package com.photosurfer.android.push_setting.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.replace
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.constant.PushSettingConstant.SELECT_TAG
 import com.photosurfer.android.core.util.DateUtil.dotDateFormatter
+import com.photosurfer.android.core.util.EventObserver
 import com.photosurfer.android.core.util.KeyBoardUtil
 import com.photosurfer.android.core.util.KeyBoardVisibilityListener
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
+import com.photosurfer.android.core.util.PhotoSurferSnackBar.Companion.PUSH_MAIN_NETWORK_ERROR
 import com.photosurfer.android.push_setting.PushSettingViewModel
 import com.photosurfer.android.push_setting.R
 import com.photosurfer.android.push_setting.databinding.FragmentPushMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment_push_main) {
@@ -38,6 +42,9 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         initKeyBoardVisibilityListener()
         initRepresentTagButtonClickListener()
         initViewDisableClickListener()
+        initButtonPushAlarmDoneClickListener()
+        initPushSettingFailureObserver()
+        initPushSettingSuccessObserver()
     }
 
     private fun initArgumentsData() {
@@ -148,6 +155,31 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         binding.viewDisableClick.setOnClickListener {
             PhotoSurferSnackBar.make(it, PhotoSurferSnackBar.PUSH_MAIN_FRAGMENT).show()
         }
+    }
+
+    private fun initButtonPushAlarmDoneClickListener() {
+        binding.btnPushAlarmDone.setOnClickListener {
+            pushSettingViewModel.postPushSetting()
+        }
+    }
+
+    private fun initPushSettingSuccessObserver() {
+        pushSettingViewModel.pushSettingSuccess.observe(
+            viewLifecycleOwner,
+            EventObserver {
+                ActivityCompat.finishAffinity(requireActivity())
+                exitProcess(0)
+            }
+        )
+    }
+
+    private fun initPushSettingFailureObserver() {
+        pushSettingViewModel.pushSettingFailure.observe(
+            viewLifecycleOwner,
+            EventObserver {
+                PhotoSurferSnackBar.make(binding.root, PUSH_MAIN_NETWORK_ERROR).show()
+            }
+        )
     }
 
     override fun onDestroyView() {

@@ -1,6 +1,8 @@
 package com.photosurfer.android.di
 
+import CustomCallAdapterFactory
 import com.photosurfer.android.BuildConfig.PHOTO_SURFER_SERVER_BASE_URL
+import com.photosurfer.android.BuildConfig.TEST_TOKEN
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +34,7 @@ object RetrofitModule {
                 proceed(
                     request()
                         .newBuilder()
-//                        .addHeader("Authorization", 일단 임시토큰 박을꺼)
+                        .addHeader("Authorization", TEST_TOKEN)
                         .build()
                 )
             }
@@ -58,7 +60,7 @@ object RetrofitModule {
         Retrofit.Builder()
             .baseUrl(PHOTO_SURFER_SERVER_BASE_URL)
             .client(okHttpClient)
-//            .addCallAdapterFactory(CustomCallAdapterFactory())
+            .addCallAdapterFactory(CustomCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }
