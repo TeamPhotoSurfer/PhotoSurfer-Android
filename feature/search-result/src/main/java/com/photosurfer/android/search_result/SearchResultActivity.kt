@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.core.constant.TagResultViewType
 import com.photosurfer.android.core.ext.shortToast
+import com.photosurfer.android.core.onboarding.AddTagOnBoardingFragmentDialog
 import com.photosurfer.android.core.util.ChipCancelableUtil
 import com.photosurfer.android.core.util.ChipUnSelectableUtil
 import com.photosurfer.android.core.util.ItemDividerGrid
@@ -71,7 +72,7 @@ class SearchResultActivity :
 
     private fun initLearnAddTag() {
         binding.layoutSearchResultEmpty.btnLearnAddTag.setOnClickListener {
-            // TODO : 온보딩 dialog 띄워줌
+            AddTagOnBoardingFragmentDialog().show(supportFragmentManager, "Tag")
         }
     }
 
