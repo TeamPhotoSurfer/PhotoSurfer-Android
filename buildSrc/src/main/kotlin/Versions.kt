@@ -51,4 +51,6 @@ object Versions {
 
     val javaVersion = JavaVersion.VERSION_11
     const val jvmVersion = "11"
+
+    const val flexBoxVersion = "3.0.0"
 }

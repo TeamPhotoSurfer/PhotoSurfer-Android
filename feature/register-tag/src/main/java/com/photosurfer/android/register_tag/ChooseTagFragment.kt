@@ -5,10 +5,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
+
 
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
 
@@ -30,6 +33,19 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         addInputTag()
         deleteInput()
         checkInputNum()
+        initRecyclerViewLayout()
+    }
+
+    private fun initRecyclerViewLayout() {
+        val oftenLayoutManager = FlexboxLayoutManager(context)
+        oftenLayoutManager.flexWrap = FlexWrap.WRAP
+        val recentLayoutManager = FlexboxLayoutManager(context)
+        recentLayoutManager.flexWrap = FlexWrap.WRAP
+        val platformLayoutManager = FlexboxLayoutManager(context)
+        platformLayoutManager.flexWrap = FlexWrap.WRAP
+        binding.rcvOften.layoutManager = oftenLayoutManager
+        binding.rcvRecent.layoutManager = recentLayoutManager
+        binding.rcvPlatform.layoutManager = platformLayoutManager
     }
 
     private fun setDataOnRecyclerView() {
