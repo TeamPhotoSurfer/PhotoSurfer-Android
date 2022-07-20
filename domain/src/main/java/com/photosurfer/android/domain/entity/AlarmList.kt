@@ -10,9 +10,10 @@ data class AlarmInfo(
 )
 
 data class AlarmElement(
-    val id: Long,
+    val id: Int,
     val pushDate: LocalDate,
     val tags: List<String>,
     val imageURL: String,
-    val memo: String
+    val memo: String,
+    val photoId: Int
 )

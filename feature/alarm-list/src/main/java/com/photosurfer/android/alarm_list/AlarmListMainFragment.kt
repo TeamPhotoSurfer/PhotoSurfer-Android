@@ -29,14 +29,14 @@ class AlarmListMainFragment :
         alarmListAdapter.submitList(
             listOf(
                 AlarmElement(
-                    id = -1L,
+                    id = -1,
                     pushDate = LocalDate.now(),
                     tags = listOf("이", "창", "환"),
                     imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",
                     memo = "알랄라 살랄라"
                 ),
                 AlarmElement(
-                    id = 1L,
+                    id = 1,
                     pushDate = LocalDate.now(),
                     tags = listOf("이", "창", "환"),
                     imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",

@@ -32,7 +32,7 @@ data class Push(
     @SerializedName("pushDate")
     val pushDate: String,
     @SerializedName("tags")
-    val tags: List<Any>
+    val tags: List<String>
 )
 
 data class Tomorrow(
