@@ -5,10 +5,9 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
-import com.photosurfer.android.core.R
 import com.photosurfer.android.core.ext.getString
-import com.photosurfer.android.shared.R.*
 import com.photosurfer.android.shared.R.layout.custom_snackbar
+import com.photosurfer.android.shared.R.string
 import com.photosurfer.android.shared.databinding.CustomSnackbarBinding
 
 class PhotoSurferSnackBar(view: View, private val usage: Int) {
@@ -19,6 +18,8 @@ class PhotoSurferSnackBar(view: View, private val usage: Int) {
 
         // 사용처 정리
         const val SELECT_TAG_FRAGMENT = 0
+        const val PUSH_MAIN_FRAGMENT = 1
+        const val CHOOSE_TAG_FRAGMENT = 2
     }
 
     private val context = view.context
@@ -45,6 +46,8 @@ class PhotoSurferSnackBar(view: View, private val usage: Int) {
     private fun initData(view: View) {
         snackbarBinding.snackBarText = when (usage) {
             SELECT_TAG_FRAGMENT -> view.getString(string.select_tag_fragment)
+            PUSH_MAIN_FRAGMENT -> view.getString(string.push_main_fragment)
+            CHOOSE_TAG_FRAGMENT -> view.getString(string.choose_tag_fragment)
             else -> throw IllegalStateException()
         }
     }

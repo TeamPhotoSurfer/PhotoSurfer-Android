@@ -60,3 +60,23 @@ fun ImageView.loadImage(url: String?) {
         .placeholder(gray_20)
         .into(this)
 }
+
+@BindingAdapter("app:setAlarmWhenText")
+fun TextView.setAlarmWhenText(startPoint: Int) {
+    text = when (startPoint) {
+        1 -> "지난 알림"
+        2 -> "다가오는 알림"
+        else -> ""
+    }
+}
+
+@BindingAdapter("app:setImage")
+fun ImageView.setImage(url: String?) {
+    url?.let {
+        Glide.with(this.context)
+            .load(url)
+            .placeholder(gray_20)
+            .error(gray_20)
+            .into(this)
+    }
+}

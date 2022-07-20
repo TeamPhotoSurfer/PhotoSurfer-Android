@@ -13,7 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoSurferAndroid"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <service
+            android:name=".PhotoSurferMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--푸시 아이콘 지정-->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+
         <activity
             android:name=".auth.LoginActivity"
             android:configChanges="orientation"
@@ -28,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.register_tag.RegisterTagActivity"
+            android:name=".register_tag.RegisterTagActivity"
             android:exported="false" />
 
         <activity
@@ -50,5 +64,12 @@
         <activity
             android:name=".search_result.SearchResultActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".alarm_list.moreinfo.AlarmListExtraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".alarm_list.eachinfo.AlarmSpecificImageActivity"
+            android:exported="false" />
     </application>
 </manifest>

@@ -1,11 +1,16 @@
 package com.photosurfer.android.alarm_list
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.PUSH_ID
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.ZOOM_IN_IMAGE_URL
 import com.photosurfer.android.alarm_list.databinding.ItemAlarmContentBinding
 import com.photosurfer.android.alarm_list.databinding.ItemDivisionDayHeaderBinding
+import com.photosurfer.android.alarm_list.eachinfo.AlarmSpecificImageActivity
 import com.photosurfer.android.core.util.ItemDiffCallback
 import com.photosurfer.android.domain.entity.AlarmElement
 
@@ -58,6 +63,13 @@ class AlarmListAdapter() : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: AlarmElement) {
             binding.alarmData = data
+            binding.root.setOnClickListener {
+                val intent = Intent(it.context, AlarmSpecificImageActivity::class.java).apply {
+                    putExtra(ZOOM_IN_IMAGE_URL, data.imageURL)
+                    putExtra(PUSH_ID, data.id)
+                }
+                startActivity(it.context, intent, null)
+            }
         }
     }
 

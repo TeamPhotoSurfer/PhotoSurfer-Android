@@ -11,6 +11,9 @@ dependencies {
     // Android Core
     implementation(AndroidXDependencies.coreKtx)
 
+    // Jetpack Fragment
+    implementation(AndroidXDependencies.fragment)
+
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
