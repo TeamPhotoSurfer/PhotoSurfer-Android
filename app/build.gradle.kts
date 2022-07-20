@@ -10,7 +10,7 @@ plugins {
     kotlin("kapt")
     kotlin("plugin.serialization") version Versions.kotlinVersion
     id("com.google.gms.google-services")
-    // id("dagger.hilt.android.plugin")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
