@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.photosurfer.android.core.util.ItemDiffCallback
 import com.photosurfer.android.domain.entity.TagInfo
-import com.photosurfer.android.register_tag.databinding.ItemTagPointSubBinding
+import com.photosurfer.android.shared.R.layout.item_tag_point_sub
+import com.photosurfer.android.shared.databinding.ItemTagPointSubBinding
 
 class PointSubTagAdapter(
     private val selectTag: ((TagInfo) -> Unit)? = null
@@ -24,7 +25,7 @@ class PointSubTagAdapter(
     ): SubTagViewHolder {
         val binding: ItemTagPointSubBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_tag_point_sub,
+            item_tag_point_sub,
             parent,
             false
         )
