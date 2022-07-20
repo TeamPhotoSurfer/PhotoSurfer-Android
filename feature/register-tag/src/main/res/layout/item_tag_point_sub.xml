@@ -10,10 +10,15 @@
             type="com.photosurfer.android.domain.entity.TagInfo" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/cl_whole_tag"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        app:alignContent="stretch"
+        app:alignItems="stretch"
+        app:flexWrap="wrap">
 
         <ImageView
             android:id="@+id/iv_tail"
@@ -65,5 +70,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 </layout>

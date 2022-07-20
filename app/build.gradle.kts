@@ -102,4 +102,7 @@ dependencies {
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    // flexbox layout
+    implementation(AndroidXDependencies.flexBox)
 }
