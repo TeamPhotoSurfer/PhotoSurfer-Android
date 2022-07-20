@@ -19,6 +19,7 @@ android {
     }
     defaultConfig {
         buildConfigField("String", "PHOTO_SURFER_SERVER_BASE_URL", properties.getProperty("PHOTO_SURFER_SERVER_BASE_URL"))
+        buildConfigField("String", "TEST_TOKEN", properties.getProperty("TEST_TOKEN"))
     }
     namespace = "com.photosurfer.android"
 }

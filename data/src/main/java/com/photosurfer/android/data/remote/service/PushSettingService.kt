@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface PushSettingService {
-    @POST("photo/push/{photoId}")
+    @POST("push/{photoId}")
     suspend fun postPushSetting(
         @Path("photoId") photoId: Int,
         @Body body: PushSettingRequest

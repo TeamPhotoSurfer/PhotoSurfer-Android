@@ -13,6 +13,7 @@ import com.photosurfer.android.domain.entity.request.DomainPushSettingRequest
 import com.photosurfer.android.domain.repository.PushSettingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -95,9 +96,11 @@ class PushSettingViewModel @Inject constructor(
                     representTagIdList.value ?: throw IllegalStateException(),
                     memo.value ?: throw IllegalStateException()
                 )
-            )
-                .onSuccess { _pushSettingSuccess.postValue(Event(true)) }
-                .onFailure { _pushSettingSuccess.postValue(Event(false)) }
+            ).onSuccess {
+                _pushSettingSuccess.postValue(Event(true))
+            }.onFailure {
+                _pushSettingFailure.postValue(Event(false))
+            }
         }
     }
 }
