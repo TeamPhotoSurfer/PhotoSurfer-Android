@@ -217,6 +217,7 @@
                         android:layout_marginTop="16dp"
                         android:background="@drawable/shape_rect_grey10_fill_8"
                         android:gravity="start"
+                        android:text="@={pushSettingViewModel.memo}"
                         android:hint="@string/memo_hint"
                         android:inputType="textMultiLine"
                         android:maxLength="50"

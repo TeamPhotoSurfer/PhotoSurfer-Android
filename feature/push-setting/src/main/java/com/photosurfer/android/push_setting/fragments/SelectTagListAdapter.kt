@@ -11,8 +11,8 @@ import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.push_setting.databinding.ItemSelectTagBinding
 
 class SelectTagListAdapter(
-    var tempList: MutableList<Long>,
-    private val updateTempRepresentTagList: ((MutableList<Long>) -> Unit)? = null
+    var tempList: MutableList<Int>,
+    private val updateTempRepresentTagList: ((MutableList<Int>) -> Unit)? = null
 ) :
     ListAdapter<TagInfo, SelectTagListAdapter.SelectTagRecyclerViewHolder>(
         ItemDiffCallback<TagInfo>(
@@ -43,7 +43,7 @@ class SelectTagListAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             data: TagInfo,
-            updateTempRepresentTagList: ((MutableList<Long>) -> Unit)? = null
+            updateTempRepresentTagList: ((MutableList<Int>) -> Unit)? = null
         ) {
             binding.tagInfo = data
             if (tempList.contains(data.id)) {
