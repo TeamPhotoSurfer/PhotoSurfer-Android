@@ -8,8 +8,8 @@ import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.databinding.ActivityMainBinding
 import com.photosurfer.android.main.TagFragment
 import com.photosurfer.android.main.home.HomeFragment
-import com.photosurfer.android.shared.R.color.home_status_bar_color
-import com.photosurfer.android.shared.R.color.white
+import com.photosurfer.android.main.setting.SettingFragment
+import com.photosurfer.android.shared.R.color.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,8 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun initAdapter() {
         binding.vpMain.adapter = MainViewPagerAdapter(this).also { mainViewPagerAdapter = it }
         mainViewPagerAdapter.fragmentList = listOf(
-            // TODO : HomeFragment(), TagFragment(), AlarmFragment(), SettingFragment()로 교체할것
-            HomeFragment(), TagFragment(), AlarmListMainFragment(), HomeFragment()
+            HomeFragment(), TagFragment(), AlarmListMainFragment(), SettingFragment()
         )
     }
 
@@ -56,7 +55,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setStatusBarColor(position: Int) {
-        val colorRes = if (position == 0) home_status_bar_color else white
+        val colorRes = when (position) {
+            0 -> home_status_bar_color
+            1, 3 -> white
+            2 -> alarm_grad_blue_top
+            else -> throw IllegalStateException("Wrong Position")
+        }
         this.window.statusBarColor = ContextCompat.getColor(this, colorRes)
     }
 
