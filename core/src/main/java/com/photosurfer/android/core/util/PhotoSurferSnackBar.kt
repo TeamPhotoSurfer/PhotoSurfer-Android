@@ -20,6 +20,7 @@ class PhotoSurferSnackBar(view: View, private val usage: Int) {
         const val SELECT_TAG_FRAGMENT = 0
         const val PUSH_MAIN_FRAGMENT = 1
         const val CHOOSE_TAG_FRAGMENT = 2
+        const val SETTING_ACTIVITY = 3
     }
 
     private val context = view.context
@@ -46,7 +47,7 @@ class PhotoSurferSnackBar(view: View, private val usage: Int) {
     private fun initData(view: View) {
         snackbarBinding.snackBarText = when (usage) {
             SELECT_TAG_FRAGMENT -> view.getString(string.select_tag_fragment)
-            PUSH_MAIN_FRAGMENT -> view.getString(string.push_main_fragment)
+            PUSH_MAIN_FRAGMENT, SETTING_ACTIVITY -> view.getString(string.push_main_fragment)
             CHOOSE_TAG_FRAGMENT -> view.getString(string.choose_tag_fragment)
             else -> throw IllegalStateException()
         }
