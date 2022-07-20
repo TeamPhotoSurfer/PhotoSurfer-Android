@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="tagInfo"
             type="com.photosurfer.android.domain.entity.TagInfo" />

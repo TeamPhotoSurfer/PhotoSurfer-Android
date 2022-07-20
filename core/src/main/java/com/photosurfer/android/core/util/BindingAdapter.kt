@@ -53,6 +53,14 @@ fun TextView.setDateToAlarmList(localDate: LocalDate) {
     this.text = localDate.format(monthDayDateFormatter)
 }
 
+@BindingAdapter("app:imageUrl")
+fun ImageView.loadImage(url: String?) {
+    Glide.with(context)
+        .load(url)
+        .placeholder(gray_20)
+        .into(this)
+}
+
 @BindingAdapter("app:setAlarmWhenText")
 fun TextView.setAlarmWhenText(startPoint: Int) {
     text = when (startPoint) {

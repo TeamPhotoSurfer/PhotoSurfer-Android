@@ -56,6 +56,13 @@
     <string name="alarm_list_up_coming">다가오는 알림</string>
     <string name="alarm_list_urgent">임박한 알림</string>
 
+    <!-- SearchResult -->
+    <string name="search_result">검색 결과</string>
+    <string name="choose">선택</string>
+    <string name="no_result_for_tag">태그에 대한 검색결과가 없어요</string>
+    <string name="no_result_info">- 태그를 끊어서 입력해보세요.\n- 플랫폼명을 활용해 보세요.</string>
+    <string name="learn_add_tag">태그추가 알아보기</string>
+
     <!--ImageZoomInFragment-->
     <string name="button_check_alarm">알림 내용 확인하기</string>
 

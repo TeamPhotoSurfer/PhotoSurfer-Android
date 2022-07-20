@@ -5,10 +5,9 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
-import com.photosurfer.android.core.R
 import com.photosurfer.android.core.ext.getString
-import com.photosurfer.android.shared.R.*
 import com.photosurfer.android.shared.R.layout.custom_snackbar
+import com.photosurfer.android.shared.R.string
 import com.photosurfer.android.shared.databinding.CustomSnackbarBinding
 
 class PhotoSurferSnackBar(view: View, private val usage: Int) {

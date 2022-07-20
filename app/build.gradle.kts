@@ -18,7 +18,11 @@ android {
         dataBinding = true
     }
     defaultConfig {
-        buildConfigField("String", "PHOTO_SURFER_SERVER_BASE_URL", properties.getProperty("PHOTO_SURFER_SERVER_BASE_URL"))
+        buildConfigField(
+            "String",
+            "PHOTO_SURFER_SERVER_BASE_URL",
+            properties.getProperty("PHOTO_SURFER_SERVER_BASE_URL")
+        )
     }
     namespace = "com.photosurfer.android"
 }
@@ -32,6 +36,7 @@ dependencies {
     implementation(project(":shared"))
     implementation(project(":feature:register-tag"))
     implementation(project(":feature:search-tag"))
+    implementation(project(":feature:search-result"))
     implementation(project(":feature:push-setting"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
