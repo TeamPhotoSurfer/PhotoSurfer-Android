@@ -25,11 +25,15 @@ class ManageAccountActivity :
     }
 
     private fun onClickLogout() {
-        PhotoSurferSnackBar.make(binding.clLogout, PhotoSurferSnackBar.PUSH_MAIN_FRAGMENT).show()
+        binding.clLogout.setOnClickListener {
+            PhotoSurferSnackBar.make(binding.clLogout, PhotoSurferSnackBar.SETTING_ACTIVITY).show()
+        }
     }
 
     private fun onClickDeleteUser() {
-        PhotoSurferSnackBar.make(binding.clDeleteUser, PhotoSurferSnackBar.PUSH_MAIN_FRAGMENT)
-            .show()
+        binding.clDeleteUser.setOnClickListener {
+            PhotoSurferSnackBar.make(binding.clDeleteUser, PhotoSurferSnackBar.SETTING_ACTIVITY)
+                .show()
+        }
     }
 }
