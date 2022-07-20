@@ -1,6 +1,11 @@
 package com.photosurfer.android.register_tag
 
+import android.content.ContentValues.TAG
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -8,9 +13,11 @@ import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.util.MultiPartResolver
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
+import java.io.File
 
 
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
@@ -34,6 +41,28 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         deleteInput()
         checkInputNum()
         initRecyclerViewLayout()
+
+        val file: File = setImgToFile(getImgToUri())
+    }
+
+    private fun getImgToUri(): Uri? {
+        val intent = activity?.intent
+        intent?.getStringExtra(Intent.EXTRA_TEXT).toString()
+        intent?.getStringExtra(Intent.ACTION_SEND).toString()
+
+        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val bundle = Bundle()
+        val imageUri: Uri? = intent?.getParcelableExtra(Intent.EXTRA_STREAM)
+        if (imageUri != null) {
+            bundle.putString("image", imageUri.toString())
+        } else {
+            bundle.putString("image", "")
+        }
+        return imageUri
+    }
+
+    private fun setImgToFile(uri: Uri?): File {
+        return File(getImgToUri().toString())
     }
 
     private fun initRecyclerViewLayout() {

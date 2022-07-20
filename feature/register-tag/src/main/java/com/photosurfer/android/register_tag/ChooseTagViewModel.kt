@@ -1,9 +1,15 @@
 package com.photosurfer.android.register_tag
 
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.photosurfer.android.domain.entity.TagInfo
+import java.io.File
 
 class ChooseTagViewModel : ViewModel() {
     private var _isEmptyInput = MutableLiveData<Int>()
@@ -58,4 +64,5 @@ class ChooseTagViewModel : ViewModel() {
     fun deleteTag(item: TagInfo) {
         inputList.remove(item)
     }
+
 }
