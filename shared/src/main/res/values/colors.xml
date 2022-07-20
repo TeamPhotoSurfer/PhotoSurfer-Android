@@ -48,5 +48,7 @@
     <color name="alpha_ocean_a_75">#c03f96fc</color>
     <color name="alarm_grad_blue_top">#3985fa</color>
     <color name="alarm_grad_blue_bottom">#51c6ff</color>
+    <color name="logo_sky_blue">#53cbff</color>
+
 
 </resources>

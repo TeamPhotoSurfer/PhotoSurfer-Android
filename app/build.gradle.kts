@@ -33,6 +33,7 @@ dependencies {
     implementation(project(":shared"))
     implementation(project(":feature:register-tag"))
     implementation(project(":feature:search-tag"))
+    implementation(project(":feature:search-result"))
     implementation(project(":feature:push-setting"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
@@ -98,4 +99,7 @@ dependencies {
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    // flexbox layout
+    implementation(AndroidXDependencies.flexBox)
 }

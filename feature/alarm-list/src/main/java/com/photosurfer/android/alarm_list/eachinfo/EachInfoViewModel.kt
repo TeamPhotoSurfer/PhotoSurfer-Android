@@ -3,7 +3,6 @@ package com.photosurfer.android.alarm_list.eachinfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.photosurfer.android.core.base.BaseViewModel
-import com.photosurfer.android.core.constant.PushSettingConstant
 
 class EachInfoViewModel : BaseViewModel() {
 

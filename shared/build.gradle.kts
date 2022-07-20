@@ -21,4 +21,7 @@ dependencies {
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    // dotsIndocator
+    implementation(ThirdPartyDependencies.dotsIndicator)
 }

@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.register_tag.RegisterTagActivity"
+            android:name=".register_tag.RegisterTagActivity"
             android:exported="false" />
 
         <activity
@@ -60,6 +60,11 @@
         <activity
             android:name=".main.setting.EtcPolicyActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".search_result.SearchResultActivity"
+            android:exported="true" />
+
         <activity
             android:name=".alarm_list.moreinfo.AlarmListExtraActivity"
             android:exported="false" />

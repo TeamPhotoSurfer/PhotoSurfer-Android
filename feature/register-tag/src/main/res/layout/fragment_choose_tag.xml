@@ -6,6 +6,18 @@
     <data>
 
         <import type="android.view.View" />
+
+        <variable
+            name="isTyping"
+            type="Boolean" />
+
+        <variable
+            name="isChecked"
+            type="Boolean" />
+
+        <variable
+            name="viewmodel"
+            type="com.photosurfer.android.register_tag.ChooseTagViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +26,6 @@
         tools:context=".SelectTagFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-
             android:id="@+id/cl_top"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -40,7 +51,7 @@
                 android:paddingHorizontal="16dp"
                 android:text="저장"
                 android:textAppearance="@style/subtitle_1"
-                android:textColor="@color/gray_50"
+                android:textColor="@color/selector_choose_tag_check_state_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,6 +66,8 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/shape_rect_register_gray_radius_8dp"
             android:hint="태그를 입력하세요"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:maxLength="20"
             android:maxLines="1"
             android:paddingHorizontal="16dp"
@@ -65,6 +78,7 @@
             app:layout_constraintTop_toBottomOf="@id/cl_top" />
 
         <ImageView
+            android:id="@+id/iv_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
@@ -123,9 +137,11 @@
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="20dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintTop_toTopOf="parent"
@@ -135,24 +151,26 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-
                     android:id="@+id/cl_not_typing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="74dp"
+                    android:visibility="@{isTyping? View.VISIBLE : View.GONE}"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_recent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="20dp"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tv_recent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:paddingVertical="9dp"
                             android:text="최근 추가한 태그"
                             android:textAppearance="@style/subtitle_2"
@@ -175,13 +193,15 @@
                         android:id="@+id/cl_often"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="20dp"
                         app:layout_constraintTop_toBottomOf="@id/cl_recent">
 
                         <TextView
                             android:id="@+id/tv_often"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:paddingVertical="9dp"
                             android:text="자주 추가한 태그"
                             android:textAppearance="@style/subtitle_2"
@@ -191,10 +211,12 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rcv_often"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:scrollbars="vertical"
+                            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_often"
                             tools:listitem="@layout/item_tag_point_sub" />
 
@@ -204,13 +226,15 @@
                         android:id="@+id/cl_platform"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="20dp"
                         app:layout_constraintTop_toBottomOf="@id/cl_often">
 
                         <TextView
                             android:id="@+id/tv_platform"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:layout_marginTop="28dp"
                             android:text="플랫폼 유형"
                             android:textAppearance="@style/subtitle_2"
@@ -222,6 +246,7 @@
                             android:id="@+id/tv_platform_msg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:text="출처를 추가하면 사진을 더 쉽게 찾을 수 있어요."
                             android:textAppearance="@style/caption_1"
                             android:textColor="@color/gray_40"
@@ -232,8 +257,9 @@
                             android:id="@+id/rcv_platform"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:layout_marginTop="8dp"
+                            android:scrollbars="vertical"
+                            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
                             app:layout_constraintTop_toBottomOf="@id/tv_platform_msg"
                             tools:listitem="@layout/item_tag_point_sub" />
 
@@ -247,7 +273,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="74dp"
-                    android:visibility="gone"
+                    android:visibility="@{isTyping? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
                     <TextView
