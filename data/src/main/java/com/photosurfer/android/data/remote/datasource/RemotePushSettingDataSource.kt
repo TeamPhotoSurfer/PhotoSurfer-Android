@@ -1,17 +1,14 @@
-package com.photosurfer.android.data.remote.service
+package com.photosurfer.android.data.remote.datasource
 
 import com.photosurfer.android.data.remote.calladapter.NetworkState
 import com.photosurfer.android.data.remote.model.request.PushSettingRequest
 import com.photosurfer.android.data.remote.model.response.BaseResponse
 import com.photosurfer.android.data.remote.model.response.PushSettingResponse
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.http.Path
 
-interface PushSettingService {
-    @POST("photo/push/{photoId}")
+interface RemotePushSettingDataSource {
+
     suspend fun postPushSetting(
-        @Path("photoId") photoId: Int,
-        @Body body: PushSettingRequest
+        photoId: Int,
+        pushSettingRequest: PushSettingRequest
     ): NetworkState<BaseResponse<PushSettingResponse>>
 }
