@@ -43,4 +43,6 @@ dependencies {
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
 }
