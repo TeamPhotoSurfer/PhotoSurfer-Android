@@ -9,6 +9,7 @@ object KotlinDependencies {
 }
 
 object AndroidXDependencies {
+    const val flexBox = "com.google.android.flexbox:flexbox:${Versions.flexBoxVersion}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtxVersion}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompatVersion}"
     const val desugarLibrary = "com.android.tools:desugar_jdk_libs:1.1.5"
