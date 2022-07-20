@@ -10,13 +10,14 @@ import com.photosurfer.android.shared.databinding.DialogOnboardingBinding
 
 class AddTagOnBoardingFragmentDialog : DialogFragment() {
 
+    private lateinit var binding: DialogOnboardingBinding
+    private lateinit var onBoardingAdapter: OnBoardingAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.dialog_fullscreen)
         isCancelable = true
     }
-
-    private lateinit var binding: DialogOnboardingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,5 +26,24 @@ class AddTagOnBoardingFragmentDialog : DialogFragment() {
     ): View? {
         binding = DialogOnboardingBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initAdapter()
+        initIndicator()
+    }
+
+    private fun initAdapter() {
+        val fragmentList = listOf(AddTagOneFragment(), AddTagTwoFragment(), AddTagThreeFragment())
+
+        onBoardingAdapter = OnBoardingAdapter(this)
+        onBoardingAdapter.fragments.addAll(fragmentList)
+
+        binding.vpOnBoarding.adapter = onBoardingAdapter
+    }
+
+    private fun initIndicator(){
+        binding.indicatorOnBoarding.attachTo(binding.vpOnBoarding)
     }
 }
