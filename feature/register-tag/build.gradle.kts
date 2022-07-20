@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -43,4 +41,7 @@ dependencies {
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    // flexbox layout
+    implementation(AndroidXDependencies.flexBox)
 }

@@ -22,11 +22,11 @@ object Versions {
 
     const val gradleVersion = "7.2.1"
     const val ktlintVersion = "10.2.0"
-    const val googleServiceVersion = "4.3.10"
+    const val googleServiceVersion = "4.3.13"
     const val playCoreVersion = "1.10.0"
 
     const val lottieVersion = "3.6.0"
-    const val firebaseBomVersion = "29.3.0"
+    const val firebaseBomVersion = "30.2.0"
     const val firebaseMessagingVersion = "22.0.0"
     const val viewPagerIndicatorVersion = "4.1.2"
     const val glideVersion = "4.13.0"
@@ -47,8 +47,11 @@ object Versions {
     const val gsonVersion = "2.8.9"
     const val gsonConverterVersion = "2.9.0"
     const val naverAuth = "5.1.0"
-    const val  stFalconImageViewer = "v1.0.1"
+    const val stFalconImageViewer = "v1.0.1"
+    const val dotsIndicator = "4.3"
 
     val javaVersion = JavaVersion.VERSION_11
     const val jvmVersion = "11"
+
+    const val flexBoxVersion = "3.0.0"
 }

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -44,4 +42,7 @@ dependencies {
 
     // stfalconImageViewer
     implementation(ThirdPartyDependencies.stFalconImageViewer)
+
+    // dotsIndocator
+    implementation(ThirdPartyDependencies.dotsIndicator)
 }

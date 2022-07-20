@@ -17,6 +17,7 @@
     <string name="represent_tag_title">대표 태그</string>
     <string name="represent_tag_content">푸시 알림에서 보일 대표 태그를 최대 3개 선택해보세요!</string>
     <string name="date_picker_info">오전 8시에 알려드릴께요!</string>
+    <string name="push_image_check">서퍼님을 위한 알림이에요!</string>
 
     <!-- Bottom Navigation -->
     <string name="home">Home</string>
@@ -33,4 +34,50 @@
 
     <!--SanckBarMessage 정리-->
     <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>
+    <string name="push_main_fragment">서비스 준비 중이에요.</string>
+    <string name="choose_tag_fragment">태그는 최대 6개까지만 추가할 수 있어요.</string>
+
+    <!-- Setting -->
+    <string name="setting_kr">환경설정</string>
+    <string name="manage_account">계정 관리</string>
+    <string name="push_alarm">푸시 알림</string>
+    <string name="etc_policy">기타 정책</string>
+    <string name="version_info">버전 정보</string>
+    <string name="personal_data">개인정보 처리방침</string>
+    <string name="open_source_license">오픈소스 라이선스</string>
+    <string name="auto_login">자동 로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="delete_account">계정 탈퇴</string>
+
+    <!--AlarmListMainFragment-->
+    <string name="alarm_list_title">알림 목록</string>
+    <string name="alarm_list_passed_title">지난 알림</string>
+    <string name="alarm_list_more">더보기</string>
+    <string name="alarm_list_up_coming">다가오는 알림</string>
+    <string name="alarm_list_urgent">임박한 알림</string>
+
+    <!-- SearchResult -->
+    <string name="search_result">검색 결과</string>
+    <string name="choose">선택</string>
+    <string name="no_result_for_tag">태그에 대한 검색결과가 없어요</string>
+    <string name="no_result_info">- 태그를 끊어서 입력해보세요.\n- 플랫폼명을 활용해 보세요.</string>
+    <string name="learn_add_tag">태그추가 알아보기</string>
+
+    <!--ImageZoomInFragment-->
+    <string name="button_check_alarm">알림 내용 확인하기</string>
+
+    <!--DialogOnBoarding-->
+    <string name="skip_on_boarding">건너뛰기</string>
+    <string name="on_boarding_add_tag_one_title">사진을 포토 서퍼로 \'공유\'하여</string>
+    <string name="on_boarding_add_tag_one_sub_title">태그를 추가해 보세요.</string>
+    <string name="on_boarding_add_tag_two_title">태그 검색을 통해</string>
+    <string name="on_boarding_add_tag_two_sub_title">쉽게 사진을 찾아보세요.</string>
+    <string name="on_boarding_add_tag_three_title">필요한 사진을 놓치지 않도록</string>
+    <string name="on_boarding_add_tag_three_sub_title">미리 알림을 설정해 보세요.</string>
+    <string name="on_boarding_set_alarm_one_title">사진을 포토서퍼로</string>
+    <string name="on_boarding_set_alarm_one_sub_title">\'공유\'하여</string>
+    <string name="on_boarding_set_alarm_two_title">태그를</string>
+    <string name="on_boarding_set_alarm_two_sub_title">추가하고</string>
+    <string name="on_boarding_set_alarm_three_title">원하는 날짜에</string>
+    <string name="on_boarding_set_alarm_three_sub_title">미리 알림을 설정해 보세요.</string>
 </resources>

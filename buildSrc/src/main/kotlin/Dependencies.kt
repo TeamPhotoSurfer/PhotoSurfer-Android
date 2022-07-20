@@ -9,6 +9,7 @@ object KotlinDependencies {
 }
 
 object AndroidXDependencies {
+    const val flexBox = "com.google.android.flexbox:flexbox:${Versions.flexBoxVersion}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtxVersion}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompatVersion}"
     const val desugarLibrary = "com.android.tools:desugar_jdk_libs:1.1.5"
@@ -80,7 +81,9 @@ object ThirdPartyDependencies {
     const val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"
     const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.gsonConverterVersion}"
     const val naverAuth = "com.navercorp.nid:oauth:${Versions.naverAuth}"
-    const val stFalconImageViewer = "com.github.stfalcon-studio:StfalconImageViewer:${Versions.stFalconImageViewer}"
+    const val stFalconImageViewer =
+        "com.github.stfalcon-studio:StfalconImageViewer:${Versions.stFalconImageViewer}"
+    const val dotsIndicator = "com.tbuonomo:dotsindicator:${Versions.dotsIndicator}"
 }
 
 object FirebaseDependency {

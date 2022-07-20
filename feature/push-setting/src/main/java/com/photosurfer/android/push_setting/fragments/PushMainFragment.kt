@@ -9,6 +9,7 @@ import com.photosurfer.android.core.constant.PushSettingConstant.SELECT_TAG
 import com.photosurfer.android.core.util.DateUtil.dotDateFormatter
 import com.photosurfer.android.core.util.KeyBoardUtil
 import com.photosurfer.android.core.util.KeyBoardVisibilityListener
+import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.push_setting.PushSettingViewModel
 import com.photosurfer.android.push_setting.R
 import com.photosurfer.android.push_setting.databinding.FragmentPushMainBinding
@@ -20,11 +21,14 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
 
     private val pushSettingViewModel by activityViewModels<PushSettingViewModel>()
     private lateinit var keyBoardVisibilityListener: KeyBoardVisibilityListener
+    private var clickableState = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.pushSettingViewModel = pushSettingViewModel
         initDefaultAlarmDate()
         initVisibilityVariable()
+        initArgumentsData()
+        binding.clickableState = clickableState
         setDatePickerMinDate()
         getDateFromDatePicker()
         initDatePickerButtonClickListener()
@@ -33,6 +37,13 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         initBackGroundClickListener()
         initKeyBoardVisibilityListener()
         initRepresentTagButtonClickListener()
+        initViewDisableClickListener()
+    }
+
+    private fun initArgumentsData() {
+        if (arguments != null) {
+            clickableState = requireNotNull(arguments).getBoolean("CLICKABLE_STATE")
+        }
     }
 
     private fun initDefaultAlarmDate() {
@@ -131,6 +142,12 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
     private fun transactionToSelectTagFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace<SelectTagFragment>(R.id.container_push_setting).commit()
+    }
+
+    private fun initViewDisableClickListener() {
+        binding.viewDisableClick.setOnClickListener {
+            PhotoSurferSnackBar.make(it, PhotoSurferSnackBar.PUSH_MAIN_FRAGMENT).show()
+        }
     }
 
     override fun onDestroyView() {

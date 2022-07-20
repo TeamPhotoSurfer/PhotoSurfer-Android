@@ -1,32 +1,45 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+
 plugins {
     id("com.android.application")
     id("kotlin-parcelize")
     kotlin("android")
     kotlin("kapt")
     kotlin("plugin.serialization") version Versions.kotlinVersion
-//    id("com.google.gms.google-services") 요거 추후에 구글 연결할때 사용
-    id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    // id("dagger.hilt.android.plugin")
 }
 
 android {
     buildFeatures {
         dataBinding = true
     }
+    defaultConfig {
+        buildConfigField(
+            "String",
+            "PHOTO_SURFER_SERVER_BASE_URL",
+            properties.getProperty("PHOTO_SURFER_SERVER_BASE_URL")
+        )
+    }
     namespace = "com.photosurfer.android"
 }
 
 dependencies {
-    //
     implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":navigator"))
     implementation(project(":shared"))
     implementation(project(":feature:register-tag"))
+    implementation(project(":feature:search-result"))
     implementation(project(":feature:push-setting"))
     implementation(project(":feature:search"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
+    implementation(project(":feature:alarm-list"))
 
     // Kotlin
     implementation(KotlinDependencies.kotlin)
@@ -83,8 +96,12 @@ dependencies {
     // Firebase
     implementation(platform(FirebaseDependency.firebaseBom))
     implementation(FirebaseDependency.analyticsKtx)
+    implementation(FirebaseDependency.firebaeMessaging)
 
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    // flexbox layout
+    implementation(AndroidXDependencies.flexBox)
 }
