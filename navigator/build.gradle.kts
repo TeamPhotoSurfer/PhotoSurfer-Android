@@ -7,7 +7,10 @@ android {
     namespace = "com.photosurfer.android.navigator"
 }
 
+
 dependencies {
+    implementation(project(":domain"))
+
     // Android Core
     implementation(AndroidXDependencies.coreKtx)
 

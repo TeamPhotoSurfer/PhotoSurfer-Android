@@ -41,7 +41,7 @@
             android:layout_marginTop="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_skip"
-            tools:layout_editor_absoluteX="-46dp" >
+            tools:layout_editor_absoluteX="-46dp">
 
         </androidx.viewpager2.widget.ViewPager2>
 
@@ -58,7 +58,7 @@
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
+            app:layout_constraintStart_toStartOf="parent">
 
         </com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator>
 

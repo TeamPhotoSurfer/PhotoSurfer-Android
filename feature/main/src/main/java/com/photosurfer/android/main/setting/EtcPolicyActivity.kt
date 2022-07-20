@@ -2,6 +2,7 @@ package com.photosurfer.android.main.setting
 
 import android.os.Bundle
 import com.photosurfer.android.core.base.BaseActivity
+import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.main.R
 import com.photosurfer.android.main.databinding.ActivityEctPolicyBinding
 
@@ -19,13 +20,15 @@ class EtcPolicyActivity : BaseActivity<ActivityEctPolicyBinding>(R.layout.activi
 
     private fun setPersonalDataClickListener() {
         binding.clPersonalData.setOnClickListener {
-            // 개인정보 처리방침
+            PhotoSurferSnackBar.make(binding.clPersonalData, PhotoSurferSnackBar.SETTING_ACTIVITY)
+                .show()
         }
     }
 
     private fun setOpenSourceClickListener() {
         binding.clOpenSource.setOnClickListener {
-            // 오픈소스 라이선스
+            PhotoSurferSnackBar.make(binding.clOpenSource, PhotoSurferSnackBar.SETTING_ACTIVITY)
+                .show()
         }
     }
 }

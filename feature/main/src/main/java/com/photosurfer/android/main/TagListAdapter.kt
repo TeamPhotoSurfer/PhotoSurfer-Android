@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.photosurfer.android.domain.entity.TagInfo
-import com.photosurfer.android.main.TagListAdapter.*
+import com.photosurfer.android.main.TagListAdapter.TagListViewHolder
 import com.photosurfer.android.main.databinding.ItemTagBinding
 
 class TagListAdapter(
