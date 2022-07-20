@@ -43,4 +43,7 @@ dependencies {
     // test
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
+
+    // Third Party Library
+    implementation(ThirdPartyDependencies.flexBox)
 }
