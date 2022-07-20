@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_tail_gray10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_tag"
@@ -30,7 +31,8 @@
             android:src="@drawable/ic_hashtag_line_gray80_tag"
             app:layout_constraintBottom_toBottomOf="@id/tv_tag_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_tag_name" />
+            app:layout_constraintTop_toTopOf="@id/tv_tag_name"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_tag_name"
@@ -51,7 +53,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_head_gray10"
         app:layout_constraintStart_toEndOf="@id/cl_tag"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
