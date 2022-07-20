@@ -47,7 +47,8 @@ object Versions {
     const val gsonVersion = "2.8.9"
     const val gsonConverterVersion = "2.9.0"
     const val naverAuth = "5.1.0"
-    const val  stFalconImageViewer = "v1.0.1"
+    const val stFalconImageViewer = "v1.0.1"
+    const val dotsIndicator = "4.3"
 
     val javaVersion = JavaVersion.VERSION_11
     const val jvmVersion = "11"

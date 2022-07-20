@@ -65,4 +65,19 @@
 
     <!--ImageZoomInFragment-->
     <string name="button_check_alarm">알림 내용 확인하기</string>
+
+    <!--DialogOnBoarding-->
+    <string name="skip_on_boarding">건너뛰기</string>
+    <string name="on_boarding_add_tag_one_title">사진을 포토 서퍼로 \'공유\'하여</string>
+    <string name="on_boarding_add_tag_one_sub_title">태그를 추가해 보세요.</string>
+    <string name="on_boarding_add_tag_two_title">태그 검색을 통해</string>
+    <string name="on_boarding_add_tag_two_sub_title">쉽게 사진을 찾아보세요.</string>
+    <string name="on_boarding_add_tag_three_title">필요한 사진을 놓치지 않도록</string>
+    <string name="on_boarding_add_tag_three_sub_title">미리 알림을 설정해 보세요.</string>
+    <string name="on_boarding_set_alarm_one_title">사진을 포토서퍼로</string>
+    <string name="on_boarding_set_alarm_one_sub_title">\'공유\'하여</string>
+    <string name="on_boarding_set_alarm_two_title">태그를</string>
+    <string name="on_boarding_set_alarm_two_sub_title">추가하고</string>
+    <string name="on_boarding_set_alarm_three_title">원하는 날짜에</string>
+    <string name="on_boarding_set_alarm_three_sub_title">미리 알림을 설정해 보세요.</string>
 </resources>
