@@ -32,6 +32,7 @@ class AddTagOnBoardingFragmentDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         initIndicator()
+        initSkipButton()
     }
 
     private fun initAdapter() {
@@ -45,5 +46,11 @@ class AddTagOnBoardingFragmentDialog : DialogFragment() {
 
     private fun initIndicator(){
         binding.indicatorOnBoarding.attachTo(binding.vpOnBoarding)
+    }
+
+    private fun initSkipButton(){
+        binding.tvSkip.setOnClickListener {
+            this.dismiss()
+        }
     }
 }

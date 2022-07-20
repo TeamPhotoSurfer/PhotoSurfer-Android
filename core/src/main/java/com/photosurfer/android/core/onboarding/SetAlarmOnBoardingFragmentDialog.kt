@@ -32,6 +32,7 @@ class SetAlarmOnBoardingFragmentDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         initIndicator()
+        initSkipButton()
     }
 
     private fun initAdapter() {
@@ -46,5 +47,11 @@ class SetAlarmOnBoardingFragmentDialog : DialogFragment() {
 
     private fun initIndicator() {
         binding.indicatorOnBoarding.attachTo(binding.vpOnBoarding)
+    }
+
+    private fun initSkipButton(){
+        binding.tvSkip.setOnClickListener {
+            this.dismiss()
+        }
     }
 }
