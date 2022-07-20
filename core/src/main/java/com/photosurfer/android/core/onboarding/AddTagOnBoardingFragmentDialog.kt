@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.photosurfer.android.shared.R
 import com.photosurfer.android.shared.databinding.DialogOnboardingBinding
 
-class TagAlbumOnBoardingFragmentDialog : DialogFragment() {
+class AddTagOnBoardingFragmentDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

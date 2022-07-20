@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.photosurfer.android.shared.R.style.dialog_fullscreen
 import com.photosurfer.android.shared.databinding.DialogOnboardingBinding
 
-class SearchOnBoardingFragmentDialog : DialogFragment() {
+class SetAlarmOnBoardingFragmentDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
