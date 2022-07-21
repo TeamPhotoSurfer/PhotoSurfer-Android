@@ -18,42 +18,48 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var tagList: List<TagInfo>
 
     @Inject
     lateinit var mainNavigator: MainNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.viewModel = viewModel
-        initTagList()
-        setChip()
+        getOftenSearchTagList()
+        setChipAfterTagDataExist()
         onClickEditText()
-        initChipClickListener()
     }
 
-    private fun initTagList() {
-        tagList = viewModel.fakeOftenTagList
+    private fun getOftenSearchTagList() {
+        viewModel.getOftenSearchTagList()
     }
 
-    private fun setChip() {
-        for (tag in tagList) {
-            val chip = ChipUnSelectableUtil(requireContext()).getChip(tag.name)
-            binding.cgOftenSearch.addView(chip)
+    private fun setChipAfterTagDataExist() {
+        viewModel.fakeOftenTagList.observe(requireActivity()) {
+            setChip()
+            initChipClickListener()
         }
     }
 
-    private fun initChipClickListener() {
-        for (i in tagList.indices) {
-            binding.cgOftenSearch[i].setOnClickListener {
-                val tag = tagList[i]
-                navigateToSearchTagActivity(tag)
-            }
+    private fun setChip() {
+        for (tag in viewModel.fakeOftenTagList.value ?: return) {
+            val chip = ChipUnSelectableUtil(requireContext()).getChip(tag.name)
+            binding.cgOftenSearch.addView(chip)
         }
     }
 
     private fun navigateToSearchTagActivity(tag: TagInfo? = null) {
         mainNavigator.navigateSearchTag(requireContext(), tag)
         Timber.tag(TAG).d("onClick: ${tag?.name}")
+    }
+
+    private fun initChipClickListener() {
+        val listSize: Int = viewModel.fakeOftenTagList.value?.size ?: return
+        for (i in 0 until listSize) {
+            binding.cgOftenSearch[i].setOnClickListener {
+                val tag = requireNotNull(viewModel.fakeOftenTagList.value)[i]
+                navigateToSearchTagActivity(tag)
+            }
+        }
     }
 
     private fun onClickEditText() {
