@@ -6,7 +6,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.intellij.lang.annotations.PrintFormat
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -25,6 +27,11 @@ object RetrofitServiceModule {
 
     @Provides
     @Singleton
+    fun providesTagListService(retrofit: Retrofit): ChooseTagService =
+        retrofit.create(ChooseTagService::class.java)
+
+    @Provides
+    @Singleton
     fun providesUpComingAlarmListService(retrofit: Retrofit): UpComingAlarmListService =
         retrofit.create(UpComingAlarmListService::class.java)
 
@@ -37,4 +44,5 @@ object RetrofitServiceModule {
     @Singleton
     fun providesSpecificAlarmService(retrofit: Retrofit): SpecificAlarmService =
         retrofit.create(SpecificAlarmService::class.java)
+
 }
