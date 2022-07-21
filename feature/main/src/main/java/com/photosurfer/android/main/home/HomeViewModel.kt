@@ -1,18 +1,25 @@
 package com.photosurfer.android.main.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.photosurfer.android.domain.entity.TagInfo
+import com.photosurfer.android.domain.repository.TagListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val tagListRepository: TagListRepository
+) : ViewModel() {
+
     val isOftenTagMoreThanZero = true
-    val fakeOftenTagList = listOf(
-        TagInfo(0, "포토서퍼"),
-        TagInfo(1, "카페"),
-        TagInfo(2, "생활꿀팁"),
-        TagInfo(3, "위시리스트"),
-        TagInfo(4, "휴학계획"),
-        TagInfo(5, "여행")
-    )
+    private val _fakeOftenTagList = MutableLiveData<List<TagInfo>>()
+    val fakeOftenTagList: LiveData<List<TagInfo>> = _fakeOftenTagList
+
     val fakeOftenTagLongList = listOf(
         TagInfo(0, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
         TagInfo(1, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
@@ -21,4 +28,20 @@ class HomeViewModel : ViewModel() {
         TagInfo(4, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
         TagInfo(5, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼")
     )
+
+    fun getOftenSearchTagList() {
+        viewModelScope.launch {
+            tagListRepository.getOftenSearchTagList()
+                .onSuccess {
+                    updateOftenSearchTagList(it)
+                }
+                .onFailure {
+                    Timber.d(it, "${this.javaClass.name}_getOftenSearchTag")
+                }
+        }
+    }
+
+    private fun updateOftenSearchTagList(list: List<TagInfo>) {
+        _fakeOftenTagList.value = list
+    }
 }

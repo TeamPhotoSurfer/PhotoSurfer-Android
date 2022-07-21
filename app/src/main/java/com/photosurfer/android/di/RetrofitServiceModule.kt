@@ -1,6 +1,5 @@
 package com.photosurfer.android.di
 
-import com.photosurfer.android.data.remote.model.response.UrgentAlarmListResponse
 import com.photosurfer.android.data.remote.service.*
 import dagger.Module
 import dagger.Provides
@@ -44,5 +43,10 @@ object RetrofitServiceModule {
     @Singleton
     fun providesSpecificAlarmService(retrofit: Retrofit): SpecificAlarmService =
         retrofit.create(SpecificAlarmService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesOftenSearchTagService(retrofit: Retrofit): OftenSearchTagService =
+        retrofit.create(OftenSearchTagService::class.java)
 
 }
