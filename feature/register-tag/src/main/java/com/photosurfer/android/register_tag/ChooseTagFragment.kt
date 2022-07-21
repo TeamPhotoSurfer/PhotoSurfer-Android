@@ -1,9 +1,11 @@
 package com.photosurfer.android.register_tag
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -11,7 +13,6 @@ import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,8 +30,10 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
-        chooseTagViewModel.setTagList()
 
+        setRecentList()
+        setOftenList()
+        setPlatformList()
         initAdapter()
         setDataOnRecyclerView()
         observeInputChipGroup()
@@ -39,11 +42,30 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         deleteInput()
         checkInputNum()
         initRecyclerViewLayout()
-        chooseTagViewModel.getTagList()
+
 
         val file: File = setImgToFile(getImgToUri())
 
         initButtonSaveClickListener()
+    }
+
+    private fun setPlatformList() {
+        chooseTagViewModel.platformList.observe(viewLifecycleOwner) {
+            platformTagAdapter.submitList(chooseTagViewModel.platformList.value)
+        }
+    }
+
+    private fun setOftenList() {
+        chooseTagViewModel.oftenList.observe(viewLifecycleOwner) {
+            oftenTagAdapter.submitList(chooseTagViewModel.oftenList.value)
+        }
+    }
+
+    private fun setRecentList() {
+        chooseTagViewModel.getTagList()
+        chooseTagViewModel.recentList.observe(viewLifecycleOwner) {
+            recentTagAdapter.submitList(chooseTagViewModel.recentList.value)
+        }
     }
 
     private fun initButtonSaveClickListener() {
@@ -85,10 +107,11 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun setDataOnRecyclerView() {
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
-        recentTagAdapter.submitList(chooseTagViewModel.recentList)
-        oftenTagAdapter.submitList(chooseTagViewModel.oftenList)
-        platformTagAdapter.submitList(chooseTagViewModel.platformList)
+        Log.d(TAG, "setDataOnRecyclerView: recent ${chooseTagViewModel.recentList}")
+        inputTagAdapter.submitList(chooseTagViewModel.inputList.value)
+        recentTagAdapter.submitList(chooseTagViewModel.recentList.value)
+        oftenTagAdapter.submitList(chooseTagViewModel.oftenList.value)
+        platformTagAdapter.submitList(chooseTagViewModel.platformList.value)
     }
 
     private fun initAdapter() {
@@ -104,9 +127,9 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun checkInputNum() {
-        if (chooseTagViewModel.inputList.size > 6) {
-            PhotoSurferSnackBar.make(requireView(), PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT).show()
-        }
+//        if (chooseTagViewModel.inputList.value?.size > 6) {
+//            PhotoSurferSnackBar.make(requireView(), PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT).show()
+//        }
     }
 
     private fun deleteInput() {
@@ -140,20 +163,20 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun addTagWithInputText() {
-        chooseTagViewModel.inputList.add(TagInfo(0, binding.etTag.text.toString()))
-        chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
+        chooseTagViewModel.inputList.value?.add(TagInfo(0, binding.etTag.text.toString()))
+        //chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
         binding.etTag.text.clear()
     }
 
     private fun selectTag(tagInfo: TagInfo) {
         chooseTagViewModel.selectTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
+        inputTagAdapter.submitList(chooseTagViewModel.inputList.value)
         inputTagAdapter.notifyDataSetChanged()
     }
 
     private fun deleteTag(tagInfo: TagInfo) {
         chooseTagViewModel.deleteTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
+        inputTagAdapter.submitList(chooseTagViewModel.inputList.value)
     }
 }
 
