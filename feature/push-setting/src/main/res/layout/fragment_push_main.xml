@@ -173,6 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
                         android:textColor="@color/gray_60"
+                        app:setRepresentTagText="@{pushSettingViewModel.representTagIdList}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageButton2"
                         app:layout_constraintTop_toTopOf="parent"

@@ -52,6 +52,9 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         if (arguments != null) {
             clickableState = requireNotNull(arguments).getBoolean("CLICKABLE_STATE")
             pushId = requireNotNull(arguments).getInt("PUSH_ID")
+
+            pushSettingViewModel.updateClickableState(clickableState)
+            pushSettingViewModel.updatePushId(pushId)
         }
     }
 

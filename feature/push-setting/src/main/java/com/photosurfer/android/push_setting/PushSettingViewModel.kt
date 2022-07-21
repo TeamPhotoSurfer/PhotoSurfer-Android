@@ -42,6 +42,9 @@ class PushSettingViewModel @Inject constructor(
     private val _pushId = MutableLiveData<Int>()
     val pushId: LiveData<Int> = _pushId
 
+    private val _clickableState = MutableLiveData<Boolean>()
+    val clickableState: LiveData<Boolean> = _clickableState
+
     val memo = MutableLiveData("")
 
     private val _pushSettingSuccess = MutableLiveData<Event<Boolean>>()
@@ -49,6 +52,14 @@ class PushSettingViewModel @Inject constructor(
 
     private val _pushSettingFailure = MutableLiveData<Event<Boolean>>()
     val pushSettingFailure: LiveData<Event<Boolean>> = _pushSettingFailure
+
+    fun updateClickableState(state: Boolean) {
+        _clickableState.value = state
+    }
+
+    fun updatePushId(pushId :Int){
+        _pushId.postValue(pushId)
+    }
 
     fun initDefaultAlarmDate() {
         val defaultDate = LocalDate.now().plusDays(1)
