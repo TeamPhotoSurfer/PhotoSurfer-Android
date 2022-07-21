@@ -87,7 +87,7 @@ class AlarmListRepositoryImpl @Inject constructor(
             val response = alarmListDataSource.getPassedAlarmList()
         ) {
             is NetworkState.Success -> return Result.success(
-                response.body.data.map { pushMapper.toAlarmElement(it) }
+                response.body.data.push.map { pushMapper.toAlarmElement(it) }
             )
             is NetworkState.Failure -> return Result.failure(
                 RetrofitFailureStateException(
@@ -112,7 +112,7 @@ class AlarmListRepositoryImpl @Inject constructor(
             val response = alarmListDataSource.getUpComingAlarmList()
         ) {
             is NetworkState.Success -> return Result.success(
-                response.body.data.map { pushMapper.toAlarmElement(it) }
+                response.body.data.push.map { pushMapper.toAlarmElement(it) }
             )
             is NetworkState.Failure -> return Result.failure(
                 RetrofitFailureStateException(
