@@ -31,9 +31,9 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         searchTagViewModel.setTagList()
 
         getExtraData()
+        onClickBackButton()
         initAdapter()
         setDataOnRecyclerView()
-        observeInputChipGroup()
         convertTypingView()
         setCompleteOnKeyBoardListener()
         deleteInput()
@@ -45,6 +45,12 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         val tagInfo = requireActivity().intent.getSerializableExtra(SELECTED_TAG) as? TagInfo
         Timber.d("tagInfo from previous $tagInfo")
         tagInfo?.let { addTagWithInputText(it.name) }
+    }
+
+    private fun onClickBackButton() {
+        binding.ivBack.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     private fun initRecyclerViewLayout() {
@@ -89,15 +95,6 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
     private fun deleteInput() {
         binding.ivClose.setOnClickListener {
             binding.etTag.text.clear()
-        }
-    }
-
-    private fun observeInputChipGroup() {
-        searchTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
-            if (searchTagViewModel.isEmptyInput.value!! > 0) {
-                binding.tvSave.isSelected = binding.ivCheckPlatform.isSelected != true
-                binding.tvSave.isEnabled = true
-            }
         }
     }
 

@@ -25,45 +25,26 @@
         android:layout_height="match_parent"
         tools:context=".SearchTagFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_top"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:src="@drawable/ic_shortarrow_line_left"
+            app:layout_constraintEnd_toStartOf="@id/et_tag"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="16dp"
-                android:text="취소"
-                android:textAppearance="@style/subtitle_1"
-                android:textColor="@color/gray_60"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:text="저장"
-                android:textAppearance="@style/subtitle_1"
-                android:textColor="@color/selector_choose_tag_check_state_text"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/et_tag"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/shape_rect_register_gray_radius_8dp"
             android:hint="태그를 입력하세요"
             android:imeOptions="actionDone"
@@ -75,7 +56,10 @@
             android:textAppearance="@style/body2"
             android:textColor="@color/gray_50"
             android:theme="@style/BlueEditTextStyle"
-            app:layout_constraintTop_toBottomOf="@id/cl_top" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
 
         <ImageView
             android:id="@+id/iv_close"
@@ -111,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:paddingVertical="8dp"
-                        android:text="추가한 태그"
+                        android:text="@string/entered_tag"
                         android:textAppearance="@style/subtitle_1"
                         android:textColor="@color/gray_90"
                         app:layout_constraintStart_toStartOf="parent"
@@ -121,34 +105,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="최대 6개"
+                        android:text="@string/max_6"
                         android:textAppearance="@style/caption_1"
                         android:textColor="@color/gray_50"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_add"
                         app:layout_constraintStart_toEndOf="@id/tv_add"
                         app:layout_constraintTop_toTopOf="@+id/tv_add" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_add_tag"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/cl_add">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcv_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="20dp"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/item_tag_point" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/cl_add"
+                    tools:listitem="@layout/item_tag_point" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_not_typing"
@@ -158,6 +132,7 @@
                     android:visibility="@{isTyping? View.VISIBLE : View.GONE}"
                     app:layout_constraintTop_toBottomOf="@id/cl_add">
 
+                    <!-- 최근 추가 태그 -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_recent"
                         android:layout_width="match_parent"
@@ -189,6 +164,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <!-- 자주 추가한 태그 -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_often"
                         android:layout_width="match_parent"
@@ -222,6 +198,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <!-- 플랫폼 유형 -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_platform"
                         android:layout_width="match_parent"
@@ -236,7 +213,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="28dp"
-                            android:text="플랫폼 유형"
+                            android:text="@string/platform_type"
                             android:textAppearance="@style/subtitle_2"
                             android:textColor="@color/gray_90"
                             app:layout_constraintStart_toStartOf="parent"
@@ -247,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
-                            android:text="출처를 추가하면 사진을 더 쉽게 찾을 수 있어요."
+                            android:text="@string/can_find_photo_easy_when_add_source"
                             android:textAppearance="@style/caption_1"
                             android:textColor="@color/gray_40"
                             app:layout_constraintStart_toStartOf="parent"
@@ -281,7 +258,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingVertical="9dp"
-                        android:text="연관 태그"
+                        android:text="@string/relative_tag"
                         android:textAppearance="@style/subtitle_2"
                         android:textColor="@color/gray_90"
                         app:layout_constraintStart_toStartOf="parent"
@@ -292,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="21dp"
-                        android:text="추가하기"
+                        android:text="@string/add"
                         android:textAppearance="@style/caption_1"
                         android:textColor="@color/gray_60"
                         app:layout_constraintStart_toStartOf="parent"
@@ -309,48 +286,12 @@
                         android:textAppearance="@style/body2"
                         android:textColor="@color/gray_70"
                         app:layout_constraintBottom_toBottomOf="@id/tv_relative_add"
-                        app:layout_constraintEnd_toStartOf="@id/cl_check_platform"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@id/tv_relative_add"
                         app:layout_constraintTop_toTopOf="@id/tv_relative_add" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_check_platform"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@id/chip_relative_add"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/chip_relative_add">
-
-                        <TextView
-                            android:id="@+id/tv_check_platform"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="8dp"
-                            android:paddingEnd="8dp"
-                            android:text="플랫폼"
-                            android:textAppearance="@style/caption_1"
-                            android:textColor="@color/gray_40"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/iv_check_platform"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_check_circle_fill"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_check_platform"
-                            app:layout_constraintEnd_toStartOf="@id/tv_check_platform"
-                            app:layout_constraintTop_toTopOf="@id/tv_check_platform" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
