@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="passedAlarm"
+            type="Integer" />
+        <variable
+            name="upComingAlarm"
+            type="Integer" />
+        <variable
+            name="urgentAlarm"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{passedAlarm + `개`}"
                     android:textAppearance="@style/caption_1"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -118,6 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{upComingAlarm + `개`}"
                     android:textAppearance="@style/caption_1"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -171,6 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{urgentAlarm + `개`}"
                     android:textAppearance="@style/subtitle_1"
                     android:textColor="@color/gray_60"
                     app:layout_constraintBottom_toBottomOf="parent"

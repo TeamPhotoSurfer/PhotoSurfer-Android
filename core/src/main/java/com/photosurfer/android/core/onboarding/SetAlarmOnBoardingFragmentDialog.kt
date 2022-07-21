@@ -37,7 +37,11 @@ class SetAlarmOnBoardingFragmentDialog : DialogFragment() {
 
     private fun initAdapter() {
         val fragmentList =
-            listOf(OnBoardingAlarmFirsrtFragment(), OnBoardingAlarmSecondFragment(), OnBoardingAlarmThirdFragment())
+            listOf(
+                OnBoardingAlarmFirsrtFragment(),
+                OnBoardingAlarmSecondFragment(),
+                OnBoardingAlarmThirdFragment()
+            )
 
         onBoardingAdapter = OnBoardingAdapter(this)
         onBoardingAdapter.fragments.addAll(fragmentList)
@@ -49,7 +53,7 @@ class SetAlarmOnBoardingFragmentDialog : DialogFragment() {
         binding.indicatorOnBoarding.attachTo(binding.vpOnBoarding)
     }
 
-    private fun initSkipButton(){
+    private fun initSkipButton() {
         binding.tvSkip.setOnClickListener {
             this.dismiss()
         }
