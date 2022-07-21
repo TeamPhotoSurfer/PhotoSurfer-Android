@@ -8,12 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ItemPhotoThumbnailBinding
 
-
 class ThumbnailAdapter(
-    private val onItemClick: ((ThumbnailInfo) -> Unit)
+    private val onItemClick: ((ThumbnailInfo, Int) -> Unit)
 ) : ListAdapter<ThumbnailInfo, ThumbnailAdapter.ViewHolder>(ThumbNailComparator()) {
-
-    var isSelectable = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -21,13 +18,9 @@ class ThumbnailAdapter(
         return ViewHolder(binding)
     }
 
-    fun toggleSelectable() {
-        isSelectable = !isSelectable
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val thumbnail = getItem(position)
-        holder.bind(thumbnail, onItemClick, isSelectable)
+        holder.bind(thumbnail, onItemClick)
     }
 
     class ViewHolder(
@@ -35,14 +28,13 @@ class ThumbnailAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
             thumbnail: ThumbnailInfo,
-            onItemClick: ((ThumbnailInfo) -> Unit),
-            isSelectable: Boolean
+            onItemClick: ((ThumbnailInfo, Int) -> Unit),
         ) {
             binding.data = thumbnail
-//            binding.isSelectable = isSelectable
-            binding.root.setOnClickListener { onItemClick(thumbnail) }
+            binding.root.setOnClickListener { onItemClick(thumbnail, adapterPosition) }
         }
     }
+
 
     private class ThumbNailComparator : DiffUtil.ItemCallback<ThumbnailInfo>() {
         override fun areItemsTheSame(oldItem: ThumbnailInfo, newItem: ThumbnailInfo) =
