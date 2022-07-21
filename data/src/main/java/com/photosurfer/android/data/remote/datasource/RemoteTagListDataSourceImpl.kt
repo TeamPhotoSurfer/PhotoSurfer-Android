@@ -9,7 +9,7 @@ import com.photosurfer.android.data.remote.service.OftenSearchTagService
 import javax.inject.Inject
 
 class RemoteTagListDataSourceImpl @Inject constructor(
-    private val oftenSearchTagService: OftenSearchTagService
+    private val oftenSearchTagService: OftenSearchTagService,
     private val chooseTagListService: ChooseTagService
 ) : RemoteTagListDataSource {
 

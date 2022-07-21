@@ -107,7 +107,6 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun setDataOnRecyclerView() {
-        Log.d(TAG, "setDataOnRecyclerView: recent ${chooseTagViewModel.recentList}")
         inputTagAdapter.submitList(chooseTagViewModel.inputList)
         recentTagAdapter.submitList(chooseTagViewModel.recentList.value)
         oftenTagAdapter.submitList(chooseTagViewModel.oftenList.value)
@@ -140,7 +139,6 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun observeInputChipGroup() {
         chooseTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
-            Log.d("count::", "${chooseTagViewModel.isEmptyInput}")
             if (chooseTagViewModel.isEmptyInput.value!! > 0) {
                 binding.tvSave.isSelected = binding.ivCheckPlatform.isSelected != true
                 binding.tvSave.isEnabled = true
@@ -165,7 +163,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun addTagWithInputText() {
         chooseTagViewModel.inputList.add(TagInfo(0, binding.etTag.text.toString()))
-        chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
+        //chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
         binding.etTag.text.clear()
     }
 
