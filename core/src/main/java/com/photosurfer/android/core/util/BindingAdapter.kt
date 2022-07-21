@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.photosurfer.android.core.util.DateUtil.monthDayDateFormatter
+import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.shared.R.color.gray_20
 import java.time.LocalDate
 
@@ -36,13 +37,13 @@ fun ShapeableImageView.setImage(url: String?) {
 }
 
 @BindingAdapter("app:setRepresentTagText")
-fun TextView.setRepresentTagText(representTag: List<String>) {
+fun TextView.setRepresentTagText(representTag: List<TagInfo>) {
     lateinit var tempString: String
     for (i in representTag) {
         if (i == representTag[0]) {
-            tempString = "#$i"
+            tempString = "#${i.name}"
         } else {
-            tempString = "$tempString #$i"
+            tempString = "$tempString #${i.name}"
         }
     }
     text = tempString

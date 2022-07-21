@@ -1,6 +1,7 @@
 package com.photosurfer.android.data.remote.model.response
 
 import com.google.gson.annotations.SerializedName
+import com.photosurfer.android.domain.entity.TagInfo
 
 data class UrgentAlarmListResponse(
     @SerializedName("comingCount")
@@ -32,7 +33,7 @@ data class Push(
     @SerializedName("pushDate")
     val pushDate: String,
     @SerializedName("tags")
-    val tags: List<String>
+    val tags: List<TagInfo>
 )
 
 data class Tomorrow(
