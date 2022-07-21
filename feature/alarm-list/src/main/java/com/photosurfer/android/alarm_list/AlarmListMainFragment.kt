@@ -49,7 +49,7 @@ class AlarmListMainFragment :
         alarmListMainViewModel.upComingAlarmCount.observe(viewLifecycleOwner) {
             binding.upComingAlarm = it
         }
-        alarmListMainViewModel.upComingAlarmCount.observe(viewLifecycleOwner) {
+        alarmListMainViewModel.urgentAlarmCount.observe(viewLifecycleOwner) {
             binding.urgentAlarm = it
         }
     }

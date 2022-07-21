@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.photosurfer.android.core.base.BaseViewModel
 import com.photosurfer.android.domain.entity.AlarmElement
-import com.photosurfer.android.domain.repository.UrgentAlarmListRepository
+import com.photosurfer.android.domain.repository.AlarmListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmListMainViewModel @Inject constructor(
-    private val urgentAlarmListRepository: UrgentAlarmListRepository
+    private val urgentAlarmListRepository: AlarmListRepository
 ) : BaseViewModel() {
 
     private val _passedAlarmCount = MutableLiveData<Int>()
@@ -37,7 +37,6 @@ class AlarmListMainViewModel @Inject constructor(
                     _upComingAlarmCount.value = it.upComingCount
                     _urgentAlarmCount.value = it.urgentCount
                     _urgentAlarmList.value = it.alarmList
-                    Log.d("이창환", "되나요?")
                 }.onFailure {
                     Timber.d(it, "${this.javaClass.name}_getUrgentAlarmList")
                 }

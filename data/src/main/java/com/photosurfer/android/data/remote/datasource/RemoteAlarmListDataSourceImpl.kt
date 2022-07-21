@@ -6,9 +6,9 @@ import com.photosurfer.android.data.remote.model.response.UrgentAlarmListRespons
 import com.photosurfer.android.data.remote.service.UrgentAlarmListService
 import javax.inject.Inject
 
-class RemoteUrgentAlarmListDataSourceImpl @Inject constructor(
+class RemoteAlarmListDataSourceImpl @Inject constructor(
     private val urgentAlarmListService: UrgentAlarmListService
-) : RemoteUrgentAlarmListDataSource {
+) : RemoteAlarmListDataSource {
     override suspend fun getUrgentAlarmList(): NetworkState<BaseResponse<UrgentAlarmListResponse>> =
         urgentAlarmListService.getUrgentAlarmList()
 }

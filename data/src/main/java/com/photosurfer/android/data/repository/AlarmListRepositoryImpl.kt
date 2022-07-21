@@ -2,19 +2,19 @@ package com.photosurfer.android.data.repository
 
 import com.photosurfer.android.core.exception.RetrofitFailureStateException
 import com.photosurfer.android.data.remote.calladapter.NetworkState
-import com.photosurfer.android.data.remote.datasource.RemoteUrgentAlarmListDataSource
+import com.photosurfer.android.data.remote.datasource.RemoteAlarmListDataSource
 import com.photosurfer.android.data.remote.mapper.PushMapper
 import com.photosurfer.android.domain.entity.AlarmElement
 import com.photosurfer.android.domain.entity.AlarmInfo
-import com.photosurfer.android.domain.repository.UrgentAlarmListRepository
+import com.photosurfer.android.domain.repository.AlarmListRepository
 import timber.log.Timber
 import java.time.LocalDate
 import javax.inject.Inject
 
-class UrgentAlarmListRepositoryImpl @Inject constructor(
-    private val urgentAlarmListDataSource: RemoteUrgentAlarmListDataSource,
+class AlarmListRepositoryImpl @Inject constructor(
+    private val urgentAlarmListDataSource: RemoteAlarmListDataSource,
     private val pushMapper: PushMapper
-) : UrgentAlarmListRepository {
+) : AlarmListRepository {
 
     override suspend fun getUrgentAlarmList(): Result<AlarmInfo> {
         when (
