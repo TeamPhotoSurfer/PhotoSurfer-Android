@@ -116,8 +116,10 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
     private fun setCompleteOnKeyBoardListener() {
         binding.etTag.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (isTypingNow()) addTagWithInputText(binding.etTag.text.toString())
-                else if (isTagSelectedAtListOnce()) navigateToSearchTagActivity()
+                if (isTypingNow()) {
+                    // 검색 창 뜨게
+                } else if (isTagSelectedAtListOnce())
+                    navigateToSearchTagActivity()
             }
             false
         }
