@@ -75,7 +75,7 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
     private fun getDateFromDatePicker() {
         binding.pickerPush.setOnDateChangedListener { datePicker, year, month, day ->
             // 월에 +1 하는것 데이트 피커가 1씩 뺀값을줌 이상한 부분 보정
-            val tempDate = LocalDate.of(year, month + 1, day).format(dotDateFormatter)
+            val tempDate = LocalDate.of(year, month + 1, day)
             pushSettingViewModel.updateAlarmDate(tempDate)
         }
     }

@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
+import com.photosurfer.android.core.util.DateUtil.dotDateFormatter
 import com.photosurfer.android.core.util.DateUtil.monthDayDateFormatter
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.shared.R.color.gray_20
@@ -37,16 +38,18 @@ fun ShapeableImageView.setImage(url: String?) {
 }
 
 @BindingAdapter("app:setRepresentTagText")
-fun TextView.setRepresentTagText(representTag: List<TagInfo>) {
-    lateinit var tempString: String
-    for (i in representTag) {
-        if (i == representTag[0]) {
-            tempString = "#${i.name}"
-        } else {
-            tempString = "$tempString #${i.name}"
+fun TextView.setRepresentTagText(representTag: List<TagInfo>?) {
+    if (representTag != null) {
+        lateinit var tempString: String
+        for (i in representTag) {
+            if (i == representTag[0]) {
+                tempString = "#${i.name}"
+            } else {
+                tempString = "$tempString #${i.name}"
+            }
         }
+        text = tempString
     }
-    text = tempString
 }
 
 @BindingAdapter("app:setDateToAlarmList")
@@ -80,4 +83,9 @@ fun ImageView.setImage(url: String?) {
             .error(gray_20)
             .into(this)
     }
+}
+
+@BindingAdapter("app:setLocalDateText")
+fun TextView.setLocalDateText(localDate: LocalDate) {
+    text = localDate.format(dotDateFormatter)
 }

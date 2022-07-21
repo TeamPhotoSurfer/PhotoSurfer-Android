@@ -21,8 +21,8 @@ class PushSettingViewModel @Inject constructor(
     private val pushSettingRepository: PushSettingRepository
 ) : BaseViewModel() {
 
-    private val _alarmDate = MutableLiveData<String>()
-    val alarmDate: LiveData<String> = _alarmDate
+    private val _alarmDate = MutableLiveData<LocalDate>()
+    val alarmDate: LiveData<LocalDate> = _alarmDate
 
     private val _fragmentState = MutableLiveData<PushSettingConstant>(PUSH_MAIN)
     val fragmentState: LiveData<PushSettingConstant> = _fragmentState
@@ -63,10 +63,10 @@ class PushSettingViewModel @Inject constructor(
 
     fun initDefaultAlarmDate() {
         val defaultDate = LocalDate.now().plusDays(1)
-        _alarmDate.value = defaultDate.format(dotDateFormatter)
+        _alarmDate.value = defaultDate
     }
 
-    fun updateAlarmDate(currentDate: String) {
+    fun updateAlarmDate(currentDate: LocalDate) {
         _alarmDate.value = currentDate
     }
 
@@ -103,7 +103,7 @@ class PushSettingViewModel @Inject constructor(
             pushSettingRepository.postPushSetting(
                 photoId.value ?: throw IllegalStateException(),
                 DomainPushSettingRequest(
-                    alarmDate.value ?: throw IllegalStateException(),
+                    alarmDate.value.toString() ?: throw IllegalStateException(),
                     requireNotNull(representTagIdList.value?.map { it.id }).toMutableList(),
                     memo.value ?: throw IllegalStateException()
                 )
