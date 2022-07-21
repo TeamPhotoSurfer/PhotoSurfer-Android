@@ -30,6 +30,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
 
+        getRecommendTagList()
         setRecentList()
         setOftenList()
         setPlatformList()
@@ -47,6 +48,10 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         initButtonSaveClickListener()
     }
 
+    private fun getRecommendTagList() {
+        chooseTagViewModel.getTagList()
+    }
+
     private fun setPlatformList() {
         chooseTagViewModel.platformList.observe(viewLifecycleOwner) {
             platformTagAdapter.submitList(chooseTagViewModel.platformList.value)
@@ -62,7 +67,6 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun setRecentList() {
-        chooseTagViewModel.getTagList()
         chooseTagViewModel.recentList.observe(viewLifecycleOwner) {
             recentTagAdapter.submitList(chooseTagViewModel.recentList.value)
         }
