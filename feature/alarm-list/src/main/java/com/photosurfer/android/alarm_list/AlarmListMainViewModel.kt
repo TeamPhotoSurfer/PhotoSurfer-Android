@@ -1,6 +1,5 @@
 package com.photosurfer.android.alarm_list
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,16 +16,16 @@ class AlarmListMainViewModel @Inject constructor(
     private val urgentAlarmListRepository: AlarmListRepository
 ) : BaseViewModel() {
 
-    private val _passedAlarmCount = MutableLiveData<Int>()
+    private val _passedAlarmCount = MutableLiveData<Int>(0)
     val passedAlarmCount: LiveData<Int> = _passedAlarmCount
 
-    private val _upComingAlarmCount = MutableLiveData<Int>()
+    private val _upComingAlarmCount = MutableLiveData<Int>(0)
     val upComingAlarmCount: LiveData<Int> = _upComingAlarmCount
 
-    private val _urgentAlarmCount = MutableLiveData<Int>()
+    private val _urgentAlarmCount = MutableLiveData<Int>(0)
     val urgentAlarmCount: LiveData<Int> = _urgentAlarmCount
 
-    private val _urgentAlarmList = MutableLiveData<List<AlarmElement>>()
+    private val _urgentAlarmList = MutableLiveData<List<AlarmElement>>(mutableListOf())
     val urgentAlarmList: LiveData<List<AlarmElement>> = _urgentAlarmList
 
     fun getUrgentAlarmList() {

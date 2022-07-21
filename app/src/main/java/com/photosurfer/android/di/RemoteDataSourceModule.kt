@@ -17,6 +17,18 @@ interface RemoteDataSourceModule {
 
     @Binds
     @Singleton
+    fun bindRemoteChooseTagDataSource(source: RemoteChooseTagDataSourceImpl): RemoteChooseTagDataSource
+
+    @Binds
+    @Singleton
+    fun bindsRemoteUrgentAlarmListDataSource(source: RemoteUrgentAlarmListDataSourceImpl): RemoteUrgentAlarmListDataSource
+
+    @Binds
+    @Singleton
+    fun bindsRemoteTagListDataSource(source: RemoteTagListDataSourceImpl): RemoteTagListDataSource
+
+    @Binds
+    @Singleton
     fun bindsRemoteAlarmListDataSource(source: RemoteAlarmListDataSourceImpl): RemoteAlarmListDataSource
 
     @Binds

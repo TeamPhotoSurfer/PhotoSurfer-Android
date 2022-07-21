@@ -1,5 +1,10 @@
 package com.photosurfer.android.di
 
+
+import com.photosurfer.android.data.repository.ChooseTagRepositoryImpl
+import com.photosurfer.android.data.repository.PushSettingRepositoryImpl
+import com.photosurfer.android.domain.repository.ChooseTagRepository
+import com.photosurfer.android.data.repository.UrgentAlarmListRepositoryImpl
 import com.photosurfer.android.data.repository.AlarmListRepositoryImpl
 import com.photosurfer.android.data.repository.PushSettingRepositoryImpl
 import com.photosurfer.android.data.repository.TagListRepositoryImpl
@@ -22,9 +27,19 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
+    fun bindsChooseTagRepository(repository: ChooseTagRepositoryImpl): ChooseTagRepository
+
+
+    @Binds
+    @Singleton
+    fun bindsUrgentAlarmListRepository(repository: UrgentAlarmListRepositoryImpl): UrgentAlarmListRepository
+
+    @Binds
+    @Singleton
     fun bindsAlarmListRepository(repository: AlarmListRepositoryImpl): AlarmListRepository
 
     @Binds
     @Singleton
     fun bindsTagListRepository(repository: TagListRepositoryImpl): TagListRepository
+
 }

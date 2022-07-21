@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="passedAlarm"
             type="Integer" />
+
         <variable
             name="upComingAlarm"
             type="Integer" />
+
         <variable
             name="urgentAlarm"
             type="Integer" />
@@ -198,16 +203,46 @@
             android:background="@drawable/bg_alarm_list_shadow"
             app:layout_constraintTop_toBottomOf="@id/layout_gradient_background" />
 
+        <TextView
+            android:id="@+id/tv_empty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_view_text"
+            android:textAppearance="@style/subtitle_1"
+            android:textColor="@color/gray_90"
+            android:visibility="@{urgentAlarm == 0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/btn_on_boarding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_gradient_background"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_on_boarding"
+            android:layout_width="141dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_rect_sub_fill_8"
+            android:text="@string/empty_view_button"
+            android:textColor="@color/main"
+            android:stateListAnimator="@null"
+            android:visibility="@{urgentAlarm == 0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_empty_text"
+            app:layout_constraintStart_toStartOf="@+id/tv_empty_text"
+            app:layout_constraintTop_toBottomOf="@+id/tv_empty_text"
+            app:layout_constraintVertical_chainStyle="packed" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_alarm_list"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:paddingBottom="32dp"
-            android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_alarm_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_gradient_background" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_gradient_background"
+            tools:listitem="@layout/item_alarm_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

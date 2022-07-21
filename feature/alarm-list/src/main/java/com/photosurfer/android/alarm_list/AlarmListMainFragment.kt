@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.photosurfer.android.alarm_list.databinding.FragmentAlarmListMainBinding
 import com.photosurfer.android.alarm_list.moreinfo.AlarmListExtraActivity
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.onboarding.SetAlarmOnBoardingFragmentDialog
 import com.photosurfer.android.domain.entity.AlarmElement
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,16 @@ class AlarmListMainFragment :
         setPassedAlarmClickListener()
         setUpComingAlarmClickListener()
         initAlarmListAdapterData()
+        initOnBoardingButtonClickListener()
+    }
+
+    private fun initOnBoardingButtonClickListener() {
+        binding.btnOnBoarding.setOnClickListener {
+            SetAlarmOnBoardingFragmentDialog().show(
+                requireActivity().supportFragmentManager,
+                "SetAlarmOnBoardingFragmentDialog"
+            )
+        }
     }
 
     private fun initAlarmListAdapter() {
