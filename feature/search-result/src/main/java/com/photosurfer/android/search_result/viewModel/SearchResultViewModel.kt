@@ -1,5 +1,7 @@
 package com.photosurfer.android.search_result.viewModel
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -58,9 +60,12 @@ class SearchResultViewModel @Inject constructor(
             photoRepository.getPhotoListByTag(option)
                 .onSuccess {
                     _thumbnail.value = it.photos.toMutableList()
-                    _tagList.value = it.tags.toMutableList()
+                    Log.d(TAG, "getPhotosByTags: $it")
                 }.onFailure {
-                    Timber.d(it, "${this.javaClass.name}_getPhotosByTags")
+                    _thumbnail.value = emptyArray<ThumbnailInfo>().toMutableList()
+                    Timber.d(it, "$/{this.javaClass.name}_getPhotosByTags")
+                }.run {
+                    noThumbnailData.value = thumbnail.value?.size == 0
                 }
         }
     }
