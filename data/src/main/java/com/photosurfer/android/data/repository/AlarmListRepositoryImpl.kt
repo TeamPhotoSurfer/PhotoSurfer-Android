@@ -4,7 +4,6 @@ import com.photosurfer.android.core.exception.RetrofitFailureStateException
 import com.photosurfer.android.data.remote.calladapter.NetworkState
 import com.photosurfer.android.data.remote.datasource.RemoteAlarmListDataSource
 import com.photosurfer.android.data.remote.mapper.PushMapper
-import com.photosurfer.android.data.remote.model.request.PushSettingRequest
 import com.photosurfer.android.domain.entity.AlarmElement
 import com.photosurfer.android.domain.entity.AlarmInfo
 import com.photosurfer.android.domain.repository.AlarmListRepository
@@ -127,6 +126,31 @@ class AlarmListRepositoryImpl @Inject constructor(
             is NetworkState.UnknownError -> Timber.d(
                 response.t,
                 "${this.javaClass.name}_getUpComingAlarmList"
+            )
+        }
+        return Result.failure(IllegalStateException("NetworkError or UnKnownError please check timber"))
+    }
+
+    override suspend fun getSpecificAlarmInfo(pushId: Int): Result<AlarmElement> {
+        when (
+            val response = alarmListDataSource.getSpecificAlarmInfo(pushId)
+        ) {
+            is NetworkState.Success -> return Result.success(
+                response.body.data
+            )
+            is NetworkState.Failure -> return Result.failure(
+                RetrofitFailureStateException(
+                    response.error,
+                    response.code
+                )
+            )
+            is NetworkState.NetworkError -> Timber.d(
+                response.error,
+                "${this.javaClass.name}_getSpecificAlarmInfo"
+            )
+            is NetworkState.UnknownError -> Timber.d(
+                response.t,
+                "${this.javaClass.name}_getSpecificAlarmInfo"
             )
         }
         return Result.failure(IllegalStateException("NetworkError or UnKnownError please check timber"))

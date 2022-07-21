@@ -9,4 +9,6 @@ interface AlarmListRepository {
     suspend fun getPassedAlarmList(): Result<List<AlarmElement>>
 
     suspend fun getUpComingAlarmList(): Result<List<AlarmElement>>
+
+    suspend fun getSpecificAlarmInfo(pushId: Int): Result<AlarmElement>
 }
