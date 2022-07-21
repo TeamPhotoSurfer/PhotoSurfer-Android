@@ -17,13 +17,13 @@
 
         <variable
             name="viewModel"
-            type="com.photosurfer.android.register_tag.ChooseTagViewModel" />
+            type="com.photosurfer.android.search.SearchTagViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SelectTagFragment">
+        tools:context=".SearchTagFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_top"

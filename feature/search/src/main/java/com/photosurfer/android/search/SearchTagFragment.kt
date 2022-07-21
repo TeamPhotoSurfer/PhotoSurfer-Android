@@ -13,13 +13,13 @@ import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.PointSubTagAdapter
 import com.photosurfer.android.register_tag.PointTagAdapter
-import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
+import com.photosurfer.android.search.databinding.FragmentSearchTagBinding
 import timber.log.Timber
 
 
-class SearchTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_search_tag) {
+class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragment_search_tag) {
 
-    private val chooseTagViewModel: SearchTagViewModel by viewModels()
+    private val searchTagViewModel: SearchTagViewModel by viewModels()
 
     private lateinit var inputTagAdapter: PointTagAdapter
     private lateinit var recentTagAdapter: PointSubTagAdapter
@@ -28,7 +28,7 @@ class SearchTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
-        chooseTagViewModel.setTagList()
+        searchTagViewModel.setTagList()
 
         getExtraData()
         initAdapter()
@@ -42,9 +42,9 @@ class SearchTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun getExtraData() {
-        val tagInfo = requireActivity().intent.getSerializableExtra(SELECTED_TAG) as TagInfo
+        val tagInfo = requireActivity().intent.getSerializableExtra(SELECTED_TAG) as? TagInfo
         Timber.d("tagInfo from previous $tagInfo")
-        addTagWithInputText(tagInfo.name)
+        tagInfo?.let { addTagWithInputText(it.name) }
     }
 
     private fun initRecyclerViewLayout() {
@@ -62,10 +62,10 @@ class SearchTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun setDataOnRecyclerView() {
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
-        recentTagAdapter.submitList(chooseTagViewModel.recentList)
-        oftenTagAdapter.submitList(chooseTagViewModel.oftenList)
-        platformTagAdapter.submitList(chooseTagViewModel.platformList)
+        inputTagAdapter.submitList(searchTagViewModel.inputList)
+        recentTagAdapter.submitList(searchTagViewModel.recentList)
+        oftenTagAdapter.submitList(searchTagViewModel.oftenList)
+        platformTagAdapter.submitList(searchTagViewModel.platformList)
     }
 
     private fun initAdapter() {
@@ -81,7 +81,7 @@ class SearchTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun checkInputNum() {
-        if (chooseTagViewModel.inputList.size > 6) {
+        if (searchTagViewModel.inputList.size > 6) {
             PhotoSurferSnackBar.make(requireView(), PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT).show()
         }
     }
@@ -93,8 +93,8 @@ class SearchTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun observeInputChipGroup() {
-        chooseTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
-            if (chooseTagViewModel.isEmptyInput.value!! > 0) {
+        searchTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
+            if (searchTagViewModel.isEmptyInput.value!! > 0) {
                 binding.tvSave.isSelected = binding.ivCheckPlatform.isSelected != true
                 binding.tvSave.isEnabled = true
             }
@@ -117,19 +117,19 @@ class SearchTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun addTagWithInputText(tag: String) {
-        chooseTagViewModel.inputList.add(TagInfo(0, tag))
-        chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
+        searchTagViewModel.inputList.add(TagInfo(0, tag))
+        searchTagViewModel.setEmptyInput(searchTagViewModel.inputList.size)
         binding.etTag.text.clear()
     }
 
     private fun selectTag(tagInfo: TagInfo) {
-        chooseTagViewModel.selectTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
+        searchTagViewModel.selectTag(tagInfo)
+        inputTagAdapter.submitList(searchTagViewModel.inputList)
         inputTagAdapter.notifyDataSetChanged()
     }
 
     private fun deleteTag(tagInfo: TagInfo) {
-        chooseTagViewModel.deleteTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
+        searchTagViewModel.deleteTag(tagInfo)
+        inputTagAdapter.submitList(searchTagViewModel.inputList)
     }
 }
