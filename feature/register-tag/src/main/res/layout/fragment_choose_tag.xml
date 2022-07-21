@@ -140,13 +140,11 @@
                         android:id="@+id/rcv_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="20dp"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="20dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:listitem="@layout/item_tag_point" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -11,10 +11,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginStart="12dp"
         android:id="@+id/cl_whole_tag"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingEnd="12dp">
 
         <ImageView
             android:id="@+id/iv_tail"
@@ -47,8 +47,8 @@
                 android:id="@+id/tv_tag_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/body2"
                 android:text="@{tagInfo.name}"
+                android:textAppearance="@style/body2"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_hashtag"
