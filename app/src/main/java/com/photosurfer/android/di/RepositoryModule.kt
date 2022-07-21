@@ -1,6 +1,8 @@
 package com.photosurfer.android.di
 
+import com.photosurfer.android.data.repository.ChooseTagRepositoryImpl
 import com.photosurfer.android.data.repository.PushSettingRepositoryImpl
+import com.photosurfer.android.domain.repository.ChooseTagRepository
 import com.photosurfer.android.domain.repository.PushSettingRepository
 import dagger.Binds
 import dagger.Module
@@ -15,4 +17,9 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindsPushSettingRepository(repository: PushSettingRepositoryImpl): PushSettingRepository
+
+    @Binds
+    @Singleton
+    fun bindsChooseTagRepository(repository: ChooseTagRepositoryImpl): ChooseTagRepository
+
 }
