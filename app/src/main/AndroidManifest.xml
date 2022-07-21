@@ -84,5 +84,9 @@
         <activity
             android:name=".alarm_list.eachinfo.AlarmSpecificImageActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".search_result.detailimage.DetailImageActivity"
+            android:exported="false" />
     </application>
 </manifest>
