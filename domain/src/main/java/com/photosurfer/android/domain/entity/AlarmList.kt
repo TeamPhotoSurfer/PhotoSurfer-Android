@@ -12,8 +12,8 @@ data class AlarmInfo(
 data class AlarmElement(
     val id: Int,
     val pushDate: LocalDate,
-    val tags: List<String>,
-    val imageURL: String,
+    val tags: List<TagInfo>,
+    val imageURL: String?,
     val memo: String,
-    val photoId: Int
+    val photoId: Int?
 )

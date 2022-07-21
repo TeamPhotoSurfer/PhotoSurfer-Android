@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ItemPhotoThumbnailBinding
 
-
 class ThumbnailAdapter(
-    private val onItemClick: ((ThumbnailInfo) -> Unit)
+    private val onItemClick: ((ThumbnailInfo, Int) -> Unit)
 ) : ListAdapter<ThumbnailInfo, ThumbnailAdapter.ViewHolder>(ThumbNailComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,11 +26,15 @@ class ThumbnailAdapter(
     class ViewHolder(
         private val binding: ItemPhotoThumbnailBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(thumbnail: ThumbnailInfo, onItemClick: ((ThumbnailInfo) -> Unit)) {
+        fun bind(
+            thumbnail: ThumbnailInfo,
+            onItemClick: ((ThumbnailInfo, Int) -> Unit),
+        ) {
             binding.data = thumbnail
-            binding.root.setOnClickListener { onItemClick(thumbnail) }
+            binding.root.setOnClickListener { onItemClick(thumbnail, adapterPosition) }
         }
     }
+
 
     private class ThumbNailComparator : DiffUtil.ItemCallback<ThumbnailInfo>() {
         override fun areItemsTheSame(oldItem: ThumbnailInfo, newItem: ThumbnailInfo) =

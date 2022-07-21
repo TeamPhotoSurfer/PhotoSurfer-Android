@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.PUSH_ID
 import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.ZOOM_IN_IMAGE_URL
 import com.photosurfer.android.alarm_list.eachinfo.AlarmSpecificImageActivity
 import com.photosurfer.android.core.util.useBitmapImg
@@ -34,10 +35,11 @@ class PhotoSurferMessagingService : FirebaseMessagingService() {
             val title: String = remoteMessage.data["title"] ?: throw IllegalStateException()
             val body: String = remoteMessage.data["body"] ?: throw IllegalStateException()
             val imageUrl: String = remoteMessage.data["imageUrl"] ?: throw IllegalStateException()
-//            val photoId : Long = remoteMessage.data["photoId"]?.toLong() ?: throw IllegalStateException()
+            val photoId: Int =
+                remoteMessage.data["photoId"]?.toInt() ?: throw IllegalStateException()
             useBitmapImg(this, imageUrl) {
                 NotificationManagerCompat.from(this)
-                    .notify(0, createNotification(title, body, it, imageUrl))
+                    .notify(0, createNotification(title, body, it, imageUrl, photoId))
             }
         }
     }
@@ -46,10 +48,12 @@ class PhotoSurferMessagingService : FirebaseMessagingService() {
         title: String,
         body: String,
         bitmap: Bitmap,
-        imageUrl: String
+        imageUrl: String,
+        photoId: Int
     ): Notification {
         val intent = Intent(this, AlarmSpecificImageActivity::class.java).apply {
             putExtra(ZOOM_IN_IMAGE_URL, imageUrl)
+            putExtra(PUSH_ID, photoId)
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 

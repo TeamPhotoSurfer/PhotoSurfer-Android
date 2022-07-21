@@ -5,10 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isChecked"
+            type="boolean" />
+
         <variable
             name="data"
             type="com.photosurfer.android.domain.entity.ThumbnailInfo" />
-
 
     </data>
 
@@ -28,11 +33,12 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
-        <!-- TODO visibility 추가 -->
         <ImageView
+            android:id="@+id/iv_check"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_check_circle_fill_blue"
+            android:visibility="@{data.isChecked ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="ContentDescription" />

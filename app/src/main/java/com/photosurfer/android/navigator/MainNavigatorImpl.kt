@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.photosurfer.android.MainActivity
+import com.photosurfer.android.core.constant.SELECTED_TAG
+import com.photosurfer.android.core.constant.TAG_LIST
 import com.photosurfer.android.core.ext.startActivity
 import com.photosurfer.android.domain.entity.SerializeTagInfoList
 import com.photosurfer.android.domain.entity.TagInfo
@@ -18,9 +20,12 @@ class MainNavigatorImpl @Inject constructor() : MainNavigator {
         context.startActivity<MainActivity>()
     }
 
-
-    override fun navigateSearchTag(context: Context, tag: Pair<String, String>) {
-        context.startActivity<SearchTagActivity>(tag)
+    override fun navigateSearchTag(context: Context, selectedTag: TagInfo?) {
+        context.startActivity(
+            Intent(context, SearchTagActivity::class.java).apply {
+                putExtra(SELECTED_TAG, selectedTag)
+            }
+        )
     }
 
     override fun transactionPushMainFragment(fragmentActivity: FragmentActivity, bundle: Bundle) {
@@ -39,7 +44,4 @@ class MainNavigatorImpl @Inject constructor() : MainNavigator {
         )
     }
 
-    companion object {
-        const val TAG_LIST = "TAG_LIST"
-    }
 }

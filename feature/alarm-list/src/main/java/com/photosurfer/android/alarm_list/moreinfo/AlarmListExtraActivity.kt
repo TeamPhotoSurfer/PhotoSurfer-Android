@@ -9,9 +9,7 @@ import com.photosurfer.android.alarm_list.AlarmListMainFragment.Companion.UP_COM
 import com.photosurfer.android.alarm_list.R
 import com.photosurfer.android.alarm_list.databinding.ActivityAlarmListMoreBinding
 import com.photosurfer.android.core.base.BaseActivity
-import com.photosurfer.android.domain.entity.AlarmElement
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDate
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
@@ -37,8 +35,12 @@ class AlarmListExtraActivity :
 
     private fun initStartFragmentData() {
         when (startPoint) {
-            PASSED_ALARM -> {}
-            UP_COMING_ALARM -> {}
+            PASSED_ALARM -> {
+                alarmListExtraViewModel.getPassedAlarmList()
+            }
+            UP_COMING_ALARM -> {
+                alarmListExtraViewModel.getUpComingAlarmList()
+            }
         }
     }
 
@@ -51,53 +53,8 @@ class AlarmListExtraActivity :
     private fun initAlarmListAdapter() {
         alarmListAdapter = AlarmListAdapter()
         binding.rvAlarmListMore.adapter = alarmListAdapter
-        // 리스트 업데이트 코드
-        // 현재는 더미
-//        alarmListAdapter.submitList(
-//            listOf(
-//                AlarmElement(
-//                    id = 1L,
-//                    pushDate = LocalDate.now(),
-//                    tags = listOf("이", "창", "환"),
-//                    imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",
-//                    memo = "알랄라 살랄라"
-//                ),
-//                AlarmElement(
-//                    id = 1L,
-//                    pushDate = LocalDate.now(),
-//                    tags = listOf("이", "창", "환"),
-//                    imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",
-//                    memo = "알랄라 살랄라"
-//                ),
-//                AlarmElement(
-//                    id = 2L,
-//                    pushDate = LocalDate.now(),
-//                    tags = listOf("이", "창", "환"),
-//                    imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",
-//                    memo = "알랄라 살랄라"
-//                ),
-//                AlarmElement(
-//                    id = 3L,
-//                    pushDate = LocalDate.now(),
-//                    tags = listOf("이", "창", "환"),
-//                    imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",
-//                    memo = "알랄라 살랄라"
-//                ),
-//                AlarmElement(
-//                    id = 2L,
-//                    pushDate = LocalDate.now(),
-//                    tags = listOf("이", "창", "환"),
-//                    imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",
-//                    memo = "알랄라 살랄라"
-//                ),
-//                AlarmElement(
-//                    id = 4L,
-//                    pushDate = LocalDate.now(),
-//                    tags = listOf("이", "창", "환"),
-//                    imageURL = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSihF%2FbtrESP6CdQz%2FjQMTqA5fz1kiBbKJtYtxJ0%2Fimg.jpg",
-//                    memo = "알랄라 살랄라"
-//                )
-//            )
-//        )
+        alarmListExtraViewModel.alarmData.observe(this) {
+            alarmListAdapter.submitList(it)
+        }
     }
 }

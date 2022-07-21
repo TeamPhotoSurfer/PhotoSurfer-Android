@@ -99,6 +99,6 @@ dependencies {
     implementation(AndroidXDependencies.junit)
     androidTestImplementation(TestDependencies.androidTest)
 
-    // flexbox layout
-    implementation(AndroidXDependencies.flexBox)
+    // Third Party Library
+    implementation(ThirdPartyDependencies.flexBox)
 }

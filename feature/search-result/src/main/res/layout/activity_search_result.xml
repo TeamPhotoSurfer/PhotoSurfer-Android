@@ -3,8 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- &amp;&amp; -->
-
     <data>
 
         <import type="android.view.View" />
@@ -44,7 +42,8 @@
                 android:visibility="@{currentViewType == TagResultViewType.DEFAULT ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,7 +98,8 @@
                 android:visibility="@{currentViewType == TagResultViewType.SELECT &amp;&amp; !viewModel.noThumbnailData ? View.VISIBLE : View.GONE }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -110,39 +110,17 @@
             android:background="@color/gray_30"
             app:layout_constraintTop_toBottomOf="@id/cl_tool_bar" />
 
-
-        <HorizontalScrollView
-            android:id="@+id/scroll_chip_defualt"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:visibility="@{currentViewType == TagResultViewType.DEFAULT ? View.VISIBLE : View.GONE}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_divider">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cg_search_tag_default"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp" />
-        </HorizontalScrollView>
-
-        <HorizontalScrollView
-            android:id="@+id/scroll_chip_default_select"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:visibility="@{currentViewType == TagResultViewType.SELECT ? View.VISIBLE : View.GONE}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scroll_chip_defualt">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cg_search_tag_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp" />
-        </HorizontalScrollView>
-
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="16dp"
+            android:visibility="@{viewModel.isTagListEmpty ? View.GONE : View.VISIBLE }"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/view_divider"
+            tools:listitem="@layout/item_tag_point" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_thumbnail"
@@ -151,7 +129,7 @@
             android:visibility="@{viewModel.noThumbnailData ? View.GONE : View.VISIBLE }"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scroll_chip_default_select"
+            app:layout_constraintTop_toBottomOf="@id/rcv_tag"
             app:spanCount="3"
             tools:listitem="@layout/item_photo_thumbnail" />
 
@@ -162,7 +140,7 @@
             android:layout_height="0dp"
             android:visibility="@{viewModel.noThumbnailData ? View.VISIBLE : View.GONE }"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scroll_chip_defualt"
+            app:layout_constraintTop_toBottomOf="@id/rcv_tag"
             tools:layout="@layout/layout_search_result_empty" />
 
 

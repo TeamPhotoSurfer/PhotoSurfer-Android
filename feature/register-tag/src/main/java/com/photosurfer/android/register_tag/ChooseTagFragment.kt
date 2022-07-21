@@ -1,11 +1,9 @@
 package com.photosurfer.android.register_tag
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -167,6 +165,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun addTagWithInputText() {
         chooseTagViewModel.inputList.add(TagInfo(0, binding.etTag.text.toString()))
+        chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
         binding.etTag.text.clear()
     }
 
