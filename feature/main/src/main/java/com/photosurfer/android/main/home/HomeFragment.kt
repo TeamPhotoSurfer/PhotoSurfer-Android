@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun navigateToSearchTagActivity(tag: TagInfo? = null) {
-        mainNavigator.navigateSearchTag(requireContext(), Pair("hi", "hi"))
+        mainNavigator.navigateSearchTag(requireContext(), tag)
         Timber.tag(TAG).d("onClick: ${tag?.name}")
     }
 
