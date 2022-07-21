@@ -55,7 +55,7 @@ class PushSettingActivity :
         val tagInfoList = intent.getSerializableExtra("TAG_INFO_LIST")
         pushSettingViewModel.updateWholeTagList(
             // 추후 받아온 태그 데이터로 교체
-            listOf(
+            mutableListOf(
                 TagInfo(41, "침대2345"),
                 TagInfo(44, "뉴우우에어팟"),
                 TagInfo(37, "침대"),
@@ -63,7 +63,7 @@ class PushSettingActivity :
                 TagInfo(65, "침대2수정")
             )
         )
-        pushSettingViewModel.updatePhotoId(88)
+        pushSettingViewModel.updatePhotoId(109)
     }
 
     private fun initRepresentTagIdList() {

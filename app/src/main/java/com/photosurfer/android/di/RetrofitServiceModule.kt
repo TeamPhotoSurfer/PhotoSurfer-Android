@@ -1,10 +1,7 @@
 package com.photosurfer.android.di
 
 import com.photosurfer.android.data.remote.model.response.UrgentAlarmListResponse
-import com.photosurfer.android.data.remote.service.PassedAlarmListService
-import com.photosurfer.android.data.remote.service.PushSettingService
-import com.photosurfer.android.data.remote.service.UpComingAlarmListService
-import com.photosurfer.android.data.remote.service.UrgentAlarmListService
+import com.photosurfer.android.data.remote.service.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +32,9 @@ object RetrofitServiceModule {
     @Singleton
     fun providesPassedAlarmListService(retrofit: Retrofit): PassedAlarmListService =
         retrofit.create(PassedAlarmListService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesSpecificAlarmService(retrofit: Retrofit): SpecificAlarmService =
+        retrofit.create(SpecificAlarmService::class.java)
 }

@@ -15,6 +15,7 @@ android {
 dependencies {
     implementation(project(":shared"))
     implementation(project(":navigator"))
+    implementation(project(":domain"))
 
     implementation(ThirdPartyDependencies.timber)
 

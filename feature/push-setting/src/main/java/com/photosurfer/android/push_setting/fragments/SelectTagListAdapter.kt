@@ -11,8 +11,8 @@ import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.push_setting.databinding.ItemSelectTagBinding
 
 class SelectTagListAdapter(
-    var tempList: MutableList<Int>,
-    private val updateTempRepresentTagList: ((MutableList<Int>) -> Unit)? = null
+    var tempList: MutableList<TagInfo>,
+    private val updateTempRepresentTagList: ((MutableList<TagInfo>) -> Unit)? = null
 ) :
     ListAdapter<TagInfo, SelectTagListAdapter.SelectTagRecyclerViewHolder>(
         ItemDiffCallback<TagInfo>(
@@ -43,17 +43,17 @@ class SelectTagListAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             data: TagInfo,
-            updateTempRepresentTagList: ((MutableList<Int>) -> Unit)? = null
+            updateTempRepresentTagList: ((MutableList<TagInfo>) -> Unit)? = null
         ) {
             binding.tagInfo = data
-            if (tempList.contains(data.id)) {
+            if (tempList.contains(data)) {
                 binding.cbCheckImage.isChecked = true
             }
             binding.root.setOnClickListener {
-                val tempConclusion = tempList.remove(data.id)
+                val tempConclusion = tempList.remove(data)
                 if (!tempConclusion) {
                     if (tempList.size < 3) {
-                        tempList.add(data.id)
+                        tempList.add(data)
                         binding.cbCheckImage.isChecked = true
                     } else {
                         PhotoSurferSnackBar.make(it, SELECT_TAG_FRAGMENT).show()
