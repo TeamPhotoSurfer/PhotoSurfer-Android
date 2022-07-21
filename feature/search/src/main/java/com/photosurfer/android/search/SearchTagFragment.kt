@@ -34,8 +34,11 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
-        viewModel.setTagList()
 
+        getRecommendTagList()
+        setRecentList()
+        setOftenList()
+        setPlatformList()
         getExtraData()
         onClickBackButton()
         initAdapter()
@@ -44,6 +47,29 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         setCompleteOnKeyBoardListener()
         deleteInput()
         initRecyclerViewLayout()
+    }
+
+    private fun setPlatformList() {
+        viewModel.platformList.observe(viewLifecycleOwner) {
+            platformTagAdapter.submitList(viewModel.platformList.value)
+        }
+    }
+
+    private fun setOftenList() {
+        viewModel.oftenList.observe(viewLifecycleOwner) {
+            oftenTagAdapter.submitList(viewModel.oftenList.value)
+        }
+    }
+
+    private fun setRecentList() {
+        viewModel.recentList.observe(viewLifecycleOwner) {
+            recentTagAdapter.submitList(viewModel.recentList.value)
+        }
+    }
+
+
+    private fun getRecommendTagList() {
+        viewModel.getTagList()
     }
 
     private fun getExtraData() {
@@ -74,9 +100,9 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
 
     private fun setDataOnRecyclerView() {
         inputTagAdapter.submitList(viewModel.inputList)
-        recentTagAdapter.submitList(viewModel.recentList)
-        oftenTagAdapter.submitList(viewModel.oftenList)
-        platformTagAdapter.submitList(viewModel.platformList)
+        recentTagAdapter.submitList(viewModel.recentList.value)
+        oftenTagAdapter.submitList(viewModel.oftenList.value)
+        platformTagAdapter.submitList(viewModel.platformList.value)
     }
 
     private fun initAdapter() {
@@ -145,4 +171,5 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         viewModel.deleteTag(tagInfo)
         inputTagAdapter.submitList(viewModel.inputList)
     }
+
 }
