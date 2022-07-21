@@ -20,15 +20,19 @@ class SearchResultViewModel : ViewModel() {
     )
     val originTagList: LiveData<MutableList<TagInfo>> = _originTagList
 
-    private var _thumbnail = MutableLiveData<List<ThumbnailInfo?>>()
-    val thumbnail: LiveData<List<ThumbnailInfo?>> = _thumbnail
+    private var _tempTagList: MutableLiveData<MutableList<TagInfo>> =
+        MutableLiveData(originTagList.value)
+    val tempTagList: LiveData<MutableList<TagInfo>> = _tempTagList
+
+    private var _thumbnail = MutableLiveData<MutableList<ThumbnailInfo?>>()
+    val thumbnail: LiveData<MutableList<ThumbnailInfo?>> = _thumbnail
 
     val noThumbnailData = MutableLiveData(thumbnail.value?.size == 0)
 
     fun updateList(list: MutableList<Int>) {
         // for (i in 0 until list.size) {}
         // TODO 서버 response 값으로 교체
-        _thumbnail.value = listOf(
+        _thumbnail.value = mutableListOf(
             ThumbnailInfo(
                 1,
                 "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
@@ -41,8 +45,12 @@ class SearchResultViewModel : ViewModel() {
         noThumbnailData.value = thumbnail.value?.size == 0
     }
 
+    fun deleteTag(position: Int) {
+        _tempTagList.value?.removeAt(position)
+    }
+
     init {
-        _thumbnail.value = listOf(
+        _thumbnail.value = mutableListOf(
             ThumbnailInfo(
                 1,
                 "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"

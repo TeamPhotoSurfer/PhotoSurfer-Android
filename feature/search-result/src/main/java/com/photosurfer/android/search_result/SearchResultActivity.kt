@@ -15,6 +15,7 @@ class SearchResultActivity :
     BaseActivity<ActivitySearchResultBinding>(R.layout.activity_search_result) {
     private val viewModel: SearchResultViewModel by viewModels()
     private lateinit var thumbnailAdapter: ThumbnailAdapter
+    private lateinit var chipAdapter: MutableTagAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,9 @@ class SearchResultActivity :
 
         setDefaultViewType()
         setCancelListener()
-        initAdapter()
+        initChipAdapter()
+        setDataOnRecyclerView()
+        initThumbnailAdapter()
         initThumbnailList()
         setItemDecoration()
         initLearnAddTag()
@@ -34,6 +37,21 @@ class SearchResultActivity :
         binding.currentViewType = TagResultViewType.DEFAULT
     }
 
+    private fun initChipAdapter() {
+        chipAdapter = MutableTagAdapter(::deleteTag)
+        binding.rcvTag.adapter = chipAdapter
+    }
+
+    private fun deleteTag(position: Int) {
+        viewModel.deleteTag(position)
+        chipAdapter.notifyItemRemoved(position)
+        chipAdapter.notifyItemRangeChanged(position, viewModel.tempTagList.value?.size ?: return)
+    }
+
+    private fun setDataOnRecyclerView() {
+        chipAdapter.submitList(viewModel.originTagList.value)
+    }
+
     private fun setBackButtonClickListener() {
         binding.ivBack.setOnClickListener { finish() }
     }
@@ -41,27 +59,23 @@ class SearchResultActivity :
     private fun setSelectClickListener() {
         binding.tvChoose.setOnClickListener {
             binding.currentViewType = TagResultViewType.SELECT
-            // copyChipList()
+            chipAdapter.toggleCancelable()
+            chipAdapter.notifyItemRangeChanged(
+                0,
+                viewModel.originTagList.value?.size ?: return@setOnClickListener
+            )
         }
     }
-
-//    private fun copyChipList() {
-//        binding.cgSearchTagSelect.removeAllViews()
-//        val tagList = binding.cgSearchTagDefault.checkedChipIds
-//        Log.d(TAG, "copyChipList: $tagList")
-//        for (i in 0 until tagList.size) {
-//            val currentTagIdx = tagList[i] - 1
-//            Log.d(TAG, "copyChipList: $currentTagIdx")
-//            val name = viewModel.originTagList.value?.get(currentTagIdx)?.name
-//            // ChipUnSelectableUtil(this).make(binding.cgSearchTagSelect, name!!) {}
-//        }
-//        // binding.cgSearchTagDefault.size
-//    }
 
     private fun setCancelListener() {
         binding.tvCancel.setOnClickListener {
             // viewModel 에서 selectedList -> emptyList()로 해주기
             binding.currentViewType = TagResultViewType.DEFAULT
+            chipAdapter.toggleCancelable()
+            chipAdapter.notifyItemRangeChanged(
+                0,
+                viewModel.originTagList.value?.size ?: return@setOnClickListener
+            )
         }
     }
 
@@ -71,7 +85,7 @@ class SearchResultActivity :
         }
     }
 
-    private fun initAdapter() {
+    private fun initThumbnailAdapter() {
         binding.rvThumbnail.adapter =
             ThumbnailAdapter(::onItemClick).also { thumbnailAdapter = it }
     }
@@ -92,18 +106,6 @@ class SearchResultActivity :
         this.shortToast(thumbnail.id.toString())
     }
 
-    // Selectable Chip 만들면 코드 교체
-//    private fun setChip() {
-//        val tagList = viewModel.originTagList.value ?: return
-//        for (element in tagList) {
-//            ChipCancelableUtil(this).make(
-//                binding.cgSearchTagDefault,
-//                element.name,
-//                ::onClickChip
-//            )
-//        }
-//    }
-
     private fun onClickMenu() {
         // Menu PopUp 띄우기
     }
@@ -111,8 +113,4 @@ class SearchResultActivity :
     private fun changeItem() {
         // select 뷰타입에 따라 check 박스 처리하기
     }
-
-//    private fun onClickChip() {
-//        viewModel.updateList(binding.cgSearchTagDefault.checkedChipIds)
-//    }
 }
