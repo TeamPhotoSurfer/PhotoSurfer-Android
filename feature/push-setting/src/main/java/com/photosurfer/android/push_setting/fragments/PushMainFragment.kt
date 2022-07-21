@@ -7,7 +7,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.replace
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.constant.PushSettingConstant.SELECT_TAG
-import com.photosurfer.android.core.util.DateUtil.dotDateFormatter
 import com.photosurfer.android.core.util.EventObserver
 import com.photosurfer.android.core.util.KeyBoardUtil
 import com.photosurfer.android.core.util.KeyBoardVisibilityListener
@@ -34,6 +33,7 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
         initVisibilityVariable()
         initArgumentsData()
         binding.clickableState = clickableState
+        initSpecificAlarmData()
         setDatePickerMinDate()
         getDateFromDatePicker()
         initDatePickerButtonClickListener()
@@ -56,6 +56,10 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
             pushSettingViewModel.updateClickableState(clickableState)
             pushSettingViewModel.updatePushId(pushId)
         }
+    }
+
+    private fun initSpecificAlarmData() {
+        pushSettingViewModel.getSpecificAlarmInfo()
     }
 
     private fun initDefaultAlarmDate() {

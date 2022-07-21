@@ -3,6 +3,7 @@ package com.photosurfer.android.data.remote.datasource
 import com.photosurfer.android.data.remote.calladapter.NetworkState
 import com.photosurfer.android.data.remote.model.response.BaseResponse
 import com.photosurfer.android.data.remote.model.response.MoreAlarmListResponse
+import com.photosurfer.android.data.remote.model.response.SpecificAlarmResponse
 import com.photosurfer.android.data.remote.model.response.UrgentAlarmListResponse
 import com.photosurfer.android.data.remote.service.PassedAlarmListService
 import com.photosurfer.android.data.remote.service.SpecificAlarmService
@@ -26,6 +27,6 @@ class RemoteAlarmListDataSourceImpl @Inject constructor(
     override suspend fun getUpComingAlarmList(): NetworkState<BaseResponse<MoreAlarmListResponse>> =
         upComingAlarmListService.getUpComingAlarmList()
 
-    override suspend fun getSpecificAlarmInfo(pushId: Int): NetworkState<BaseResponse<AlarmElement>> =
+    override suspend fun getSpecificAlarmInfo(pushId: Int): NetworkState<BaseResponse<SpecificAlarmResponse>> =
         specificAlarmService.getSpecificAlarmInfo(pushId)
 }

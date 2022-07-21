@@ -136,7 +136,7 @@ class AlarmListRepositoryImpl @Inject constructor(
             val response = alarmListDataSource.getSpecificAlarmInfo(pushId)
         ) {
             is NetworkState.Success -> return Result.success(
-                response.body.data
+                pushMapper.toAlarmElement(response.body.data)
             )
             is NetworkState.Failure -> return Result.failure(
                 RetrofitFailureStateException(

@@ -1,24 +1,27 @@
 package com.photosurfer.android.push_setting
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.photosurfer.android.core.base.BaseViewModel
 import com.photosurfer.android.core.constant.PushSettingConstant
 import com.photosurfer.android.core.constant.PushSettingConstant.PUSH_MAIN
-import com.photosurfer.android.core.util.DateUtil.dotDateFormatter
 import com.photosurfer.android.core.util.Event
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.request.DomainPushSettingRequest
+import com.photosurfer.android.domain.repository.AlarmListRepository
 import com.photosurfer.android.domain.repository.PushSettingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
 class PushSettingViewModel @Inject constructor(
-    private val pushSettingRepository: PushSettingRepository
+    private val pushSettingRepository: PushSettingRepository,
+    private val alarmListRepository: AlarmListRepository
 ) : BaseViewModel() {
 
     private val _alarmDate = MutableLiveData<LocalDate>()
@@ -52,6 +55,10 @@ class PushSettingViewModel @Inject constructor(
 
     private val _pushSettingFailure = MutableLiveData<Event<Boolean>>()
     val pushSettingFailure: LiveData<Event<Boolean>> = _pushSettingFailure
+
+    fun updateRepresentTagIdList(tagList: MutableList<TagInfo>) {
+        _representTagIdList.value = tagList
+    }
 
     fun updateClickableState(state: Boolean) {
         _clickableState.value = state
@@ -112,6 +119,20 @@ class PushSettingViewModel @Inject constructor(
             }.onFailure {
                 _pushSettingFailure.postValue(Event(false))
             }
+        }
+    }
+
+    fun getSpecificAlarmInfo() {
+        viewModelScope.launch {
+            alarmListRepository.getSpecificAlarmInfo(pushId.value ?: -1)
+                .onSuccess {
+                    updatePushId(it.id)
+                    updateAlarmDate(it.pushDate)
+                    updateRepresentTagIdList(it.tags.toMutableList())
+                    memo.value = it.memo
+                }.onFailure {
+                    Timber.d(it, "${this.javaClass.name}_getSpecificAlarmInfo")
+                }
         }
     }
 }
