@@ -81,8 +81,8 @@ class AlarmListAdapter() : ListAdapter<AlarmElement, RecyclerView.ViewHolder>(
     }
 
     companion object {
-        const val TODAY_ID = -1L
-        const val TOMORROW_ID = -2L
+        const val TODAY_ID = -1
+        const val TOMORROW_ID = -2
         const val DIVISION_DAY_HEADER = 1
         const val ALARM_CONTENT = 2
     }

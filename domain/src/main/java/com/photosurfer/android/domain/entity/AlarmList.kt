@@ -4,7 +4,7 @@ import java.time.LocalDate
 
 data class AlarmInfo(
     val alarmList: MutableList<AlarmElement>,
-    val lastCount: Int,
+    val passedCount: Int,
     val upComingCount: Int,
     val urgentCount: Int
 )

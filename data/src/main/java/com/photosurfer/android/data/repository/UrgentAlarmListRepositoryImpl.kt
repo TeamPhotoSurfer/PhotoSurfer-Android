@@ -57,7 +57,7 @@ class UrgentAlarmListRepositoryImpl @Inject constructor(
                 return Result.success(
                     AlarmInfo(
                         alarmList = tempAlarmElementList,
-                        lastCount = response.body.data.lastCount,
+                        passedCount = response.body.data.lastCount,
                         upComingCount = response.body.data.comingCount,
                         urgentCount = response.body.data.todayTomorrowCount
                     )
