@@ -13,7 +13,6 @@ import com.photosurfer.android.domain.entity.request.DomainPushSettingRequest
 import com.photosurfer.android.domain.repository.PushSettingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -28,14 +27,14 @@ class PushSettingViewModel @Inject constructor(
     private val _fragmentState = MutableLiveData<PushSettingConstant>(PUSH_MAIN)
     val fragmentState: LiveData<PushSettingConstant> = _fragmentState
 
-    private val _wholeTagList = MutableLiveData<List<TagInfo>>()
-    val wholeTagList: LiveData<List<TagInfo>> = _wholeTagList
+    private val _wholeTagList = MutableLiveData<MutableList<TagInfo>>()
+    val wholeTagList: LiveData<MutableList<TagInfo>> = _wholeTagList
 
-    private val _representTagIdList = MutableLiveData<MutableList<Int>>()
-    val representTagIdList: LiveData<MutableList<Int>> = _representTagIdList
+    private val _representTagIdList = MutableLiveData<MutableList<TagInfo>>()
+    val representTagIdList: LiveData<MutableList<TagInfo>> = _representTagIdList
 
-    private val _tempRepresentTagIdList = MutableLiveData<MutableList<Int>>()
-    val tempRepresentTagIdList: LiveData<MutableList<Int>> = _tempRepresentTagIdList
+    private val _tempRepresentTagIdList = MutableLiveData<MutableList<TagInfo>>()
+    val tempRepresentTagIdList: LiveData<MutableList<TagInfo>> = _tempRepresentTagIdList
 
     private val _photoId = MutableLiveData<Int>()
     val photoId: LiveData<Int> = _photoId
@@ -64,16 +63,16 @@ class PushSettingViewModel @Inject constructor(
         _fragmentState.postValue(fragmentState)
     }
 
-    fun updateWholeTagList(wholeTag: List<TagInfo>) {
+    fun updateWholeTagList(wholeTag: MutableList<TagInfo>) {
         _wholeTagList.value = wholeTag
     }
 
     fun initRepresentTagIdList() {
         if ((_wholeTagList.value?.size ?: 1) < 3) {
-            _representTagIdList.postValue(wholeTagList.value?.map { it.id }?.toMutableList())
+            _representTagIdList.postValue(wholeTagList.value)
         } else {
             _representTagIdList.postValue(
-                wholeTagList.value?.subList(0, 3)?.map { it.id }?.toMutableList()
+                wholeTagList.value?.subList(0, 3)
             )
         }
     }
@@ -82,7 +81,7 @@ class PushSettingViewModel @Inject constructor(
         _representTagIdList.value = tempRepresentTagIdList.value
     }
 
-    fun updateTempRepresentTagList(tempList: MutableList<Int>) {
+    fun updateTempRepresentTagList(tempList: MutableList<TagInfo>) {
         _tempRepresentTagIdList.postValue(tempList)
     }
 
@@ -96,7 +95,7 @@ class PushSettingViewModel @Inject constructor(
                 photoId.value ?: throw IllegalStateException(),
                 DomainPushSettingRequest(
                     alarmDate.value ?: throw IllegalStateException(),
-                    representTagIdList.value ?: throw IllegalStateException(),
+                    requireNotNull(representTagIdList.value?.map { it.id }).toMutableList(),
                     memo.value ?: throw IllegalStateException()
                 )
             ).onSuccess {
