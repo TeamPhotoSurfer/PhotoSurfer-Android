@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PhotoSurfer-Android</string>
+    <string name="app_name">Photo Surfer</string>
 
     <!-- login -->
     <string name="kakao_login">카카오톡 로그인</string>
@@ -32,7 +32,7 @@
     <string name="where_to">어떤 사진을 향해</string>
     <string name="try_first_surf">첫 번째 서핑을 시작해보세요!</string>
 
-    <!--SanckBarMessage 정리-->
+    <!--SnackBarMessage 정리-->
     <string name="select_tag_fragment">대표태그는 3개까지만 추가할 수 있어요.</string>
     <string name="push_main_fragment">서비스 준비 중이에요.</string>
     <string name="choose_tag_fragment">태그는 최대 6개까지만 추가할 수 있어요.</string>

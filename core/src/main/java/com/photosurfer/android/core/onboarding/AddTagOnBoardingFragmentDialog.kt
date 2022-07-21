@@ -36,7 +36,11 @@ class AddTagOnBoardingFragmentDialog : DialogFragment() {
     }
 
     private fun initAdapter() {
-        val fragmentList = listOf(OnBoardingTagfirstFragment(), OnBoardingTagSecondFragment(), OnBoardingTagThirdFragment())
+        val fragmentList = listOf(
+            OnBoardingTagfirstFragment(),
+            OnBoardingTagSecondFragment(),
+            OnBoardingTagThirdFragment()
+        )
 
         onBoardingAdapter = OnBoardingAdapter(this)
         onBoardingAdapter.fragments.addAll(fragmentList)
@@ -44,11 +48,11 @@ class AddTagOnBoardingFragmentDialog : DialogFragment() {
         binding.vpOnBoarding.adapter = onBoardingAdapter
     }
 
-    private fun initIndicator(){
+    private fun initIndicator() {
         binding.indicatorOnBoarding.attachTo(binding.vpOnBoarding)
     }
 
-    private fun initSkipButton(){
+    private fun initSkipButton() {
         binding.tvSkip.setOnClickListener {
             this.dismiss()
         }

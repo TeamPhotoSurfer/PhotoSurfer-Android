@@ -25,16 +25,15 @@ android {
 }
 
 dependencies {
-    //
     implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":navigator"))
     implementation(project(":shared"))
     implementation(project(":feature:register-tag"))
-    implementation(project(":feature:search-tag"))
     implementation(project(":feature:search-result"))
     implementation(project(":feature:push-setting"))
+    implementation(project(":feature:search"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
     implementation(project(":feature:alarm-list"))

@@ -9,7 +9,6 @@ import com.photosurfer.android.core.constant.TagResultViewType
 import com.photosurfer.android.core.ext.shortToast
 import com.photosurfer.android.core.onboarding.AddTagOnBoardingFragmentDialog
 import com.photosurfer.android.core.util.ChipCancelableUtil
-import com.photosurfer.android.core.util.ChipUnSelectableUtil
 import com.photosurfer.android.core.util.ItemDividerGrid
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
@@ -58,7 +57,7 @@ class SearchResultActivity :
             val currentTagIdx = tagList[i] - 1
             Log.d(TAG, "copyChipList: $currentTagIdx")
             val name = viewModel.originTagList.value?.get(currentTagIdx)?.name
-            ChipUnSelectableUtil(this).make(binding.cgSearchTagSelect, name!!) {}
+            // ChipUnSelectableUtil(this).make(binding.cgSearchTagSelect, name!!) {}
         }
         // binding.cgSearchTagDefault.size
     }

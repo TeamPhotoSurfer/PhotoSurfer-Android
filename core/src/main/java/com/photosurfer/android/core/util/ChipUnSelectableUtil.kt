@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.TriangleEdgeTreatment
 import com.photosurfer.android.shared.R
@@ -31,7 +30,7 @@ class ChipUnSelectableUtil @Inject constructor(@ApplicationContext private val c
     private val textStateList = ColorStateList(states, textColors)
     private val strokeStateList = ColorStateList(states, strokeColors)
 
-    private fun getChip(tag: String, onChipClick: (() -> Unit)): Chip {
+    fun getChip(tag: String): Chip {
         val chip = Chip(context).apply {
             this.text = tag
             this.chipStrokeColor = strokeStateList
@@ -52,15 +51,6 @@ class ChipUnSelectableUtil @Inject constructor(@ApplicationContext private val c
             .setBottomRightCorner(CornerFamily.ROUNDED, 70F)
             .build()
 
-        chip.setOnClickListener {
-            it.isSelected = !it.isSelected
-            onChipClick()
-        }
-
         return chip
-    }
-
-    fun make(view: ChipGroup, chipName: String, onChipClick: (() -> Unit)) {
-        view.addView(getChip(chipName, onChipClick))
     }
 }

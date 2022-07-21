@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".onboarding.OnBoardingTagThirdFragment" >
+        tools:context=".onboarding.OnBoardingTagThirdFragment">
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
