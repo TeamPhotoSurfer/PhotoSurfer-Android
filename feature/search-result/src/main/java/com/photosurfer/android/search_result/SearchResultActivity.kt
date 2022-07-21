@@ -74,6 +74,7 @@ class SearchResultActivity :
         binding.tvChoose.setOnClickListener {
             binding.currentViewType = TagResultViewType.SELECT
             chipAdapter.toggleCancelable()
+            thumbnailAdapter.toggleSelectable()
             chipAdapter.notifyItemRangeChanged(
                 0,
                 viewModel.originTagList.value?.size ?: return@setOnClickListener
@@ -86,6 +87,7 @@ class SearchResultActivity :
             // viewModel 에서 selectedList -> emptyList()로 해주기
             binding.currentViewType = TagResultViewType.DEFAULT
             chipAdapter.toggleCancelable()
+            thumbnailAdapter.toggleSelectable()
             chipAdapter.notifyItemRangeChanged(
                 0,
                 viewModel.originTagList.value?.size ?: return@setOnClickListener
@@ -117,7 +119,15 @@ class SearchResultActivity :
     }
 
     private fun onItemClick(thumbnail: ThumbnailInfo) {
-        this.shortToast(thumbnail.id.toString())
+        when (binding.currentViewType) {
+            TagResultViewType.DEFAULT -> {
+                this.shortToast("DEFAULT 일때 처리")
+                // TODO 창환~~ 미정이뷰 Navigate 로직 넣어조
+            }
+            TagResultViewType.SELECT -> {
+                this.shortToast("SELECT 일때 처리")
+            }
+        }
     }
 
     private fun onClickMenu() {

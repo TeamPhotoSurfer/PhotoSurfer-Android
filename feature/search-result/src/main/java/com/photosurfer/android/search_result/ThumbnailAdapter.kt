@@ -13,22 +13,33 @@ class ThumbnailAdapter(
     private val onItemClick: ((ThumbnailInfo) -> Unit)
 ) : ListAdapter<ThumbnailInfo, ThumbnailAdapter.ViewHolder>(ThumbNailComparator()) {
 
+    var isSelectable = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemPhotoThumbnailBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }
 
+    fun toggleSelectable() {
+        isSelectable = !isSelectable
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val thumbnail = getItem(position)
-        holder.bind(thumbnail, onItemClick)
+        holder.bind(thumbnail, onItemClick, isSelectable)
     }
 
     class ViewHolder(
         private val binding: ItemPhotoThumbnailBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(thumbnail: ThumbnailInfo, onItemClick: ((ThumbnailInfo) -> Unit)) {
+        fun bind(
+            thumbnail: ThumbnailInfo,
+            onItemClick: ((ThumbnailInfo) -> Unit),
+            isSelectable: Boolean
+        ) {
             binding.data = thumbnail
+//            binding.isSelectable = isSelectable
             binding.root.setOnClickListener { onItemClick(thumbnail) }
         }
     }
