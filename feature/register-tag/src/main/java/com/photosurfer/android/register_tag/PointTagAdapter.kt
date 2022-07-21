@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.photosurfer.android.core.util.ItemDiffCallback
 import com.photosurfer.android.domain.entity.TagInfo
-import com.photosurfer.android.register_tag.databinding.ItemTagPointBinding
+import com.photosurfer.android.shared.R.layout.item_tag_point
+import com.photosurfer.android.shared.databinding.ItemTagPointBinding
 
 class PointTagAdapter(
     private val deleteTag: ((TagInfo) -> Unit)? = null
@@ -24,7 +25,7 @@ class PointTagAdapter(
     ): PointTagViewHolder {
         val binding: ItemTagPointBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_tag_point,
+            item_tag_point,
             parent,
             false
         )
