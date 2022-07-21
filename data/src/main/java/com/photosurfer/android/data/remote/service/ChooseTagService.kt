@@ -4,6 +4,7 @@ import com.photosurfer.android.data.remote.calladapter.NetworkState
 import com.photosurfer.android.data.remote.model.request.ChooseTagRequest
 import com.photosurfer.android.data.remote.model.response.BaseResponse
 import com.photosurfer.android.data.remote.model.response.ChooseTagResponse
+import com.photosurfer.android.data.remote.model.response.SavedTagResponse
 import com.photosurfer.android.data.remote.model.response.TagListResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,4 +27,7 @@ interface ChooseTagService {
 
     @GET("tag/main")
     suspend fun getTagList(): NetworkState<BaseResponse<TagListResponse>>
+
+    @GET("tag")
+    suspend fun getSavedTagList(): NetworkState<BaseResponse<SavedTagResponse>>
 }

@@ -5,6 +5,7 @@ import com.photosurfer.android.data.remote.model.response.BaseResponse
 import com.photosurfer.android.data.remote.model.response.TagListResponse
 import com.photosurfer.android.data.remote.service.ChooseTagService
 import com.photosurfer.android.data.remote.model.response.OftenSearchTagResponse
+import com.photosurfer.android.data.remote.model.response.SavedTagResponse
 import com.photosurfer.android.data.remote.service.OftenSearchTagService
 import javax.inject.Inject
 
@@ -18,5 +19,8 @@ class RemoteTagListDataSourceImpl @Inject constructor(
 
     override suspend fun getTagList(): NetworkState<BaseResponse<TagListResponse>> =
         chooseTagListService.getTagList()
-        
+
+    override suspend fun getSavedTagList(): NetworkState<BaseResponse<SavedTagResponse>> =
+        chooseTagListService.getSavedTagList()
+
 }

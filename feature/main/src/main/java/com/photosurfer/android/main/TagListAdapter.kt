@@ -7,13 +7,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.photosurfer.android.domain.entity.TagInfo
+import com.photosurfer.android.domain.entity.SavedTag
 import com.photosurfer.android.main.TagListAdapter.TagListViewHolder
 import com.photosurfer.android.main.databinding.ItemTagBinding
 
 class TagListAdapter(
     private val threeDotClickListener: ((Int, ImageView) -> Unit)? = null
-) : ListAdapter<TagInfo, TagListViewHolder>(TagComparator()) {
+) : ListAdapter<SavedTag, TagListViewHolder>(TagComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagListViewHolder {
         val binding: ItemTagBinding = DataBindingUtil.inflate(
@@ -29,11 +29,11 @@ class TagListAdapter(
         private val binding: ItemTagBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            data: TagInfo,
+            data: SavedTag,
             position: Int,
             threeDotClickListener: ((Int, ImageView) -> Unit)? = null
         ) {
-            binding.tagInfo = data
+            binding.savedTag = data
 
             binding.ivStar.setOnClickListener {
                 binding.ivStar.isSelected = binding.ivStar.isSelected != true
@@ -49,11 +49,11 @@ class TagListAdapter(
         holder.onBind(getItem(position), position, threeDotClickListener)
     }
 
-    private class TagComparator : DiffUtil.ItemCallback<TagInfo>() {
-        override fun areItemsTheSame(oldItem: TagInfo, newItem: TagInfo) =
+    private class TagComparator : DiffUtil.ItemCallback<SavedTag>() {
+        override fun areItemsTheSame(oldItem: SavedTag, newItem: SavedTag) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: TagInfo, newItem: TagInfo) =
+        override fun areContentsTheSame(oldItem: SavedTag, newItem: SavedTag) =
             oldItem == newItem
     }
 }
