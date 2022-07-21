@@ -3,10 +3,13 @@ package com.photosurfer.android.search_result
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
+import com.photosurfer.android.core.constant.TAG_LIST
 import com.photosurfer.android.core.constant.TagResultViewType
 import com.photosurfer.android.core.ext.shortToast
 import com.photosurfer.android.core.onboarding.AddTagOnBoardingFragmentDialog
 import com.photosurfer.android.core.util.ItemDividerGrid
+import com.photosurfer.android.domain.entity.SerializeTagInfoList
+import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
 import com.photosurfer.android.search_result.viewModel.SearchResultViewModel
@@ -16,11 +19,14 @@ class SearchResultActivity :
     private val viewModel: SearchResultViewModel by viewModels()
     private lateinit var thumbnailAdapter: ThumbnailAdapter
     private lateinit var chipAdapter: MutableTagAdapter
+    private lateinit var inputTag: List<TagInfo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
+        getExtraData()
+        initExtraDataOnViewModel()
         setDefaultViewType()
         setCancelListener()
         initChipAdapter()
@@ -31,6 +37,15 @@ class SearchResultActivity :
         initLearnAddTag()
         setBackButtonClickListener()
         setSelectClickListener()
+    }
+
+    private fun getExtraData() {
+        inputTag = (intent.getSerializableExtra(TAG_LIST) as SerializeTagInfoList).TagInfoList
+    }
+
+    private fun initExtraDataOnViewModel() {
+        viewModel.setOriginTagList(inputTag)
+        viewModel.setTempTagList(inputTag)
     }
 
     private fun setDefaultViewType() {
@@ -45,11 +60,10 @@ class SearchResultActivity :
     private fun deleteTag(position: Int) {
         viewModel.deleteTag(position)
         chipAdapter.notifyItemRemoved(position)
-        chipAdapter.notifyItemRangeChanged(position, viewModel.tempTagList.value?.size ?: return)
     }
 
     private fun setDataOnRecyclerView() {
-        chipAdapter.submitList(viewModel.originTagList.value)
+        chipAdapter.submitList(viewModel.tagList.value)
     }
 
     private fun setBackButtonClickListener() {

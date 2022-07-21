@@ -1,8 +1,6 @@
 package com.photosurfer.android.search
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -128,7 +126,6 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
     private fun isTagSelectedAtListOnce(): Boolean = viewModel.inputList.size != 0
 
     private fun navigateToSearchTagActivity() {
-        Log.d(TAG, "navigateToSearchTagActivity: ")
         mainNavigator.navigateSearchResult(requireContext(), viewModel.inputList.toList())
     }
 
