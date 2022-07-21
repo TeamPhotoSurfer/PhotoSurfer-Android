@@ -2,23 +2,24 @@ package com.photosurfer.android.data.repository
 
 import com.photosurfer.android.core.exception.RetrofitFailureStateException
 import com.photosurfer.android.data.remote.calladapter.NetworkState
-import com.photosurfer.android.data.remote.datasource.RemoteUrgentAlarmListDataSource
+import com.photosurfer.android.data.remote.datasource.RemoteAlarmListDataSource
 import com.photosurfer.android.data.remote.mapper.PushMapper
+import com.photosurfer.android.data.remote.model.request.PushSettingRequest
 import com.photosurfer.android.domain.entity.AlarmElement
 import com.photosurfer.android.domain.entity.AlarmInfo
-import com.photosurfer.android.domain.repository.UrgentAlarmListRepository
+import com.photosurfer.android.domain.repository.AlarmListRepository
 import timber.log.Timber
 import java.time.LocalDate
 import javax.inject.Inject
 
-class UrgentAlarmListRepositoryImpl @Inject constructor(
-    private val urgentAlarmListDataSource: RemoteUrgentAlarmListDataSource,
+class AlarmListRepositoryImpl @Inject constructor(
+    private val alarmListDataSource: RemoteAlarmListDataSource,
     private val pushMapper: PushMapper
-) : UrgentAlarmListRepository {
+) : AlarmListRepository {
 
     override suspend fun getUrgentAlarmList(): Result<AlarmInfo> {
         when (
-            val response = urgentAlarmListDataSource.getUrgentAlarmList()
+            val response = alarmListDataSource.getUrgentAlarmList()
         ) {
             is NetworkState.Success -> {
                 val todayDivider = AlarmElement(
@@ -76,6 +77,56 @@ class UrgentAlarmListRepositoryImpl @Inject constructor(
             is NetworkState.UnknownError -> Timber.d(
                 response.t,
                 "${this.javaClass.name}_getUrgentAlarmList"
+            )
+        }
+        return Result.failure(IllegalStateException("NetworkError or UnKnownError please check timber"))
+    }
+
+    override suspend fun getPassedAlarmList(): Result<List<AlarmElement>> {
+        when (
+            val response = alarmListDataSource.getPassedAlarmList()
+        ) {
+            is NetworkState.Success -> return Result.success(
+                response.body.data.push.map { pushMapper.toAlarmElement(it) }
+            )
+            is NetworkState.Failure -> return Result.failure(
+                RetrofitFailureStateException(
+                    response.error,
+                    response.code
+                )
+            )
+            is NetworkState.NetworkError -> Timber.d(
+                response.error,
+                "${this.javaClass.name}_getPassedAlarmList"
+            )
+            is NetworkState.UnknownError -> Timber.d(
+                response.t,
+                "${this.javaClass.name}_getPassedAlarmList"
+            )
+        }
+        return Result.failure(IllegalStateException("NetworkError or UnKnownError please check timber"))
+    }
+
+    override suspend fun getUpComingAlarmList(): Result<List<AlarmElement>> {
+        when (
+            val response = alarmListDataSource.getUpComingAlarmList()
+        ) {
+            is NetworkState.Success -> return Result.success(
+                response.body.data.push.map { pushMapper.toAlarmElement(it) }
+            )
+            is NetworkState.Failure -> return Result.failure(
+                RetrofitFailureStateException(
+                    response.error,
+                    response.code
+                )
+            )
+            is NetworkState.NetworkError -> Timber.d(
+                response.error,
+                "${this.javaClass.name}_getUpComingAlarmList"
+            )
+            is NetworkState.UnknownError -> Timber.d(
+                response.t,
+                "${this.javaClass.name}_getUpComingAlarmList"
             )
         }
         return Result.failure(IllegalStateException("NetworkError or UnKnownError please check timber"))

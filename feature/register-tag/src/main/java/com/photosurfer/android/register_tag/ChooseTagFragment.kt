@@ -133,7 +133,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun addTagWithInputText() {
-        chooseTagViewModel.inputList.add(TagInfo(0L, binding.etTag.text.toString()))
+        chooseTagViewModel.inputList.add(TagInfo(0, binding.etTag.text.toString()))
         chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
         binding.etTag.text.clear()
     }
