@@ -55,6 +55,8 @@
     <string name="alarm_list_more">더보기</string>
     <string name="alarm_list_up_coming">다가오는 알림</string>
     <string name="alarm_list_urgent">임박한 알림</string>
+    <string name="empty_view_text">아직 알림이 없어요</string>
+    <string name="empty_view_button">알림설정 알아보기</string>
 
     <!-- SearchResult -->
     <string name="search_result">검색 결과</string>
