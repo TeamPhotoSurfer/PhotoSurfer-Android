@@ -34,6 +34,7 @@
             android:id="@+id/iv_alarm_content"
             android:layout_width="94dp"
             android:layout_height="0dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/iv_gray_20_background"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="@+id/iv_gray_20_background"
@@ -48,22 +49,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            app:setRepresentTagText="@{alarmData.tags}"
             android:layout_marginEnd="20dp"
             android:textAppearance="@style/subtitle_2"
             android:textColor="@color/gray_90"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_gray_20_background"
             app:layout_constraintTop_toTopOf="@+id/iv_gray_20_background"
+            app:setRepresentTagText="@{alarmData.tags}"
             tools:text="#장학금 #신청 #대학" />
 
         <TextView
             android:id="@+id/tv_memo"
             android:layout_width="0dp"
             android:layout_height="49dp"
-            android:text="@{alarmData.memo}"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="20dp"
+            android:text="@{alarmData.memo}"
             android:textAppearance="@style/caption_1"
             android:textColor="@color/gray_90"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,12 +78,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="14dp"
-            app:setDateToAlarmList="@{alarmData.pushDate}"
             android:textAppearance="@style/caption_1"
             android:textColor="@color/gray_50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_memo"
             app:layout_constraintTop_toBottomOf="@+id/tv_memo"
+            app:setDateToAlarmList="@{alarmData.pushDate}"
             tools:text="7월 9일" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 package com.photosurfer.android.di
 
 import com.photosurfer.android.data.repository.PushSettingRepositoryImpl
+import com.photosurfer.android.data.repository.UrgentAlarmListRepositoryImpl
 import com.photosurfer.android.domain.repository.PushSettingRepository
+import com.photosurfer.android.domain.repository.UrgentAlarmListRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,4 +17,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindsPushSettingRepository(repository: PushSettingRepositoryImpl): PushSettingRepository
+
+    @Binds
+    @Singleton
+    fun bindsUrgentAlarmListRepository(repository: UrgentAlarmListRepositoryImpl): UrgentAlarmListRepository
 }

@@ -3,8 +3,11 @@ package com.photosurfer.android.alarm_list.eachinfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.photosurfer.android.core.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EachInfoViewModel : BaseViewModel() {
+@HiltViewModel
+class EachInfoViewModel @Inject constructor() : BaseViewModel() {
 
     private val _fragmentState = MutableLiveData<String>()
     val fragmentState: LiveData<String> = _fragmentState
