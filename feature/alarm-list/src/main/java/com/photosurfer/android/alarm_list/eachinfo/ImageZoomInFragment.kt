@@ -33,7 +33,7 @@ class ImageZoomInFragment :
     private fun initCheckAlarmButton() {
         binding.btnCheckAlarm.setOnClickListener {
             val bundle = Bundle().apply {
-                putLong(PUSH_ID, eachInfoViewModel.pushId.value ?: throw IllegalStateException())
+                putInt(PUSH_ID, eachInfoViewModel.pushId.value ?: throw IllegalStateException())
                 putBoolean(CLICKABLE_STATE, false)
             }
             mainNavigator.transactionPushMainFragment(requireActivity(), bundle)

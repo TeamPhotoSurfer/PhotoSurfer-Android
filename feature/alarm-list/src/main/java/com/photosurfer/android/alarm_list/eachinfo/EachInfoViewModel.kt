@@ -15,14 +15,14 @@ class EachInfoViewModel @Inject constructor() : BaseViewModel() {
     private val _imgUrl = MutableLiveData<String>()
     val imgurl: LiveData<String> = _imgUrl
 
-    private val _pushId = MutableLiveData<Long>()
-    val pushId: LiveData<Long> = _pushId
+    private val _pushId = MutableLiveData<Int>()
+    val pushId: LiveData<Int> = _pushId
 
     fun updateImgUrl(imgUrl: String) {
         _imgUrl.postValue(imgUrl)
     }
 
-    fun updatePushId(pushId: Long) {
+    fun updatePushId(pushId: Int) {
         _pushId.postValue(pushId)
     }
 

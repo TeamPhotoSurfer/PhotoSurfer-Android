@@ -40,6 +40,9 @@ class PushSettingViewModel @Inject constructor(
     private val _photoId = MutableLiveData<Int>()
     val photoId: LiveData<Int> = _photoId
 
+    private val _pushId = MutableLiveData<Int>()
+    val pushId: LiveData<Int> = _pushId
+
     val memo = MutableLiveData("")
 
     private val _pushSettingSuccess = MutableLiveData<Event<Boolean>>()

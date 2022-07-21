@@ -26,6 +26,7 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
     private val pushSettingViewModel by activityViewModels<PushSettingViewModel>()
     private lateinit var keyBoardVisibilityListener: KeyBoardVisibilityListener
     private var clickableState = true
+    private var pushId = -1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.pushSettingViewModel = pushSettingViewModel
@@ -50,6 +51,7 @@ class PushMainFragment : BaseFragment<FragmentPushMainBinding>(R.layout.fragment
     private fun initArgumentsData() {
         if (arguments != null) {
             clickableState = requireNotNull(arguments).getBoolean("CLICKABLE_STATE")
+            pushId = requireNotNull(arguments).getInt("PUSH_ID")
         }
     }
 
