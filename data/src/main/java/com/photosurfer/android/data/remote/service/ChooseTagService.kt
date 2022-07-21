@@ -17,6 +17,13 @@ interface ChooseTagService {
         @Body body: ChooseTagRequest
     ): NetworkState<BaseResponse<ChooseTagResponse>>
 
+    /*
+    suspend fun postTag(
+        @Part image: MultipartBody.Part?,
+        @Part("contents") contents: List<TagNameType>
+    ): NetworkState<BaseResponse<ChooseTagResponse>>
+     */
+
     @GET("tag/main")
     suspend fun getTagList(): NetworkState<BaseResponse<TagListResponse>>
 }

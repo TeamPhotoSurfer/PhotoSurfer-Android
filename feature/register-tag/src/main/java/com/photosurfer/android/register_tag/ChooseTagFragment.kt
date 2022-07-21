@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         setRecentList()
         setOftenList()
         setPlatformList()
+        chooseTagViewModel.setEmptyInput()
         initAdapter()
         setDataOnRecyclerView()
         observeInputChipGroup()
@@ -43,15 +45,15 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         checkInputNum()
         initRecyclerViewLayout()
 
-
         val file: File = setImgToFile(getImgToUri())
-
         initButtonSaveClickListener()
     }
 
     private fun setPlatformList() {
         chooseTagViewModel.platformList.observe(viewLifecycleOwner) {
             platformTagAdapter.submitList(chooseTagViewModel.platformList.value)
+            chooseTagViewModel.setPlatformIdList()
+
         }
     }
 
@@ -108,7 +110,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun setDataOnRecyclerView() {
         Log.d(TAG, "setDataOnRecyclerView: recent ${chooseTagViewModel.recentList}")
-        inputTagAdapter.submitList(chooseTagViewModel.inputList.value)
+        inputTagAdapter.submitList(chooseTagViewModel.inputList)
         recentTagAdapter.submitList(chooseTagViewModel.recentList.value)
         oftenTagAdapter.submitList(chooseTagViewModel.oftenList.value)
         platformTagAdapter.submitList(chooseTagViewModel.platformList.value)
@@ -127,9 +129,9 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun checkInputNum() {
-//        if (chooseTagViewModel.inputList.value?.size > 6) {
-//            PhotoSurferSnackBar.make(requireView(), PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT).show()
-//        }
+        if (chooseTagViewModel.inputList.size > 6) {
+            PhotoSurferSnackBar.make(requireView(), PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT).show()
+        }
     }
 
     private fun deleteInput() {
@@ -140,6 +142,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun observeInputChipGroup() {
         chooseTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
+            Log.d("count::", "${chooseTagViewModel.isEmptyInput}")
             if (chooseTagViewModel.isEmptyInput.value!! > 0) {
                 binding.tvSave.isSelected = binding.ivCheckPlatform.isSelected != true
                 binding.tvSave.isEnabled = true
@@ -163,22 +166,43 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun addTagWithInputText() {
-        chooseTagViewModel.inputList.value?.add(TagInfo(0, binding.etTag.text.toString()))
-        //chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
+        chooseTagViewModel.inputList.add(TagInfo(0, binding.etTag.text.toString()))
         binding.etTag.text.clear()
     }
 
     private fun selectTag(tagInfo: TagInfo) {
         chooseTagViewModel.selectTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList.value)
+        inputTagAdapter.submitList(chooseTagViewModel.inputList)
         inputTagAdapter.notifyDataSetChanged()
     }
 
     private fun deleteTag(tagInfo: TagInfo) {
         chooseTagViewModel.deleteTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList.value)
+        inputTagAdapter.submitList(chooseTagViewModel.inputList)
     }
 }
+
+// TODO: POST 관련
+//fun checkPlatform() {
+//    var filteredList: MutableList<TagInfo> = mutableListOf()
+//
+//    for (i in 0 until 6) {
+//        filteredList = chooseTagViewModel.inputList.value?.filter {
+//            it.id == chooseTagViewModel.platformList.value?.get(i)?.id
+//        } as MutableList<TagInfo>
+//    }
+//
+//    Log.d("filtered List", "$filteredList")
+//}
+//
+//private fun initCompleteButtonCLick() {
+//    binding.tvSave.setOnClickListener {
+//        uploadPost(
+//            contents = chooseTagViewModel.inputList,
+//            image = MultiPartResolver().createImgMultiPart(requireNotNull(imageUri), this)
+//        )
+//    }
+//}
 
 enum class Platform(val platformName: String) {
     KAKAOTALK("카카오톡"),
