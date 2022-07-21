@@ -57,21 +57,21 @@ class PushSettingViewModel @Inject constructor(
         _clickableState.value = state
     }
 
-    fun updatePushId(pushId :Int){
-        _pushId.postValue(pushId)
+    fun updatePushId(pushId: Int) {
+        _pushId.value = pushId
     }
 
     fun initDefaultAlarmDate() {
         val defaultDate = LocalDate.now().plusDays(1)
-        _alarmDate.postValue(defaultDate.format(dotDateFormatter))
+        _alarmDate.value = defaultDate.format(dotDateFormatter)
     }
 
     fun updateAlarmDate(currentDate: String) {
-        _alarmDate.postValue(currentDate)
+        _alarmDate.value = currentDate
     }
 
     fun updateFragmentState(fragmentState: PushSettingConstant) {
-        _fragmentState.postValue(fragmentState)
+        _fragmentState.value = fragmentState
     }
 
     fun updateWholeTagList(wholeTag: MutableList<TagInfo>) {
@@ -80,11 +80,9 @@ class PushSettingViewModel @Inject constructor(
 
     fun initRepresentTagIdList() {
         if ((_wholeTagList.value?.size ?: 1) < 3) {
-            _representTagIdList.postValue(wholeTagList.value)
+            _representTagIdList.value = wholeTagList.value
         } else {
-            _representTagIdList.postValue(
-                wholeTagList.value?.subList(0, 3)
-            )
+            _representTagIdList.value = wholeTagList.value?.subList(0, 3)
         }
     }
 
@@ -93,11 +91,11 @@ class PushSettingViewModel @Inject constructor(
     }
 
     fun updateTempRepresentTagList(tempList: MutableList<TagInfo>) {
-        _tempRepresentTagIdList.postValue(tempList)
+        _tempRepresentTagIdList.value = tempList
     }
 
     fun updatePhotoId(photoId: Int) {
-        _photoId.postValue(photoId)
+        _photoId.value = photoId
     }
 
     fun postPushSetting() {
