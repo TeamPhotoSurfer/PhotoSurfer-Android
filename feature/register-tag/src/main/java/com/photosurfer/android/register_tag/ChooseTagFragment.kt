@@ -14,9 +14,10 @@ import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
-
+@AndroidEntryPoint
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
 
     private val chooseTagViewModel: ChooseTagViewModel by viewModels()
@@ -38,6 +39,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         deleteInput()
         checkInputNum()
         initRecyclerViewLayout()
+        chooseTagViewModel.getTagList()
 
         val file: File = setImgToFile(getImgToUri())
 
@@ -46,7 +48,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun initButtonSaveClickListener() {
         binding.tvSave.setOnClickListener {
-            chooseTagViewModel.postChooseTag()
+            //chooseTagViewModel.postChooseTag()
         }
     }
 
@@ -138,7 +140,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun addTagWithInputText() {
-        chooseTagViewModel.inputList.add(TagInfo(0L, binding.etTag.text.toString()))
+        chooseTagViewModel.inputList.add(TagInfo(0, binding.etTag.text.toString()))
         chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
         binding.etTag.text.clear()
     }

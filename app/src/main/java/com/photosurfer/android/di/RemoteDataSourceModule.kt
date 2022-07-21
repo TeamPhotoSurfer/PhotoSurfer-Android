@@ -1,11 +1,6 @@
 package com.photosurfer.android.di
 
-import com.photosurfer.android.data.remote.datasource.RemoteChooseTagDataSource
-import com.photosurfer.android.data.remote.datasource.RemoteChooseTagDataSourceImpl
-import com.photosurfer.android.data.remote.datasource.RemotePushSettingDataSource
-import com.photosurfer.android.data.remote.datasource.RemotePushSettingDataSourceImpl
-import com.photosurfer.android.data.remote.datasource.RemoteUrgentAlarmListDataSource
-import com.photosurfer.android.data.remote.datasource.RemoteUrgentAlarmListDataSourceImpl
+import com.photosurfer.android.data.remote.datasource.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -27,4 +22,8 @@ interface RemoteDataSourceModule {
     @Binds
     @Singleton
     fun bindsRemoteUrgentAlarmListDataSource(source: RemoteUrgentAlarmListDataSourceImpl): RemoteUrgentAlarmListDataSource
+
+    @Binds
+    @Singleton
+    fun bindsRemoteTagListDataSource(source: RemoteTagListDataSourceImpl): RemoteTagListDataSource
 }

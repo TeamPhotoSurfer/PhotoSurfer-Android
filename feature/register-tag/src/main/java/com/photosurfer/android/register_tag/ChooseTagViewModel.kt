@@ -1,5 +1,6 @@
 package com.photosurfer.android.register_tag
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,9 +22,9 @@ class ChooseTagViewModel @Inject constructor(
     private var _isEmptyInput = MutableLiveData<Int>()
     val isEmptyInput: LiveData<Int> get() = _isEmptyInput
     var inputList: MutableList<TagInfo> = mutableListOf()
-    val recentList: MutableList<TagInfo> = mutableListOf()
-    val oftenList: MutableList<TagInfo> = mutableListOf()
-    val platformList: MutableList<TagInfo> = mutableListOf()
+    var recentList: MutableList<TagInfo> = mutableListOf()
+    var oftenList: MutableList<TagInfo> = mutableListOf()
+    var platformList: MutableList<TagInfo> = mutableListOf()
 
     private val _chooseTagSuccess = MutableLiveData<Event<Boolean>>()
     val chooseTagSuccess: LiveData<Event<Boolean>> = _chooseTagSuccess
@@ -100,4 +101,17 @@ class ChooseTagViewModel @Inject constructor(
 //        }
 //    }
 
+    fun getTagList() {
+        viewModelScope.launch {
+            chooseTagRepository.getTagList()
+                .onSuccess {
+                    recentList = it.recentTagList
+                    oftenList = it.oftenTagList
+                    platformList = it.platformTagList
+                    Log.d("되니?", "된다....")
+                }.onFailure {
+                    Log.d("되니?", "안되니...")
+                }
+        }
+    }
 }
