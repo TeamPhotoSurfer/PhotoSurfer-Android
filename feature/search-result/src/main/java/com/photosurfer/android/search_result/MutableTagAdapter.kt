@@ -31,7 +31,7 @@ class MutableTagAdapter(
         fun bind(MutableChip: TagInfo, onItemClick: ((Int) -> Unit), isCancelable: Boolean) {
             binding.isCancelable = isCancelable
             binding.tagInfo = MutableChip
-            binding.root.setOnClickListener { onItemClick(layoutPosition) }
+            binding.root.setOnClickListener { onItemClick(adapterPosition) }
         }
     }
 

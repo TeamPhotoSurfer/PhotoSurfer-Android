@@ -5,8 +5,10 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
-            name="isSelectable"
+            name="isChecked"
             type="boolean" />
 
         <variable
@@ -35,8 +37,8 @@
             android:id="@+id/iv_check"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:visibility="gone"
             android:src="@drawable/ic_check_circle_fill_blue"
+            android:visibility="@{data.isChecked ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="ContentDescription" />

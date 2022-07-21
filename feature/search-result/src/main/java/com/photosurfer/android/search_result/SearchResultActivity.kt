@@ -1,11 +1,16 @@
 package com.photosurfer.android.search_result
 
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.widget.PopupMenu
 import androidx.activity.viewModels
+import androidx.appcompat.view.ContextThemeWrapper
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.core.constant.TAG_LIST
 import com.photosurfer.android.core.constant.TagResultViewType
-import com.photosurfer.android.core.ext.shortToast
 import com.photosurfer.android.core.onboarding.AddTagOnBoardingFragmentDialog
 import com.photosurfer.android.core.util.ItemDividerGrid
 import com.photosurfer.android.domain.entity.SerializeTagInfoList
@@ -37,6 +42,7 @@ class SearchResultActivity :
         initLearnAddTag()
         setBackButtonClickListener()
         setSelectClickListener()
+        onClickMenu()
     }
 
     private fun getExtraData() {
@@ -74,7 +80,6 @@ class SearchResultActivity :
         binding.tvChoose.setOnClickListener {
             binding.currentViewType = TagResultViewType.SELECT
             chipAdapter.toggleCancelable()
-            thumbnailAdapter.toggleSelectable()
             chipAdapter.notifyItemRangeChanged(
                 0,
                 viewModel.originTagList.value?.size ?: return@setOnClickListener
@@ -87,7 +92,6 @@ class SearchResultActivity :
             // viewModel 에서 selectedList -> emptyList()로 해주기
             binding.currentViewType = TagResultViewType.DEFAULT
             chipAdapter.toggleCancelable()
-            thumbnailAdapter.toggleSelectable()
             chipAdapter.notifyItemRangeChanged(
                 0,
                 viewModel.originTagList.value?.size ?: return@setOnClickListener
@@ -106,6 +110,21 @@ class SearchResultActivity :
             ThumbnailAdapter(::onItemClick).also { thumbnailAdapter = it }
     }
 
+    private fun onItemClick(thumbnail: ThumbnailInfo, position: Int) {
+        when (binding.currentViewType ?: TagResultViewType.DEFAULT) {
+            TagResultViewType.DEFAULT -> {
+                // TODO 창환~~ 미정이뷰 Navigate 로직 넣어조
+                val thumbnailId: Int =
+                    viewModel.thumbnail.value?.get(position)?.id ?: throw IllegalStateException()
+                Log.d(TAG, "onItemClick: $thumbnailId")
+            }
+            TagResultViewType.SELECT -> {
+                thumbnail.isChecked = !thumbnail.isChecked
+                thumbnailAdapter.notifyItemChanged(position)
+            }
+        }
+    }
+
     private fun initThumbnailList() {
         viewModel.thumbnail.observe(this) { list ->
             if (list != null) thumbnailAdapter.submitList(list)
@@ -118,23 +137,24 @@ class SearchResultActivity :
         )
     }
 
-    private fun onItemClick(thumbnail: ThumbnailInfo) {
-        when (binding.currentViewType) {
-            TagResultViewType.DEFAULT -> {
-                this.shortToast("DEFAULT 일때 처리")
-                // TODO 창환~~ 미정이뷰 Navigate 로직 넣어조
-            }
-            TagResultViewType.SELECT -> {
-                this.shortToast("SELECT 일때 처리")
-            }
-        }
-    }
-
     private fun onClickMenu() {
-        // Menu PopUp 띄우기
-    }
+        binding.ivMenu.setOnClickListener {
+            val wrapper: Context = ContextThemeWrapper(
+                this,
+                com.photosurfer.android.shared.R.style.popupMenuStyle
+            )
 
-    private fun changeItem() {
-        // select 뷰타입에 따라 check 박스 처리하기
+            val popupMenu = PopupMenu(wrapper, binding.ivMenu, Gravity.RIGHT)
+            popupMenu.inflate(R.menu.menu_search_result)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item?.itemId) {
+                    R.id.tag_add -> true
+                    R.id.tag_edit -> true
+                    R.id.tag_delete -> true
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
     }
 }

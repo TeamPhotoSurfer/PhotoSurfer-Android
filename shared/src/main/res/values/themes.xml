@@ -55,10 +55,16 @@
     <!-- popup menu style. -->
 
     <style name="popupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">4.2sp</item>
+        <item name="background">@drawable/shape_rect_white_fill_4</item>
         <item name="android:textColor">@color/gray_95_a_70</item>
         <item name="android:itemBackground">@color/white</item>
         <item name="android:divider">@color/gray_10</item>
         <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
         <item name="android:dividerHeight">1dp</item>
     </style>
 
