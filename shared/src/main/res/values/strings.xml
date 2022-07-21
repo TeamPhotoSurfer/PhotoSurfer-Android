@@ -88,4 +88,10 @@
     <string name="relative_tag">연관 태그</string>
     <string name="can_find_photo_easy_when_add_source">출처를 추가하면 사진을 더 쉽게 찾을 수 있어요.</string>
     <string name="platform_type">플랫폼 유형</string>
+
+    <!-- pop up menu -->
+    <string name="tag_add">태그 추가</string>
+    <string name="tag_edit">태그 수정</string>
+    <string name="tag_delete">태그 삭제</string>
+
 </resources>

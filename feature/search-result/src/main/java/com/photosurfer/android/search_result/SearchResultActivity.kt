@@ -1,9 +1,13 @@
 package com.photosurfer.android.search_result
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.widget.PopupMenu
 import androidx.activity.viewModels
+import androidx.appcompat.view.ContextThemeWrapper
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.core.constant.TAG_LIST
 import com.photosurfer.android.core.constant.TagResultViewType
@@ -38,6 +42,7 @@ class SearchResultActivity :
         initLearnAddTag()
         setBackButtonClickListener()
         setSelectClickListener()
+        onClickMenu()
     }
 
     private fun getExtraData() {
@@ -133,10 +138,23 @@ class SearchResultActivity :
     }
 
     private fun onClickMenu() {
-        // Menu PopUp 띄우기
-    }
+        binding.ivMenu.setOnClickListener {
+            val wrapper: Context = ContextThemeWrapper(
+                this,
+                com.photosurfer.android.shared.R.style.popupMenuStyle
+            )
 
-    private fun changeItem() {
-        // select 뷰타입에 따라 check 박스 처리하기
+            val popupMenu = PopupMenu(wrapper, binding.ivMenu, Gravity.RIGHT)
+            popupMenu.inflate(R.menu.menu_search_result)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item?.itemId) {
+                    R.id.tag_add -> true
+                    R.id.tag_edit -> true
+                    R.id.tag_delete -> true
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
     }
 }
