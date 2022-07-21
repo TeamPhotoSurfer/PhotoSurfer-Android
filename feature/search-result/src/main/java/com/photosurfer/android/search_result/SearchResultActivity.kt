@@ -18,7 +18,9 @@ import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
 import com.photosurfer.android.search_result.viewModel.SearchResultViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchResultActivity :
     BaseActivity<ActivitySearchResultBinding>(R.layout.activity_search_result) {
     private val viewModel: SearchResultViewModel by viewModels()
@@ -32,6 +34,8 @@ class SearchResultActivity :
 
         getExtraData()
         initExtraDataOnViewModel()
+        getPhotosByTags()
+        updatePhoto()
         setDefaultViewType()
         setCancelListener()
         initChipAdapter()
@@ -43,6 +47,16 @@ class SearchResultActivity :
         setBackButtonClickListener()
         setSelectClickListener()
         onClickMenu()
+    }
+
+    private fun updatePhoto() {
+        viewModel.thumbnail.observe(this) {
+            thumbnailAdapter.submitList(viewModel.thumbnail.value)
+        }
+    }
+
+    private fun getPhotosByTags() {
+        viewModel.getPhotosByTags()
     }
 
     private fun getExtraData() {
