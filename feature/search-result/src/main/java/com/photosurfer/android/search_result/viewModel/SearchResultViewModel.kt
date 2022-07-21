@@ -23,10 +23,10 @@ class SearchResultViewModel : ViewModel() {
     private var _tempTagList: MutableLiveData<MutableList<TagInfo>> =
         MutableLiveData(originTagList.value)
     val tempTagList: LiveData<MutableList<TagInfo>> = _tempTagList
+    val isTempTagListEmpty = MutableLiveData(tempTagList.value?.size == 0)
 
     private var _thumbnail = MutableLiveData<MutableList<ThumbnailInfo?>>()
     val thumbnail: LiveData<MutableList<ThumbnailInfo?>> = _thumbnail
-
     val noThumbnailData = MutableLiveData(thumbnail.value?.size == 0)
 
     fun updateList(list: MutableList<Int>) {
@@ -47,6 +47,7 @@ class SearchResultViewModel : ViewModel() {
 
     fun deleteTag(position: Int) {
         _tempTagList.value?.removeAt(position)
+        isTempTagListEmpty.value = tempTagList.value?.size == 0
     }
 
     init {
