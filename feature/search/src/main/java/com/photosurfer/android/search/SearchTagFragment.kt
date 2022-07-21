@@ -1,9 +1,6 @@
-package com.photosurfer.android.register_tag
+package com.photosurfer.android.search
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -11,74 +8,75 @@ import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.constant.SELECTED_TAG
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
-import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
-import java.io.File
+import com.photosurfer.android.navigator.MainNavigator
+import com.photosurfer.android.register_tag.PointSubTagAdapter
+import com.photosurfer.android.register_tag.PointTagAdapter
+import com.photosurfer.android.search.databinding.FragmentSearchTagBinding
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragment_search_tag) {
 
-class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
-
-    private val chooseTagViewModel: ChooseTagViewModel by viewModels()
+    private val viewModel: SearchTagViewModel by viewModels()
 
     private lateinit var inputTagAdapter: PointTagAdapter
     private lateinit var recentTagAdapter: PointSubTagAdapter
     private lateinit var oftenTagAdapter: PointSubTagAdapter
     private lateinit var platformTagAdapter: PointSubTagAdapter
 
+    @Inject
+    lateinit var mainNavigator: MainNavigator
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
-        chooseTagViewModel.setTagList()
+        viewModel.setTagList()
 
+        getExtraData()
+        onClickBackButton()
         initAdapter()
         setDataOnRecyclerView()
-        observeInputChipGroup()
         convertTypingView()
         setCompleteOnKeyBoardListener()
         deleteInput()
-        checkInputNum()
         initRecyclerViewLayout()
-
-        val file: File = setImgToFile(getImgToUri())
     }
 
-    private fun getImgToUri(): Uri? {
-        val intent = activity?.intent
-        intent?.getStringExtra(Intent.EXTRA_TEXT).toString()
-        intent?.getStringExtra(Intent.ACTION_SEND).toString()
+    private fun getExtraData() {
+        val tagInfo = requireActivity().intent.getSerializableExtra(SELECTED_TAG) as? TagInfo
+        Timber.d("tagInfo from previous $tagInfo")
+        tagInfo?.let { addTagWithInputText(it.name) }
+    }
 
-        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        val bundle = Bundle()
-        val imageUri: Uri? = intent?.getParcelableExtra(Intent.EXTRA_STREAM)
-        if (imageUri != null) {
-            bundle.putString("image", imageUri.toString())
-        } else {
-            bundle.putString("image", "")
+    private fun onClickBackButton() {
+        binding.ivBack.setOnClickListener {
+            requireActivity().finish()
         }
-        return imageUri
-    }
-
-    private fun setImgToFile(uri: Uri?): File {
-        return File(getImgToUri().toString())
     }
 
     private fun initRecyclerViewLayout() {
         val oftenLayoutManager = FlexboxLayoutManager(context)
-        oftenLayoutManager.flexWrap = FlexWrap.WRAP
         val recentLayoutManager = FlexboxLayoutManager(context)
-        recentLayoutManager.flexWrap = FlexWrap.WRAP
         val platformLayoutManager = FlexboxLayoutManager(context)
+
+        recentLayoutManager.flexWrap = FlexWrap.WRAP
+        oftenLayoutManager.flexWrap = FlexWrap.WRAP
         platformLayoutManager.flexWrap = FlexWrap.WRAP
+
         binding.rcvOften.layoutManager = oftenLayoutManager
         binding.rcvRecent.layoutManager = recentLayoutManager
         binding.rcvPlatform.layoutManager = platformLayoutManager
     }
 
     private fun setDataOnRecyclerView() {
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
-        recentTagAdapter.submitList(chooseTagViewModel.recentList)
-        oftenTagAdapter.submitList(chooseTagViewModel.oftenList)
-        platformTagAdapter.submitList(chooseTagViewModel.platformList)
+        inputTagAdapter.submitList(viewModel.inputList)
+        recentTagAdapter.submitList(viewModel.recentList)
+        oftenTagAdapter.submitList(viewModel.oftenList)
+        platformTagAdapter.submitList(viewModel.platformList)
     }
 
     private fun initAdapter() {
@@ -94,7 +92,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun checkInputNum() {
-        if (chooseTagViewModel.inputList.size > 6) {
+        if (viewModel.inputList.size > 6) {
             PhotoSurferSnackBar.make(requireView(), PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT).show()
         }
     }
@@ -105,53 +103,46 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         }
     }
 
-    private fun observeInputChipGroup() {
-        chooseTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
-            if (chooseTagViewModel.isEmptyInput.value!! > 0) {
-                binding.tvSave.isSelected = binding.ivCheckPlatform.isSelected != true
-                binding.tvSave.isEnabled = true
-            }
-        }
-    }
-
     private fun convertTypingView() {
         binding.etTag.addTextChangedListener {
             binding.isTyping = binding.etTag.text.isEmpty()
         }
     }
 
+    private fun isTypingNow() = binding.etTag.text.toString() != ""
+
     private fun setCompleteOnKeyBoardListener() {
         binding.etTag.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                addTagWithInputText()
+                if (isTypingNow()) {
+                    // 검색 창 뜨게
+                } else if (isTagSelectedAtListOnce())
+                    navigateToSearchTagActivity()
             }
             false
         }
     }
 
-    private fun addTagWithInputText() {
-        chooseTagViewModel.inputList.add(TagInfo(0, binding.etTag.text.toString()))
-        chooseTagViewModel.setEmptyInput(chooseTagViewModel.inputList.size)
+    private fun isTagSelectedAtListOnce(): Boolean = viewModel.inputList.size != 0
+
+    private fun navigateToSearchTagActivity() {
+        mainNavigator.navigateSearchResult(requireContext(), viewModel.inputList.toList())
+    }
+
+    private fun addTagWithInputText(tag: String) {
+        viewModel.inputList.add(TagInfo(0, tag))
+        viewModel.setEmptyInput(viewModel.inputList.size)
         binding.etTag.text.clear()
     }
 
     private fun selectTag(tagInfo: TagInfo) {
-        chooseTagViewModel.selectTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
+        viewModel.selectTag(tagInfo)
+        inputTagAdapter.submitList(viewModel.inputList)
         inputTagAdapter.notifyDataSetChanged()
     }
 
     private fun deleteTag(tagInfo: TagInfo) {
-        chooseTagViewModel.deleteTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
+        viewModel.deleteTag(tagInfo)
+        inputTagAdapter.submitList(viewModel.inputList)
     }
-}
-
-enum class Platform(val platformName: String) {
-    KAKAOTALK("카카오톡"),
-    YOUTUBE("유튜브"),
-    INSTAGRAM("인스타그램"),
-    SHOPPINGMALL("쇼핑몰"),
-    COMMUNITY("커뮤니티"),
-    ETC("기타")
 }

@@ -12,6 +12,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
     // Android Core
     implementation(AndroidXDependencies.splashScreen)
 
@@ -24,4 +26,7 @@ dependencies {
 
     // dotsIndocator
     implementation(ThirdPartyDependencies.dotsIndicator)
+
+    // Third Party Library
+    implementation(ThirdPartyDependencies.flexBox)
 }

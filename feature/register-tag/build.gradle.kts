@@ -48,6 +48,6 @@ dependencies {
     implementation(ThirdPartyDependencies.okHttp)
     implementation(ThirdPartyDependencies.okHttpLoggingInterceptor)
 
-    // flexbox layout
-    implementation(AndroidXDependencies.flexBox)
+    // Third Party Library
+    implementation(ThirdPartyDependencies.flexBox)
 }

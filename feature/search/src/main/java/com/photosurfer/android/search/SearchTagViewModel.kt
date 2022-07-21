@@ -1,11 +1,11 @@
-package com.photosurfer.android.register_tag
+package com.photosurfer.android.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.photosurfer.android.domain.entity.TagInfo
 
-class ChooseTagViewModel : ViewModel() {
+class SearchTagViewModel : ViewModel() {
     private var _isEmptyInput = MutableLiveData<Int>()
     val isEmptyInput: LiveData<Int> get() = _isEmptyInput
     var inputList: MutableList<TagInfo> = mutableListOf()

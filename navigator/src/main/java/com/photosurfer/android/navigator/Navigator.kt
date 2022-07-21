@@ -11,7 +11,7 @@ interface MainNavigator {
 
     fun navigateSearchTag(
         context: Context,
-        tag: Pair<String, String>
+        selectedTag: TagInfo? = null
     )
 
     fun transactionPushMainFragment(fragmentActivity: FragmentActivity, bundle: Bundle)
