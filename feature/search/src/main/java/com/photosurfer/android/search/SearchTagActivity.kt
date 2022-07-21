@@ -2,7 +2,6 @@ package com.photosurfer.android.search
 
 import android.os.Bundle
 import com.photosurfer.android.core.base.BaseActivity
-import com.photosurfer.android.register_tag.ChooseTagFragment
 import com.photosurfer.android.search.databinding.ActivitySearchTagBinding
 
 class SearchTagActivity : BaseActivity<ActivitySearchTagBinding>(R.layout.activity_search_tag) {
@@ -11,9 +10,13 @@ class SearchTagActivity : BaseActivity<ActivitySearchTagBinding>(R.layout.activi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val chooseTagFragment = ChooseTagFragment()
+        setFragmentOnFCV()
+    }
+
+    private fun setFragmentOnFCV() {
+        val searchTagFragment = SearchTagFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_select_tag, chooseTagFragment)
+            .replace(R.id.fcv_select_tag, searchTagFragment)
             .commit()
     }
 }
