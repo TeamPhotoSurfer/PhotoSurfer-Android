@@ -1,6 +1,8 @@
 package com.photosurfer.android.search
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -11,24 +13,30 @@ import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.constant.SELECTED_TAG
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
+import com.photosurfer.android.navigator.MainNavigator
 import com.photosurfer.android.register_tag.PointSubTagAdapter
 import com.photosurfer.android.register_tag.PointTagAdapter
 import com.photosurfer.android.search.databinding.FragmentSearchTagBinding
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragment_search_tag) {
 
-    private val searchTagViewModel: SearchTagViewModel by viewModels()
+    private val viewModel: SearchTagViewModel by viewModels()
 
     private lateinit var inputTagAdapter: PointTagAdapter
     private lateinit var recentTagAdapter: PointSubTagAdapter
     private lateinit var oftenTagAdapter: PointSubTagAdapter
     private lateinit var platformTagAdapter: PointSubTagAdapter
 
+    @Inject
+    lateinit var mainNavigator: MainNavigator
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
-        searchTagViewModel.setTagList()
+        viewModel.setTagList()
 
         getExtraData()
         onClickBackButton()
@@ -37,7 +45,6 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         convertTypingView()
         setCompleteOnKeyBoardListener()
         deleteInput()
-        checkInputNum()
         initRecyclerViewLayout()
     }
 
@@ -68,10 +75,10 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
     }
 
     private fun setDataOnRecyclerView() {
-        inputTagAdapter.submitList(searchTagViewModel.inputList)
-        recentTagAdapter.submitList(searchTagViewModel.recentList)
-        oftenTagAdapter.submitList(searchTagViewModel.oftenList)
-        platformTagAdapter.submitList(searchTagViewModel.platformList)
+        inputTagAdapter.submitList(viewModel.inputList)
+        recentTagAdapter.submitList(viewModel.recentList)
+        oftenTagAdapter.submitList(viewModel.oftenList)
+        platformTagAdapter.submitList(viewModel.platformList)
     }
 
     private fun initAdapter() {
@@ -87,7 +94,7 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
     }
 
     private fun checkInputNum() {
-        if (searchTagViewModel.inputList.size > 6) {
+        if (viewModel.inputList.size > 6) {
             PhotoSurferSnackBar.make(requireView(), PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT).show()
         }
     }
@@ -104,29 +111,39 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         }
     }
 
+    private fun isTypingNow() = binding.etTag.text.toString() != ""
+
     private fun setCompleteOnKeyBoardListener() {
         binding.etTag.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                addTagWithInputText(binding.etTag.text.toString())
+                if (isTypingNow()) addTagWithInputText(binding.etTag.text.toString())
+                else if (isTagSelectedAtListOnce()) navigateToSearchTagActivity()
             }
             false
         }
     }
 
+    private fun isTagSelectedAtListOnce(): Boolean = viewModel.inputList.size != 0
+
+    private fun navigateToSearchTagActivity() {
+        Log.d(TAG, "navigateToSearchTagActivity: ")
+        mainNavigator.navigateSearchResult(requireContext(), viewModel.inputList.toList())
+    }
+
     private fun addTagWithInputText(tag: String) {
-        searchTagViewModel.inputList.add(TagInfo(0, tag))
-        searchTagViewModel.setEmptyInput(searchTagViewModel.inputList.size)
+        viewModel.inputList.add(TagInfo(0, tag))
+        viewModel.setEmptyInput(viewModel.inputList.size)
         binding.etTag.text.clear()
     }
 
     private fun selectTag(tagInfo: TagInfo) {
-        searchTagViewModel.selectTag(tagInfo)
-        inputTagAdapter.submitList(searchTagViewModel.inputList)
+        viewModel.selectTag(tagInfo)
+        inputTagAdapter.submitList(viewModel.inputList)
         inputTagAdapter.notifyDataSetChanged()
     }
 
     private fun deleteTag(tagInfo: TagInfo) {
-        searchTagViewModel.deleteTag(tagInfo)
-        inputTagAdapter.submitList(searchTagViewModel.inputList)
+        viewModel.deleteTag(tagInfo)
+        inputTagAdapter.submitList(viewModel.inputList)
     }
 }

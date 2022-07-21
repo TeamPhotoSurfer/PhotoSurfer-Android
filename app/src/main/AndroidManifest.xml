@@ -22,7 +22,7 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-            +
+
         </service>
         <!--푸시 아이콘 지정-->
         <meta-data
@@ -70,13 +70,17 @@
             android:exported="false" />
 
         <activity
+            android:name=".search.SearchTagActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".search_result.SearchResultActivity"
-            android:exported="true" />
-        <!-- TODO : 효림 곧 export 수정 예정 -->
+            android:exported="false" />
 
         <activity
             android:name=".alarm_list.moreinfo.AlarmListExtraActivity"
             android:exported="false" />
+
         <activity
             android:name=".alarm_list.eachinfo.AlarmSpecificImageActivity"
             android:exported="false" />
