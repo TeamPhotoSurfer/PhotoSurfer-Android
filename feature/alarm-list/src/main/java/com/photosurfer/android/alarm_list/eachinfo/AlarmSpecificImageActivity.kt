@@ -20,7 +20,7 @@ class AlarmSpecificImageActivity :
 
     private val eachInfoViewModel by viewModels<EachInfoViewModel>()
     private lateinit var imgUrl: String
-    private var pushId by Delegates.notNull<Long>()
+    private var pushId by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class AlarmSpecificImageActivity :
 
     private fun initExtraData() {
         imgUrl = intent.getStringExtra(ZOOM_IN_IMAGE_URL) ?: "오류발생"
-        pushId = intent.getLongExtra(PUSH_ID, -3L)
+        pushId = intent.getIntExtra(PUSH_ID, -3)
     }
 
     private fun initViewModelData() {
