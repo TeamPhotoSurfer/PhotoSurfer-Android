@@ -6,4 +6,5 @@ interface TagListRepository {
 
     suspend fun getOftenSearchTagList(): Result<List<TagInfo>>
 
+
 }

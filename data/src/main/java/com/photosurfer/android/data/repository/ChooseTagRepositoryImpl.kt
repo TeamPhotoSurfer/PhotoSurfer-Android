@@ -4,11 +4,9 @@ import com.photosurfer.android.core.exception.RetrofitFailureStateException
 import com.photosurfer.android.data.remote.calladapter.NetworkState
 import com.photosurfer.android.data.remote.datasource.RemoteChooseTagDataSource
 import com.photosurfer.android.data.remote.datasource.RemoteTagListDataSource
-import com.photosurfer.android.data.remote.mapper.TagMapper
 import com.photosurfer.android.data.remote.model.request.ChooseTagRequest
-import com.photosurfer.android.domain.entity.TagIdNameType
-import com.photosurfer.android.domain.entity.TagInfo
-import com.photosurfer.android.domain.entity.ThreeTagList
+import com.photosurfer.android.data.remote.model.response.EditTagNameResponse
+import com.photosurfer.android.domain.entity.*
 import com.photosurfer.android.domain.entity.request.DomainChooseTagRequest
 import com.photosurfer.android.domain.repository.ChooseTagRepository
 import timber.log.Timber
@@ -90,6 +88,74 @@ class ChooseTagRepositoryImpl @Inject constructor(
             )
         }
         return Result.failure(java.lang.IllegalStateException("NetworkError or UnKnownError please check timber"))
+    }
+
+    override suspend fun getSavedTagList(): Result<SavedTagList> {
+        when(
+            val response = remoteTagListDataSource.getSavedTagList()
+        ) {
+            is NetworkState.Success -> {
+                val tempBookmarkedList = mutableListOf<SavedTag>()
+                val tempNotBookmarkedList = mutableListOf<SavedTag>()
+
+                tempBookmarkedList.addAll(
+                    response.body.data.bookmarked.tags
+                )
+                tempNotBookmarkedList.addAll(
+                    response.body.data.notBookmarked.tags
+                )
+                return Result.success(
+                    SavedTagList(
+                        bookmarked = tempBookmarkedList,
+                        notBookmarked = tempNotBookmarkedList
+                    )
+                )
+            }
+            is NetworkState.Failure -> return Result.failure(
+                RetrofitFailureStateException(
+                    response.error,
+                    response.code
+                )
+            )
+            is NetworkState.NetworkError -> Timber.d(
+                response.error,
+                "${this.javaClass.name}_getUrgentAlarmList"
+            )
+            is NetworkState.UnknownError -> Timber.d(
+                response.t,
+                "${this.javaClass.name}_getUrgentAlarmList"
+            )
+        }
+        return Result.failure(java.lang.IllegalStateException("NetworkError or UnKnownError please check timber"))
+    }
+
+    override suspend fun putNewTagName(): Result<String> {
+        when(
+            val response = remoteTagListDataSource.putEditTagName()
+        ) {
+            is NetworkState.Success -> {
+
+                return Result.success(
+                    response.body.data.name
+                )
+            }
+            is NetworkState.Failure -> return Result.failure(
+                RetrofitFailureStateException(
+                    response.error,
+                    response.code
+                )
+            )
+            is NetworkState.NetworkError -> Timber.d(
+                response.error,
+                "${this.javaClass.name}_putNewTagName"
+            )
+            is NetworkState.UnknownError -> Timber.d(
+                response.t,
+                "${this.javaClass.name}_putNewTagName"
+            )
+        }
+        return Result.failure(java.lang.IllegalStateException("NetworkError or UnKnownError please check timber"))
+
     }
 
 }
