@@ -89,6 +89,7 @@ class SearchResultViewModel @Inject constructor(
 
     fun deleteTag(position: Int) {
         _tagList.value?.removeAt(position)
+        // _tagList.value = tagList.value?.toMutableList() // new Instance
         isTagListEmpty.value = tagList.value?.size == 0
     }
 

@@ -35,11 +35,11 @@ class SearchResultActivity :
 
         getExtraData()
         initExtraDataOnViewModel()
+        initChipAdapter()
         getNewPhotoAsTagChanged()
         updatePhoto()
         setDefaultViewType()
         setCancelListener()
-        initChipAdapter()
         setDataOnRecyclerView()
         initThumbnailAdapter()
         initThumbnailList()
@@ -57,7 +57,9 @@ class SearchResultActivity :
     }
 
     private fun getNewPhotoAsTagChanged() {
+        // TODO observe 작동 안함 deep copy 사용방법으로 교체
         viewModel.tagList.observe(this) {
+            Log.d(TAG, "getNewPhotoAsTagChanged: ${viewModel.tagList.value}")
             getPhotosByTags()
         }
     }
@@ -90,6 +92,7 @@ class SearchResultActivity :
     private fun deleteTag(position: Int) {
         viewModel.deleteTag(position)
         chipAdapter.notifyItemRemoved(position)
+        getPhotosByTags()
     }
 
     private fun setDataOnRecyclerView() {
