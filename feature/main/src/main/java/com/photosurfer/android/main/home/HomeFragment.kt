@@ -6,9 +6,7 @@ import android.view.View
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.core.constant.DialogMode
 import com.photosurfer.android.core.util.ChipUnSelectableUtil
-import com.photosurfer.android.core.util.PhotoSurferDialogUtil
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.main.R
 import com.photosurfer.android.main.databinding.FragmentHomeBinding
@@ -29,10 +27,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         getOftenSearchTagList()
         setChipAfterTagDataExist()
         onClickEditText()
-
-        val dialog =
-            PhotoSurferDialogUtil(DialogMode.DELETE_SELECTED_PHOTO.name, ::dismissBottomSheet, "인턴")
-        dialog.show(requireActivity().supportFragmentManager, this.javaClass.name)
     }
 
     private fun dismissBottomSheet() {
