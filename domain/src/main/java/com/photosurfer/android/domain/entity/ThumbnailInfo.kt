@@ -2,6 +2,6 @@ package com.photosurfer.android.domain.entity
 
 data class ThumbnailInfo(
     val id: Int,
-    val imageURL: String,
+    val imageUrl: String,
     var isChecked: Boolean = false
 )
