@@ -7,9 +7,10 @@
 
         <import type="android.view.View" />
 
+
         <variable
-            name="isCancelable"
-            type="boolean" />
+            name="processState"
+            type="String" />
 
         <variable
             name="tagInfo"
@@ -20,7 +21,7 @@
         android:id="@+id/cl_whole_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="@{isCancelable ? true : false}"
+        android:clickable="@{processState == `ADD` ? false : true}"
         android:paddingEnd="12dp">
 
         <ImageView
@@ -51,10 +52,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_tag_name" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_tag_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:focusable="@{processState == `ADJUST` ? true : false}"
                 android:text="@{tagInfo.name}"
                 android:textAppearance="@style/body2"
                 android:textColor="@color/white"
@@ -69,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:src="@drawable/ic_x_circle_fill_white"
-                android:visibility="@{isCancelable ? View.VISIBLE : View.GONE}"
+                android:visibility="@{processState == `DELETE` ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_tag_name"
                 app:layout_constraintStart_toEndOf="@id/tv_tag_name"
                 app:layout_constraintTop_toTopOf="@id/tv_tag_name" />
