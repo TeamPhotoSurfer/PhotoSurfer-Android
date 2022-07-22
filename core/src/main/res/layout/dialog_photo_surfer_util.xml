@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+
+        <variable
+            name="confirmText"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white_radius_20">
+
+        <TextView
+            android:id="@+id/tv_popup_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:text="@{title}"
+            android:textAppearance="@style/subtitle_1"
+            android:textColor="@color/gray_90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="'인턴' 태그를 삭제하시겠습니까?" />
+
+        <TextView
+            android:id="@+id/tv_popup_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@{description}"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray_50"
+            android:visibility="@{description == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/btn_confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_popup_title"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="마지막 태그를 삭제하면 사진도 포토서퍼에서 지워집니다." />
+
+        <TextView
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            android:text="@{confirmText}"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_popup_description"
+            tools:text="삭제" />
+
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            android:text="@string/btn_cancel"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray_50"
+            app:layout_constraintBottom_toBottomOf="@id/btn_confirm"
+            app:layout_constraintEnd_toStartOf="@id/btn_confirm"
+            app:layout_constraintTop_toTopOf="@id/btn_confirm" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

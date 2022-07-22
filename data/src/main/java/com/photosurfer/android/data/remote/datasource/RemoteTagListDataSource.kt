@@ -13,4 +13,6 @@ interface RemoteTagListDataSource {
     suspend fun getSavedTagList(): NetworkState<BaseResponse<SavedTagResponse>>
 
     suspend fun putEditTagName(): NetworkState<BaseResponse<EditTagNameResponse>>
+
+    suspend fun getAllTagList(): NetworkState<BaseResponse<MutableList<TagInfo>>>
 }

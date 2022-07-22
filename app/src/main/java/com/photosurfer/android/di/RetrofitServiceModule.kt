@@ -5,9 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import org.intellij.lang.annotations.PrintFormat
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -48,5 +46,10 @@ object RetrofitServiceModule {
     @Singleton
     fun providesOftenSearchTagService(retrofit: Retrofit): OftenSearchTagService =
         retrofit.create(OftenSearchTagService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesSearchTagResultService(retrofit: Retrofit): SearchTagResultService =
+        retrofit.create(SearchTagResultService::class.java)
 
 }

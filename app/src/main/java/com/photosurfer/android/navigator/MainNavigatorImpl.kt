@@ -10,6 +10,7 @@ import com.photosurfer.android.core.constant.TAG_LIST
 import com.photosurfer.android.core.ext.startActivity
 import com.photosurfer.android.domain.entity.SerializeTagInfoList
 import com.photosurfer.android.domain.entity.TagInfo
+import com.photosurfer.android.push_setting.PushSettingActivity
 import com.photosurfer.android.push_setting.fragments.PushMainFragment
 import com.photosurfer.android.search.SearchTagActivity
 import com.photosurfer.android.search_result.SearchResultActivity
@@ -39,6 +40,14 @@ class MainNavigatorImpl @Inject constructor() : MainNavigator {
     override fun navigateSearchResult(context: Context, list: List<TagInfo>) {
         context.startActivity(
             Intent(context, SearchResultActivity::class.java).apply {
+                putExtra(TAG_LIST, SerializeTagInfoList(list))
+            }
+        )
+    }
+
+    override fun navigatePushSettingFragment(context: Context, list: List<TagInfo>) {
+        context.startActivity(
+            Intent(context, PushSettingActivity::class.java).apply {
                 putExtra(TAG_LIST, SerializeTagInfoList(list))
             }
         )

@@ -25,6 +25,10 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
     </style>
 
+    <style name="DisableDialogBackground" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="ThemeOverlay.App.Switch" parent="">
         <item name="colorOnSurface">@color/main</item>
         <item name="colorSecondary">@color/gray_10</item>
