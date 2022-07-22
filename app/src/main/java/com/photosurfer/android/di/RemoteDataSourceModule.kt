@@ -26,4 +26,8 @@ interface RemoteDataSourceModule {
     @Binds
     @Singleton
     fun bindsRemoteTagListDataSource(source: RemoteTagListDataSourceImpl): RemoteTagListDataSource
+
+    @Binds
+    @Singleton
+    fun bindsRemoteTagListDataSource(source: RemoteImageDataSourceImpl): RemoteImageDataSource
 }

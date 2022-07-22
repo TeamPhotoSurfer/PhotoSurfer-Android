@@ -9,6 +9,6 @@ import retrofit2.http.Path
 interface DetailImageService {
     @GET("photo/detail/{photoId}")
     suspend fun getDetailImageInfo(
-        @Path("photoID") photo: Int
+        @Path("photoID") photoId: Int
     ): NetworkState<BaseResponse<DetailImageResponse>>
 }
