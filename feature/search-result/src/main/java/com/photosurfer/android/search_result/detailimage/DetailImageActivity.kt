@@ -7,10 +7,8 @@ import android.view.Gravity
 import android.widget.PopupMenu
 import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
-import com.photosurfer.android.core.util.EventObserver
-import com.photosurfer.android.core.util.StfalconImageViewerUtil
-import com.photosurfer.android.core.util.getImageUriFromBitmap
-import com.photosurfer.android.core.util.useBitmapImg
+import com.photosurfer.android.core.constant.DialogMode
+import com.photosurfer.android.core.util.*
 import com.photosurfer.android.search_result.R
 import com.photosurfer.android.search_result.SearchResultActivity.Companion.PHOTO_ID
 import com.photosurfer.android.search_result.databinding.ActivityDetailImageBinding
@@ -23,6 +21,7 @@ class DetailImageActivity :
 
     private val detailImageViewModel by viewModels<DetailImageViewModel>()
     var photoId by Delegates.notNull<Int>()
+    lateinit var dialog: PhotoSurferDialogUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +38,14 @@ class DetailImageActivity :
     }
 
     private fun initDeleteButtonClickListener() {
+        dialog = PhotoSurferDialogUtil(DialogMode.DELETE_ONE_PHOTO.name, ::deleteImage)
         binding.ivDelete.setOnClickListener {
+            dialog.show(supportFragmentManager, this.javaClass.name)
         }
+    }
+
+    private fun deleteImage() {
+        detailImageViewModel.deleteImage()
     }
 
     private fun initExtraData() {
