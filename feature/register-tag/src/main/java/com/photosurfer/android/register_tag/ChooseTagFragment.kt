@@ -26,32 +26,46 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     private lateinit var recentTagAdapter: PointSubTagAdapter
     private lateinit var oftenTagAdapter: PointSubTagAdapter
     private lateinit var platformTagAdapter: PointSubTagAdapter
+    private lateinit var filterTagAdapter: PointSubTagAdapter
+    private lateinit var tempList: ArrayList<TagInfo>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
 
+        getRecommendTagList()
         setRecentList()
         setOftenList()
         setPlatformList()
+        chooseTagViewModel.getAllTagList()
+        setAllItemList()
         chooseTagViewModel.setEmptyInput()
         initAdapter()
         setDataOnRecyclerView()
         observeInputChipGroup()
-        convertTypingView()
+        typingEditText()
         setCompleteOnKeyBoardListener()
         deleteInput()
         checkInputNum()
         initRecyclerViewLayout()
-
         val file: File = setImgToFile(getImgToUri())
         initButtonSaveClickListener()
+
+    }
+
+    private fun setAllItemList() {
+        chooseTagViewModel.allItemList.observe(viewLifecycleOwner) {
+            filterTagAdapter.submitList(chooseTagViewModel.allItemList.value)
+        }
+    }
+
+    private fun getRecommendTagList() {
+        chooseTagViewModel.getTagList()
     }
 
     private fun setPlatformList() {
         chooseTagViewModel.platformList.observe(viewLifecycleOwner) {
             platformTagAdapter.submitList(chooseTagViewModel.platformList.value)
             chooseTagViewModel.setPlatformIdList()
-
         }
     }
 
@@ -62,7 +76,6 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     }
 
     private fun setRecentList() {
-        chooseTagViewModel.getTagList()
         chooseTagViewModel.recentList.observe(viewLifecycleOwner) {
             recentTagAdapter.submitList(chooseTagViewModel.recentList.value)
         }
@@ -111,6 +124,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         recentTagAdapter.submitList(chooseTagViewModel.recentList.value)
         oftenTagAdapter.submitList(chooseTagViewModel.oftenList.value)
         platformTagAdapter.submitList(chooseTagViewModel.platformList.value)
+        filterTagAdapter.submitList(chooseTagViewModel.allItemList.value)
     }
 
     private fun initAdapter() {
@@ -118,11 +132,13 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         recentTagAdapter = PointSubTagAdapter(::selectTag)
         oftenTagAdapter = PointSubTagAdapter(::selectTag)
         platformTagAdapter = PointSubTagAdapter(::selectTag)
+        filterTagAdapter = PointSubTagAdapter(::selectTag)
 
         binding.rcvInput.adapter = inputTagAdapter
         binding.rcvRecent.adapter = recentTagAdapter
         binding.rcvOften.adapter = oftenTagAdapter
         binding.rcvPlatform.adapter = platformTagAdapter
+        binding.rvFilterList.adapter = filterTagAdapter
     }
 
     private fun checkInputNum() {
@@ -140,16 +156,24 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     private fun observeInputChipGroup() {
         chooseTagViewModel.isEmptyInput.observe(viewLifecycleOwner) {
             if (chooseTagViewModel.isEmptyInput.value!! > 0) {
-                binding.tvSave.isSelected = binding.ivCheckPlatform.isSelected != true
                 binding.tvSave.isEnabled = true
             }
         }
     }
 
-    private fun convertTypingView() {
+    private fun typingEditText() {
         binding.etTag.addTextChangedListener {
-            binding.isTyping = binding.etTag.text.isEmpty()
+            setFilterList()
+            converTypingView()
         }
+    }
+
+    private fun setFilterList() {
+        filterTagAdapter.submitList(chooseTagViewModel.filterList(binding.etTag.text.toString()))
+    }
+
+    private fun converTypingView() {
+        binding.isTyping = binding.etTag.text.isEmpty()
     }
 
     private fun setCompleteOnKeyBoardListener() {

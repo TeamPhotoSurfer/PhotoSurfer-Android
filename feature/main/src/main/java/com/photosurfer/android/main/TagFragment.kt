@@ -8,39 +8,37 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.main.databinding.FragmentTagBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
 
     private lateinit var tagListAdapter: TagListAdapter
+    private val tagViewModel: TagViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTagAdapter()
+
+        tagViewModel.getSavedTagList()
+        tagViewModel.savedBookmarkedTagList.observe(viewLifecycleOwner) {
+            tagListAdapter.submitList(tagViewModel.savedBookmarkedTagList.value)
+        }
+        tagViewModel.savedNotBookmarkedTagList.observe(viewLifecycleOwner){
+            tagListAdapter.submitList(tagViewModel.savedNotBookmarkedTagList.value)
+        }
+    }
+
+    private fun setStar() {
+
     }
 
     private fun initTagAdapter() {
         tagListAdapter = TagListAdapter(::performOptionsMenuClick)
-
         binding.rcvTagList.adapter = tagListAdapter
-        tagListAdapter.submitList(
-            mutableListOf(
-                TagInfo(1, "tag1"),
-                TagInfo(1, "tag2"),
-                TagInfo(1, "tag3"),
-                TagInfo(1, "tag4tag4tag4tag4tag4tag4tag4tag4tag4tag4tag4tag4tag4tag4"),
-                TagInfo(1, "tag5"),
-                TagInfo(1, "tag66666666"),
-                TagInfo(1, "tag666666667"),
-                TagInfo(1, "tag666666668"),
-                TagInfo(1, "tag666666669"),
-                TagInfo(1, "tag10"),
-                TagInfo(1, "tag11"),
-            )
-        )
     }
 
     private fun performOptionsMenuClick(position: Int, threeDot: ImageView) {
@@ -56,15 +54,16 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 when (item?.itemId) {
                     R.id.tag_edit -> {
+                        // TODO : 파도 키보드 올라옴
                         return true
                     }
                     R.id.tag_delete -> {
+                        // TODO : 삭제 팝업 올라옴
                         return true
                     }
                 }
                 return false
             }
-
         })
         popupMenu.show()
     }

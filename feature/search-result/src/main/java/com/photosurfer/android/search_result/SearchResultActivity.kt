@@ -18,13 +18,16 @@ import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
 import com.photosurfer.android.search_result.detailimage.DetailImageActivity
 import com.photosurfer.android.search_result.viewModel.SearchResultViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchResultActivity :
     BaseActivity<ActivitySearchResultBinding>(R.layout.activity_search_result) {
     private val viewModel: SearchResultViewModel by viewModels()
     private lateinit var thumbnailAdapter: ThumbnailAdapter
     private lateinit var chipAdapter: MutableTagAdapter
-    private lateinit var inputTag: List<TagInfo>
+
+    private lateinit var extraTag: List<TagInfo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,8 @@ class SearchResultActivity :
 
         getExtraData()
         initExtraDataOnViewModel()
+        getNewPhotoAsTagChanged()
+        updatePhoto()
         setDefaultViewType()
         setCancelListener()
         initChipAdapter()
@@ -45,13 +50,32 @@ class SearchResultActivity :
         onClickMenu()
     }
 
+    private fun updatePhoto() {
+        viewModel.thumbnail.observe(this) {
+            thumbnailAdapter.submitList(viewModel.thumbnail.value)
+        }
+    }
+
+    private fun getNewPhotoAsTagChanged() {
+        viewModel.tagList.observe(this) {
+            getPhotosByTags()
+        }
+    }
+
+    private fun getPhotosByTags() {
+        viewModel.getPhotosByTags()
+    }
+
     private fun getExtraData() {
-        inputTag = (intent.getSerializableExtra(TAG_LIST) as SerializeTagInfoList).TagInfoList
+        extraTag = (intent.getSerializableExtra(TAG_LIST) as SerializeTagInfoList).TagInfoList
+        for (i in extraTag.indices) {
+            viewModel.tagList.value?.add(extraTag[i])
+        }
     }
 
     private fun initExtraDataOnViewModel() {
-        viewModel.setOriginTagList(inputTag)
-        viewModel.setTempTagList(inputTag)
+        viewModel.setOriginTagList(extraTag)
+        viewModel.setTempTagList(extraTag)
     }
 
     private fun setDefaultViewType() {

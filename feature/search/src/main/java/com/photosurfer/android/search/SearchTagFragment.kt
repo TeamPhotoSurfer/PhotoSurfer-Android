@@ -34,8 +34,11 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
-        viewModel.setTagList()
 
+        getRecommendTagList()
+        setRecentList()
+        setOftenList()
+        setPlatformList()
         getExtraData()
         onClickBackButton()
         initAdapter()
@@ -46,10 +49,33 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         initRecyclerViewLayout()
     }
 
+    private fun setPlatformList() {
+        viewModel.platformList.observe(viewLifecycleOwner) {
+            platformTagAdapter.submitList(viewModel.platformList.value)
+        }
+    }
+
+    private fun setOftenList() {
+        viewModel.oftenList.observe(viewLifecycleOwner) {
+            oftenTagAdapter.submitList(viewModel.oftenList.value)
+        }
+    }
+
+    private fun setRecentList() {
+        viewModel.recentList.observe(viewLifecycleOwner) {
+            recentTagAdapter.submitList(viewModel.recentList.value)
+        }
+    }
+
+
+    private fun getRecommendTagList() {
+        viewModel.getTagList()
+    }
+
     private fun getExtraData() {
         val tagInfo = requireActivity().intent.getSerializableExtra(SELECTED_TAG) as? TagInfo
         Timber.d("tagInfo from previous $tagInfo")
-        tagInfo?.let { addTagWithInputText(it.name) }
+        tagInfo?.let { addTagWithInputText(it) }
     }
 
     private fun onClickBackButton() {
@@ -74,9 +100,9 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
 
     private fun setDataOnRecyclerView() {
         inputTagAdapter.submitList(viewModel.inputList)
-        recentTagAdapter.submitList(viewModel.recentList)
-        oftenTagAdapter.submitList(viewModel.oftenList)
-        platformTagAdapter.submitList(viewModel.platformList)
+        recentTagAdapter.submitList(viewModel.recentList.value)
+        oftenTagAdapter.submitList(viewModel.oftenList.value)
+        platformTagAdapter.submitList(viewModel.platformList.value)
     }
 
     private fun initAdapter() {
@@ -116,8 +142,10 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (isTypingNow()) {
                     // 검색 창 뜨게
-                } else if (isTagSelectedAtListOnce())
+                } else if (isTagSelectedAtListOnce()) {
                     navigateToSearchTagActivity()
+                    requireActivity().finish()
+                }
             }
             false
         }
@@ -129,8 +157,8 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         mainNavigator.navigateSearchResult(requireContext(), viewModel.inputList.toList())
     }
 
-    private fun addTagWithInputText(tag: String) {
-        viewModel.inputList.add(TagInfo(0, tag))
+    private fun addTagWithInputText(tag: TagInfo) {
+        viewModel.inputList.add(TagInfo(tag.id, tag.name))
         viewModel.setEmptyInput(viewModel.inputList.size)
         binding.etTag.text.clear()
     }
@@ -145,4 +173,5 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         viewModel.deleteTag(tagInfo)
         inputTagAdapter.submitList(viewModel.inputList)
     }
+
 }

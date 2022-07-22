@@ -1,12 +1,23 @@
 package com.photosurfer.android.search_result.viewModel
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
+import com.photosurfer.android.domain.repository.PhotoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class SearchResultViewModel : ViewModel() {
+@HiltViewModel
+class SearchResultViewModel @Inject constructor(
+    private val photoRepository: PhotoRepository
+) : ViewModel() {
 
     private var _originTagList = MutableLiveData<MutableList<TagInfo>>()
     val originTagList: LiveData<MutableList<TagInfo>> = _originTagList
@@ -42,165 +53,26 @@ class SearchResultViewModel : ViewModel() {
         noThumbnailData.value = thumbnail.value?.size == 0
     }
 
+    fun getPhotosByTags() {
+        viewModelScope.launch {
+            val option = mutableMapOf<String, Int>()
+            tagList.value?.forEach { option["id"] = it.id }
+            photoRepository.getPhotoListByTag(option)
+                .onSuccess {
+                    _thumbnail.value = it.photos.toMutableList()
+                    Log.d(TAG, "getPhotosByTags: $it")
+                }.onFailure {
+                    _thumbnail.value = emptyArray<ThumbnailInfo>().toMutableList()
+                    Timber.d(it, "$/{this.javaClass.name}_getPhotosByTags")
+                }.run {
+                    noThumbnailData.value = thumbnail.value?.size == 0
+                }
+        }
+    }
+
     fun deleteTag(position: Int) {
         _tagList.value?.removeAt(position)
         isTagListEmpty.value = tagList.value?.size == 0
     }
 
-    init {
-        _thumbnail.value = mutableListOf(
-            ThumbnailInfo(
-                1,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                2,
-                "https://mb1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                3,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                4,
-                "https://mblogthumb-phinf.pstatic.net/201uRO8_JPEG/dave1.jpg?type=w800"
-            ),
-        )
-    }
 }

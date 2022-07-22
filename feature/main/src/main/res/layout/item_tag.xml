@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="tagInfo"
-            type="com.photosurfer.android.domain.entity.TagInfo" />
+            name="savedTag"
+            type="com.photosurfer.android.domain.entity.SavedTag" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,8 @@
             android:layout_height="0dp"
             android:adjustViewBounds="true"
             android:tint="@color/gray_95_a_70"
-            android:src="@drawable/bg_splash_gradient_blue"
+            app:imageUrl="@{savedTag.image_url}"
+            android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="W, 110:162"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -63,7 +64,7 @@
                 android:maxLines="2"
                 android:paddingStart="8dp"
                 android:paddingEnd="18dp"
-                android:text="@{tagInfo.name}"
+                android:text="@{savedTag.name}"
                 android:textAppearance="@style/title_3B"
                 android:textColor="@color/white"
                 app:drawableLeftCompat="@drawable/ic_hashtag_line_white"

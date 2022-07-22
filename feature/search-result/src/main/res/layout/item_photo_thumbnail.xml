@@ -24,9 +24,8 @@
         <ImageView
             android:layout_width="118dp"
             android:layout_height="118dp"
-            android:background="@color/gray_30"
             android:scaleType="centerCrop"
-            app:imageUrl="@{data.imageURL}"
+            app:imageUrl="@{data.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
