@@ -17,8 +17,8 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     val isOftenTagMoreThanZero = true
-    private val _fakeOftenTagList = MutableLiveData<List<TagInfo>>()
-    val fakeOftenTagList: LiveData<List<TagInfo>> = _fakeOftenTagList
+    private val _oftenTagList = MutableLiveData<List<TagInfo>>()
+    val oftenTagList: LiveData<List<TagInfo>> = _oftenTagList
 
     val fakeOftenTagLongList = listOf(
         TagInfo(0, "포토서퍼포토서퍼포토서퍼포토서퍼포토서퍼"),
@@ -42,6 +42,6 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun updateOftenSearchTagList(list: List<TagInfo>) {
-        _fakeOftenTagList.value = list
+        _oftenTagList.value = list
     }
 }

@@ -93,25 +93,18 @@
             app:layout_constraintStart_toStartOf="@id/et_enter_tag"
             app:layout_constraintTop_toBottomOf="@id/et_enter_tag" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_often"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="13dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_often_search_tag"
+            android:layout_marginEnd="12dp"
+            android:orientation="horizontal"
+            app:goneUnless="@{!viewModel.isOftenTagMoreThanZero}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_often_search_tag"
-            app:layout_constraintVertical_bias="0">
-
-            <!-- TODO (수정) chipSpacingVertical이 dp만큼 작동하지 않음 -->
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cg_often_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:chipSpacingVertical="1dp"
-                app:goneUnless="@{!viewModel.isOftenTagMoreThanZero}" />
-        </ScrollView>
+            tools:listitem="@layout/item_tag_point_sub" />
 
         <TextView
             android:layout_width="wrap_content"
