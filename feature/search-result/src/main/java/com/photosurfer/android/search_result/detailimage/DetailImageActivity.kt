@@ -1,12 +1,16 @@
 package com.photosurfer.android.search_result.detailimage
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.PopupMenu
 import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.core.util.StfalconImageViewerUtil
+import com.photosurfer.android.core.util.getImageUriFromBitmap
+import com.photosurfer.android.core.util.useBitmapImg
 import com.photosurfer.android.search_result.R
 import com.photosurfer.android.search_result.SearchResultActivity.Companion.PHOTO_ID
 import com.photosurfer.android.search_result.databinding.ActivityDetailImageBinding
@@ -29,6 +33,7 @@ class DetailImageActivity :
         getDetailImageInfo()
         binding.detailImageViewModel = detailImageViewModel
         startImageViewer()
+        initShareButtonClickListener()
     }
 
     private fun initExtraData() {
@@ -72,6 +77,21 @@ class DetailImageActivity :
                 }
             }
             popupMenu.show()
+        }
+    }
+
+    private fun initShareButtonClickListener() {
+        binding.ivShare.setOnClickListener {
+            useBitmapImg(this, detailImageViewModel.imageUrl.value ?: "") {
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "image/*"
+                    putExtra(
+                        Intent.EXTRA_STREAM,
+                        getImageUriFromBitmap(this@DetailImageActivity, it)
+                    )
+                }
+                startActivity(Intent.createChooser(intent, "공유하기"))
+            }
         }
     }
 
