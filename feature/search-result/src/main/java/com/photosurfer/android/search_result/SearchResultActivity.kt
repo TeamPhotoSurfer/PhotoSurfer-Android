@@ -51,8 +51,8 @@ class SearchResultActivity :
     }
 
     private fun updatePhoto() {
-        viewModel.thumbnail.observe(this) {
-            thumbnailAdapter.submitList(viewModel.thumbnail.value)
+        viewModel.thumbnailList.observe(this) {
+            thumbnailAdapter.submitList(viewModel.thumbnailList.value)
         }
     }
 
@@ -113,14 +113,25 @@ class SearchResultActivity :
 
     private fun setCancelListener() {
         binding.tvCancel.setOnClickListener {
-            // viewModel 에서 selectedList -> emptyList()로 해주기
-            binding.currentViewType = TagResultViewType.DEFAULT
+            setViewTypeAsDefault()
+            viewModel.clearCheckedThumbnail()
+            updateChipAdapter()
+            updateThumbnailAdapter()
             chipAdapter.toggleCancelable()
-            chipAdapter.notifyItemRangeChanged(
-                0,
-                viewModel.originTagList.value?.size ?: return@setOnClickListener
-            )
         }
+    }
+
+    private fun setViewTypeAsDefault() {
+        binding.currentViewType = TagResultViewType.DEFAULT
+    }
+
+    private fun updateChipAdapter() {
+        chipAdapter.notifyItemRangeChanged(0, viewModel.originTagList.value?.size ?: return)
+    }
+
+    private fun updateThumbnailAdapter() {
+        // TODO Selected 된 item 만 update 하게 구현할 예정
+        thumbnailAdapter.notifyDataSetChanged()
     }
 
     private fun initLearnAddTag() {
@@ -139,7 +150,8 @@ class SearchResultActivity :
             TagResultViewType.DEFAULT -> {
                 // TODO 창환~~ 미정이뷰 Navigate 로직 넣어조
                 val thumbnailId: Int =
-                    viewModel.thumbnail.value?.get(position)?.id ?: throw IllegalStateException()
+                    viewModel.thumbnailList.value?.get(position)?.id
+                        ?: throw IllegalStateException()
                 Log.d(TAG, "onItemClick: $thumbnailId")
             }
             TagResultViewType.SELECT -> {
@@ -150,7 +162,7 @@ class SearchResultActivity :
     }
 
     private fun initThumbnailList() {
-        viewModel.thumbnail.observe(this) { list ->
+        viewModel.thumbnailList.observe(this) { list ->
             if (list != null) thumbnailAdapter.submitList(list)
         }
     }

@@ -33,24 +33,12 @@ class SearchResultViewModel @Inject constructor(
         _tagList.value = tagList.toMutableList()
     }
 
-    private var _thumbnail = MutableLiveData<MutableList<ThumbnailInfo?>>()
-    val thumbnail: LiveData<MutableList<ThumbnailInfo?>> = _thumbnail
-    val noThumbnailData = MutableLiveData(thumbnail.value?.size == 0)
+    private var _thumbnailList = MutableLiveData<MutableList<ThumbnailInfo?>>()
+    val thumbnailList: LiveData<MutableList<ThumbnailInfo?>> = _thumbnailList
+    val noThumbnailData = MutableLiveData(thumbnailList.value?.size == 0)
 
-    fun updateList(list: MutableList<Int>) {
-        // for (i in 0 until list.size) {}
-        // TODO 서버 response 값으로 교체
-        _thumbnail.value = mutableListOf(
-            ThumbnailInfo(
-                1,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                2,
-                "https://mb1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            )
-        )
-        noThumbnailData.value = thumbnail.value?.size == 0
+    fun clearCheckedThumbnail() {
+        thumbnailList.value?.forEach { it?.isChecked = false }
     }
 
     fun getPhotosByTags() {
@@ -59,13 +47,13 @@ class SearchResultViewModel @Inject constructor(
             tagList.value?.forEach { option["id"] = it.id }
             photoRepository.getPhotoListByTag(option)
                 .onSuccess {
-                    _thumbnail.value = it.photos.toMutableList()
+                    _thumbnailList.value = it.photos.toMutableList()
                     Log.d(TAG, "getPhotosByTags: $it")
                 }.onFailure {
-                    _thumbnail.value = emptyArray<ThumbnailInfo>().toMutableList()
+                    _thumbnailList.value = emptyArray<ThumbnailInfo>().toMutableList()
                     Timber.d(it, "$/{this.javaClass.name}_getPhotosByTags")
                 }.run {
-                    noThumbnailData.value = thumbnail.value?.size == 0
+                    noThumbnailData.value = thumbnailList.value?.size == 0
                 }
         }
     }
