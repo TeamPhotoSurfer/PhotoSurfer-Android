@@ -29,6 +29,13 @@ class DetailImageViewModel @Inject constructor(
     private val _deleteSuccessState = MutableLiveData<Event<Boolean>>()
     val deleteSuccessState: LiveData<Event<Boolean>> = _deleteSuccessState
 
+    private val _processState = MutableLiveData<String>("START")
+    val processState: LiveData<String> = _processState
+
+    fun updateProcessState(processState: String) {
+        _processState.value = processState
+    }
+
     fun updateTagInfoList(tags: List<TagInfo>) {
         _tagInfoList.value = tags
     }

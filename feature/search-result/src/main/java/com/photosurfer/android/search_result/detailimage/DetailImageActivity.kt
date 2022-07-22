@@ -85,9 +85,21 @@ class DetailImageActivity :
             popupMenu.inflate(R.menu.menu_search_result)
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item?.itemId) {
-                    R.id.tag_add -> true
-                    R.id.tag_edit -> true
-                    R.id.tag_delete -> true
+                    R.id.tag_add -> {
+                        binding.updateState = true
+                        detailImageViewModel.updateProcessState(ADD)
+                        true
+                    }
+                    R.id.tag_edit -> {
+                        binding.updateState = true
+                        detailImageViewModel.updateProcessState(EDIT)
+                        true
+                    }
+                    R.id.tag_delete -> {
+                        binding.updateState = true
+                        detailImageViewModel.updateProcessState(DELETE)
+                        true
+                    }
                     else -> false
                 }
             }
@@ -134,6 +146,6 @@ class DetailImageActivity :
         const val START = "START"
         const val ADD = "ADD"
         const val DELETE = "DELETE"
-        const val ADJUST = "ADJUST"
+        const val EDIT = "EDIT"
     }
 }

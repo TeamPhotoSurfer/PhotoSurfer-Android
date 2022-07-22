@@ -4,9 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable
-        name="detailImageViewModel"
-        type="com.photosurfer.android.search_result.detailimage.DetailImageViewModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="detailImageViewModel"
+            type="com.photosurfer.android.search_result.detailimage.DetailImageViewModel" />
+
+        <variable
+            name="updateState"
+            type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,10 +66,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:setImage="@{detailImageViewModel.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_tool_bar"
+            app:setImage="@{detailImageViewModel.imageUrl}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,6 +96,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/shape_oval_white_fill"
                 android:padding="10dp"
+                android:visibility="@{updateState ? View.GONE: View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/ic_trashcan_line" />
@@ -101,10 +109,39 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/shape_oval_white_fill"
                 android:padding="10dp"
+                android:visibility="@{updateState ? View.GONE: View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_share_line" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/et_tag_process"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_rect_white_fill_300"
+            android:inputType="textPersonName"
+            android:paddingVertical="13dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="40dp"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray_90"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/et_tag_process"
+            app:layout_constraintEnd_toEndOf="@+id/et_tag_process"
+            app:layout_constraintTop_toTopOf="@+id/et_tag_process"
+            app:srcCompat="@drawable/ic_x_circle_fill" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tag_detail"
