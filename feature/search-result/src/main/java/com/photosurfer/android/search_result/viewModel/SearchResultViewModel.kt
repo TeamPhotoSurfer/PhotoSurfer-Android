@@ -37,6 +37,24 @@ class SearchResultViewModel @Inject constructor(
     val thumbnailList: LiveData<MutableList<ThumbnailInfo?>> = _thumbnailList
     val noThumbnailData = MutableLiveData(thumbnailList.value?.size == 0)
 
+    private val selectedThumbnailList = mutableListOf<ThumbnailInfo>()
+
+    fun updateSelectedThumbnailList(thumbnail: ThumbnailInfo) {
+        if (thumbnail.isChecked)
+            addOnThumbnailList(thumbnail)
+        else deleteOnThumbnailList(thumbnail)
+
+        Log.d(TAG, "updateSelectedThumbnailList: $selectedThumbnailList")
+    }
+
+    private fun addOnThumbnailList(thumbnail: ThumbnailInfo) {
+        selectedThumbnailList.add(thumbnail)
+    }
+
+    private fun deleteOnThumbnailList(thumbnail: ThumbnailInfo) {
+        selectedThumbnailList.remove(thumbnail)
+    }
+
     fun clearCheckedThumbnail() {
         thumbnailList.value?.forEach { it?.isChecked = false }
     }

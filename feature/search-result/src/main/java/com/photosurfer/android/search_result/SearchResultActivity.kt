@@ -156,6 +156,7 @@ class SearchResultActivity :
             }
             TagResultViewType.SELECT -> {
                 thumbnail.isChecked = !thumbnail.isChecked
+                viewModel.updateSelectedThumbnailList(thumbnail)
                 thumbnailAdapter.notifyItemChanged(position)
             }
         }
