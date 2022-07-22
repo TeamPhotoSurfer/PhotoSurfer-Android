@@ -26,7 +26,6 @@ class SearchResultActivity :
     private val viewModel: SearchResultViewModel by viewModels()
     private lateinit var thumbnailAdapter: ThumbnailAdapter
     private lateinit var chipAdapter: MutableTagAdapter
-
     private lateinit var extraTag: List<TagInfo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,12 +112,16 @@ class SearchResultActivity :
 
     private fun setCancelListener() {
         binding.tvCancel.setOnClickListener {
-            setViewTypeAsDefault()
-            viewModel.clearCheckedThumbnail()
-            updateChipAdapter()
-            updateThumbnailAdapter()
-            chipAdapter.toggleCancelable()
+            doOnCancelClicked()
         }
+    }
+
+    private fun doOnCancelClicked() {
+        setViewTypeAsDefault()
+        viewModel.clearCheckedThumbnail()
+        updateChipAdapter()
+        updateThumbnailAdapter()
+        chipAdapter.toggleCancelable()
     }
 
     private fun setViewTypeAsDefault() {
@@ -193,5 +196,12 @@ class SearchResultActivity :
             }
             popupMenu.show()
         }
+    }
+
+    override fun onBackPressed() {
+        val viewType = binding.currentViewType
+        if (viewType == TagResultViewType.DEFAULT)
+            super.onBackPressed()
+        else doOnCancelClicked()
     }
 }
