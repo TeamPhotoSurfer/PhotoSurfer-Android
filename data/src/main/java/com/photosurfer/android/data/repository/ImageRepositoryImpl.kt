@@ -39,4 +39,29 @@ class ImageRepositoryImpl @Inject constructor(
         }
         return Result.failure(IllegalStateException("NetworkError or UnKnownError please check timber"))
     }
+
+    override suspend fun deleteImage(options: Map<String, Int>): Result<String> {
+        when (
+            val response = remoteImageDataSource.deleteImage(options)
+        ) {
+            is NetworkState.Success -> return Result.success(
+                response.body.message
+            )
+            is NetworkState.Failure -> return Result.failure(
+                RetrofitFailureStateException(
+                    response.error,
+                    response.code
+                )
+            )
+            is NetworkState.NetworkError -> Timber.d(
+                response.error,
+                "${this.javaClass.name}_deleteImage"
+            )
+            is NetworkState.UnknownError -> Timber.d(
+                response.t,
+                "${this.javaClass.name}_deleteImage"
+            )
+        }
+        return Result.failure(IllegalStateException("NetworkError or UnKnownError please check timber"))
+    }
 }
