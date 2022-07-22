@@ -11,7 +11,7 @@ class RemoteSearchTagResultDataSourceImpl @Inject constructor(
 ) : RemoteSearchTagResultDataSource {
 
     override suspend fun getSearchTagResultList(
-        options: List<Pair<String, Int>>
+        options: List<Int>
     ): NetworkState<BaseResponse<SearchTagResultResponse>> =
         searchTagService.getSearchTagResultList(options)
 

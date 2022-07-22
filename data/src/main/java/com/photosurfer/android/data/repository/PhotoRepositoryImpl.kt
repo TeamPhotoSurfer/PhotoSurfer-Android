@@ -12,7 +12,7 @@ class PhotoRepositoryImpl @Inject constructor(
     private val remoteSearchTagResultDataSource: RemoteSearchTagResultDataSource
 ) : PhotoRepository {
 
-    override suspend fun getPhotoListByTag(options: List<Pair<String, Int>>): Result<SearchTagResult> {
+    override suspend fun getPhotoListByTag(options: List<Int>): Result<SearchTagResult> {
         val response = remoteSearchTagResultDataSource.getSearchTagResultList(options.toList())
         when (response) {
             is NetworkState.Success -> {
