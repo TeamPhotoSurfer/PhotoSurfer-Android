@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+    <variable
+        name="detailImageViewModel"
+        type="com.photosurfer.android.search_result.detailimage.DetailImageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:setImage="@{detailImageViewModel.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_tool_bar"

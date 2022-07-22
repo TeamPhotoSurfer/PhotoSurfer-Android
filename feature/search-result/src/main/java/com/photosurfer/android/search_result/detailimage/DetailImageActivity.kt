@@ -4,15 +4,20 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.PopupMenu
+import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
+import com.photosurfer.android.core.util.StfalconImageViewerUtil
 import com.photosurfer.android.search_result.R
 import com.photosurfer.android.search_result.SearchResultActivity.Companion.PHOTO_ID
 import com.photosurfer.android.search_result.databinding.ActivityDetailImageBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class DetailImageActivity :
     BaseActivity<ActivityDetailImageBinding>(R.layout.activity_detail_image) {
 
+    private val detailImageViewModel by viewModels<DetailImageViewModel>()
     var photoId by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,23 +25,34 @@ class DetailImageActivity :
 
         onClickMenu()
         initExtraData()
-//        startImageViewer()
+        initViewModelData()
+        getDetailImageInfo()
+        binding.detailImageViewModel = detailImageViewModel
+        startImageViewer()
     }
 
-    private fun initExtraData(){
-        photoId = intent.getIntExtra(PHOTO_ID,-1)
+    private fun initExtraData() {
+        photoId = intent.getIntExtra(PHOTO_ID, -1)
     }
 
-//    private fun startImageViewer() {
-//        binding.ivDetail.setOnClickListener {
-//            StfalconImageViewerUtil.initImageViewer(
-//                this,
-//                binding.ivDetail,
-//                listOf(imgUrl),
-//                0
-//            )
-//        }
-//    }
+    private fun initViewModelData() {
+        detailImageViewModel.updatePhotoId(photoId)
+    }
+
+    private fun getDetailImageInfo() {
+        detailImageViewModel.getDetailImageInfo()
+    }
+
+    private fun startImageViewer() {
+        binding.ivDetail.setOnClickListener {
+            StfalconImageViewerUtil.initImageViewer(
+                this,
+                binding.ivDetail,
+                listOf(detailImageViewModel.imageUrl.value ?: ""),
+                0
+            )
+        }
+    }
 
     private fun onClickMenu() {
         binding.btnMore.setOnClickListener {
