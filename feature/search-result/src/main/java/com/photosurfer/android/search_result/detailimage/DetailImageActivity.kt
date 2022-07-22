@@ -3,11 +3,11 @@ package com.photosurfer.android.search_result.detailimage
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.widget.PopupMenu
 import androidx.activity.viewModels
 import com.photosurfer.android.core.base.BaseActivity
+import com.photosurfer.android.core.util.EventObserver
 import com.photosurfer.android.core.util.StfalconImageViewerUtil
 import com.photosurfer.android.core.util.getImageUriFromBitmap
 import com.photosurfer.android.core.util.useBitmapImg
@@ -34,6 +34,13 @@ class DetailImageActivity :
         binding.detailImageViewModel = detailImageViewModel
         startImageViewer()
         initShareButtonClickListener()
+        deleteImageSuccess()
+        initDeleteButtonClickListener()
+    }
+
+    private fun initDeleteButtonClickListener() {
+        binding.ivDelete.setOnClickListener {
+        }
     }
 
     private fun initExtraData() {
@@ -93,6 +100,15 @@ class DetailImageActivity :
                 startActivity(Intent.createChooser(intent, "공유하기"))
             }
         }
+    }
+
+    private fun deleteImageSuccess() {
+        detailImageViewModel.deleteSuccessState.observe(
+            this,
+            EventObserver {
+                finish()
+            }
+        )
     }
 
     companion object {

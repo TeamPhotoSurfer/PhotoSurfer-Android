@@ -1,10 +1,10 @@
 package com.photosurfer.android.search_result.detailimage
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.photosurfer.android.core.base.BaseViewModel
+import com.photosurfer.android.core.util.Event
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.repository.ImageRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +25,9 @@ class DetailImageViewModel @Inject constructor(
 
     private val _photoId = MutableLiveData<Int>()
     val photoId: LiveData<Int> = _photoId
+
+    private val _deleteSuccessState = MutableLiveData<Event<Boolean>>()
+    val deleteSuccessState: LiveData<Event<Boolean>> = _deleteSuccessState
 
     fun updateTagInfoList(tags: List<TagInfo>) {
         _tagInfoList.value = tags
@@ -47,6 +50,19 @@ class DetailImageViewModel @Inject constructor(
                     updateTagInfoList(it.tagList)
                 }.onFailure {
                     Timber.d(it, "${this.javaClass.name}_getDetailImageInfo")
+                }
+        }
+    }
+
+    fun deleteImage() {
+        viewModelScope.launch {
+            val option = mutableMapOf<String, Int>()
+             option["id"] = requireNotNull(photoId.value)
+            imageRepository.deleteImage(option)
+                .onSuccess {
+                    _deleteSuccessState.value = Event(true)
+                }.onFailure {
+                    Timber.d(it, "${this.javaClass.name}_deleteImage")
                 }
         }
     }
