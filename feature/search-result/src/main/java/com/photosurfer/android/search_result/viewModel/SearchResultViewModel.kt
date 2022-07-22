@@ -37,23 +37,31 @@ class SearchResultViewModel @Inject constructor(
     val thumbnailList: LiveData<MutableList<ThumbnailInfo?>> = _thumbnailList
     val noThumbnailData = MutableLiveData(thumbnailList.value?.size == 0)
 
-    private val selectedThumbnailList = mutableListOf<ThumbnailInfo>()
+    val selectedThumbnailList = mutableListOf<ThumbnailInfo>()
+    var selectedTempThumbnailList = mutableListOf<ThumbnailInfo>()
+    var selectedThumbnailListPosition = mutableListOf<Int>()
 
-    fun updateSelectedThumbnailList(thumbnail: ThumbnailInfo) {
-        if (thumbnail.isChecked)
-            addOnThumbnailList(thumbnail)
-        else deleteOnThumbnailList(thumbnail)
-
-        Log.d(TAG, "updateSelectedThumbnailList: $selectedThumbnailList")
+    fun clearCheckedTempThumbnail() {
+        selectedTempThumbnailList.forEach { it.isChecked = false }
     }
 
-    private fun addOnThumbnailList(thumbnail: ThumbnailInfo) {
-        selectedThumbnailList.add(thumbnail)
+    fun updateSelectedThumbnailList(thumbnailInfo: ThumbnailInfo, position: Int) {
+        if (thumbnailInfo.isChecked)
+            selectedThumbnailListPosition.add(position)
+        else selectedThumbnailListPosition.remove(position)
     }
 
-    private fun deleteOnThumbnailList(thumbnail: ThumbnailInfo) {
-        selectedThumbnailList.remove(thumbnail)
-    }
+//    fun copySelectedThumbnailList() {
+//        selectedTempThumbnailList = selectedThumbnailList.toMutableList()   // deep copy
+//    }
+//
+//    private fun addOnThumbnailList(thumbnail: ThumbnailInfo) {
+//        selectedThumbnailList.add(thumbnail)
+//    }
+//
+//    fun deleteOnThumbnailList(thumbnail: ThumbnailInfo) {
+//        selectedThumbnailList.remove(thumbnail)
+//    }
 
     fun clearCheckedThumbnail() {
         thumbnailList.value?.forEach { it?.isChecked = false }

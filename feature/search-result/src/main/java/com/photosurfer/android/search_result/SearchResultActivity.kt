@@ -18,6 +18,7 @@ import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
 import com.photosurfer.android.search_result.viewModel.SearchResultViewModel
+import com.photosurfer.android.shared.R.style
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -117,11 +118,12 @@ class SearchResultActivity :
     }
 
     private fun doOnCancelClicked() {
-        setViewTypeAsDefault()
         viewModel.clearCheckedThumbnail()
+        setViewTypeAsDefault()
         updateChipAdapter()
-        updateThumbnailAdapter()
+        updateThumbnailAdapterWithViewModel()
         chipAdapter.toggleCancelable()
+        viewModel.clearCheckedTempThumbnail()
     }
 
     private fun setViewTypeAsDefault() {
@@ -132,9 +134,13 @@ class SearchResultActivity :
         chipAdapter.notifyItemRangeChanged(0, viewModel.originTagList.value?.size ?: return)
     }
 
-    private fun updateThumbnailAdapter() {
-        // TODO Selected 된 item 만 update 하게 구현할 예정
-        thumbnailAdapter.notifyDataSetChanged()
+    private fun updateThumbnailAdapterWithViewModel() {
+        val selectedThumbnailList = viewModel.selectedThumbnailListPosition
+        Log.d(TAG, "updateThumbnailAdapterWithViewModel: ${selectedThumbnailList.size}")
+        for (i in 0 until selectedThumbnailList.size) {
+            thumbnailAdapter.notifyItemChanged(selectedThumbnailList[i])
+            Log.d(TAG, "updateThumbnailAdapterWithViewModel: ${selectedThumbnailList[i]}")
+        }
     }
 
     private fun initLearnAddTag() {
@@ -159,7 +165,7 @@ class SearchResultActivity :
             }
             TagResultViewType.SELECT -> {
                 thumbnail.isChecked = !thumbnail.isChecked
-                viewModel.updateSelectedThumbnailList(thumbnail)
+                viewModel.updateSelectedThumbnailList(thumbnail, position)
                 thumbnailAdapter.notifyItemChanged(position)
             }
         }
@@ -179,11 +185,7 @@ class SearchResultActivity :
 
     private fun onClickMenu() {
         binding.ivMenu.setOnClickListener {
-            val wrapper: Context = ContextThemeWrapper(
-                this,
-                com.photosurfer.android.shared.R.style.popupMenuStyle
-            )
-
+            val wrapper: Context = ContextThemeWrapper(this, style.popupMenuStyle)
             val popupMenu = PopupMenu(wrapper, binding.ivMenu, Gravity.RIGHT)
             popupMenu.inflate(R.menu.menu_search_result)
             popupMenu.setOnMenuItemClickListener { item ->
