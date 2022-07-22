@@ -1,12 +1,10 @@
 package com.photosurfer.android.data.remote.datasource
 
 import com.photosurfer.android.data.remote.calladapter.NetworkState
-import com.photosurfer.android.data.remote.model.response.BaseResponse
-import com.photosurfer.android.data.remote.model.response.TagListResponse
+import com.photosurfer.android.data.remote.model.response.*
 import com.photosurfer.android.data.remote.service.ChooseTagService
-import com.photosurfer.android.data.remote.model.response.OftenSearchTagResponse
-import com.photosurfer.android.data.remote.model.response.SavedTagResponse
 import com.photosurfer.android.data.remote.service.OftenSearchTagService
+import com.photosurfer.android.domain.entity.TagInfo
 import javax.inject.Inject
 
 class RemoteTagListDataSourceImpl @Inject constructor(
@@ -22,5 +20,12 @@ class RemoteTagListDataSourceImpl @Inject constructor(
 
     override suspend fun getSavedTagList(): NetworkState<BaseResponse<SavedTagResponse>> =
         chooseTagListService.getSavedTagList()
+
+    override suspend fun putEditTagName(): NetworkState<BaseResponse<EditTagNameResponse>> =
+        chooseTagListService.putSavedTagName()
+
+    override suspend fun getAllTagList(): NetworkState<BaseResponse<MutableList<TagInfo>>> =
+        chooseTagListService.getAllTagList()
+
 
 }
