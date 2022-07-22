@@ -40,7 +40,7 @@ fun ShapeableImageView.setImage(url: String?) {
 @BindingAdapter("app:setRepresentTagText")
 fun TextView.setRepresentTagText(representTag: List<TagInfo>?) {
     if (representTag != null) {
-        lateinit var tempString: String
+        var tempString: String? = null
         for (i in representTag) {
             if (i == representTag[0]) {
                 tempString = "#${i.name}"
