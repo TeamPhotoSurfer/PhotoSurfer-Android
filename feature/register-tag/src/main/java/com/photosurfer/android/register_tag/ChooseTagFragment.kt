@@ -13,8 +13,10 @@ import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.constant.TAG_LIST
 import com.photosurfer.android.core.ext.getColor
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
+import com.photosurfer.android.domain.entity.SerializeTagInfoList
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.navigator.MainNavigator
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
@@ -113,7 +115,7 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
                 val bundle = Bundle().apply {
                     putInt("int", 0)
                 }
-                mainNavigator.navigatePushSettingFragment(requireActivity(), bundle )
+                mainNavigator.navigatePushSettingFragment(requireActivity(), chooseTagViewModel.inputList)
             } else {
                 Log.d("어쩔", "input 개수 0개")
             }
