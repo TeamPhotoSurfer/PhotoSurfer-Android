@@ -21,6 +21,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_choose_tag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SelectTagFragment">
@@ -47,11 +48,12 @@
             <TextView
                 android:id="@+id/tv_save"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:paddingHorizontal="16dp"
+                android:padding="16dp"
                 android:text="저장"
                 android:textAppearance="@style/subtitle_1"
-                android:textColor="@color/selector_choose_tag_check_state_text"
+                android:textColor="@color/point_main"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

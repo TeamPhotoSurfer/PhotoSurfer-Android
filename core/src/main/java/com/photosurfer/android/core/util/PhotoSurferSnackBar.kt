@@ -20,8 +20,8 @@ class PhotoSurferSnackBar(view: View, private val usage: Int) {
         const val SELECT_TAG_FRAGMENT = 0
         const val PUSH_MAIN_FRAGMENT = 1
         const val PUSH_MAIN_NETWORK_ERROR = 2
-        const val CHOOSE_TAG_FRAGMENT = 2
         const val SETTING_ACTIVITY = 3
+        const val CHOOSE_TAG_FRAGMENT = 4
     }
 
     private val context = view.context
