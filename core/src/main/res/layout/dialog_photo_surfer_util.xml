@@ -69,7 +69,6 @@
             android:textColor="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="24dp"
             tools:text="삭제" />
 
         <TextView
