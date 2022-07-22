@@ -1,9 +1,11 @@
 package com.photosurfer.android.register_tag
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -11,11 +13,16 @@ import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.constant.TAG_LIST
+import com.photosurfer.android.core.ext.getColor
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
+import com.photosurfer.android.domain.entity.SerializeTagInfoList
 import com.photosurfer.android.domain.entity.TagInfo
+import com.photosurfer.android.navigator.MainNavigator
 import com.photosurfer.android.register_tag.databinding.FragmentChooseTagBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragment_choose_tag) {
@@ -29,6 +36,9 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
     private lateinit var filterTagAdapter: PointSubTagAdapter
     private lateinit var tempList: ArrayList<TagInfo>
 
+    @Inject
+    lateinit var mainNavigator: MainNavigator
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
 
@@ -36,8 +46,8 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         setRecentList()
         setOftenList()
         setPlatformList()
-        chooseTagViewModel.getAllTagList()
         setAllItemList()
+        chooseTagViewModel.getAllTagList()
         chooseTagViewModel.setEmptyInput()
         initAdapter()
         setDataOnRecyclerView()
@@ -47,9 +57,26 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
         deleteInput()
         checkInputNum()
         initRecyclerViewLayout()
-        val file: File = setImgToFile(getImgToUri())
         initButtonSaveClickListener()
+        initSaveTextColor()
+        observeInputListNum()
 
+    }
+
+    private fun observeInputListNum() {
+        chooseTagViewModel.inputListNum.observe(viewLifecycleOwner) {
+            if (chooseTagViewModel.inputList.size > 0) {
+                binding.tvSave.isEnabled = true
+                binding.tvSave.setTextColor(getColor(com.photosurfer.android.shared.R.color.point_main))
+            } else {
+                binding.tvSave.isEnabled = false
+                binding.tvSave.setTextColor(getColor(com.photosurfer.android.shared.R.color.gray_50))
+            }
+        }
+    }
+
+    private fun initSaveTextColor() {
+        binding.tvSave.setTextColor(getColor(com.photosurfer.android.shared.R.color.gray_50))
     }
 
     private fun setAllItemList() {
@@ -83,7 +110,15 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun initButtonSaveClickListener() {
         binding.tvSave.setOnClickListener {
-            //chooseTagViewModel.postChooseTag()
+
+            if (chooseTagViewModel.inputList.size > 0) {
+                val bundle = Bundle().apply {
+                    putInt("int", 0)
+                }
+                mainNavigator.navigatePushSettingFragment(requireActivity(), chooseTagViewModel.inputList)
+            } else {
+                Log.d("어쩔", "input 개수 0개")
+            }
         }
     }
 
@@ -193,8 +228,14 @@ class ChooseTagFragment : BaseFragment<FragmentChooseTagBinding>(R.layout.fragme
 
     private fun selectTag(tagInfo: TagInfo) {
         chooseTagViewModel.selectTag(tagInfo)
-        inputTagAdapter.submitList(chooseTagViewModel.inputList)
-        inputTagAdapter.notifyDataSetChanged()
+        if(chooseTagViewModel.inputList.size < 7) {
+            inputTagAdapter.submitList(chooseTagViewModel.inputList)
+            chooseTagViewModel.inputListNum.value = chooseTagViewModel.inputList.size
+            inputTagAdapter.notifyDataSetChanged()
+        } else {
+            PhotoSurferSnackBar.make(binding.clChooseTag, PhotoSurferSnackBar.CHOOSE_TAG_FRAGMENT)
+                .show()
+        }
     }
 
     private fun deleteTag(tagInfo: TagInfo) {
