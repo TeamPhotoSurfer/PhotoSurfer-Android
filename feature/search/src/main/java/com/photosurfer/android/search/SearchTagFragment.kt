@@ -142,8 +142,10 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (isTypingNow()) {
                     // 검색 창 뜨게
-                } else if (isTagSelectedAtListOnce())
+                } else if (isTagSelectedAtListOnce()) {
                     navigateToSearchTagActivity()
+                    requireActivity().finish()
+                }
             }
             false
         }
