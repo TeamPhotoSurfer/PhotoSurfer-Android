@@ -6,6 +6,6 @@ import com.photosurfer.android.data.remote.model.response.SearchTagResultRespons
 
 interface RemoteSearchTagResultDataSource {
 
-    suspend fun getSearchTagResultList(options: List<Pair<String, Int>>): NetworkState<BaseResponse<SearchTagResultResponse>>
+    suspend fun getSearchTagResultList(options: List<Int>): NetworkState<BaseResponse<SearchTagResultResponse>>
 
 }
