@@ -69,8 +69,11 @@ class SearchResultViewModel @Inject constructor(
 
     fun getPhotosByTags() {
         viewModelScope.launch {
-            val option = mutableMapOf<String, Int>()
-            tagList.value?.forEach { option["id"] = it.id }
+            Log.d(TAG, "getPhotosByTags: ${tagList.value}")
+            val option = mutableListOf<Pair<String, Int>>()
+            tagList.value?.forEach { option.add(Pair("id", it.id)) }
+            Log.d(TAG, "getPhotosByTags: $option")
+            Log.d(TAG, "getPhotosByTags: $tagList")
             photoRepository.getPhotoListByTag(option)
                 .onSuccess {
                     _thumbnailList.value = it.photos.toMutableList()
@@ -86,6 +89,7 @@ class SearchResultViewModel @Inject constructor(
 
     fun deleteTag(position: Int) {
         _tagList.value?.removeAt(position)
+        // _tagList.value = tagList.value?.toMutableList() // new Instance
         isTagListEmpty.value = tagList.value?.size == 0
     }
 

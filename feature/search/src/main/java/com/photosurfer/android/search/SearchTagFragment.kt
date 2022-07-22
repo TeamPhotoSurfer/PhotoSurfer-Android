@@ -9,6 +9,7 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.constant.SELECTED_TAG
+import com.photosurfer.android.core.util.KeyBoardUtil
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.navigator.MainNavigator
@@ -35,6 +36,7 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.isTyping = true
 
+        setKeyBoardFocus()
         getRecommendTagList()
         setRecentList()
         setOftenList()
@@ -47,6 +49,10 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         setCompleteOnKeyBoardListener()
         deleteInput()
         initRecyclerViewLayout()
+    }
+
+    private fun setKeyBoardFocus() {
+        KeyBoardUtil.show(requireActivity(), binding.etTag)
     }
 
     private fun setPlatformList() {

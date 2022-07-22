@@ -2,6 +2,7 @@ package com.photosurfer.android.core.util
 
 import android.app.Activity
 import android.content.Context
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 object KeyBoardUtil {
@@ -14,11 +15,10 @@ object KeyBoardUtil {
         }
     }
 
-    fun show(activity: Activity) {
-        val inputMethodManager =
-            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        activity.currentFocus?.let { view ->
-            inputMethodManager.showSoftInput(view, 0)
-        }
+    fun show(context: Context, view: View) {
+        view.requestFocus()
+        // open the soft keyboard
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 }
