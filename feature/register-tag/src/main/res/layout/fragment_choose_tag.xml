@@ -82,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:visibility="@{isTyping? View.GONE : View.VISIBLE}"
             android:src="@drawable/ic_x_circle_fill"
             app:layout_constraintBottom_toBottomOf="@id/et_tag"
             app:layout_constraintEnd_toEndOf="@id/et_tag"
