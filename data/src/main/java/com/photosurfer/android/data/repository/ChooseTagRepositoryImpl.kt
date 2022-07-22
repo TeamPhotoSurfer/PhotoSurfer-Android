@@ -5,7 +5,6 @@ import com.photosurfer.android.data.remote.calladapter.NetworkState
 import com.photosurfer.android.data.remote.datasource.RemoteChooseTagDataSource
 import com.photosurfer.android.data.remote.datasource.RemoteTagListDataSource
 import com.photosurfer.android.data.remote.model.request.ChooseTagRequest
-import com.photosurfer.android.data.remote.model.response.EditTagNameResponse
 import com.photosurfer.android.domain.entity.*
 import com.photosurfer.android.domain.entity.request.DomainChooseTagRequest
 import com.photosurfer.android.domain.repository.ChooseTagRepository
@@ -156,6 +155,33 @@ class ChooseTagRepositoryImpl @Inject constructor(
         }
         return Result.failure(java.lang.IllegalStateException("NetworkError or UnKnownError please check timber"))
 
+    }
+
+    override suspend fun getAllTagList(): Result<MutableList<TagInfo>> {
+        when(
+            val response = remoteTagListDataSource.getAllTagList()
+        ) {
+            is NetworkState.Success -> {
+                return Result.success(
+                    response.body.data
+                )
+            }
+            is NetworkState.Failure -> return Result.failure(
+                RetrofitFailureStateException(
+                    response.error,
+                    response.code
+                )
+            )
+            is NetworkState.NetworkError -> Timber.d(
+                response.error,
+                "${this.javaClass.name}_getAllTagList"
+            )
+            is NetworkState.UnknownError -> Timber.d(
+                response.t,
+                "${this.javaClass.name}_getAllTagList"
+            )
+        }
+        return Result.failure(java.lang.IllegalStateException("NetworkError or UnKnownError please check timber"))
     }
 
 }
