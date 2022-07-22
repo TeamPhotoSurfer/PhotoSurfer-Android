@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.search_result.detailimage.DetailImageActivity.Companion.ADD
+import com.photosurfer.android.search_result.detailimage.DetailImageActivity.Companion.START
 import com.photosurfer.android.shared.databinding.ItemMutableChipDetailBinding
 
 class DetailImageAdapter() :
     ListAdapter<TagInfo, DetailImageAdapter.DetailImageViewHolder>(MutableChipComparator()) {
 
-    private var processState = ADD
+    private var processState = START
 
     fun updateProcessState(state: String) {
         processState = state

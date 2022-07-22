@@ -10,7 +10,9 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailImageViewModel @Inject constructor() : BaseViewModel(){
 
-    private val _tagInfoList = MutableLiveData<TagInfo>()
-    val tagInfoList: LiveData<TagInfo> = _tagInfoList
+    private val _tagInfoList = MutableLiveData<List<TagInfo>>()
+    val tagInfoList: LiveData<List<TagInfo>> = _tagInfoList
 
+    private val _imageUrl = MutableLiveData<String>()
+    val imageUrl: LiveData<String> = _imageUrl
 }
