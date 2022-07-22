@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:text="@{description}"
             android:textAppearance="@style/body2"
             android:textColor="@color/gray_50"
@@ -69,6 +68,7 @@
             android:textColor="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_popup_description"
             tools:text="삭제" />
 
         <TextView
@@ -78,6 +78,7 @@
             android:paddingHorizontal="24dp"
             android:paddingVertical="16dp"
             android:text="@string/btn_cancel"
+            android:textAppearance="@style/body2"
             android:textColor="@color/gray_50"
             app:layout_constraintBottom_toBottomOf="@id/btn_confirm"
             app:layout_constraintEnd_toStartOf="@id/btn_confirm"
