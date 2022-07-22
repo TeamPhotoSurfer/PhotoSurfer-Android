@@ -29,6 +29,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         onClickEditText()
     }
 
+    private fun dismissBottomSheet() {
+
+    }
+
     private fun getOftenSearchTagList() {
         viewModel.getOftenSearchTagList()
     }
