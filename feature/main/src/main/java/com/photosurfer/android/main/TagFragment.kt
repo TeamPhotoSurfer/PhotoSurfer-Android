@@ -10,7 +10,6 @@ import android.widget.PopupMenu
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
-import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.main.databinding.FragmentTagBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +32,10 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
         }
     }
 
+    private fun setStar() {
+
+    }
+
     private fun initTagAdapter() {
         tagListAdapter = TagListAdapter(::performOptionsMenuClick)
         binding.rcvTagList.adapter = tagListAdapter
@@ -51,9 +54,11 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 when (item?.itemId) {
                     R.id.tag_edit -> {
+                        // TODO : 파도 키보드 올라옴
                         return true
                     }
                     R.id.tag_delete -> {
+                        // TODO : 삭제 팝업 올라옴
                         return true
                     }
                 }

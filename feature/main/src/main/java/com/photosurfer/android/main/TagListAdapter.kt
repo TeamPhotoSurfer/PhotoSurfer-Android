@@ -12,7 +12,8 @@ import com.photosurfer.android.main.TagListAdapter.TagListViewHolder
 import com.photosurfer.android.main.databinding.ItemTagBinding
 
 class TagListAdapter(
-    private val threeDotClickListener: ((Int, ImageView) -> Unit)? = null
+    private val threeDotClickListener: ((Int, ImageView) -> Unit)? = null,
+    private val startClickListener: (() -> Unit)? = null
 ) : ListAdapter<SavedTag, TagListViewHolder>(TagComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagListViewHolder {
@@ -37,6 +38,12 @@ class TagListAdapter(
 
             binding.ivStar.setOnClickListener {
                 binding.ivStar.isSelected = binding.ivStar.isSelected != true
+                // TODO : 누르면 서버 통신
+                if(binding.ivStar.isSelected) {
+                    // 즐찾 설정
+                } else {
+                    // 즐찾 취소
+                }
             }
 
             binding.ivThreedots.setOnClickListener {

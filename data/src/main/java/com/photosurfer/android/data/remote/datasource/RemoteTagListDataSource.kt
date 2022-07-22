@@ -1,10 +1,8 @@
 package com.photosurfer.android.data.remote.datasource
 
 import com.photosurfer.android.data.remote.calladapter.NetworkState
-import com.photosurfer.android.data.remote.model.response.BaseResponse
-import com.photosurfer.android.data.remote.model.response.TagListResponse
-import com.photosurfer.android.data.remote.model.response.OftenSearchTagResponse
-import com.photosurfer.android.data.remote.model.response.SavedTagResponse
+import com.photosurfer.android.data.remote.model.response.*
+import com.photosurfer.android.domain.entity.TagInfo
 
 interface RemoteTagListDataSource {
 
@@ -13,4 +11,6 @@ interface RemoteTagListDataSource {
     suspend fun getTagList(): NetworkState<BaseResponse<TagListResponse>>
 
     suspend fun getSavedTagList(): NetworkState<BaseResponse<SavedTagResponse>>
+
+    suspend fun putEditTagName(): NetworkState<BaseResponse<EditTagNameResponse>>
 }
