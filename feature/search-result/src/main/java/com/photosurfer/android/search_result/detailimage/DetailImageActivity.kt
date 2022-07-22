@@ -22,6 +22,7 @@ class DetailImageActivity :
     private val detailImageViewModel by viewModels<DetailImageViewModel>()
     var photoId by Delegates.notNull<Int>()
     lateinit var dialog: PhotoSurferDialogUtil
+    lateinit var detailImageAdapter: DetailImageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,8 @@ class DetailImageActivity :
         initViewModelData()
         getDetailImageInfo()
         binding.detailImageViewModel = detailImageViewModel
+        initAdapter()
+        initAdapterDataObserver()
         startImageViewer()
         initShareButtonClickListener()
         deleteImageSuccess()
@@ -114,6 +117,17 @@ class DetailImageActivity :
                 finish()
             }
         )
+    }
+
+    private fun initAdapter(){
+        detailImageAdapter = DetailImageAdapter()
+        binding.rvTagDetail.adapter = detailImageAdapter
+    }
+
+    private fun initAdapterDataObserver(){
+        detailImageViewModel.tagInfoList.observe(this){
+            detailImageAdapter.submitList(it)
+        }
     }
 
     companion object {

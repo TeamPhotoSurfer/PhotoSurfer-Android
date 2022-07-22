@@ -57,7 +57,7 @@ class DetailImageViewModel @Inject constructor(
     fun deleteImage() {
         viewModelScope.launch {
             val option = mutableMapOf<String, Int>()
-             option["id"] = requireNotNull(photoId.value)
+            option["id"] = requireNotNull(photoId.value)
             imageRepository.deleteImage(option)
                 .onSuccess {
                     _deleteSuccessState.value = Event(true)
