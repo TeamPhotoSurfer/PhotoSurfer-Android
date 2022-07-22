@@ -75,7 +75,7 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
     private fun getExtraData() {
         val tagInfo = requireActivity().intent.getSerializableExtra(SELECTED_TAG) as? TagInfo
         Timber.d("tagInfo from previous $tagInfo")
-        tagInfo?.let { addTagWithInputText(it.name) }
+        tagInfo?.let { addTagWithInputText(it) }
     }
 
     private fun onClickBackButton() {
@@ -155,8 +155,8 @@ class SearchTagFragment : BaseFragment<FragmentSearchTagBinding>(R.layout.fragme
         mainNavigator.navigateSearchResult(requireContext(), viewModel.inputList.toList())
     }
 
-    private fun addTagWithInputText(tag: String) {
-        viewModel.inputList.add(TagInfo(0, tag))
+    private fun addTagWithInputText(tag: TagInfo) {
+        viewModel.inputList.add(TagInfo(tag.id, tag.name))
         viewModel.setEmptyInput(viewModel.inputList.size)
         binding.etTag.text.clear()
     }
