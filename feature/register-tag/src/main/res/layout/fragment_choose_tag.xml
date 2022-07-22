@@ -307,41 +307,19 @@
                         android:textAppearance="@style/body2"
                         android:textColor="@color/gray_70"
                         app:layout_constraintBottom_toBottomOf="@id/tv_relative_add"
-                        app:layout_constraintEnd_toStartOf="@id/cl_check_platform"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@id/tv_relative_add"
                         app:layout_constraintTop_toTopOf="@id/tv_relative_add" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_check_platform"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@id/chip_relative_add"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/chip_relative_add">
-
-                        <TextView
-                            android:id="@+id/tv_check_platform"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="8dp"
-                            android:paddingEnd="8dp"
-                            android:text="플랫폼"
-                            android:textAppearance="@style/caption_1"
-                            android:textColor="@color/gray_40"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/iv_check_platform"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_check_circle_fill"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_check_platform"
-                            app:layout_constraintEnd_toStartOf="@id/tv_check_platform"
-                            app:layout_constraintTop_toTopOf="@id/tv_check_platform" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_filter_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/chip_relative_add"
+                        tools:listitem="@layout/item_tag_point_sub" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

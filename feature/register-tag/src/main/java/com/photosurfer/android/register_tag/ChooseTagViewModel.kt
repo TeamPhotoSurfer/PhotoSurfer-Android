@@ -31,6 +31,9 @@ class ChooseTagViewModel @Inject constructor(
     private val _platformList = MutableLiveData<MutableList<TagInfo>>()
     val platformList: MutableLiveData<MutableList<TagInfo>> = _platformList
 
+    private val _allItemList = MutableLiveData<MutableList<TagInfo>>()
+    val allItemList: MutableLiveData<MutableList<TagInfo>> = _allItemList
+
     private val _platformListId = MutableLiveData<MutableList<Int>>()
     val platformListId: MutableLiveData<MutableList<Int>> = _platformListId
 
@@ -68,6 +71,28 @@ class ChooseTagViewModel @Inject constructor(
                     Timber.d(it, "${this.javaClass.name}_getTagList")
                 }
         }
+    }
+
+    fun getAllTagList() {
+        viewModelScope.launch {
+            chooseTagRepository.getAllTagList()
+                .onSuccess {
+                    _allItemList.value = it
+                }.onFailure {
+                    Timber.d(it, "${this.javaClass.name}_getAllTagList")
+                }
+        }
+    }
+
+    fun filterList(filterItem: String): MutableList<TagInfo> {
+        val tempList: MutableList<TagInfo> = ArrayList()
+
+        for(d in allItemList.value!!) {
+            if(filterItem in d.name) {
+                tempList.add(d)
+            }
+        }
+        return tempList
     }
 
     // TODO: GET 서버 로직 붙이고 추가할 예정
