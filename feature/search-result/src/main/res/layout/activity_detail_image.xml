@@ -125,6 +125,7 @@
             android:background="@drawable/shape_rect_white_fill_300"
             android:inputType="textPersonName"
             android:paddingVertical="13dp"
+            android:visibility="gone"
             android:paddingStart="16dp"
             android:paddingEnd="40dp"
             android:textAppearance="@style/body2"
