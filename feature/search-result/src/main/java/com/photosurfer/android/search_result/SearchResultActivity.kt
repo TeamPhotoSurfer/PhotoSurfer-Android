@@ -14,6 +14,7 @@ import com.photosurfer.android.core.constant.TAG_LIST
 import com.photosurfer.android.core.constant.TagResultViewType
 import com.photosurfer.android.core.onboarding.AddTagOnBoardingFragmentDialog
 import com.photosurfer.android.core.util.ItemDividerGrid
+import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.domain.entity.SerializeTagInfoList
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
@@ -202,23 +203,28 @@ class SearchResultActivity :
             popupMenu.inflate(R.menu.menu_search_result)
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item?.itemId) {
-                    R.id.tag_add -> true
-                    R.id.tag_edit -> true
-                    R.id.tag_delete -> true
+                    // todo 데모데이 시연용 스낵바
+                    R.id.tag_add, R.id.tag_edit, R.id.tag_delete -> {
+                        PhotoSurferSnackBar.make(
+                            binding.root,
+                            PhotoSurferSnackBar.SERVICE_PREPARING
+                        ).show()
+                        true
+                    }
                     else -> false
                 }
             }
             popupMenu.show()
         }
     }
-    
+
     override fun onBackPressed() {
         val viewType = binding.currentViewType
         if (viewType == TagResultViewType.DEFAULT)
             super.onBackPressed()
         else doOnCancelClicked()
     }
-    
+
     companion object {
         const val PHOTO_ID = "PHOTO_ID"
     }

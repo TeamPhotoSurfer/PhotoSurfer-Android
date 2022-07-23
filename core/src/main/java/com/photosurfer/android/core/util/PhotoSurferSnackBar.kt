@@ -22,6 +22,7 @@ class PhotoSurferSnackBar(view: View, private val usage: Int) {
         const val PUSH_MAIN_NETWORK_ERROR = 2
         const val SETTING_ACTIVITY = 3
         const val CHOOSE_TAG_FRAGMENT = 4
+        const val SERVICE_PREPARING = 5
     }
 
     private val context = view.context
@@ -48,7 +49,7 @@ class PhotoSurferSnackBar(view: View, private val usage: Int) {
     private fun initData(view: View) {
         snackbarBinding.snackBarText = when (usage) {
             SELECT_TAG_FRAGMENT -> view.getString(string.select_tag_fragment)
-            PUSH_MAIN_FRAGMENT, SETTING_ACTIVITY -> view.getString(string.push_main_fragment)
+            PUSH_MAIN_FRAGMENT, SETTING_ACTIVITY, SERVICE_PREPARING -> view.getString(string.push_main_fragment)
             PUSH_MAIN_NETWORK_ERROR -> "오류가 났습니다 다시 시도해 주세요"
             CHOOSE_TAG_FRAGMENT -> view.getString(string.choose_tag_fragment)
             else -> throw IllegalStateException()
