@@ -1,8 +1,10 @@
 package com.photosurfer.android.search_result
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.PopupMenu
 import androidx.activity.viewModels
@@ -32,6 +34,11 @@ class SearchResultActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         getExtraData()
         initExtraDataOnViewModel()
@@ -161,7 +168,8 @@ class SearchResultActivity :
         when (binding.currentViewType ?: TagResultViewType.DEFAULT) {
             TagResultViewType.DEFAULT -> {
                 val thumbnailId: Int =
-                    viewModel.thumbnail.value?.get(position)?.id ?: throw IllegalStateException()
+                    viewModel.thumbnailList.value?.get(position)?.id
+                        ?: throw IllegalStateException()
                 val intent = Intent(this, DetailImageActivity::class.java).apply {
                     putExtra(PHOTO_ID, thumbnailId)
                 }
