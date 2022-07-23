@@ -10,6 +10,7 @@ import android.widget.PopupMenu
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
+import com.photosurfer.android.core.util.PhotoSurferSnackBar
 import com.photosurfer.android.main.databinding.FragmentTagBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,7 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
         tagViewModel.savedBookmarkedTagList.observe(viewLifecycleOwner) {
             tagListAdapter.submitList(tagViewModel.savedBookmarkedTagList.value)
         }
-        tagViewModel.savedNotBookmarkedTagList.observe(viewLifecycleOwner){
+        tagViewModel.savedNotBookmarkedTagList.observe(viewLifecycleOwner) {
             tagListAdapter.submitList(tagViewModel.savedNotBookmarkedTagList.value)
         }
     }
@@ -53,11 +54,12 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
         popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 when (item?.itemId) {
-                    R.id.tag_edit -> {
-                        // TODO : 파도 키보드 올라옴
-                        return true
-                    }
-                    R.id.tag_delete -> {
+                    R.id.tag_edit, R.id.tag_delete -> {
+
+                        PhotoSurferSnackBar.make(
+                            binding.root,
+                            PhotoSurferSnackBar.SERVICE_PREPARING
+                        ).show()
                         // TODO : 삭제 팝업 올라옴
                         return true
                     }

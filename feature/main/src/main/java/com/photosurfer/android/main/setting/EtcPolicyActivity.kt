@@ -20,7 +20,7 @@ class EtcPolicyActivity : BaseActivity<ActivityEctPolicyBinding>(R.layout.activi
 
     private fun setPersonalDataClickListener() {
         binding.clPersonalData.setOnClickListener {
-            PhotoSurferSnackBar.make(binding.clPersonalData, PhotoSurferSnackBar.SETTING_ACTIVITY)
+            PhotoSurferSnackBar.make(binding.clPersonalData, PhotoSurferSnackBar.SERVICE_PREPARING)
                 .show()
         }
     }
