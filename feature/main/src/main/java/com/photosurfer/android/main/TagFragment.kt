@@ -11,14 +11,21 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.viewModels
 import com.photosurfer.android.core.base.BaseFragment
 import com.photosurfer.android.core.util.PhotoSurferSnackBar
+import com.photosurfer.android.domain.entity.SavedTag
+import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.main.databinding.FragmentTagBinding
+import com.photosurfer.android.navigator.MainNavigator
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
 
     private lateinit var tagListAdapter: TagListAdapter
     private val tagViewModel: TagViewModel by viewModels()
+
+    @Inject
+    lateinit var mainNavigator: MainNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,12 +40,17 @@ class TagFragment : BaseFragment<FragmentTagBinding>(R.layout.fragment_tag) {
         }
     }
 
+    private fun navigateSearchResultActivity(savedTag: SavedTag) {
+        val tag: TagInfo = TagInfo(savedTag.id, savedTag.name)
+        mainNavigator.navigateSearchResult(requireContext(), listOf(tag))
+    }
+
     private fun setStar() {
 
     }
 
     private fun initTagAdapter() {
-        tagListAdapter = TagListAdapter(::performOptionsMenuClick)
+        tagListAdapter = TagListAdapter(::performOptionsMenuClick, ::navigateSearchResultActivity)
         binding.rcvTagList.adapter = tagListAdapter
     }
 
