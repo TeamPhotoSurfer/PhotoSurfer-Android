@@ -49,6 +49,15 @@ object RetrofitServiceModule {
 
     @Provides
     @Singleton
+    fun providesDetailImageService(retrofit: Retrofit): DetailImageService =
+        retrofit.create(DetailImageService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesDeleteImageService(retrofit: Retrofit): DeleteImageService =
+        retrofit.create(DeleteImageService::class.java)
+    @Provides
+    @Singleton
     fun providesSearchTagResultService(retrofit: Retrofit): SearchTagResultService =
         retrofit.create(SearchTagResultService::class.java)
 

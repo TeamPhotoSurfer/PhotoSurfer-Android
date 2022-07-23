@@ -30,4 +30,8 @@ interface RemoteDataSourceModule {
     @Binds
     @Singleton
     fun bindsRemoteSearchResultDataSource(source: RemoteSearchTagResultDataSourceImpl): RemoteSearchTagResultDataSource
+
+    @Binds
+    @Singleton
+    fun bindsRemoteImageDataSource(source: RemoteImageDataSourceImpl): RemoteImageDataSource
 }

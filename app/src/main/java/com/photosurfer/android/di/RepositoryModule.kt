@@ -31,6 +31,10 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
+    fun bindsImageRepository(repository: ImageRepositoryImpl): ImageRepository
+
+    @Binds
+    @Singleton
     fun bindsSearchResultRepository(repository: PhotoRepositoryImpl): PhotoRepository
 
 }

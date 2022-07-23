@@ -1,9 +1,8 @@
 package com.photosurfer.android.search_result
 
-import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.widget.PopupMenu
 import androidx.activity.viewModels
@@ -17,6 +16,7 @@ import com.photosurfer.android.domain.entity.SerializeTagInfoList
 import com.photosurfer.android.domain.entity.TagInfo
 import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
+import com.photosurfer.android.search_result.detailimage.DetailImageActivity
 import com.photosurfer.android.search_result.viewModel.SearchResultViewModel
 import com.photosurfer.android.shared.R.style
 import dagger.hilt.android.AndroidEntryPoint
@@ -160,11 +160,12 @@ class SearchResultActivity :
     private fun onItemClick(thumbnail: ThumbnailInfo, position: Int) {
         when (binding.currentViewType ?: TagResultViewType.DEFAULT) {
             TagResultViewType.DEFAULT -> {
-                // TODO 창환~~ 미정이뷰 Navigate 로직 넣어조
                 val thumbnailId: Int =
-                    viewModel.thumbnailList.value?.get(position)?.id
-                        ?: throw IllegalStateException()
-                Log.d(TAG, "onItemClick: $thumbnailId")
+                    viewModel.thumbnail.value?.get(position)?.id ?: throw IllegalStateException()
+                val intent = Intent(this, DetailImageActivity::class.java).apply {
+                    putExtra(PHOTO_ID, thumbnailId)
+                }
+                startActivity(intent)
             }
             TagResultViewType.SELECT -> {
                 thumbnail.isChecked = !thumbnail.isChecked
@@ -202,11 +203,16 @@ class SearchResultActivity :
             popupMenu.show()
         }
     }
-
+    
     override fun onBackPressed() {
         val viewType = binding.currentViewType
         if (viewType == TagResultViewType.DEFAULT)
             super.onBackPressed()
         else doOnCancelClicked()
     }
+    
+    companion object {
+        const val PHOTO_ID = "PHOTO_ID"
+    }
+
 }

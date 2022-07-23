@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="processState"
+            type="String" />
+
+        <variable
+            name="tagInfo"
+            type="com.photosurfer.android.domain.entity.TagInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_whole_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="@{processState == `ADD` ? false : true}"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:id="@+id/iv_tail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_tail_point"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@color/point_main"
+            app:layout_constraintBottom_toBottomOf="@id/iv_tail"
+            app:layout_constraintStart_toEndOf="@id/iv_tail"
+            app:layout_constraintTop_toTopOf="@id/iv_tail">
+
+            <ImageView
+                android:id="@+id/iv_hashtag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_hashtag_line_white_tag"
+                app:layout_constraintBottom_toBottomOf="@id/tv_tag_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_tag_name" />
+
+            <EditText
+                android:id="@+id/tv_tag_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:focusable="@{processState == `ADJUST` ? true : false}"
+                android:text="@{tagInfo.name}"
+                android:textAppearance="@style/body2"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_hashtag"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="포토서퍼" />
+
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_x_circle_fill_white"
+                android:visibility="@{processState == `DELETE` ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_tag_name"
+                app:layout_constraintStart_toEndOf="@id/tv_tag_name"
+                app:layout_constraintTop_toTopOf="@id/tv_tag_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_head_point"
+            app:layout_constraintStart_toEndOf="@id/cl_tag"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
