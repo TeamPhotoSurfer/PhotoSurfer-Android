@@ -37,6 +37,8 @@ class TagListAdapter(
         ) {
             binding.savedTag = data
 
+            binding.ivTagImg.setOnClickListener { startClickListener(data) }
+
             binding.ivStar.setOnClickListener {
                 binding.ivStar.isSelected = binding.ivStar.isSelected != true
                 // TODO : 누르면 서버 통신
@@ -47,12 +49,10 @@ class TagListAdapter(
                         // 즐찾 취소
                     }
                 }
+            }
 
-                binding.ivTagImg.setOnClickListener { startClickListener(data) }
-
-                binding.ivThreedots.setOnClickListener {
-                    threeDotClickListener?.invoke(position, binding.ivThreedots)
-                }
+            binding.ivThreedots.setOnClickListener {
+                threeDotClickListener?.invoke(position, binding.ivThreedots)
             }
         }
     }
