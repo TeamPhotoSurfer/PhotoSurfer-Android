@@ -33,45 +33,61 @@ class SearchResultViewModel @Inject constructor(
         _tagList.value = tagList.toMutableList()
     }
 
-    private var _thumbnail = MutableLiveData<MutableList<ThumbnailInfo?>>()
-    val thumbnail: LiveData<MutableList<ThumbnailInfo?>> = _thumbnail
-    val noThumbnailData = MutableLiveData(thumbnail.value?.size == 0)
+    private var _thumbnailList = MutableLiveData<MutableList<ThumbnailInfo?>>()
+    val thumbnailList: LiveData<MutableList<ThumbnailInfo?>> = _thumbnailList
+    val noThumbnailData = MutableLiveData(thumbnailList.value?.size == 0)
 
-    fun updateList(list: MutableList<Int>) {
-        // for (i in 0 until list.size) {}
-        // TODO 서버 response 값으로 교체
-        _thumbnail.value = mutableListOf(
-            ThumbnailInfo(
-                1,
-                "https://mblogthumb-phinf.pstatic.net/20151026_131/ddazero_1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            ),
-            ThumbnailInfo(
-                2,
-                "https://mb1445793805984ouRO8_JPEG/dave1.jpg?type=w800"
-            )
-        )
-        noThumbnailData.value = thumbnail.value?.size == 0
+    val selectedThumbnailList = mutableListOf<ThumbnailInfo>()
+    var selectedTempThumbnailList = mutableListOf<ThumbnailInfo>()
+    var selectedThumbnailListPosition = mutableListOf<Int>()
+
+    fun clearCheckedTempThumbnail() {
+        selectedTempThumbnailList.forEach { it.isChecked = false }
+    }
+
+    fun updateSelectedThumbnailList(thumbnailInfo: ThumbnailInfo, position: Int) {
+        if (thumbnailInfo.isChecked)
+            selectedThumbnailListPosition.add(position)
+        else selectedThumbnailListPosition.remove(position)
+    }
+
+//    fun copySelectedThumbnailList() {
+//        selectedTempThumbnailList = selectedThumbnailList.toMutableList()   // deep copy
+//    }
+//
+//    private fun addOnThumbnailList(thumbnail: ThumbnailInfo) {
+//        selectedThumbnailList.add(thumbnail)
+//    }
+//
+//    fun deleteOnThumbnailList(thumbnail: ThumbnailInfo) {
+//        selectedThumbnailList.remove(thumbnail)
+//    }
+
+    fun clearCheckedThumbnail() {
+        thumbnailList.value?.forEach { it?.isChecked = false }
     }
 
     fun getPhotosByTags() {
         viewModelScope.launch {
-            val option = mutableMapOf<String, Int>()
-            tagList.value?.forEach { option["id"] = it.id }
+            val option = mutableListOf<Int>()
+            tagList.value?.forEach { option.add(it.id) }
+            Log.d(TAG, "getPhotosByTags: $option")
             photoRepository.getPhotoListByTag(option)
                 .onSuccess {
-                    _thumbnail.value = it.photos.toMutableList()
+                    _thumbnailList.value = it.photos.toMutableList()
                     Log.d(TAG, "getPhotosByTags: $it")
                 }.onFailure {
-                    _thumbnail.value = emptyArray<ThumbnailInfo>().toMutableList()
+                    _thumbnailList.value = emptyArray<ThumbnailInfo>().toMutableList()
                     Timber.d(it, "$/{this.javaClass.name}_getPhotosByTags")
                 }.run {
-                    noThumbnailData.value = thumbnail.value?.size == 0
+                    noThumbnailData.value = thumbnailList.value?.size == 0
                 }
         }
     }
 
     fun deleteTag(position: Int) {
         _tagList.value?.removeAt(position)
+        // _tagList.value = tagList.value?.toMutableList() // new Instance
         isTagListEmpty.value = tagList.value?.size == 0
     }
 

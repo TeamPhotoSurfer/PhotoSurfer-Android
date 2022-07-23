@@ -4,6 +4,6 @@ import com.photosurfer.android.domain.entity.request.SearchTagResult
 
 interface PhotoRepository {
 
-    suspend fun getPhotoListByTag(options: Map<String, Int>): Result<SearchTagResult>
+    suspend fun getPhotoListByTag(options: List<Int>): Result<SearchTagResult>
 
 }

@@ -18,6 +18,7 @@ import com.photosurfer.android.domain.entity.ThumbnailInfo
 import com.photosurfer.android.search_result.databinding.ActivitySearchResultBinding
 import com.photosurfer.android.search_result.detailimage.DetailImageActivity
 import com.photosurfer.android.search_result.viewModel.SearchResultViewModel
+import com.photosurfer.android.shared.R.style
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +27,6 @@ class SearchResultActivity :
     private val viewModel: SearchResultViewModel by viewModels()
     private lateinit var thumbnailAdapter: ThumbnailAdapter
     private lateinit var chipAdapter: MutableTagAdapter
-
     private lateinit var extraTag: List<TagInfo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +35,11 @@ class SearchResultActivity :
 
         getExtraData()
         initExtraDataOnViewModel()
+        initChipAdapter()
         getNewPhotoAsTagChanged()
         updatePhoto()
         setDefaultViewType()
         setCancelListener()
-        initChipAdapter()
         setDataOnRecyclerView()
         initThumbnailAdapter()
         initThumbnailList()
@@ -51,13 +51,15 @@ class SearchResultActivity :
     }
 
     private fun updatePhoto() {
-        viewModel.thumbnail.observe(this) {
-            thumbnailAdapter.submitList(viewModel.thumbnail.value)
+        viewModel.thumbnailList.observe(this) {
+            thumbnailAdapter.submitList(viewModel.thumbnailList.value)
         }
     }
 
     private fun getNewPhotoAsTagChanged() {
+        // TODO observe 작동 안함 deep copy 사용방법으로 교체
         viewModel.tagList.observe(this) {
+            Log.d(TAG, "getNewPhotoAsTagChanged: ${viewModel.tagList.value}")
             getPhotosByTags()
         }
     }
@@ -90,6 +92,7 @@ class SearchResultActivity :
     private fun deleteTag(position: Int) {
         viewModel.deleteTag(position)
         chipAdapter.notifyItemRemoved(position)
+        getPhotosByTags()
     }
 
     private fun setDataOnRecyclerView() {
@@ -113,13 +116,33 @@ class SearchResultActivity :
 
     private fun setCancelListener() {
         binding.tvCancel.setOnClickListener {
-            // viewModel 에서 selectedList -> emptyList()로 해주기
-            binding.currentViewType = TagResultViewType.DEFAULT
-            chipAdapter.toggleCancelable()
-            chipAdapter.notifyItemRangeChanged(
-                0,
-                viewModel.originTagList.value?.size ?: return@setOnClickListener
-            )
+            doOnCancelClicked()
+        }
+    }
+
+    private fun doOnCancelClicked() {
+        viewModel.clearCheckedThumbnail()
+        setViewTypeAsDefault()
+        updateChipAdapter()
+        updateThumbnailAdapterWithViewModel()
+        chipAdapter.toggleCancelable()
+        viewModel.clearCheckedTempThumbnail()
+    }
+
+    private fun setViewTypeAsDefault() {
+        binding.currentViewType = TagResultViewType.DEFAULT
+    }
+
+    private fun updateChipAdapter() {
+        chipAdapter.notifyItemRangeChanged(0, viewModel.originTagList.value?.size ?: return)
+    }
+
+    private fun updateThumbnailAdapterWithViewModel() {
+        val selectedThumbnailList = viewModel.selectedThumbnailListPosition
+        Log.d(TAG, "updateThumbnailAdapterWithViewModel: ${selectedThumbnailList.size}")
+        for (i in 0 until selectedThumbnailList.size) {
+            thumbnailAdapter.notifyItemChanged(selectedThumbnailList[i])
+            Log.d(TAG, "updateThumbnailAdapterWithViewModel: ${selectedThumbnailList[i]}")
         }
     }
 
@@ -146,13 +169,14 @@ class SearchResultActivity :
             }
             TagResultViewType.SELECT -> {
                 thumbnail.isChecked = !thumbnail.isChecked
+                viewModel.updateSelectedThumbnailList(thumbnail, position)
                 thumbnailAdapter.notifyItemChanged(position)
             }
         }
     }
 
     private fun initThumbnailList() {
-        viewModel.thumbnail.observe(this) { list ->
+        viewModel.thumbnailList.observe(this) { list ->
             if (list != null) thumbnailAdapter.submitList(list)
         }
     }
@@ -165,11 +189,7 @@ class SearchResultActivity :
 
     private fun onClickMenu() {
         binding.ivMenu.setOnClickListener {
-            val wrapper: Context = ContextThemeWrapper(
-                this,
-                com.photosurfer.android.shared.R.style.popupMenuStyle
-            )
-
+            val wrapper: Context = ContextThemeWrapper(this, style.popupMenuStyle)
             val popupMenu = PopupMenu(wrapper, binding.ivMenu, Gravity.RIGHT)
             popupMenu.inflate(R.menu.menu_search_result)
             popupMenu.setOnMenuItemClickListener { item ->
@@ -183,8 +203,16 @@ class SearchResultActivity :
             popupMenu.show()
         }
     }
-
+    
+    override fun onBackPressed() {
+        val viewType = binding.currentViewType
+        if (viewType == TagResultViewType.DEFAULT)
+            super.onBackPressed()
+        else doOnCancelClicked()
+    }
+    
     companion object {
         const val PHOTO_ID = "PHOTO_ID"
     }
+
 }

@@ -19,4 +19,6 @@ interface MainNavigator {
     fun navigateSearchResult(
         context: Context, list: List<TagInfo>
     )
+
+    fun navigatePushSettingFragment(context: Context, list: List<TagInfo>)
 }

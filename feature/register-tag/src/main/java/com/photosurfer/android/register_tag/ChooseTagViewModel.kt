@@ -34,6 +34,8 @@ class ChooseTagViewModel @Inject constructor(
     private val _allItemList = MutableLiveData<MutableList<TagInfo>>()
     val allItemList: MutableLiveData<MutableList<TagInfo>> = _allItemList
 
+    var inputListNum = MutableLiveData<Int>()
+
     private val _platformListId = MutableLiveData<MutableList<Int>>()
     val platformListId: MutableLiveData<MutableList<Int>> = _platformListId
 

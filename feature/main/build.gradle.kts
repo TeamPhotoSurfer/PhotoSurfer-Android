@@ -17,6 +17,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":shared"))
     implementation(project(":navigator"))
+    implementation(project(mapOf("path" to ":feature:register-tag")))
 
     // Android Core
     implementation(AndroidXDependencies.coreKtx)
@@ -42,4 +43,7 @@ dependencies {
 
     // Logger - Timber
     implementation(ThirdPartyDependencies.timber)
+
+    // Third Party Library
+    implementation(ThirdPartyDependencies.flexBox)
 }
