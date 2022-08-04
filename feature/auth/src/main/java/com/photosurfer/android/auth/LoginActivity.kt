@@ -56,7 +56,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
             clNaver.setOnClickListener {
                 navigateMainActivity()
-
             }
         }
     }
@@ -98,8 +97,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun setDelayIfDeviceOverAndroid12(objectAnimator: ObjectAnimator) {
-        if (isOverAndroid12)
+        if (isOverAndroid12) {
             objectAnimator.startDelay = SPLASH_TIME + 300L
+        }
     }
 
     private val isOverAndroid12 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
