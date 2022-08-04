@@ -10,6 +10,9 @@ import androidx.activity.viewModels
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.navercorp.nid.NaverIdLoginSDK
+import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_ID
+import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_SECRET
 import com.photosurfer.android.auth.databinding.ActivityLoginBinding
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.navigator.MainNavigator
@@ -23,6 +26,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     @Inject
     lateinit var mainNavigator: MainNavigator
+    private val loginViewModel by viewModels<LoginViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -55,7 +59,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             }
 
             clNaver.setOnClickListener {
-                navigateMainActivity()
+                loginViewModel.updatePlatform(NAVER)
+                loginViewModel.naverSetOAuthLoginCallback()
+                NaverIdLoginSDK.initialize(
+                    this@LoginActivity,
+                    X_NAVER_CLIENT_ID,
+                    X_NAVER_CLIENT_SECRET,
+                    "PhotoSurfer"
+                )
+                NaverIdLoginSDK.authenticate(this@LoginActivity, loginViewModel.oAuthLoginCallback)
             }
         }
     }
@@ -106,5 +118,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     companion object {
         const val SPLASH_TIME = 300L
+        private const val NAVER = "naver"
+        private const val KAKAO = "kakao"
     }
 }
