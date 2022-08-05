@@ -10,6 +10,9 @@ import androidx.activity.viewModels
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_ID
 import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_SECRET
@@ -18,6 +21,7 @@ import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.navigator.MainNavigator
 import com.photosurfer.android.shared.R.color
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,10 +56,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun onClickLoginBtn() {
-        // TODO 로그인 로직 추가 & MainView이동 로직 수정
         with(binding) {
             clKakao.setOnClickListener {
-                navigateMainActivity()
+                if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
+                    UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity) { token, error ->
+                        if (error != null) {
+                            Timber.d("${error.message} OAuthLoginCallback 부분에서의 오류 onError")
+
+                            if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                                return@loginWithKakaoTalk
+                            }
+
+                            UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = this@LoginActivity.viewModel.kakaoLoginCallback)
+                        } else if (token != null) {
+                            this@LoginActivity.viewModel.updateSocialToken(token.accessToken)
+                        }
+                    }
+                } else {
+                    UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = this@LoginActivity.viewModel.kakaoLoginCallback)
+                }
             }
 
             clNaver.setOnClickListener {
