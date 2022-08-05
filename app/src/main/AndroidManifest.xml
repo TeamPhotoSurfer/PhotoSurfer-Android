@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.photosurfer.android">
 
+    <!-- 인터넷 사용 권한 설정-->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".PhotoSurferApplication"
         android:allowBackup="true"
@@ -28,6 +31,22 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_launcher_foreground" />
+
+<!--        &lt;!&ndash;카카오 로그인 액티비티&ndash;&gt;-->
+<!--        <activity-->
+<!--            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+
+<!--                &lt;!&ndash; Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" &ndash;&gt;-->
+<!--                <data android:host="oauth"-->
+<!--                    android:scheme="kakao${}" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
 
         <activity
             android:name=".auth.LoginActivity"

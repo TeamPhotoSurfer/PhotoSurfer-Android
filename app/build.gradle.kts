@@ -101,4 +101,7 @@ dependencies {
 
     // Third Party Library
     implementation(ThirdPartyDependencies.flexBox)
+
+    // Kakao - social Login
+    implementation(ThirdPartyDependencies.kakaoAuth)
 }
