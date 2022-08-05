@@ -26,7 +26,6 @@ dependencies {
     implementation(AndroidXDependencies.coroutines)
     implementation(AndroidXDependencies.splashScreen)
 
-
     // Material Design
     implementation(MaterialDesignDependencies.materialDesign)
 
@@ -46,4 +45,8 @@ dependencies {
 
     // Third Party Library
     implementation(ThirdPartyDependencies.flexBox)
+
+    // test
+    implementation(AndroidXDependencies.junit)
+    androidTestImplementation(TestDependencies.androidTest)
 }

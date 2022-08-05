@@ -25,6 +25,11 @@ android {
             "X_NAVER_CLIENT_SECRET",
             properties.getProperty("X_NAVER_CLIENT_SECRET")
         )
+        buildConfigField(
+            "String",
+            "KAKAO_NATIVE_APP_KEY",
+            properties.getProperty("KAKAO_NATIVE_APP_KEY")
+        )
     }
     namespace = "com.photosurfer.android.auth"
 }
@@ -34,6 +39,10 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":shared"))
     implementation(project(":navigator"))
+
+    // test
+    implementation(AndroidXDependencies.junit)
+    androidTestImplementation(TestDependencies.androidTest)
 
     // Android Core
     implementation(AndroidXDependencies.coreKtx)
@@ -60,4 +69,7 @@ dependencies {
 
     // Naver - social Login
     implementation(ThirdPartyDependencies.naverAuth)
+
+    // Kakao - social Login
+    implementation(ThirdPartyDependencies.kakaoAuth)
 }

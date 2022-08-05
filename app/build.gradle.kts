@@ -19,7 +19,7 @@ android {
     }
     defaultConfig {
         buildConfigField("String", "PHOTO_SURFER_SERVER_BASE_URL", properties.getProperty("PHOTO_SURFER_SERVER_BASE_URL"))
-        buildConfigField("String", "TEST_TOKEN", properties.getProperty("TEST_TOKEN"))
+        buildConfigField("String", "KAKAO_NATIVE_APP_KEY", properties.getProperty("KAKAO_NATIVE_APP_KEY"))
     }
     namespace = "com.photosurfer.android"
 }
