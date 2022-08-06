@@ -1,6 +1,5 @@
 package com.photosurfer.android.di
 
-
 import com.photosurfer.android.data.repository.*
 import com.photosurfer.android.domain.repository.*
 import dagger.Binds
@@ -37,4 +36,7 @@ interface RepositoryModule {
     @Singleton
     fun bindsSearchResultRepository(repository: PhotoRepositoryImpl): PhotoRepository
 
+    @Binds
+    @Singleton
+    fun bindsAuthRepository(repository: AuthRepositoryImpl): AuthRepository
 }

@@ -13,10 +13,15 @@ class LoginViewModel : ViewModel() {
     private val _socialToken = MutableLiveData<String>()
     val socialToken: LiveData<String> = _socialToken
 
+    private val _fcmToken = MutableLiveData<String>()
+    val fcmToken: LiveData<String> = _fcmToken
+
     private lateinit var platform: String
 
     private val _loginFailureMessage = MutableLiveData<String>()
     val loginFailureMessage: LiveData<String> = _loginFailureMessage
+
+    val isAutoLogin = false // TODO : sharedPreference에서 불러오는 데이터로 변경할 것
 
     lateinit var oAuthLoginCallback: OAuthLoginCallback
         private set
@@ -28,8 +33,6 @@ class LoginViewModel : ViewModel() {
             _socialToken.value = token.accessToken
         }
     }
-
-    val isAutoLogin = false // TODO : sharedPreference에서 불러오는 데이터로 변경할 것
 
     fun naverSetOAuthLoginCallback() {
         oAuthLoginCallback = object : OAuthLoginCallback {
