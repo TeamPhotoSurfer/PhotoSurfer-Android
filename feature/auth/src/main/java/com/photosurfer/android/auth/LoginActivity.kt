@@ -26,11 +26,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+
     private val viewModel: LoginViewModel by viewModels()
 
     @Inject
     lateinit var mainNavigator: MainNavigator
-    private val loginViewModel by viewModels<LoginViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -67,26 +67,35 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                                 return@loginWithKakaoTalk
                             }
 
-                            UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = this@LoginActivity.viewModel.kakaoLoginCallback)
+                            UserApiClient.instance.loginWithKakaoAccount(
+                                this@LoginActivity,
+                                callback = this@LoginActivity.viewModel.kakaoLoginCallback
+                            )
                         } else if (token != null) {
                             this@LoginActivity.viewModel.updateSocialToken(token.accessToken)
                         }
                     }
                 } else {
-                    UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = this@LoginActivity.viewModel.kakaoLoginCallback)
+                    UserApiClient.instance.loginWithKakaoAccount(
+                        this@LoginActivity,
+                        callback = this@LoginActivity.viewModel.kakaoLoginCallback
+                    )
                 }
             }
 
             clNaver.setOnClickListener {
-                loginViewModel.updatePlatform(NAVER)
-                loginViewModel.naverSetOAuthLoginCallback()
+                this@LoginActivity.viewModel.updatePlatform(NAVER)
+                this@LoginActivity.viewModel.naverSetOAuthLoginCallback()
                 NaverIdLoginSDK.initialize(
                     this@LoginActivity,
                     X_NAVER_CLIENT_ID,
                     X_NAVER_CLIENT_SECRET,
                     "PhotoSurfer"
                 )
-                NaverIdLoginSDK.authenticate(this@LoginActivity, loginViewModel.oAuthLoginCallback)
+                NaverIdLoginSDK.authenticate(
+                    this@LoginActivity,
+                    this@LoginActivity.viewModel.oAuthLoginCallback
+                )
             }
         }
     }
