@@ -1,6 +1,8 @@
 package com.photosurfer.android.domain.repository
 
+import java.util.*
+
 interface AuthRepository {
 
-    fun getFcmToken(tokenCallBack: () -> Unit)
+    fun getFcmToken(tokenCallBack: (String) -> Unit)
 }

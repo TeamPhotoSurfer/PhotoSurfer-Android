@@ -2,13 +2,19 @@ package com.photosurfer.android.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kakao.sdk.auth.model.OAuthToken
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.photosurfer.android.core.base.BaseViewModel
+import com.photosurfer.android.domain.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : BaseViewModel() {
 
     private val _socialToken = MutableLiveData<String>()
     val socialToken: LiveData<String> = _socialToken
@@ -56,5 +62,15 @@ class LoginViewModel : ViewModel() {
 
     fun updatePlatform(platform: String) {
         this.platform = platform
+    }
+
+    fun getFcmToken() {
+        authRepository.getFcmToken {
+            updateFcmToken(it)
+        }
+    }
+
+    fun updateFcmToken(fcmToken: String) {
+        _fcmToken.value = fcmToken
     }
 }

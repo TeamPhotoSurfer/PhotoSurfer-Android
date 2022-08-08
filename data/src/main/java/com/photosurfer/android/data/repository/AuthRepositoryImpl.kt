@@ -8,7 +8,9 @@ class
 AuthRepositoryImpl @Inject constructor(
     private val firebaseTokenManager: FirebaseTokenManager
 ) : AuthRepository {
-    override fun getFcmToken(tokenCallBack: () -> Unit){
-        firebaseTokenManager.getFirebaseToken { tokenCallBack() }
+    override fun getFcmToken(tokenCallBack: (String) -> Unit) {
+        firebaseTokenManager.getFirebaseToken {
+            tokenCallBack(it)
+        }
     }
 }
