@@ -71,6 +71,5 @@ class LoginViewModel @Inject constructor(
     }
 
     fun updateFcmToken(fcmToken: String) {
-        _fcmToken.value = fcmToken
-    }
+        _fcmToken.value = fcmToken }
 }

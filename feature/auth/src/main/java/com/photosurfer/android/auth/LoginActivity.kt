@@ -41,6 +41,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         setStatusBarColorOnSplash()
         setLogoTransitionY()
         checkAutoLogin()
+        viewModel.getFcmToken()
         onClickLoginBtn()
     }
 
@@ -58,6 +59,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun onClickLoginBtn() {
         with(binding) {
             clKakao.setOnClickListener {
+                this@LoginActivity.viewModel.updatePlatform(KAKAO)
                 if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
                     UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity) { token, error ->
                         if (error != null) {
