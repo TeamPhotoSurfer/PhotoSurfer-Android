@@ -36,7 +36,7 @@ class LoginViewModel @Inject constructor(
         if (error != null) {
             Timber.d("${error.message} OAuthLoginCallback 부분에서의 오류 onError")
         } else if (token != null) {
-            _socialToken.value = token.accessToken
+            updateSocialToken(token.accessToken)
         }
     }
 
@@ -71,5 +71,6 @@ class LoginViewModel @Inject constructor(
     }
 
     fun updateFcmToken(fcmToken: String) {
-        _fcmToken.value = fcmToken }
+        _fcmToken.value = fcmToken
+    }
 }
