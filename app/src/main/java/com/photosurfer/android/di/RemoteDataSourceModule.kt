@@ -34,4 +34,8 @@ interface RemoteDataSourceModule {
     @Binds
     @Singleton
     fun bindsRemoteImageDataSource(source: RemoteImageDataSourceImpl): RemoteImageDataSource
+
+    @Binds
+    @Singleton
+    fun bindsRemoteLoginDataSource(source: RemoteLoginDataSourceImpl): RemoteLoginDataSource
 }
