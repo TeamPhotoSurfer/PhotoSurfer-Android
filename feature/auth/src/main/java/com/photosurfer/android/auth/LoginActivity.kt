@@ -18,6 +18,7 @@ import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_ID
 import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_SECRET
 import com.photosurfer.android.auth.databinding.ActivityLoginBinding
 import com.photosurfer.android.core.base.BaseActivity
+import com.photosurfer.android.core.util.EventObserver
 import com.photosurfer.android.navigator.MainNavigator
 import com.photosurfer.android.shared.R.color
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +44,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         checkAutoLogin()
         viewModel.getFcmToken()
         onClickLoginBtn()
+        initLoginObserver()
+        initLoginStateObserver()
+        initLoginFailureMessageObserver()
     }
 
     private fun checkAutoLogin() {
@@ -99,6 +103,26 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     this@LoginActivity.viewModel.oAuthLoginCallback
                 )
             }
+        }
+    }
+
+    private fun initLoginObserver() {
+        viewModel.socialToken.observe(this) {
+            viewModel.postLogin()
+        }
+    }
+
+    private fun initLoginStateObserver() {
+        viewModel.loginState.observe(
+            this,
+            EventObserver { navigateMainActivity() }
+        )
+    }
+
+    private fun initLoginFailureMessageObserver() {
+        viewModel.loginFailureMessage.observe(this) {
+            Timber.d("로그인 실패")
+            // 추후에 토스트 메시지 등등 원하는 처리
         }
     }
 
