@@ -84,6 +84,7 @@ object ThirdPartyDependencies {
         "com.github.stfalcon-studio:StfalconImageViewer:${Versions.stFalconImageViewer}"
     const val dotsIndicator = "com.tbuonomo:dotsindicator:${Versions.dotsIndicator}"
     const val flexBox = "com.google.android.flexbox:flexbox:${Versions.flexBoxVersion}"
+    const val kakaoAuth = "com.kakao.sdk:v2-user:${Versions.kakaoAuth}"
 }
 
 object FirebaseDependency {

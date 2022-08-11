@@ -49,6 +49,7 @@ object Versions {
     const val naverAuth = "5.1.0"
     const val stFalconImageViewer = "v1.0.1"
     const val dotsIndicator = "4.3"
+    const val kakaoAuth = "2.11.0"
 
     val javaVersion = JavaVersion.VERSION_11
     const val jvmVersion = "11"

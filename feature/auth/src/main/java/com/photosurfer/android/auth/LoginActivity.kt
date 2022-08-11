@@ -10,15 +10,24 @@ import androidx.activity.viewModels
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_ID
+import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_SECRET
 import com.photosurfer.android.auth.databinding.ActivityLoginBinding
 import com.photosurfer.android.core.base.BaseActivity
+import com.photosurfer.android.core.util.EventObserver
 import com.photosurfer.android.navigator.MainNavigator
 import com.photosurfer.android.shared.R.color
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+
     private val viewModel: LoginViewModel by viewModels()
 
     @Inject
@@ -29,16 +38,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
+        viewModel.initAutoLoginState()
         setAnimationOnSplash()
         setStatusBarColorOnSplash()
         setLogoTransitionY()
         checkAutoLogin()
+        viewModel.getFcmToken()
         onClickLoginBtn()
+        initLoginObserver()
+        initLoginStateObserver()
+        initLoginFailureMessageObserver()
     }
 
     private fun checkAutoLogin() {
-        val isAutoLogin = viewModel.isAutoLogin
-        if (!isAutoLogin) setLoginViewGroupFadeIn()
+        val isAutoLogin = viewModel.isAutoLogin.value
+        if (!requireNotNull(isAutoLogin)) setLoginViewGroupFadeIn()
         else navigateMainActivity()
     }
 
@@ -48,16 +62,68 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun onClickLoginBtn() {
-        // TODO 로그인 로직 추가 & MainView이동 로직 수정
         with(binding) {
             clKakao.setOnClickListener {
-                navigateMainActivity()
+                this@LoginActivity.viewModel.updatePlatform(KAKAO)
+                if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
+                    UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity) { token, error ->
+                        if (error != null) {
+                            Timber.d("${error.message} OAuthLoginCallback 부분에서의 오류 onError")
+
+                            if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                                return@loginWithKakaoTalk
+                            }
+
+                            UserApiClient.instance.loginWithKakaoAccount(
+                                this@LoginActivity,
+                                callback = this@LoginActivity.viewModel.kakaoLoginCallback
+                            )
+                        } else if (token != null) {
+                            this@LoginActivity.viewModel.updateSocialToken(token.accessToken)
+                        }
+                    }
+                } else {
+                    UserApiClient.instance.loginWithKakaoAccount(
+                        this@LoginActivity,
+                        callback = this@LoginActivity.viewModel.kakaoLoginCallback
+                    )
+                }
             }
 
             clNaver.setOnClickListener {
-                navigateMainActivity()
-
+                this@LoginActivity.viewModel.updatePlatform(NAVER)
+                this@LoginActivity.viewModel.naverSetOAuthLoginCallback()
+                NaverIdLoginSDK.initialize(
+                    this@LoginActivity,
+                    X_NAVER_CLIENT_ID,
+                    X_NAVER_CLIENT_SECRET,
+                    CLIENT_NAME
+                )
+                NaverIdLoginSDK.authenticate(
+                    this@LoginActivity,
+                    this@LoginActivity.viewModel.oAuthLoginCallback
+                )
             }
+        }
+    }
+
+    private fun initLoginObserver() {
+        viewModel.socialToken.observe(this) {
+            viewModel.postLogin()
+        }
+    }
+
+    private fun initLoginStateObserver() {
+        viewModel.loginState.observe(
+            this,
+            EventObserver { navigateMainActivity() }
+        )
+    }
+
+    private fun initLoginFailureMessageObserver() {
+        viewModel.loginFailureMessage.observe(this) {
+            Timber.d("로그인 실패")
+            // 추후에 토스트 메시지 등등 원하는 처리
         }
     }
 
@@ -98,13 +164,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun setDelayIfDeviceOverAndroid12(objectAnimator: ObjectAnimator) {
-        if (isOverAndroid12)
+        if (isOverAndroid12) {
             objectAnimator.startDelay = SPLASH_TIME + 300L
+        }
     }
 
     private val isOverAndroid12 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
     companion object {
         const val SPLASH_TIME = 300L
+        private const val NAVER = "naver"
+        private const val KAKAO = "kakao"
+        private const val CLIENT_NAME = "PhotoSurfer"
     }
 }

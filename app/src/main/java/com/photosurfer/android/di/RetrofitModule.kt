@@ -2,7 +2,7 @@ package com.photosurfer.android.di
 
 import CustomCallAdapterFactory
 import com.photosurfer.android.BuildConfig.PHOTO_SURFER_SERVER_BASE_URL
-import com.photosurfer.android.BuildConfig.TEST_TOKEN
+import com.photosurfer.android.data.local.datasource.LocalPreferenceUserDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,13 +28,13 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun providesInterceptor(): Interceptor =
+    fun providesInterceptor(localPreferenceUserDataSourceImpl: LocalPreferenceUserDataSource): Interceptor =
         Interceptor { chain ->
             with(chain) {
                 proceed(
                     request()
                         .newBuilder()
-                        .addHeader("Authorization", TEST_TOKEN)
+                        .addHeader(AUTHORIZATION, localPreferenceUserDataSourceImpl.getAccessToken())
                         .build()
                 )
             }
@@ -63,4 +63,6 @@ object RetrofitModule {
             .addCallAdapterFactory(CustomCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+    const val AUTHORIZATION = "Authorization"
 }
