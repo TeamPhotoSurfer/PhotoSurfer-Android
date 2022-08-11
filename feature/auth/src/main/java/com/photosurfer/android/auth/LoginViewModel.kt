@@ -1,6 +1,5 @@
 package com.photosurfer.android.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -35,7 +34,7 @@ class LoginViewModel @Inject constructor(
     private val _loginState = MutableLiveData<Event<Boolean>>()
     val loginState: LiveData<Event<Boolean>> = _loginState
 
-    val isAutoLogin = false // TODO : sharedPreference에서 불러오는 데이터로 변경할 것
+    val isAutoLogin = MutableLiveData(false)
 
     lateinit var oAuthLoginCallback: OAuthLoginCallback
         private set
@@ -103,5 +102,11 @@ class LoginViewModel @Inject constructor(
 
     fun saveAccessToken(accessToken: String) {
         authRepository.saveAccessToken(accessToken)
+    }
+
+    fun initAutoLoginState() {
+        if (authRepository.getAccessToken() != "") {
+            isAutoLogin.value = true
+        }
     }
 }

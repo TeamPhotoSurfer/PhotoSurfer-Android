@@ -38,6 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
+        viewModel.initAutoLoginState()
         setAnimationOnSplash()
         setStatusBarColorOnSplash()
         setLogoTransitionY()
@@ -50,8 +51,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun checkAutoLogin() {
-        val isAutoLogin = viewModel.isAutoLogin
-        if (!isAutoLogin) setLoginViewGroupFadeIn()
+        val isAutoLogin = viewModel.isAutoLogin.value
+        if (!requireNotNull(isAutoLogin)) setLoginViewGroupFadeIn()
         else navigateMainActivity()
     }
 

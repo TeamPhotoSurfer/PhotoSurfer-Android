@@ -12,8 +12,7 @@ import com.photosurfer.android.domain.repository.AuthRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-class
-AuthRepositoryImpl @Inject constructor(
+class AuthRepositoryImpl @Inject constructor(
     private val firebaseTokenManager: FirebaseTokenManager,
     private val remoteLoginDataSource: RemoteLoginDataSource,
     private val localPreferenceUserDataSource: LocalPreferenceUserDataSource
@@ -61,4 +60,6 @@ AuthRepositoryImpl @Inject constructor(
     override fun saveAccessToken(accessToken: String) {
         localPreferenceUserDataSource.saveAccessToken(accessToken)
     }
+
+    override fun getAccessToken(): String = localPreferenceUserDataSource.getAccessToken()
 }

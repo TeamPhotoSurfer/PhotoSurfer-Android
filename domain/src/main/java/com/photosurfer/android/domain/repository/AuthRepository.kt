@@ -11,4 +11,6 @@ interface AuthRepository {
     suspend fun postLogin(domainLoginRequest: DomainLoginRequest): Result<LoginInfo>
 
     fun saveAccessToken(accessToken: String)
+
+    fun getAccessToken(): String
 }
