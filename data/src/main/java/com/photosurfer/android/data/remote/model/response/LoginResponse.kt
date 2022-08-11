@@ -23,7 +23,7 @@ data class CheckUser(
     @SerializedName("name")
     val name: Any,
     @SerializedName("push")
-    val push: Boolean,
+    val isPushActivated: Boolean,
     @SerializedName("socialType")
     val socialType: String,
     @SerializedName("updatedAt")

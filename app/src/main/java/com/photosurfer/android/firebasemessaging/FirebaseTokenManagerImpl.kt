@@ -11,7 +11,7 @@ class FirebaseTokenManagerImpl @Inject constructor() : FirebaseTokenManager {
             if (task.isSuccessful) {
                 tokenCallBack(task.result)
             } else {
-                Timber.d("fcm Token 오류")
+                Timber.d("fcm Token 오류 : ${task.exception}")
             }
         }
     }

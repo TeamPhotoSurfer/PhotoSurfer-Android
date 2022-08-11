@@ -97,7 +97,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     this@LoginActivity,
                     X_NAVER_CLIENT_ID,
                     X_NAVER_CLIENT_SECRET,
-                    "PhotoSurfer"
+                    CLIENT_NAME
                 )
                 NaverIdLoginSDK.authenticate(
                     this@LoginActivity,
@@ -175,5 +175,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         const val SPLASH_TIME = 300L
         private const val NAVER = "naver"
         private const val KAKAO = "kakao"
+        private const val CLIENT_NAME = "PhotoSurfer"
     }
 }
