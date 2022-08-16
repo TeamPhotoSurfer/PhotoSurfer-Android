@@ -3,16 +3,12 @@ package com.photosurfer.android.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.kakao.sdk.auth.model.OAuthToken
-import com.navercorp.nid.NaverIdLoginSDK
-import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.photosurfer.android.core.base.BaseViewModel
 import com.photosurfer.android.core.util.Event
 import com.photosurfer.android.domain.entity.request.DomainLoginRequest
 import com.photosurfer.android.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,33 +31,6 @@ class LoginViewModel @Inject constructor(
     val loginState: LiveData<Event<Boolean>> = _loginState
 
     val isAutoLogin = MutableLiveData(false)
-
-    lateinit var oAuthLoginCallback: OAuthLoginCallback
-        private set
-
-    val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        if (error != null) {
-            Timber.d("${error.message} OAuthLoginCallback 부분에서의 오류 onError")
-        } else if (token != null) {
-            updateSocialToken(token.accessToken)
-        }
-    }
-
-    fun naverSetOAuthLoginCallback() {
-        oAuthLoginCallback = object : OAuthLoginCallback {
-            override fun onSuccess() {
-                _socialToken.value = NaverIdLoginSDK.getAccessToken()
-            }
-
-            override fun onError(errorCode: Int, message: String) {
-                Timber.d("$message OAuthLoginCallback 부분에서의 오류 onError")
-            }
-
-            override fun onFailure(httpStatus: Int, message: String) {
-                Timber.d("$message OAuthLoginCallback 부분에서의 오류 onFailure")
-            }
-        }
-    }
 
     fun postLogin() {
         viewModelScope.launch {

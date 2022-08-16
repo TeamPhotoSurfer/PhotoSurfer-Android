@@ -13,9 +13,16 @@ class KakaoLoginManager @Inject constructor(
     @ActivityContext private val context: Context
 ) {
     fun startKakaoLogin(
-        kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit,
         updateSocialToken: (String) -> Unit
     ) {
+        val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                Timber.d("${error.message} OAuthLoginCallback 부분에서의 오류 onError")
+            } else if (token != null) {
+                updateSocialToken(token.accessToken)
+            }
+        }
+
         val kakaoLoginState = if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
             KaKaoLoginState.KAKAO_TALK_LOGIN
         } else {

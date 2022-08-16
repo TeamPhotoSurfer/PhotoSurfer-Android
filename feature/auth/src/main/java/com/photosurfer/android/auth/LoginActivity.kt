@@ -64,10 +64,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun onClickLoginBtn() {
+        // 카카오 네이버 둘다 소셜토큰 업데이트 해주는 함수를 인자로 넣어주면된다
         with(binding) {
             clKakao.setOnClickListener {
                 this@LoginActivity.viewModel.updatePlatform(KAKAO)
-                kakaoLoginManager.startKakaoLogin(this@LoginActivity.viewModel.kakaoLoginCallback) {
+                kakaoLoginManager.startKakaoLogin {
                     this@LoginActivity.viewModel.updateSocialToken(it)
                 }
             }
