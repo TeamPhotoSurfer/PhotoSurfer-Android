@@ -10,13 +10,9 @@ import androidx.activity.viewModels
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.user.UserApiClient
-import com.navercorp.nid.NaverIdLoginSDK
-import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_ID
-import com.photosurfer.android.auth.BuildConfig.X_NAVER_CLIENT_SECRET
 import com.photosurfer.android.auth.databinding.ActivityLoginBinding
+import com.photosurfer.android.auth.socialloginmanager.KakaoLoginManager
+import com.photosurfer.android.auth.socialloginmanager.NaverLoginManager
 import com.photosurfer.android.core.base.BaseActivity
 import com.photosurfer.android.core.util.EventObserver
 import com.photosurfer.android.navigator.MainNavigator
@@ -32,6 +28,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     @Inject
     lateinit var mainNavigator: MainNavigator
+
+    @Inject
+    lateinit var kakaoLoginManager: KakaoLoginManager
+
+    @Inject
+    lateinit var naverLoginManager: NaverLoginManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -62,47 +64,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun onClickLoginBtn() {
+        // 카카오 네이버 둘다 소셜토큰 업데이트 해주는 함수를 인자로 넣어주면된다
         with(binding) {
             clKakao.setOnClickListener {
                 this@LoginActivity.viewModel.updatePlatform(KAKAO)
-                if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
-                    UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity) { token, error ->
-                        if (error != null) {
-                            Timber.d("${error.message} OAuthLoginCallback 부분에서의 오류 onError")
-
-                            if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                                return@loginWithKakaoTalk
-                            }
-
-                            UserApiClient.instance.loginWithKakaoAccount(
-                                this@LoginActivity,
-                                callback = this@LoginActivity.viewModel.kakaoLoginCallback
-                            )
-                        } else if (token != null) {
-                            this@LoginActivity.viewModel.updateSocialToken(token.accessToken)
-                        }
-                    }
-                } else {
-                    UserApiClient.instance.loginWithKakaoAccount(
-                        this@LoginActivity,
-                        callback = this@LoginActivity.viewModel.kakaoLoginCallback
-                    )
+                kakaoLoginManager.startKakaoLogin {
+                    this@LoginActivity.viewModel.updateSocialToken(it)
                 }
             }
 
             clNaver.setOnClickListener {
                 this@LoginActivity.viewModel.updatePlatform(NAVER)
-                this@LoginActivity.viewModel.naverSetOAuthLoginCallback()
-                NaverIdLoginSDK.initialize(
-                    this@LoginActivity,
-                    X_NAVER_CLIENT_ID,
-                    X_NAVER_CLIENT_SECRET,
-                    CLIENT_NAME
-                )
-                NaverIdLoginSDK.authenticate(
-                    this@LoginActivity,
-                    this@LoginActivity.viewModel.oAuthLoginCallback
-                )
+                naverLoginManager.startNaverLogin {
+                    this@LoginActivity.viewModel.updateSocialToken(it)
+                }
             }
         }
     }
